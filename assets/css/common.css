@@ -1,0 +1,92 @@
+@charset "utf-8";
+
+/*//////////////////////////////////////////////////////////
+//  - CSS for Common
+//  - 2016-01-21 (THU)
+//////////////////////////////////////////////////////////*/
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+	margin: 0;
+	padding: 0;
+}
+
+fieldset, img {
+	border: 0;
+}
+
+address, caption, cite, code, dfn, em, strong, th, var {
+	font-style: normal;
+	font-weight: normal;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+caption, th, td {
+	text-align: left;
+	font-weight: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-size: 100%;
+	font-weight: normal;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+}
+
+blockquote, q {
+	quotes: '' '';
+}
+
+abbr,acronym {
+	border: 0;
+}
+
+p img,
+li img,
+dt img,
+dd img { vertical-align: bottom; }
+
+.clear      { clear: both; }
+.hidden     { display: none; }
+.floatleft  { float: left; }
+.floatright { float: right; }
+.textright  { text-align: right; }
+.textcenter { text-align: center; }
+.vmargin0   { margin-top: 0 !important; margin-bottom: 0 !important; }
+.vmargin5   { margin-top: 5px !important; }
+.vmargin10  { margin-top: 10px !important; }
+.vmargin15  { margin-top: 15px !important; }
+.vmargin20  { margin-top: 20px !important; }
+.vmargin25  { margin-top: 25px !important; }
+.vmargin30  { margin-top: 30px !important; }
+.vmargin35  { margin-top: 35px !important; }
+.vmargin40  { margin-top: 40px !important; }
+.vmargin45  { margin-top: 45px !important; }
+.vmargin50  { margin-top: 50px !important; }
+.vmargin55  { margin-top: 55px !important; }
+.vmargin60  { margin-top: 60px !important; }
+
+.iframe {
+	position: relative;
+	width: 100%;
+	margin: 0 0 10px 0 !important;
+	padding-top: 56.25% !important;
+}
+
+.iframe iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+

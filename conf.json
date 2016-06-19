@@ -1,0 +1,4 @@
+{
+    "API_BASE_URI": "http://api.dev.builderscon.io:8080/v1",
+    "DATE_FORMAT": "%Y-%m-%d"
+}
