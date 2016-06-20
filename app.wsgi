@@ -68,8 +68,14 @@ def conference_sessions(series_slug, slug):
 
 
 @route('/<series_slug>/<slug>/session/<id_:int>')
+@view('session_detail.tpl')
 def conference_session_details(series_slug, slug, id_):
-    return {'url': url}
+    endpoint = cfg['API_BASE_URI'] + '/session/lookup'
+    res = json.loads(requests.get(endpoint + '?id=' + id_).text)
+    return {
+        'session': session,
+        'url': url
+    }
 
 
 @route('/speaker/<id_:int>')
