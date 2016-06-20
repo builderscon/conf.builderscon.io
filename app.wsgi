@@ -82,6 +82,14 @@ def login_github():
             redirect('/login')
 
 
+@route('/logout')
+@route('/<p:path>/logout')
+def logout(p=None):
+    response.set_cookie('username', '')
+    response.set_cookie('session_id', '', expires=datetime.now()-timedelta(1))
+    redirect('/')
+
+
 @route('/<series_slug>')
 def conference(series_slug):
     redirect('/{0}/latest'.format(series_slug))

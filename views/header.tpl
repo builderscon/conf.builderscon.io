@@ -11,6 +11,8 @@
       <ul class="menu">
         {% if not login %}
         <li><a href="login">LOGIN</a></li>
+        {% else %}
+        <li><a href="logout">{{ login.username }}</a></li>
         {% endif %}
       </ul>
     </div>
