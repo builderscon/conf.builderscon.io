@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ja">
   <head>
-    <title>builderscon::{{ title }}</title>
+    <title>builderscon::{{ pagetitle }}</title>
     {% include "meta.tpl" %}
   </head>
   <body>

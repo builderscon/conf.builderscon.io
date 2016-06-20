@@ -24,7 +24,7 @@ class ConferenceNotFoundError(Exception):
 @view('index.tpl')
 def index():
     return {
-        "title": "top",
+        "pagetitle": "top",
         "conferences": _get_conference_list(),
         "url": url
     }
