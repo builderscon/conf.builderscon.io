@@ -16,7 +16,10 @@
     <div class="inner">
       <h1 class="section-header">Information</h1>
       <div class="section-content">
-
+        <h2>Date</h2>
+        <p></p>
+        <h2>Place</h2>
+        <p></p>
         <a class="expanded button" href="sessions">sessions</a>
       </div>
     </div>
