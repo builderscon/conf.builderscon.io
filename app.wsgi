@@ -4,9 +4,11 @@
 from bottle import Bottle, redirect, request
 from bottle import jinja2_view as view
 from bottle import static_file
-from datetime import date, datetime as dt
+from datetime import date, datetime, timedelta
 import functools
 import json
+import MySQLdb
+from MySQLdb.cursors import DictCursor as DC
 import requests
 
 with open('conf.json', 'r') as f:
@@ -19,6 +21,27 @@ url = app.get_url
 
 class ConferenceNotFoundError(Exception):
     pass
+
+
+def session(func):
+    @functools.wraps(func)
+    def _(*a, **ka):
+        username = request.get_cookie('username')
+        session_id = request.get_cookie('session_id')
+        query = '''SELECT * FROM auth_sessions
+        WHERE username=%s AND session_id=%s;'''
+        with MySQLdb.connect(cursorclass=DC, **cfg['DB_INFO']) as cursor:
+            cursor.execute(
+                query,
+                (username, session_id)
+            )
+            row = cursor.fetchone()
+        if row:
+            return func(*a, **ka)
+        else:
+            redirect('/login')
+    return _
+
 
 
 @route('/')
@@ -157,12 +180,13 @@ def _get_latest_conference(series_slug):
 
 
 def _save_auth(username, auth_with, access_token):
-    query = 'INSERT INTO users (username, auth, token) VALUES (%s, %s, %s);'
-    with MySQLdb.connect(cursorclass=DictCursor, **cfg['DB_INFO']) as cursor:
+    query = 'INSERT INTO users VALUES (%s, %s, %s, %s);'
+    expire = datetime.now() + timedelta(7)
+    with MySQLdb.connect(cursorclass=DC, **cfg['DB_INFO']) as cursor:
         try:
             cursor.execute(
                 query,
-                (username, auth_with, access_token)
+                (username, auth_with, access_token, expire)
             )
         except:
             return False
