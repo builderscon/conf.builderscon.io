@@ -51,16 +51,6 @@ def conference_per_instance(series_slug, slug):
     return {'conference': conference, 'url': url}
 
 
-@route('/<series_slug>/<slug>/news')
-def conference_latest_news(series_slug, slug):
-    return {'url': url}
-
-
-@route('/<series_slug>/<slug>/schedule')
-def conference_schedule(series_slug, slug):
-    return {'url': url}
-
-
 @route('/<series_slug>/<slug>/sessions')
 @view('sessions.tpl')
 def conference_sessions(series_slug, slug):
