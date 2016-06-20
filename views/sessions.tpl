@@ -6,6 +6,7 @@
     <div class="inner">
       <h1 class="section-header">Sessions</h1>
       <div class="section-content">
+        <a class="expanded button" href="#">Submit your proposal</a>
 
       </div>
     </div>
