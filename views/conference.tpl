@@ -17,6 +17,7 @@
       <h1 class="section-header">Information</h1>
       <div class="section-content">
 
+        <a class="expanded button" href="sessions">sessions</a>
       </div>
     </div>
   </div>

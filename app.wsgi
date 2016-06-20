@@ -61,6 +61,11 @@ def conference_schedule(series_slug, slug):
     return {'url': url}
 
 
+@route('/series_slug>/<slug>/sessions')
+def conference_sessions(series_slug, slug):
+    return {'url': url}
+
+
 @route('/<series_slug>/<slug>/session/<id_:int>')
 def conference_session_details(series_slug, slug, id_):
     return {'url': url}
