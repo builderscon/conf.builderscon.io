@@ -1,0 +1,7 @@
+* conf.builderscon.io
+** Requirements
+- Python
+  - bottle
+  - Requests
+- nginx
+  - uwsgi
