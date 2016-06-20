@@ -5,5 +5,9 @@
         "host": "",
         "user": "",
         "passwd": ""
+    },
+    "TABLES": {
+        "USER_TABLE": "users",
+        "SESSION_TABLE": "sessions"
     }
 }
