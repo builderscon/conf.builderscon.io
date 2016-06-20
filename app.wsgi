@@ -33,7 +33,10 @@ def index():
 @route('/login')
 @view('login.tpl')
 def login():
-    return {'url': url}
+    return {
+        'pagetitle': 'login',
+        'url': url
+    }
 
 
 @route('/<series_slug>')
@@ -49,6 +52,7 @@ def conference_per_instance(series_slug, slug):
     else:
         conference = _get_conference(series_slug, slug)
     return {
+        'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
         'url': url
     }
@@ -62,6 +66,7 @@ def conference_sessions(series_slug, slug):
     else:
         conference = _get_conference(series_slug, slug)
     return {
+        'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
         'url': url
     }
@@ -73,6 +78,7 @@ def conference_session_details(series_slug, slug, id_):
     endpoint = cfg['API_BASE_URI'] + '/session/lookup'
     res = json.loads(requests.get(endpoint + '?id=' + id_).text)
     return {
+        'pagetitle': series_slug + ' ' + slug,
         'session': session,
         'url': url
     }
@@ -80,12 +86,18 @@ def conference_session_details(series_slug, slug, id_):
 
 @route('/speaker/<id_:int>')
 def speaker_details(id_):
-    return {'url': url}
+    return {
+        'pagetitle': series_slug + ' ' + slug,
+        'url': url
+    }
 
 
 @route('/user/<id_:int>')
 def user_details(id_):
-    return {'url': url}
+    return {
+        'pagetitle': series_slug + ' ' + slug,
+        'url': url
+    }
 
 
 @route('/assets/<filename:path>', name='statics')
