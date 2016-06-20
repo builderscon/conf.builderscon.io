@@ -62,6 +62,7 @@ def conference_schedule(series_slug, slug):
 
 
 @route('/series_slug>/<slug>/sessions')
+@view('sessions.tpl')
 def conference_sessions(series_slug, slug):
     return {'url': url}
 
