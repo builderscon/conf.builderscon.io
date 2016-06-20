@@ -2,6 +2,7 @@
 ** Requirements
 - Python
   - bottle
+  - MySQLdb
   - Requests
 - nginx
   - uwsgi
