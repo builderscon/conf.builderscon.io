@@ -157,4 +157,14 @@ def _get_latest_conference(series_slug):
 
 
 def _save_auth(username, auth_with, access_token):
-    pass
+    query = 'INSERT INTO users (username, auth, token) VALUES (%s, %s, %s);'
+    with MySQLdb.connect(cursorclass=DictCursor, **cfg['DB_INFO']) as cursor:
+        try:
+            cursor.execute(
+                query,
+                (username, auth_with, access_token)
+            )
+        except:
+            return False
+        else:
+            return True
