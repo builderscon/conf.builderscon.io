@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from bottle import Bottle, redirect, request
+from bottle import Bottle, redirect, request, response
 from bottle import jinja2_view as view
 from bottle import static_file
 from datetime import date, datetime, timedelta
@@ -10,6 +10,7 @@ import json
 import MySQLdb
 from MySQLdb.cursors import DictCursor as DC
 import requests
+from uuid import uuid4
 
 with open('conf.json', 'r') as f:
     cfg = json.load(f)
@@ -26,31 +27,21 @@ class ConferenceNotFoundError(Exception):
 def session(func):
     @functools.wraps(func)
     def _(*a, **ka):
-        username = request.get_cookie('username')
-        session_id = request.get_cookie('session_id')
-        query = '''SELECT * FROM auth_sessions
-        WHERE username=%s AND session_id=%s;'''
-        with MySQLdb.connect(cursorclass=DC, **cfg['DB_INFO']) as cursor:
-            cursor.execute(
-                query,
-                (username, session_id)
-            )
-            row = cursor.fetchone()
-        if row:
+        if _has_session():
             return func(*a, **ka)
         else:
             redirect('/login')
     return _
 
 
-
 @route('/')
 @view('index.tpl')
 def index():
     return {
-        "pagetitle": "top",
-        "conferences": _get_conference_list(),
-        "url": url
+        'pagetitle': 'top',
+        'conferences': _get_conference_list(),
+        'login': {'username': _session_user()} if _has_session() else '',
+        'url': url
     }
 
 
@@ -85,7 +76,7 @@ def login_github():
                 'https://api.github.com/user?' + access_token.text
             )
             user_info = res.json()
-            _save_auth(user_info['login'], 'GitHub', access_token.text)
+            _create_session(user_info['login'])
             redirect('/')
         else:
             redirect('/login')
@@ -106,6 +97,7 @@ def conference_per_instance(series_slug, slug):
     return {
         'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
+        'login': {'username': _session_user()} if _has_session() else '',
         'url': url
     }
 
@@ -120,6 +112,7 @@ def conference_sessions(series_slug, slug):
     return {
         'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
+        'login': {'username': _session_user()} if _has_session() else '',
         'url': url
     }
 
@@ -130,6 +123,7 @@ def conference_sessions(series_slug, slug):
 def add_session(series_slug, slug):
     return {
         'pagetitle': series_slug + ' ' + slug,
+        'login': {'username': _session_user()} if _has_session() else '',
         'url': url
     }
 
@@ -142,6 +136,7 @@ def conference_session_details(series_slug, slug, id_):
     return {
         'pagetitle': series_slug + ' ' + slug,
         'session': session,
+        'login': {'username': _session_user()} if _has_session() else '',
         'url': url
     }
 
@@ -150,6 +145,7 @@ def conference_session_details(series_slug, slug, id_):
 def speaker_details(id_):
     return {
         'pagetitle': 'spkeaker',
+        'login': {'username': _session_user()} if _has_session() else '',
         'url': url
     }
 
@@ -158,6 +154,7 @@ def speaker_details(id_):
 def user_details(id_):
     return {
         'pagetitle': 'user',
+        'login': {'username': _session_user()} if _has_session() else '',
         'url': url
     }
 
@@ -192,16 +189,40 @@ def _get_latest_conference(series_slug):
     raise ConferenceNotFoundError
 
 
-def _save_auth(username, auth_with, access_token):
-    query = 'INSERT INTO users VALUES (%s, %s, %s, %s);'
+def _create_session(username):
+    query = 'INSERT INTO auth_sessions VALUES (%s, %s, %s);'
+    session_id = str(uuid4())
     expire = datetime.now() + timedelta(7)
     with MySQLdb.connect(cursorclass=DC, **cfg['DB_INFO']) as cursor:
         try:
             cursor.execute(
                 query,
-                (username, auth_with, access_token, expire)
+                (username, session_id, expire)
             )
         except:
             return False
         else:
-            return True
+            response.set_cookie('username', username, path='/')
+            response.set_cookie('session_id', session_id, expires=expire, path='/')
+            return session_id
+
+
+def _has_session():
+    username = request.get_cookie('username')
+    session_id = request.get_cookie('session_id')
+    query = '''SELECT * FROM auth_sessions
+    WHERE username=%s AND session_id=%s;'''
+    with MySQLdb.connect(cursorclass=DC, **cfg['DB_INFO']) as cursor:
+        cursor.execute(
+            query,
+            (username, session_id)
+        )
+        row = cursor.fetchone()
+    return (row and row['expire'] > datetime.now())
+
+
+def _session_user():
+    if _has_session():
+        return request.get_cookie('username')
+    else:
+        return ''
