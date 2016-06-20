@@ -140,8 +140,10 @@ def _get_conference_list():
 def _get_conference(series_slug, slug):
     conferences = _get_conference_list()
     for conference in conferences:
-        if (str(conference['series']['slug']) == series_slug and
-            str(conference['slug']) == slug):
+        if (
+                str(conference['series']['slug']) == series_slug and
+                str(conference['slug']) == slug
+        ):
             return conference
     raise ConferenceNotFoundError
 
