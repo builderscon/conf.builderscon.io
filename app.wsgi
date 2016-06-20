@@ -80,12 +80,15 @@ def login_github():
                 'client_secret': cfg['GITHUB']['client_secret']
             }
         )
-        res = requests.get(
-            'https://api.github.com/user?' + access_token.text
-        )
-        user_info = res.json()
-        _save_auth(user_info['name'], 'GitHub', access_token.text)
-        redirect('/')
+        if 'error' not in access_token.text:
+            res = requests.get(
+                'https://api.github.com/user?' + access_token.text
+            )
+            user_info = res.json()
+            _save_auth(user_info['login'], 'GitHub', access_token.text)
+            redirect('/')
+        else:
+            redirect('/login')
 
 
 @route('/<series_slug>')
