@@ -54,7 +54,14 @@ def conference_per_instance(series_slug, slug):
 @route('/<series_slug>/<slug>/sessions')
 @view('sessions.tpl')
 def conference_sessions(series_slug, slug):
-    return {'url': url}
+    if slug == 'latest':
+        conference = _get_latest_conference(series_slug)
+    else:
+        conference = _get_conference(series_slug, slug)
+    return {
+        'conference': conference,
+        'url': url
+    }
 
 
 @route('/<series_slug>/<slug>/session/<id_:int>')
