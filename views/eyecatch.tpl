@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="inner">
       <div class="column">
-        {% if conferenct %}
+        {% if conference %}
         <h1>{{ conference.title }}</h1>
         <h2>{{ conference.sub_title }}</h2>
         {% else %}
