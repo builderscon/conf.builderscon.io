@@ -48,7 +48,10 @@ def conference_per_instance(series_slug, slug):
         conference = _get_latest_conference(series_slug)
     else:
         conference = _get_conference(series_slug, slug)
-    return {'conference': conference, 'url': url}
+    return {
+        'conference': conference,
+        'url': url
+    }
 
 
 @route('/<series_slug>/<slug>/sessions')
