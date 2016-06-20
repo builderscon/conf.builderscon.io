@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from bottle import Bottle, redirect
+from bottle import Bottle, redirect, request
 from bottle import jinja2_view as view
 from bottle import static_file
 from datetime import date, datetime as dt
@@ -38,6 +38,31 @@ def login():
         'pagetitle': 'login',
         'url': url
     }
+
+
+@route('/login/github')
+def login_github():
+    code = request.query.code
+    if not code:
+        redirect(
+            'https://github.com/login/oauth/authorize' +
+            '?client_id=' + cfg['GITHUB']['client_id']
+        )
+    else:
+        access_token = requests.get(
+            'https://github.com/login/oauth/access_token',
+            params={
+                'code': code,
+                'client_id': cfg['GITHUB']['client_id'],
+                'client_secret': cfg['GITHUB']['client_secret']
+            }
+        )
+        res = requests.get(
+            'https://api.github.com/user?' + access_token.text
+        )
+        user_info = res.json()
+        _save_auth(user_info['name'], 'GitHub', access_token.text)
+        redirect('/')
 
 
 @route('/<series_slug>')
@@ -129,8 +154,5 @@ def _get_latest_conference(series_slug):
     raise ConferenceNotFoundError
 
 
-def session(func):
-    @functools.wrap(func)
-    def _(*a, **ka):
-        return func(*a, **ka)
-    return _
+def _save_auth(username, auth_with, access_token):
+    pass
