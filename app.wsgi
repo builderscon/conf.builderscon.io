@@ -124,6 +124,16 @@ def conference_sessions(series_slug, slug):
     }
 
 
+@route('/<series_slug>/<slug>/session/add')
+@view('add_session.tpl')
+@session
+def add_session(series_slug, slug):
+    return {
+        'pagetitle': series_slug + ' ' + slug,
+        'url': url
+    }
+
+
 @route('/<series_slug>/<slug>/session/<id_:int>')
 @view('session_detail.tpl')
 def conference_session_details(series_slug, slug, id_):
