@@ -5,6 +5,7 @@ from bottle import Bottle, redirect
 from bottle import jinja2_view as view
 from bottle import static_file
 from datetime import date, datetime as dt
+import functools
 import json
 import requests
 
@@ -126,3 +127,10 @@ def _get_latest_conference(series_slug):
         if str(conference['series']['slug']) == series_slug:
             return conference
     raise ConferenceNotFoundError
+
+
+def session(func):
+    @functools.wrap(func)
+    def _(*a, **ka):
+        return func(*a, **ka)
+    return _
