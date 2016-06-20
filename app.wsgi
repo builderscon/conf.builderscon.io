@@ -87,7 +87,7 @@ def conference_session_details(series_slug, slug, id_):
 @route('/speaker/<id_:int>')
 def speaker_details(id_):
     return {
-        'pagetitle': series_slug + ' ' + slug,
+        'pagetitle': 'spkeaker',
         'url': url
     }
 
@@ -95,7 +95,7 @@ def speaker_details(id_):
 @route('/user/<id_:int>')
 def user_details(id_):
     return {
-        'pagetitle': series_slug + ' ' + slug,
+        'pagetitle': 'user',
         'url': url
     }
 
