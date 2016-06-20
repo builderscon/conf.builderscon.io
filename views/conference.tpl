@@ -20,7 +20,7 @@
         <p></p>
         <h2>Place</h2>
         <p></p>
-        <a class="expanded button" href="sessions">sessions</a>
+        <a class="expanded button" href="/{{ conference.series.slug }}/{{ conference.slug }}/sessions">sessions</a>
       </div>
     </div>
   </div>
