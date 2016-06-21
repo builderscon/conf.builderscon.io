@@ -16,3 +16,14 @@ with MySQLdb.connect(**cfg['DB_INFO']) as cursor:
         );
         '''
     )
+    cursor.execute(
+        '''CREATE TABLE sessions (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        username VARCHAR(128) NOT NULL,
+        series VARCHAR(128) NOT NULL,
+        slug VARCHAR(128) NOT NULL,
+        title VARCHAR(128) NOT NULL,
+        detail VARCHAR(512) NOT NULL,
+        );
+        '''
+    )
