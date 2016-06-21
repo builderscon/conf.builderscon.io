@@ -17,6 +17,7 @@ with open('conf.json', 'r') as f:
 
 app = application = Bottle()
 route = app.route
+post = app.post
 url = app.get_url
 
 
@@ -134,6 +135,11 @@ def add_session(series_slug, slug):
         'login': {'username': _session_user()} if _has_session() else '',
         'url': url
     }
+
+@post('/<series_slug>/<slug>/session/add')
+@session
+def add_session_post(series_slug, slug):
+    redirect('/')
 
 
 @route('/<series_slug>/<slug>/session/<id_:int>')
