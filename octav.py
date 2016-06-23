@@ -357,8 +357,16 @@ class Octav(object):
         )
         return response
 
-    def delete_session(self):
-        pass
+    def delete_session(self, id_):
+        endpoint = '/session/delete'
+        response = requests.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                id=id_
+            )
+        )
+        return response
 
     def update_session(self):
         pass
