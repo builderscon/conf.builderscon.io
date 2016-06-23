@@ -62,8 +62,16 @@ class Octav(object):
         )
         return response
 
-    def delete_user(self):
-        pass
+    def delete_user(self, id_):
+        endpoint = '/user/delete'
+        response = requests.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                id=id_
+            )
+        )
+        return response
 
     def list_user(self):
         pass
