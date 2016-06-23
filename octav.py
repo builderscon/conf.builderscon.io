@@ -329,8 +329,23 @@ class Octav(object):
         )
         return response
 
-    def create_session(self):
-        pass
+    def create_session(
+            self, conference_id, speaker_id, title, abstract, duration, **ka
+    ):
+        endpoint = '/session/create'
+        response = requests.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                conference_id=conference_id,
+                speaker_id=speaker_id,
+                title=title,
+                abstract=abstract,
+                duration=duration,
+                **ka
+            )
+        )
+        return response
 
     def lookup_session(self):
         pass
