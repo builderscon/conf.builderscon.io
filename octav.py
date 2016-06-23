@@ -318,8 +318,16 @@ class Octav(object):
         )
         return response
 
-    def delete_conference(self):
-        pass
+    def delete_conference(self, id_):
+        endpoint = '/conference/delete'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                id=id_
+            )
+        )
+        return response
 
     def create_session(self):
         pass
