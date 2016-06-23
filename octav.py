@@ -426,5 +426,23 @@ class Octav(object):
         )
         return response
 
-    def create_session_survey_response(self):
-        pass
+    def create_session_survey_response(
+            self, session_id, user_id, user_prior_knowledge, speaker_knowledge,
+            speaker_presentation, material_quality, overall_rating, **ka
+    ):
+        endpoint = '/session/create'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                session_id=session_id,
+                user_id=user_id,
+                user_prior_knowledge=user_prior_knowledge,
+                speaker_knowledge=speaker_knowledge,
+                speaker_presentation=speaker_presentation,
+                material_quality=material_quality,
+                overall_rating=overall_rating,
+                **ka
+            )
+        )
+        return response
