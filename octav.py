@@ -168,8 +168,16 @@ class Octav(object):
         )
         return response
 
-    def delete_room(self):
-        pass
+    def delete_room(self, id_):
+        endpoint = '/room/delete'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                id=id_
+            )
+        )
+        return response
 
     def list_room(self):
         pass
