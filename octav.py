@@ -347,8 +347,15 @@ class Octav(object):
         )
         return response
 
-    def lookup_session(self):
-        pass
+    def lookup_session(self, id_):
+        endpoint = '/session/lookup'
+        response = requests.get(
+            cfg['BASE_URI'] + endpoint,
+            params=dict(
+                id=id_
+            )
+        )
+        return response
 
     def delete_session(self):
         pass
