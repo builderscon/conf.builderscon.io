@@ -103,7 +103,7 @@ class Octav(object):
 
     def lookup_venue(self, id_):
         endpoint = '/venue/lookup'
-        response = request.get(
+        response = requests.get(
             cfg['BASE_URI'] + endpoint,
             params=dict(
                 id=id_
@@ -113,7 +113,7 @@ class Octav(object):
 
     def update_venue(self, id_):
         endpoint = '/vanue/update'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -124,7 +124,7 @@ class Octav(object):
 
     def delete_venue(self, id_):
         endpoint = '/venue/delete'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -135,7 +135,7 @@ class Octav(object):
 
     def create_room(self, venue_id, name, **ka):
         endpoint = '/room/create'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -148,7 +148,7 @@ class Octav(object):
 
     def update_room(self, id_, **ka):
         endpoint = '/room/update'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -160,7 +160,7 @@ class Octav(object):
 
     def lookup_room(self, id_):
         endpoint = '/room/lookup'
-        response = request.get(
+        response = requests.get(
             cfg['BASE_URI'] + endpoint,
             params=dict(
                 id=id_
@@ -170,7 +170,7 @@ class Octav(object):
 
     def delete_room(self, id_):
         endpoint = '/room/delete'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -181,7 +181,7 @@ class Octav(object):
 
     def list_room(self, venue_id, **ka):
         endpoint = '/room/list'
-        response = request.get(
+        response = requests.get(
             cfg['BASE_URI'] + endpoint,
             params=dict(
                 venue_id=venue_id,
@@ -192,7 +192,7 @@ class Octav(object):
 
     def create_conference(self, title, slug, user_id, **ka):
         endpoint = '/conference/create'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -206,7 +206,7 @@ class Octav(object):
 
     def add_conference_dates(self, conference_id, dates):
         endpoint = '/conference/dates/add'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -218,7 +218,7 @@ class Octav(object):
 
     def delete_conference_dates(self, conference_id, dates):
         endpoint = '/conference/dates/delete'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -230,7 +230,7 @@ class Octav(object):
 
     def add_conference_admin(self, conference_id, user_id):
         endpoint = '/conference/admin/add'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -242,7 +242,7 @@ class Octav(object):
 
     def delete_conference_admin(self, conference_id, user_id):
         endpoint = '/conference/admin/delete'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -254,7 +254,7 @@ class Octav(object):
 
     def add_conference_venue(self, conference_id, venue_id):
         endpoint = '/conference/venue/add'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -266,7 +266,7 @@ class Octav(object):
 
     def delete_conference_venue(self, conference_id, venue_id):
         endpoint = '/conference/venue/delete'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -278,7 +278,7 @@ class Octav(object):
 
     def lookup_conference(self, id_):
         endpoint = '/conference/lookup'
-        response = request.get(
+        response = requests.get(
             cfg['BASE_URI'] + endpoint,
             params=dict(
                 id=id_
@@ -288,7 +288,7 @@ class Octav(object):
 
     def lookup_conference_by_slug(self, slug):
         endpoint = '/conference/lookup_by_slug'
-        response = request.get(
+        response = requests.get(
             cfg['BASE_URI'] + endpoint,
             params=dict(
                 slug=slug
@@ -298,7 +298,7 @@ class Octav(object):
 
     def list_conference(self, **ka):
         endpoint = '/conference/list'
-        response = request.get(
+        response = requests.get(
             cfg['BASE_URI'] + endpoint,
             params=dict(
                 **ka
@@ -308,7 +308,7 @@ class Octav(object):
 
     def update_conference(self, id_, **ka):
         endpoint = '/conference/update'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
@@ -320,7 +320,7 @@ class Octav(object):
 
     def delete_conference(self, id_):
         endpoint = '/conference/delete'
-        response = request.post(
+        response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
             data=dict(
