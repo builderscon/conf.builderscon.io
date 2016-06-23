@@ -7,7 +7,9 @@
         "passwd": ""
     },
     "OCTAV": {
-        "BASE_URI": ""
+        "BASE_URI": "",
+        "key": "",
+        "secret": ""
     },
     "GITHUB": {
         "client_id": "",
