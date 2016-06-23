@@ -306,8 +306,17 @@ class Octav(object):
         )
         return response
 
-    def update_conference(self):
-        pass
+    def update_conference(self, id_, **ka):
+        endpoint = '/conference/update'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                id=id_,
+                **ka
+            )
+        )
+        return response
 
     def delete_conference(self):
         pass
