@@ -30,7 +30,6 @@ class Octav(object):
         )
         return response
 
-
     def lookup_user(self, id_):
         endpoint = '/user/lookup'
         response = requests.get(
