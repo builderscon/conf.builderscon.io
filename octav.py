@@ -112,8 +112,16 @@ class Octav(object):
         )
         return response
 
-    def update_venue(self):
-        pass
+    def update_venue(self, id_):
+        endpoint = '/vanue/update'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                id=id_
+            )
+        )
+        return response
 
     def delete_venue(self):
         pass
