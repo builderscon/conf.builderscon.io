@@ -1,5 +1,5 @@
 {
-    "API_BASE_URI": "",
+    "OCTAV_BASE_URI": "",
     "DATE_FORMAT": "%Y-%m-%d",
     "DB_INFO": {
         "host": "",
