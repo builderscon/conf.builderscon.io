@@ -228,8 +228,17 @@ class Octav(object):
         )
         return response
 
-    def add_conference_admin(self):
-        pass
+    def add_conference_admin(self, conference_id, user_id):
+        endpoint = '/conference/admin/add'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                conference_id=conference_id,
+                user_id=user_id
+            )
+        )
+        return response
 
     def delete_conference_admin(self):
         pass
