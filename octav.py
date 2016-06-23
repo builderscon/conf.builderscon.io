@@ -368,8 +368,17 @@ class Octav(object):
         )
         return response
 
-    def update_session(self):
-        pass
+    def update_session(self, id_, **ka):
+        endpoint = '/session/update'
+        response = requests.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                id=id_,
+                **ka
+            )
+        )
+        return response
 
     def list_session_by_conference(self):
         pass
