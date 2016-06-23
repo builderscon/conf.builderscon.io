@@ -276,8 +276,15 @@ class Octav(object):
         )
         return response
 
-    def lookup_conference(self):
-        pass
+    def lookup_conference(self, id_):
+        endpoint = '/conference/lookup'
+        response = request.get(
+            cfg['BASE_URI'] + endpoint,
+            params=dict(
+                id=id_
+            )
+        )
+        return response
 
     def lookup_conference_by_slug(self):
         pass
