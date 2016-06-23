@@ -264,8 +264,17 @@ class Octav(object):
         )
         return response
 
-    def delete_conference_venue(self):
-        pass
+    def delete_conference_venue(self, conference_id, venue_id):
+        endpoint = '/conference/venue/delete'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                conference_id=conference_id,
+                venue_id=venue_id
+            )
+        )
+        return response
 
     def lookup_conference(self):
         pass
