@@ -158,8 +158,15 @@ class Octav(object):
         )
         return response
 
-    def lookup_room(self):
-        pass
+    def lookup_room(self, id_):
+        endpoint = '/room/lookup'
+        response = request.get(
+            cfg['BASE_URI'] + endpoint,
+            params=dict(
+                id=id_
+            )
+        )
+        return response
 
     def delete_room(self):
         pass
