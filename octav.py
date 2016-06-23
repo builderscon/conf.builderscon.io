@@ -102,8 +102,15 @@ class Octav(object):
         )
         return response
 
-    def lookup_venue(self):
-        pass
+    def lookup_venue(self, id_):
+        endpoint = '/venue/lookup'
+        response = request.get(
+            cfg['BASE_URI'] + endpoint,
+            params=dict(
+                id=id_
+            )
+        )
+        return response
 
     def update_venue(self):
         pass
