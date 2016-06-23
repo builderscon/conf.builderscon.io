@@ -1,11 +1,13 @@
 {
-    "OCTAV_BASE_URI": "",
     "DATE_FORMAT": "%Y-%m-%d",
     "DB_INFO": {
         "host": "",
         "db": "",
         "user": "",
         "passwd": ""
+    },
+    "OCTAV": {
+        "BASE_URI": ""
     },
     "GITHUB": {
         "client_id": "",
