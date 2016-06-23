@@ -41,8 +41,14 @@ class Octav(object):
         )
         return response
 
-    def lookup_user_by_auth_id(self):
-        pass
+    def lookup_user_by_auth_id(self, auth_via, auth_user_id):
+        endpoint = '/user/lookup_by_auth_user_id'
+        response = requests.get(
+            cfg['BASE_URI'] + endpoint,
+            params=dict(
+            )
+        )
+        return response
 
     def update_user(self):
         pass
