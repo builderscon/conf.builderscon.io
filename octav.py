@@ -35,7 +35,7 @@ class Octav(object):
         endpoint = '/user/lookup'
         response = requests.get(
             cfg['BASE_URI'] + endpoint,
-            data=dict(
+            params=dict(
                 id=id_
             )
         )
