@@ -16,8 +16,19 @@ class Octav(object):
     def __init__(self):
         pass
 
-    def create_user(self):
-        pass
+    def create_user(self, nickname, auth_via, auth_user_id, **ka):
+        endpoint = "/user/create"
+        response = requests.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                nickname=nickname,
+                auth_via=auth_via,
+                auth_user_id=auth_user_id,
+                **ka
+            )
+        )
+        return response
 
     def lookup_user(self):
         pass
