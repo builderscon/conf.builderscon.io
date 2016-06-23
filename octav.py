@@ -380,8 +380,16 @@ class Octav(object):
         )
         return response
 
-    def list_session_by_conference(self):
-        pass
+    def list_session_by_conference(self, conference_id, **ka):
+        endpoint = '/schedule/list'
+        response = request.get(
+            cfg['BASE_URI'] + endpoint,
+            params=dict(
+                conference_id=conference_id,
+                **ka
+            )
+        )
+        return response
 
     def create_question(self):
         pass
