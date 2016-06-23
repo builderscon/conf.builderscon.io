@@ -50,8 +50,17 @@ class Octav(object):
         )
         return response
 
-    def update_user(self):
-        pass
+    def update_user(self, id_, **ka):
+        endpoint = '/user/update'
+        response = requests.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                id=id_,
+                **ka
+            )
+        )
+        return response
 
     def delete_user(self):
         pass
