@@ -404,8 +404,16 @@ class Octav(object):
         )
         return response
 
-    def delete_question(self):
-        pass
+    def delete_question(self, id_):
+        endpoint = '/question/delete'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                id=id_
+            )
+        )
+        return response
 
     def list_question(self):
         pass
