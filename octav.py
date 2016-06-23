@@ -415,8 +415,16 @@ class Octav(object):
         )
         return response
 
-    def list_question(self):
-        pass
+    def list_question(self, session_id, **ka):
+        endpoint = '/question/list'
+        response = request.get(
+            cfg['BASE_URI'] + endpoint,
+            params=dict(
+                session_id=session_id,
+                **ka
+            )
+        )
+        return response
 
     def create_session_survey_response(self):
         pass
