@@ -81,11 +81,26 @@ class Octav(object):
         )
         return response
 
-    def create_venue(self):
-        pass
+    def create_venue(self, name, address, **ka):
+        endpoint = '/venue/create'
+        response = requests.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                name=name,
+                address=addres,
+                **ka
+            )
+        )
+        return response
 
-    def list_venue(self):
-        pass
+    def list_venue(self, **ka):
+        endpoint = '/venue/list'
+        response = requests.get(
+            cfg['BASE_URI'] + endpoint,
+            params=ka
+        )
+        return response
 
     def lookup_venue(self):
         pass
