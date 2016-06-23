@@ -17,7 +17,7 @@ class Octav(object):
         pass
 
     def create_user(self, nickname, auth_via, auth_user_id, **ka):
-        endpoint = "/user/create"
+        endpoint = '/user/create'
         response = requests.post(
             cfg['BASE_URI'] + endpoint,
             auth=(cfg['key'], cfg['secret']),
@@ -32,7 +32,7 @@ class Octav(object):
 
 
     def lookup_user(self, id_):
-        endpoint = "/user/lookup"
+        endpoint = '/user/lookup'
         response = requests.get(
             cfg['BASE_URI'] + endpoint,
             data=dict(
