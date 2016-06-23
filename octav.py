@@ -179,8 +179,16 @@ class Octav(object):
         )
         return response
 
-    def list_room(self):
-        pass
+    def list_room(self, venue_id, **ka):
+        endpoint = '/room/list'
+        response = request.get(
+            cfg['BASE_URI'] + endpoint,
+            params=dict(
+                venue_id=venue_id,
+                **ka
+            )
+        )
+        return response
 
     def create_conference(self):
         pass
