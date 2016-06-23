@@ -204,8 +204,17 @@ class Octav(object):
         )
         return response
 
-    def add_conference_dates(self):
-        pass
+    def add_conference_dates(self, conference_id, dates):
+        endpoint = '/conference/dates/add'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                conference_id=conference_id,
+                dates=dates
+            )
+        )
+        return response
 
     def delete_conference_dates(self):
         pass
