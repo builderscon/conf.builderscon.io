@@ -190,8 +190,19 @@ class Octav(object):
         )
         return response
 
-    def create_conference(self):
-        pass
+    def create_conference(self, title, slug, user_id, **ka):
+        endpoint = '/conference/create'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                title=title,
+                slug=slug,
+                user_id=user_id,
+                **ka
+            )
+        )
+        return response
 
     def add_conference_dates(self):
         pass
