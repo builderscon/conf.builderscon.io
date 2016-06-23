@@ -391,8 +391,18 @@ class Octav(object):
         )
         return response
 
-    def create_question(self):
-        pass
+    def create_question(self, session_id, user_id, body):
+        endpoint = '/question/create'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                session_id=sessoin_id,
+                user_id=user_id,
+                body=body
+            )
+        )
+        return response
 
     def delete_question(self):
         pass
