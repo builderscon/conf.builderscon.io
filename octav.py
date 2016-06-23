@@ -30,8 +30,16 @@ class Octav(object):
         )
         return response
 
-    def lookup_user(self):
-        pass
+
+    def lookup_user(self, id_):
+        endpoint = "/user/lookup"
+        response = requests.get(
+            cfg['BASE_URI'] + endpoint,
+            data=dict(
+                id=id_
+            )
+        )
+        return response
 
     def lookup_user_by_auth_id(self):
         pass
