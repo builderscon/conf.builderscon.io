@@ -134,8 +134,18 @@ class Octav(object):
         )
         return response
 
-    def create_room(self):
-        pass
+    def create_room(self, venue_id, name, **ka):
+        endpoint = '/room/create'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                venue_id=venue_id,
+                name=name,
+                **ka
+            )
+        )
+        return response
 
     def update_room(self):
         pass
