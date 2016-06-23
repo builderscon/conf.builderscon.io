@@ -123,8 +123,16 @@ class Octav(object):
         )
         return response
 
-    def delete_venue(self):
-        pass
+    def delete_venue(self, id_):
+        endpoint = '/venue/delete'
+        response = request.post(
+            cfg['BASE_URI'] + endpoint,
+            auth=(cfg['key'], cfg['secret']),
+            data=dict(
+                id=id_
+            )
+        )
+        return response
 
     def create_room(self):
         pass
