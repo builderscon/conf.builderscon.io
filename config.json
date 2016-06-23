@@ -1,8 +1,9 @@
 {
-    "API_BASE_URI": "http://api.dev.builderscon.io:8080/v1",
+    "API_BASE_URI": "",
     "DATE_FORMAT": "%Y-%m-%d",
     "DB_INFO": {
         "host": "",
+        "db": "",
         "user": "",
         "passwd": ""
     },

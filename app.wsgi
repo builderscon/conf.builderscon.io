@@ -12,7 +12,7 @@ from MySQLdb.cursors import DictCursor as DC
 import requests
 from uuid import uuid4
 
-with open('conf.json', 'r') as f:
+with open('config.json', 'r') as f:
     cfg = json.load(f)
 
 app = application = Bottle()

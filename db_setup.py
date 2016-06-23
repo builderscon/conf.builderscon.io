@@ -4,7 +4,7 @@
 import json
 import MySQLdb
 
-with open('conf.json', 'r') as f:
+with open('config.json', 'r') as f:
     cfg = json.load(f)
 
 with MySQLdb.connect(**cfg['DB_INFO']) as cursor:
