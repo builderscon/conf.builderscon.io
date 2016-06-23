@@ -73,8 +73,13 @@ class Octav(object):
         )
         return response
 
-    def list_user(self):
-        pass
+    def list_user(self, **ka):
+        endpoint = '/user/list'
+        response = requests.get(
+            cfg['BASE_URI'] + endpoint,
+            params=ka
+        )
+        return response
 
     def create_venue(self):
         pass
