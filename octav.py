@@ -296,8 +296,15 @@ class Octav(object):
         )
         return response
 
-    def list_conference(self):
-        pass
+    def list_conference(self, **ka):
+        endpoint = '/conference/list'
+        response = request.get(
+            cfg['BASE_URI'] + endpoint,
+            params=dict(
+                **ka
+            )
+        )
+        return response
 
     def update_conference(self):
         pass
