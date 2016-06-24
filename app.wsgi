@@ -11,10 +11,12 @@ import MySQLdb
 from MySQLdb.cursors import DictCursor as DC
 import requests
 from uuid import uuid4
+import os
 
 from octav import *
 
-with open('config.json', 'r') as f:
+config_file = os.path.join(os.path.dirname(__file__), 'config.json')
+with open(config_file, 'r') as f:
     cfg = json.load(f)
 
 app = application = Bottle()
