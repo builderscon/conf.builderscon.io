@@ -24,6 +24,8 @@ route = app.route
 post = app.post
 url = app.get_url
 
+octav = Octav()
+
 
 class ConferenceNotFoundError(Exception):
     pass
@@ -44,7 +46,7 @@ def session(func):
 def index():
     return {
         'pagetitle': 'top',
-        'conferences': _get_conference_list(),
+        'conferences': octav.list_conference().json(),
         'login': {'username': _session_user()} if _has_session() else '',
         'url': url
     }
@@ -182,25 +184,18 @@ def statics(filename):
     return static_file(filename, root='assets')
 
 
-def _get_conference_list():
-    endpoint = cfg['API_BASE_URI'] + '/conference/list'
-    res = json.loads(requests.get(endpoint).text)
-    return res
-
 
 def _get_conference(series_slug, slug):
-    conferences = _get_conference_list()
-    for conference in conferences:
-        if (
-                str(conference['series']['slug']) == series_slug and
-                str(conference['slug']) == slug
-        ):
-            return conference
-    raise ConferenceNotFoundError
+    slug_query = '/' + series_slug + '/' + slug
+    conference = octav.lookup_conference_by_slug(slug_query).json()
+    if conference:
+        return conference
+    else:
+        raise ConferenceNotFoundError
 
 
 def _get_latest_conference(series_slug):
-    conferences = _get_conference_list()
+    conferences = octav.list_conference().json()
     for conference in conferences:
         if str(conference['series']['slug']) == series_slug:
             return conference
