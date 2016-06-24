@@ -13,7 +13,7 @@ import requests
 from uuid import uuid4
 import os
 
-from octav import *
+from octav import Octav
 
 config_file = os.path.join(os.path.dirname(__file__), 'config.json')
 with open(config_file, 'r') as f:
