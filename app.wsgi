@@ -12,6 +12,8 @@ from MySQLdb.cursors import DictCursor as DC
 import requests
 from uuid import uuid4
 
+from octav import *
+
 with open('config.json', 'r') as f:
     cfg = json.load(f)
 
