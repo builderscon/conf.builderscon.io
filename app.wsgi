@@ -239,3 +239,9 @@ def _session_user():
         return request.get_cookie('username')
     else:
         return ''
+
+
+if __name__ == '__main__':
+    from wsgiref import simple_server
+    server = simple_server.make_server('', 3000, application)
+    server.serve_forever()

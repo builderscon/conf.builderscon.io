@@ -1,8 +1,0 @@
-* conf.builderscon.io
-** Requirements
-- Python
-  - bottle
-  - MySQLdb
-  - Requests
-- nginx
-  - uwsgi
