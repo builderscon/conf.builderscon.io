@@ -103,7 +103,9 @@ ubuntu-root: \
 	ubuntu-mysql \
 	ubuntu-pip
 
-ubuntu-user: ubuntu-home
+ubuntu-user: \
+	ubuntu-home \
+	ubuntu-dbsetup
 
 ubuntu-apt:
 	# Uninstall puppet and chef.
@@ -131,7 +133,7 @@ ubuntu-mysql:
 
 ubuntu-pip:
 	apt-get install -y python3-pip
-	pip3 install bottle
+	pip3 install bottle mysqlclient
 
 ubuntu-home:
 	# Build home directory and configs.
@@ -140,4 +142,7 @@ ubuntu-home:
 	echo "$$BASHRC" >> "${HOME_DIR}/.bashrc"
 	echo "$$SCREENRC" >> "${HOME_DIR}/.screenrc"
 	echo "$$MYCNF_USER" >> "${HOME_DIR}/.my.cnf"
-	echo "$$CONFIG_JSON" >> "${HOME_DIR}/vagrant/config.json"
+	echo "$$CONFIG_JSON" > "${HOME_DIR}/vagrant/config.json"
+
+ubuntu-dbsetup:
+	cd "${HOME_DIR}/vagrant" && python3 db_setup.py

@@ -17,6 +17,7 @@
 3.  start server in simple server.
 
     $ vagrant ssh
+    $ cd ~/vagrant
     $ python3 app.wsgi
 
 4.  access <http://127.0.0.1:3000/>
