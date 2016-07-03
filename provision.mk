@@ -133,7 +133,7 @@ ubuntu-mysql:
 
 ubuntu-pip:
 	apt-get install -y python3-pip
-	pip3 install bottle mysqlclient
+	pip3 install request bottle mysqlclient
 
 ubuntu-home:
 	# Build home directory and configs.
