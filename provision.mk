@@ -133,7 +133,7 @@ ubuntu-mysql:
 
 ubuntu-pip:
 	apt-get install -y python3-pip
-	pip3 install request bottle mysqlclient
+	pip3 install request bottle mysqlclient jinja2
 
 ubuntu-home:
 	# Build home directory and configs.
