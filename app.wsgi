@@ -46,7 +46,7 @@ def session(func):
 def index():
     return {
         'pagetitle': 'top',
-        'conferences': octav.list_conference().json(),
+        'conferences': octav.list_conference(),
         'login': {'username': _session_user()} if _has_session() else '',
         'url': url
     }
@@ -187,7 +187,7 @@ def statics(filename):
 
 def _get_conference(series_slug, slug):
     slug_query = '/' + series_slug + '/' + slug
-    conference = octav.lookup_conference_by_slug(slug_query).json()
+    conference = octav.lookup_conference_by_slug(slug_query)
     if conference:
         return conference
     else:
@@ -195,7 +195,7 @@ def _get_conference(series_slug, slug):
 
 
 def _get_latest_conference(series_slug):
-    conferences = octav.list_conference().json()
+    conferences = octav.list_conference()
     for conference in conferences:
         if str(conference['series']['slug']) == series_slug:
             return conference
