@@ -26,6 +26,7 @@ post = app.post
 url = app.get_url
 
 octav = Octav()
+redis = Redis(**cfg['REDIS_INFO'])
 
 
 class ConferenceNotFoundError(Exception):
@@ -40,7 +41,6 @@ def session(func):
         else:
             redirect('/login')
     return _
-
 
 @route('/')
 @view('index.tpl')
@@ -93,7 +93,6 @@ def login_github():
 @route('/logout')
 @route('/<p:path>/logout')
 def logout(p=None):
-    response.set_cookie('username', '')
     response.set_cookie('session_id', '', expires=datetime.now()-timedelta(1))
     redirect('/')
 
@@ -185,7 +184,6 @@ def statics(filename):
     return static_file(filename, root='assets')
 
 
-
 def _get_conference(series_slug, slug):
     slug_query = '/' + series_slug + '/' + slug
     conference = octav.lookup_conference_by_slug(slug_query)
@@ -204,40 +202,23 @@ def _get_latest_conference(series_slug):
 
 
 def _create_session(username):
-    query = 'INSERT INTO auth_sessions VALUES (%s, %s, %s);'
     session_id = str(uuid4())
-    expire = datetime.now() + timedelta(7)
-    with MySQLdb.connect(cursorclass=DC, **cfg['DB_INFO']) as cursor:
-        try:
-            cursor.execute(
-                query,
-                (username, session_id, expire)
-            )
-        except:
-            return False
-        else:
-            response.set_cookie('username', username, path='/')
-            response.set_cookie('session_id', session_id, expires=expire, path='/')
-            return session_id
+    expire_time = 7 * 24 * 60* 60
+    redis.setex(session_id, username, expire_time)
+    response.set_cookie('session_id', session_id, expires=expire, path='/')
+    return session_id
 
 
 def _has_session():
-    username = request.get_cookie('username')
     session_id = request.get_cookie('session_id')
-    query = '''SELECT * FROM auth_sessions
-    WHERE username=%s AND session_id=%s;'''
-    with MySQLdb.connect(cursorclass=DC, **cfg['DB_INFO']) as cursor:
-        cursor.execute(
-            query,
-            (username, session_id)
-        )
-        row = cursor.fetchone()
-    return (row and row['expire'] > datetime.now())
+    return redis.exists(session_id)
 
 
 def _session_user():
-    if _has_session():
-        return request.get_cookie('username')
+    session_id = request.get_cookie('session_id')
+    username = redis.get(session_id)
+    if username is not None:
+        return username
     else:
         return ''
 
