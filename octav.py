@@ -35,8 +35,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def lookup_user(self, id_):
         endpoint = '/user/lookup'
@@ -48,8 +47,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def lookup_user_by_auth_id(self, auth_via, auth_user_id):
         endpoint = '/user/lookup_by_auth_user_id'
@@ -60,8 +58,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def update_user(self, id_, **ka):
         endpoint = '/user/update'
@@ -75,8 +72,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def delete_user(self, id_):
         endpoint = '/user/delete'
@@ -89,8 +85,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def list_user(self, **ka):
         endpoint = '/user/list'
@@ -100,8 +95,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def create_venue(self, name, address, **ka):
         endpoint = '/venue/create'
@@ -116,8 +110,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def list_venue(self, **ka):
         endpoint = '/venue/list'
@@ -127,8 +120,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def lookup_venue(self, id_):
         endpoint = '/venue/lookup'
@@ -140,8 +132,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def update_venue(self, id_):
         endpoint = '/vanue/update'
@@ -154,8 +145,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def delete_venue(self, id_):
         endpoint = '/venue/delete'
@@ -168,8 +158,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def create_room(self, venue_id, name, **ka):
         endpoint = '/room/create'
@@ -184,8 +173,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def update_room(self, id_, **ka):
         endpoint = '/room/update'
@@ -199,8 +187,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def lookup_room(self, id_):
         endpoint = '/room/lookup'
@@ -212,8 +199,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def delete_room(self, id_):
         endpoint = '/room/delete'
@@ -226,8 +212,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def list_room(self, venue_id, **ka):
         endpoint = '/room/list'
@@ -240,8 +225,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def create_conference(self, title, slug, user_id, **ka):
         endpoint = '/conference/create'
@@ -257,8 +241,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def add_conference_dates(self, conference_id, dates):
         endpoint = '/conference/dates/add'
@@ -272,8 +255,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def delete_conference_dates(self, conference_id, dates):
         endpoint = '/conference/dates/delete'
@@ -287,8 +269,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def add_conference_admin(self, conference_id, user_id):
         endpoint = '/conference/admin/add'
@@ -302,8 +283,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def delete_conference_admin(self, conference_id, user_id):
         endpoint = '/conference/admin/delete'
@@ -317,8 +297,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def add_conference_venue(self, conference_id, venue_id):
         endpoint = '/conference/venue/add'
@@ -332,8 +311,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def delete_conference_venue(self, conference_id, venue_id):
         endpoint = '/conference/venue/delete'
@@ -347,8 +325,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def lookup_conference(self, id_):
         endpoint = '/conference/lookup'
@@ -360,8 +337,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def lookup_conference_by_slug(self, slug):
         endpoint = '/conference/lookup_by_slug'
@@ -373,8 +349,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def list_conference(self, **ka):
         endpoint = '/conference/list'
@@ -386,8 +361,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def update_conference(self, id_, **ka):
         endpoint = '/conference/update'
@@ -401,8 +375,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def delete_conference(self, id_):
         endpoint = '/conference/delete'
@@ -415,8 +388,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def create_session(
             self, conference_id, speaker_id, title, abstract, duration, **ka
@@ -436,8 +408,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def lookup_session(self, id_):
         endpoint = '/session/lookup'
@@ -449,8 +420,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def delete_session(self, id_):
         endpoint = '/session/delete'
@@ -463,8 +433,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def update_session(self, id_, **ka):
         endpoint = '/session/update'
@@ -478,8 +447,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def list_session_by_conference(self, conference_id, **ka):
         endpoint = '/schedule/list'
@@ -492,8 +460,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def create_question(self, session_id, user_id, body):
         endpoint = '/question/create'
@@ -508,8 +475,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def delete_question(self, id_):
         endpoint = '/question/delete'
@@ -522,8 +488,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def list_question(self, session_id, **ka):
         endpoint = '/question/list'
@@ -536,8 +501,7 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError
 
     def create_session_survey_response(
             self, session_id, user_id, user_prior_knowledge, speaker_knowledge,
@@ -560,5 +524,4 @@ class Octav(object):
         )
         if response.status_code == 200:
             return response.json()
-        else:
-            raise APIError
+        raise APIError

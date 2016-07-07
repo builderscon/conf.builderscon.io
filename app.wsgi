@@ -70,24 +70,23 @@ def login_github():
             'https://github.com/login/oauth/authorize' +
             '?client_id=' + cfg['GITHUB']['client_id']
         )
-    else:
-        access_token = requests.get(
-            'https://github.com/login/oauth/access_token',
-            params={
-                'code': code,
-                'client_id': cfg['GITHUB']['client_id'],
-                'client_secret': cfg['GITHUB']['client_secret']
-            }
-        )
-        if 'error' not in access_token.text:
-            res = requests.get(
-                'https://api.github.com/user?' + access_token.text
-            )
-            user_info = res.json()
-            _create_session(user_info['login'])
-            redirect('/')
-        else:
-            redirect('/login')
+    access_token = requests.get(
+        'https://github.com/login/oauth/access_token',
+        params={
+            'code': code,
+            'client_id': cfg['GITHUB']['client_id'],
+            'client_secret': cfg['GITHUB']['client_secret']
+        }
+    )
+    if 'error' in access_token.text:
+        redirect('/login')
+
+    res = requests.get(
+        'https://api.github.com/user?' + access_token.text
+    )
+    user_info = res.json()
+    _create_session(user_info['login'])
+    redirect('/')
 
 
 @route('/logout')
@@ -189,8 +188,7 @@ def _get_conference(series_slug, slug):
     conference = octav.lookup_conference_by_slug(slug_query)
     if conference:
         return conference
-    else:
-        raise ConferenceNotFoundError
+    raise ConferenceNotFoundError
 
 
 def _get_latest_conference(series_slug):
@@ -217,10 +215,9 @@ def _has_session():
 def _session_user():
     session_id = request.get_cookie('session_id')
     username = redis.get(session_id)
-    if username is not None:
-        return username
-    else:
+    if username is None:
         return ''
+    return username
 
 
 if __name__ == '__main__':
