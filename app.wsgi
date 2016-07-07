@@ -201,7 +201,7 @@ def _get_latest_conference(series_slug):
 
 def _create_session(username):
     session_id = str(uuid4())
-    expire_time = 7 * 24 * 60* 60
+    expire_time = 5*60*60
     redis.setex(session_id, username, expire_time)
     response.set_cookie('session_id', session_id, expires=expire, path='/')
     return session_id
