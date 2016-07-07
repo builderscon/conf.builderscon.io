@@ -8,8 +8,8 @@
     },
     "REDIS_INFO": {
         "host": "",
-        "port": "",
-        "db": ""
+        "port": 6379,
+        "db": 0
     },
     "OCTAV": {
         "BASE_URI": "",
