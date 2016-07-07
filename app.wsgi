@@ -12,6 +12,7 @@ from MySQLdb.cursors import DictCursor as DC
 import requests
 from uuid import uuid4
 import os
+from redis import Redis
 
 from octav import Octav
 

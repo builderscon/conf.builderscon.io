@@ -6,6 +6,11 @@
         "user": "",
         "passwd": ""
     },
+    "REDIS_INFO": {
+        "host": "",
+        "port": "",
+        "db": ""
+    },
     "OCTAV": {
         "BASE_URI": "",
         "key": "",
