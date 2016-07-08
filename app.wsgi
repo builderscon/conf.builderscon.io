@@ -4,11 +4,8 @@
 from bottle import Bottle, redirect, request, response
 from bottle import jinja2_view as view
 from bottle import static_file
-from datetime import date, datetime, timedelta
 import functools
 import json
-import MySQLdb
-from MySQLdb.cursors import DictCursor as DC
 import requests
 from uuid import uuid4
 import os
@@ -154,7 +151,7 @@ def conference_session_details(series_slug, slug, id_):
     res = json.loads(requests.get(endpoint + '?id=' + id_).text)
     return {
         'pagetitle': series_slug + ' ' + slug,
-        'session': session,
+        'session': res,
         'login': {'username': _session_user()} if _has_session() else '',
         'url': url
     }
@@ -203,7 +200,7 @@ def _create_session(username):
     session_id = str(uuid4())
     expire_time = 5*60*60
     redis.setex(session_id, username, expire_time)
-    response.set_cookie('session_id', session_id, expires=expire, path='/')
+    response.set_cookie('session_id', session_id, expires=expire_time, path='/')
     return session_id
 
 
