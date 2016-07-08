@@ -34,7 +34,7 @@ class ConferenceNotFoundError(Exception):
 def session(func):
     @functools.wraps(func)
     def _(*a, **ka):
-        if _has_session():
+        if _session_user() != '':
             return func(*a, **ka)
         else:
             redirect('/login')
@@ -46,7 +46,7 @@ def index():
     return {
         'pagetitle': 'top',
         'conferences': octav.list_conference(),
-        'login': {'username': _session_user()} if _has_session() else '',
+        'login': {'username': _session_user()},
         'url': url
     }
 
@@ -109,7 +109,7 @@ def conference_per_instance(series_slug, slug):
     return {
         'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
-        'login': {'username': _session_user()} if _has_session() else '',
+        'login': {'username': _session_user()},
         'url': url
     }
 
@@ -124,7 +124,7 @@ def conference_sessions(series_slug, slug):
     return {
         'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
-        'login': {'username': _session_user()} if _has_session() else '',
+        'login': {'username': _session_user()},
         'url': url
     }
 
@@ -135,7 +135,7 @@ def conference_sessions(series_slug, slug):
 def add_session(series_slug, slug):
     return {
         'pagetitle': series_slug + ' ' + slug,
-        'login': {'username': _session_user()} if _has_session() else '',
+        'login': {'username': _session_user()},
         'url': url
     }
 
@@ -153,7 +153,7 @@ def conference_session_details(series_slug, slug, id_):
     return {
         'pagetitle': series_slug + ' ' + slug,
         'session': res,
-        'login': {'username': _session_user()} if _has_session() else '',
+        'login': {'username': _session_user()},
         'url': url
     }
 
@@ -162,7 +162,7 @@ def conference_session_details(series_slug, slug, id_):
 def speaker_details(id_):
     return {
         'pagetitle': 'spkeaker',
-        'login': {'username': _session_user()} if _has_session() else '',
+        'login': {'username': _session_user()},
         'url': url
     }
 
@@ -171,7 +171,7 @@ def speaker_details(id_):
 def user_details(id_):
     return {
         'pagetitle': 'user',
-        'login': {'username': _session_user()} if _has_session() else '',
+        'login': {'username': _session_user()},
         'url': url
     }
 
@@ -202,19 +202,20 @@ def _create_session(username):
     expire_time = 5*60*60
     redis.setex(session_id, username, expire_time)
     response.set_cookie('session_id', session_id, expires=expire_time, path='/')
+    requiest.environ["__current_session"] = username
     return session_id
-
-
-def _has_session():
-    session_id = request.get_cookie('session_id')
-    return redis.exists(session_id)
 
 
 def _session_user():
     session_id = request.get_cookie('session_id')
+    username = request.environ.get("__current_session")
+    if username is not None:
+        return username
+
     username = redis.get(session_id)
     if username is None:
         return ''
+    request.environ["__current_session"] = username
     return username
 
 
