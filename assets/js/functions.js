@@ -2,10 +2,9 @@ function include(scriptUrl) {
 	document.write('<script src="' + scriptUrl + '"></script>');
 }
 
-include('./assets/js/jquery.cookie.js');
-include('./assets/js/jquery.easing.1.3.js');
-//include('./assets/js/jquery.softlyanim.js');
-include('./assets/js/jquery.rotate.js');
+include('/assets/js/jquery.cookie.js');
+include('/assets/js/jquery.easing.1.3.js');
+include('/assets/js/jquery.rotate.js');
 
 (function ($) {
 	var windowSize = window.innerWidth ? window.innerWidth: $(window).width();
