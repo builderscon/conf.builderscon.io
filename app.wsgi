@@ -8,13 +8,12 @@ from datetime import datetime, timedelta
 import functools
 import json
 import requests
-from uuid import uuid4
 import os
+from uuid import uuid4
 from redis import Redis
-
 from octav import Octav
 
-config_file = os.path.join(os.path.dirname(__file__), 'config.json')
+config_file = os.getenv("CONFIG_FILE", os.path.join(os.path.dirname(__file__), 'config.json'))
 with open(config_file, 'r') as f:
     cfg = json.load(f)
 
@@ -45,6 +44,7 @@ def session(func):
 def index():
     return {
         'pagetitle': 'top',
+        'body_id': "top",
         'conferences': octav.list_conference(),
         'login': {'username': _session_user()},
         'url': url

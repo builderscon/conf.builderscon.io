@@ -1,6 +1,9 @@
 {% extends 'base.tpl' %}
 
-{% set eyecatch=True %}
+{% block "herotext" %}
+<h1>{{ conference.title }}</h1>
+<h2>{{ conference.sub_title }}</h2>
+{% endblock %}
 
 {% block main %}
 <main>

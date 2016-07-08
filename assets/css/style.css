@@ -8,3 +8,9 @@
 @import url(./fonts.css);
 @import url(./jquery.mmenu.all.css);
 @import url(./html.css);
+
+#top #heroimage {
+    position: relative;
+    height: 410px;
+    background: rgba(0,0,0,0) url(/assets/images/heroimage-hall.png) repeat-x center 0;
+}
