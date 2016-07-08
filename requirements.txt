@@ -1,0 +1,5 @@
+request
+bottle
+jinja2
+redis
+
