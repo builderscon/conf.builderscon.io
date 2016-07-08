@@ -202,7 +202,7 @@ def _create_session(username):
     expire_time = 5*60*60
     redis.setex(session_id, username, expire_time)
     response.set_cookie('session_id', session_id, expires=expire_time, path='/')
-    requiest.environ["__current_session"] = username
+    request.environ["__current_session"] = username
     return session_id
 
 
