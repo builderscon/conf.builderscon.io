@@ -17,7 +17,7 @@
             {% for conference in conferences %}
             <tr>
               <td>
-                <a href="{% if confnerence.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a>
+                <a href="{% if conference.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a>
               </td>
             </tr>
             {% endfor %}
