@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from bottle import Bottle, redirect, request, response
+from bottle import Bottle, redirect, request, response, HTTPError
 from bottle import jinja2_view as view
 from bottle import static_file
 from datetime import datetime, timedelta
+from requestlogger import WSGILogger, ApacheFormatter
+from logging import StreamHandler
 import functools
 import json
 import requests
@@ -12,6 +14,7 @@ import os
 from uuid import uuid4
 from redis import Redis
 from octav import Octav
+from sys import stdout
 
 config_file = os.getenv("CONFIG_FILE", os.path.join(os.path.dirname(__file__), 'config.json'))
 with open(config_file, 'r') as f:
@@ -21,6 +24,7 @@ app = application = Bottle()
 route = app.route
 post = app.post
 url = app.get_url
+app = WSGILogger(app, [ StreamHandler(stdout) ], ApacheFormatter())
 
 octav = Octav()
 redis = Redis(**cfg['REDIS_INFO'])
@@ -28,7 +32,6 @@ redis = Redis(**cfg['REDIS_INFO'])
 
 class ConferenceNotFoundError(Exception):
     pass
-
 
 def session(func):
     @functools.wraps(func)
@@ -38,6 +41,16 @@ def session(func):
         else:
             redirect('/login')
     return _
+
+# Note: this has to come BEFORE other handlers
+@route('/favicon.ico')
+def favicon():
+    raise HTTPError(status=404)
+
+# Note: this has to come BEFORE other handlers
+@route('/assets/<filename:path>', name='statics')
+def statics(filename):
+    return static_file(filename, root='assets')
 
 @route('/')
 @view('index.tpl')
@@ -99,9 +112,10 @@ def conference(series_slug):
     redirect('/{0}/latest'.format(series_slug))
 
 
-@route('/<series_slug>/<slug>')
+@route('/<series_slug>/<slug:path>')
 @view('conference.tpl')
 def conference_per_instance(series_slug, slug):
+    print(series_slug + " "+ slug + "\n")
     if slug == 'latest':
         conference = _get_latest_conference(series_slug)
     else:
@@ -176,10 +190,6 @@ def user_details(id_):
     }
 
 
-@route('/assets/<filename:path>', name='statics')
-def statics(filename):
-    return static_file(filename, root='assets')
-
 
 def _get_conference(series_slug, slug):
     slug_query = '/' + series_slug + '/' + slug
@@ -221,5 +231,5 @@ def _session_user():
 
 if __name__ == '__main__':
     from wsgiref import simple_server
-    server = simple_server.make_server('', 3000, application)
+    server = simple_server.make_server('', 3000, app)
     server.serve_forever()
