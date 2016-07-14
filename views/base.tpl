@@ -62,5 +62,6 @@
     <script src="{{ url('statics', filename='js/jquery.cookie.js') }}"></script>
     <script src="{{ url('statics', filename='js/jquery.easing.1.3.js') }}"></script>
     <script src="{{ url('statics', filename='js/jquery.rotate.js') }}"></script>
+    {% block scripts %}{% endblock %}
   </body>
 </html>

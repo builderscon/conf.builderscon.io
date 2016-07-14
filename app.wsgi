@@ -11,6 +11,7 @@ import functools
 import json
 import requests
 import os
+from accept_language import LangDetector
 from uuid import uuid4
 from redis import Redis
 from octav import Octav
@@ -24,11 +25,11 @@ app = application = Bottle()
 route = app.route
 post = app.post
 url = app.get_url
+app = LangDetector(app, languages=["ja", "en"])
 app = WSGILogger(app, [ StreamHandler(stdout) ], ApacheFormatter())
 
 octav = Octav()
 redis = Redis(**cfg['REDIS_INFO'])
-
 
 class ConferenceNotFoundError(Exception):
     pass
@@ -55,10 +56,11 @@ def statics(filename):
 @route('/')
 @view('index.tpl')
 def index():
+    lang = request.environ.get("lang")
     return {
         'pagetitle': 'top',
         'body_id': "top",
-        'conferences': octav.list_conference(),
+        'conferences': octav.list_conference(lang),
         'login': {'username': _session_user()},
         'url': url
     }
@@ -114,17 +116,18 @@ def conference(series_slug):
 
 @route('/<series_slug>/<slug:path>')
 @view('conference.tpl')
-def conference_per_instance(series_slug, slug):
-    print(series_slug + " "+ slug + "\n")
+def conference_instance(series_slug, slug):
+    lang = request.environ.get("lang")
     if slug == 'latest':
         conference = _get_latest_conference(series_slug)
     else:
-        conference = _get_conference(series_slug, slug)
+        conference = _get_conference(series_slug, slug, lang)
     return {
         'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
         'login': {'username': _session_user()},
-        'url': url
+        'url': url,
+        'googlemap_api_key': cfg["GOOGLE_MAP"]["api_key"]
     }
 
 
@@ -191,16 +194,17 @@ def user_details(id_):
 
 
 
-def _get_conference(series_slug, slug):
+def _get_conference(series_slug, slug, lang):
     slug_query = '/' + series_slug + '/' + slug
-    conference = octav.lookup_conference_by_slug(slug_query)
+    conference = octav.lookup_conference_by_slug(slug_query, lang)
     if conference:
         return conference
     raise ConferenceNotFoundError
 
 
-def _get_latest_conference(series_slug):
-    conferences = octav.list_conference()
+def _get_latest_conference(series_slug, lang):
+    # XXX There should be a specific API call for this
+    conferences = octav.list_conference(lang)
     for conference in conferences:
         if str(conference['series']['slug']) == series_slug:
             return conference

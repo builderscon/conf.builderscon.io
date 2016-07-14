@@ -339,24 +339,25 @@ class Octav(object):
             return response.json()
         raise APIError
 
-    def lookup_conference_by_slug(self, slug):
+    def lookup_conference_by_slug(self, slug, lang):
         endpoint = '/conference/lookup_by_slug'
         response = self.session.get(
             cfg['BASE_URI'] + endpoint,
             params=dict(
-                slug=slug
+                slug=slug,
+                lang=lang
             )
         )
         if response.status_code == 200:
             return response.json()
         raise APIError
 
-    def list_conference(self, **ka):
+    def list_conference(self, lang=None):
         endpoint = '/conference/list'
         response = self.session.get(
             cfg['BASE_URI'] + endpoint,
             params=dict(
-                **ka
+                lang=lang
             )
         )
         if response.status_code == 200:
