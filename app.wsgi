@@ -28,7 +28,13 @@ url = app.get_url
 app = LangDetector(app, languages=["ja", "en"])
 app = WSGILogger(app, [ StreamHandler(stdout) ], ApacheFormatter())
 
-octav = Octav()
+octav = Octav(
+    debug = cfg["OCTAV"]["debug"],
+    endpoint = cfg["OCTAV"]["BASE_URI"],
+    key = cfg["OCTAV"]["key"],
+    secret = cfg["OCTAV"]["secret"]
+)
+
 redis = Redis(**cfg['REDIS_INFO'])
 
 class ConferenceNotFoundError(Exception):
@@ -57,10 +63,13 @@ def statics(filename):
 @view('index.tpl')
 def index():
     lang = request.environ.get("lang")
+    conferences = octav.list_conference(lang=lang)
+    if conferences is None:
+        raise HTTPError(status=500,body=octav.last_error())
     return {
         'pagetitle': 'top',
         'body_id': "top",
-        'conferences': octav.list_conference(lang),
+        'conferences': octav.list_conference(lang=lang),
         'login': {'username': _session_user()},
         'url': url
     }
@@ -196,7 +205,7 @@ def user_details(id_):
 
 def _get_conference(series_slug, slug, lang):
     slug_query = '/' + series_slug + '/' + slug
-    conference = octav.lookup_conference_by_slug(slug_query, lang)
+    conference = octav.lookup_conference_by_slug(slug=slug_query, lang=lang)
     if conference:
         return conference
     raise ConferenceNotFoundError
@@ -204,11 +213,12 @@ def _get_conference(series_slug, slug, lang):
 
 def _get_latest_conference(series_slug, lang):
     # XXX There should be a specific API call for this
-    conferences = octav.list_conference(lang)
+    conferences = octav.list_conference(lang=lang)
+    if conferences is None:
+        raise ConferenceNotFoundError
     for conference in conferences:
         if str(conference['series']['slug']) == series_slug:
             return conference
-    raise ConferenceNotFoundError
 
 
 def _create_session(username):
