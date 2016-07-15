@@ -776,10 +776,10 @@ a.disabled	{ color: #555; }
 
 @media screen and (min-width: 900px) and (max-width: 931931px) {
 	#contents {
-		padding: 100px 0 0 0;
+		padding: 20px 0 0 0;
 	}
 	#contents.index {
-		padding: 180px 0 0 0;
+		padding: 80px 0 0 0;
 	}
 	#contents .section {}
 	#contents .article { margin: 0 0 140px 0; }
