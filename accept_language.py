@@ -1,6 +1,10 @@
+if sys.version[0] == 3:
+    from http.cookies import SimpleCookie
+else:
+    from Cookie import SimpleCookie
+
 import re
 import locale
-from Cookie import SimpleCookie
 from datetime import datetime, timedelta
 from urlparse import urlparse, parse_qs
 
