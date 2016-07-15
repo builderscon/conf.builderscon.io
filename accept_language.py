@@ -1,14 +1,15 @@
 import sys
 
-if sys.version[0] == 3:
+if sys.version[0] == "3":
     from http.cookies import SimpleCookie
+    from urllib.parse import parse_qs
 else:
     from Cookie import SimpleCookie
+    from urlparse import parse_qs
 
 import re
 import locale
 from datetime import datetime, timedelta
-from urlparse import urlparse, parse_qs
 
 __all__ = ["LangDetector"]
 
