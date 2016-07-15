@@ -7,6 +7,7 @@
     <meta content="@builderscon" name="twitter:site"/>
     <link href="{{ url('statics', filename='images/favicon.ico') }}" rel="shortcut icon"/>
     <link href="{{ url('statics', filename='css/style.css') }}" rel="stylesheet"/>
+{% block header %}{% endblock %}
   </head>
   <body{% if body_id %} id="{{ body_id }}"{% endif %}>
     <div id="wrapper">
