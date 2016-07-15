@@ -1,5 +1,5 @@
-request
+requests
 bottle
 jinja2
 redis
-
+wsgi-request-logger
