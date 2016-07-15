@@ -1,3 +1,5 @@
+import sys
+
 if sys.version[0] == 3:
     from http.cookies import SimpleCookie
 else:
