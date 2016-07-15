@@ -11,6 +11,7 @@ import functools
 import json
 import requests
 import os
+import pickle
 from accept_language import LangDetector
 from uuid import uuid4
 from redis import Redis
@@ -63,13 +64,20 @@ def statics(filename):
 @view('index.tpl')
 def index():
     lang = request.environ.get("lang")
-    conferences = octav.list_conference(lang=lang)
-    if conferences is None:
-        raise HTTPError(status=500,body=octav.last_error())
+    key = "conferences.lang." + lang
+    conferences = redis.get(key)
+    if conferences:
+        conferences = pickle.loads(conferences)
+    if not conferences:
+        conferences = octav.list_conference(lang=lang)
+        if conferences is None:
+            raise HTTPError(status=500,body=octav.last_error())
+        redis.setex(key, pickle.dumps(conferences), 600)
+    print(conferences)
     return {
         'pagetitle': 'top',
         'body_id': "top",
-        'conferences': octav.list_conference(lang=lang),
+        'conferences': conferences,
         'login': {'username': _session_user()},
         'url': url
     }
@@ -130,7 +138,7 @@ def conference_instance(series_slug, slug):
     if slug == 'latest':
         conference = _get_latest_conference(series_slug)
     else:
-        conference = _get_conference(series_slug, slug, lang)
+        conference = _get_conference_by_slug(series_slug, slug, lang)
     return {
         'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
@@ -146,7 +154,7 @@ def conference_sessions(series_slug, slug):
     if slug == 'latest':
         conference = _get_latest_conference(series_slug)
     else:
-        conference = _get_conference(series_slug, slug)
+        conference = _get_conference_by_slug(series_slug, slug)
     return {
         'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
@@ -202,11 +210,28 @@ def user_details(id_):
     }
 
 
+def _get_conference(id, lang):
+    key = "conference." + id
+    conference = redis.get(key)
+    if conference:
+        conference = pickle.loads(conference)
+    else:
+        conference = octav.lookup_conference(id=id, lang=lang)
+        if not conference:
+            return ConferenceNotFoundError
+        redis.setex(key, pickle.dumps(conference), 300)
+    return conference
 
-def _get_conference(series_slug, slug, lang):
+def _get_conference_by_slug(series_slug, slug, lang):
     slug_query = '/' + series_slug + '/' + slug
+    slugkey = "conference.by_slug." + slug_query
+    cid = redis.get(slugkey)
+    if cid:
+        return _get_conference(id=id, lang=lang)
+
     conference = octav.lookup_conference_by_slug(slug=slug_query, lang=lang)
     if conference:
+        redis.setex("conference." + conference["id"], pickle.dumps(conference), 300)
         return conference
     raise ConferenceNotFoundError
 
