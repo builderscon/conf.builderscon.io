@@ -108,6 +108,7 @@ class LangDetector(object):
             return lang[0]
 
         if self.with_cookie:
+            cookie = None
             cookiestr = environ.get("HTTP_COOKIE")
             if cookiestr:
                 cookie = SimpleCookie().load(cookiestr)
