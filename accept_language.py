@@ -108,11 +108,13 @@ class LangDetector(object):
             return lang[0]
 
         if self.with_cookie:
-            cookie = SimpleCookie().load(environ.get("HTTP_COOKIE"))
+            cookiestr = environ.get("HTTP_COOKIE")
+            if cookiestr:
+                cookie = SimpleCookie().load(cookiestr)
             if cookie:
                 lang = self.language_from_cookie(cookie)
-                if lang:
-                    return lang
+            if lang:
+                return lang
 
         lang = self.preferred_language(environ.get("HTTP_ACCEPT_LANGUAGE"))
         if lang:
