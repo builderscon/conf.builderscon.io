@@ -153,6 +153,6 @@ class LangDetector(object):
             return start_response(status, response_headers)
 
         environ['lang'] = lang
-        environ['lang.origin'] = lang # shouldn't be touched
+        environ['lang.origin'] = lang  # shouldn't be touched
 
         return self.application(environ, _start_response)
