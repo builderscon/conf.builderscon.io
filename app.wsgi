@@ -41,6 +41,7 @@ octav = Octav(
 
 redis = Redis(**cfg['REDIS_INFO'])
 
+
 class ConferenceNotFoundError(Exception):
     pass
 
