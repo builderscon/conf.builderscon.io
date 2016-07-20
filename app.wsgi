@@ -18,7 +18,10 @@ from redis import Redis
 from octav import Octav
 from sys import stdout
 
-config_file = os.getenv("CONFIG_FILE", os.path.join(os.path.dirname(__file__), 'config.json'))
+config_file = os.getenv(
+    "CONFIG_FILE",
+    os.path.join(os.path.dirname(__file__), 'config.json')
+)
 with open(config_file, 'r') as f:
     cfg = json.load(f)
 
