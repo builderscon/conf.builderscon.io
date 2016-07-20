@@ -67,6 +67,7 @@ def favicon():
 def statics(filename):
     return static_file(filename, root='assets')
 
+
 @route('/')
 @view('index.tpl')
 def index():
