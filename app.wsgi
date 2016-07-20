@@ -33,10 +33,10 @@ app = LangDetector(app, languages=["ja", "en"])
 app = WSGILogger(app, [StreamHandler(stdout)], ApacheFormatter())
 
 octav = Octav(
-    debug = cfg["OCTAV"]["debug"],
-    endpoint = cfg["OCTAV"]["BASE_URI"],
-    key = cfg["OCTAV"]["key"],
-    secret = cfg["OCTAV"]["secret"]
+    debug=cfg["OCTAV"]["debug"],
+    endpoint=cfg["OCTAV"]["BASE_URI"],
+    key=cfg["OCTAV"]["key"],
+    secret=cfg["OCTAV"]["secret"]
 )
 
 redis = Redis(**cfg['REDIS_INFO'])
