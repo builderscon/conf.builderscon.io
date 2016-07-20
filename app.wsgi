@@ -61,6 +61,7 @@ def session(func):
 def favicon():
     raise HTTPError(status=404)
 
+
 # Note: this has to come BEFORE other handlers
 @route('/assets/<filename:path>', name='statics')
 def statics(filename):
