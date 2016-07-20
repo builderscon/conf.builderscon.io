@@ -131,9 +131,11 @@ class LangDetector(object):
 
         def _start_response(status, response_headers, exc_info=None):
             # Removing any existing content-language
-            response_headers = [(name, value)
-                                for name, value in response_headers
-                                    if name.lower() != 'content-language']
+            response_headers = [
+                (name, value)
+                for name, value in response_headers
+                if name.lower() != 'content-language'
+            ]
 
             # lang changed
             lang = environ['lang.origin']
