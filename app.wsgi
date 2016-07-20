@@ -27,7 +27,7 @@ with open(config_file, 'r') as f:
     if cfg['OCTAV'].get('BASE_URI'):
         raise Exception(
             'DEPRECATED: {"OCTAV":{"BASE_URI"}} in config.json is deprecated.\
- Use {"OCTAV":{"endpoint"}} and need to remove {"OCTAV":{"BASE_URI"}}.'
+ Please use {"OCTAV":{"endpoint"}} instead and remove {"OCTAV":{"BASE_URI"}}.'
         )
 
 app = application = Bottle()
