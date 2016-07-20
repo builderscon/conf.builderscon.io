@@ -30,7 +30,7 @@ route = app.route
 post = app.post
 url = app.get_url
 app = LangDetector(app, languages=["ja", "en"])
-app = WSGILogger(app, [StreamHandler(stdout) ], ApacheFormatter())
+app = WSGILogger(app, [StreamHandler(stdout)], ApacheFormatter())
 
 octav = Octav(
     debug = cfg["OCTAV"]["debug"],
