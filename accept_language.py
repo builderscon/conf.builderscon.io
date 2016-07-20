@@ -1,4 +1,7 @@
 import sys
+import re
+import locale
+from datetime import datetime, timedelta
 
 if sys.version[0] == "3":
     from http.cookies import SimpleCookie
@@ -7,17 +10,13 @@ else:
     from Cookie import SimpleCookie
     from urlparse import parse_qs
 
-import re
-import locale
-from datetime import datetime, timedelta
-
 __all__ = ["LangDetector"]
 
 
 DEFAULT_LANGS = "en",
 COOKIE_NAME = "lang"
 COOKIE_FORMAT = "%a, %d-%b-%Y %H:%M:%S UTC"
-COOKIE_EXPIRATION = 30 # days
+COOKIE_EXPIRATION = 30  # days
 
 
 class LangDetector(object):
@@ -48,7 +47,7 @@ class LangDetector(object):
 
         tmp = cookie[COOKIE_NAME].value
         if self.in_languages(tmp):
-            return  tmp
+            return tmp
 
         return None
 
@@ -95,11 +94,15 @@ class LangDetector(object):
 
         locale.setlocale(locale.LC_TIME, current_locale)
 
-        return ('Set-Cookie',
-                '%s="%s"; expires=%s; path=/' %
-                    (COOKIE_NAME,
-                     lang,
-                     expires))
+        return (
+            'Set-Cookie',
+            '%s="%s"; expires=%s; path=/' %
+            (
+                COOKIE_NAME,
+                lang,
+                expires
+            )
+        )
 
     def __detect__(self, environ):
         parsed = parse_qs(environ.get("QUERY_STRING"))
@@ -128,9 +131,11 @@ class LangDetector(object):
 
         def _start_response(status, response_headers, exc_info=None):
             # Removing any existing content-language
-            response_headers = [(name, value)
-                                for name, value in response_headers
-                                    if name.lower() != 'content-language']
+            response_headers = [
+                (name, value)
+                for name, value in response_headers
+                if name.lower() != 'content-language'
+            ]
 
             # lang changed
             lang = environ['lang.origin']
@@ -148,6 +153,6 @@ class LangDetector(object):
             return start_response(status, response_headers)
 
         environ['lang'] = lang
-        environ['lang.origin'] = lang # shouldn't be touched
+        environ['lang.origin'] = lang  # shouldn't be touched
 
         return self.application(environ, _start_response)

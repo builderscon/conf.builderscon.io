@@ -18,28 +18,33 @@ from redis import Redis
 from octav import Octav
 from sys import stdout
 
-config_file = os.getenv("CONFIG_FILE", os.path.join(os.path.dirname(__file__), 'config.json'))
+config_file = os.getenv(
+    "CONFIG_FILE",
+    os.path.join(os.path.dirname(__file__), 'config.json')
+)
 with open(config_file, 'r') as f:
     cfg = json.load(f)
+    if cfg['OCTAV'].get('BASE_URI'):
+        raise Exception(
+            'DEPRECATED: {"OCTAV":{"BASE_URI"}} in config.json is deprecated.\
+ Use {"OCTAV":{"endpoint"}} and need to remove {"OCTAV":{"BASE_URI"}}.'
+        )
 
 app = application = Bottle()
 route = app.route
 post = app.post
 url = app.get_url
 app = LangDetector(app, languages=["ja", "en"])
-app = WSGILogger(app, [ StreamHandler(stdout) ], ApacheFormatter())
+app = WSGILogger(app, [StreamHandler(stdout)], ApacheFormatter())
 
-octav = Octav(
-    debug = cfg["OCTAV"]["debug"],
-    endpoint = cfg["OCTAV"]["BASE_URI"],
-    key = cfg["OCTAV"]["key"],
-    secret = cfg["OCTAV"]["secret"]
-)
+octav = Octav(**cfg['OCTAV'])
 
 redis = Redis(**cfg['REDIS_INFO'])
 
+
 class ConferenceNotFoundError(Exception):
     pass
+
 
 def session(func):
     @functools.wraps(func)
@@ -50,15 +55,18 @@ def session(func):
             redirect('/login')
     return _
 
+
 # Note: this has to come BEFORE other handlers
 @route('/favicon.ico')
 def favicon():
     raise HTTPError(status=404)
 
+
 # Note: this has to come BEFORE other handlers
 @route('/assets/<filename:path>', name='statics')
 def statics(filename):
     return static_file(filename, root='assets')
+
 
 @route('/')
 @view('index.tpl')
@@ -71,7 +79,7 @@ def index():
     if not conferences:
         conferences = octav.list_conference(lang=lang)
         if conferences is None:
-            raise HTTPError(status=500,body=octav.last_error())
+            raise HTTPError(status=500, body=octav.last_error())
         redis.setex(key, pickle.dumps(conferences), 600)
     print(conferences)
     return {
@@ -173,6 +181,7 @@ def add_session(series_slug, slug):
         'url': url
     }
 
+
 @post('/<series_slug>/<slug>/session/add')
 @session
 def add_session_post(series_slug, slug):
@@ -222,6 +231,7 @@ def _get_conference(id, lang):
         redis.setex(key, pickle.dumps(conference), 300)
     return conference
 
+
 def _get_conference_by_slug(series_slug, slug, lang):
     slug_query = '/' + series_slug + '/' + slug
     slugkey = "conference.by_slug." + slug_query
@@ -231,7 +241,10 @@ def _get_conference_by_slug(series_slug, slug, lang):
 
     conference = octav.lookup_conference_by_slug(slug=slug_query, lang=lang)
     if conference:
-        redis.setex("conference." + conference["id"], pickle.dumps(conference), 300)
+        key = "conference." + conference["id"]
+        value = pickle.dumps(conference)
+        seconds = 300
+        redis.setex(key, value, seconds)
         return conference
     raise ConferenceNotFoundError
 
@@ -250,7 +263,12 @@ def _create_session(username):
     session_id = str(uuid4())
     expire_time = 5*60*60
     redis.setex(session_id, username, expire_time)
-    response.set_cookie('session_id', session_id, expires=expire_time, path='/')
+    response.set_cookie(
+        'session_id',
+        session_id,
+        expires=expire_time,
+        path='/'
+    )
     request.environ["__current_session"] = username
     return session_id
 
