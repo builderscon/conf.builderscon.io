@@ -94,11 +94,15 @@ class LangDetector(object):
 
         locale.setlocale(locale.LC_TIME, current_locale)
 
-        return ('Set-Cookie',
-                '%s="%s"; expires=%s; path=/' %
-                    (COOKIE_NAME,
-                     lang,
-                     expires))
+        return (
+            'Set-Cookie',
+            '%s="%s"; expires=%s; path=/' %
+            (
+                COOKIE_NAME,
+                lang,
+                expires
+            )
+        )
 
     def __detect__(self, environ):
         parsed = parse_qs(environ.get("QUERY_STRING"))
