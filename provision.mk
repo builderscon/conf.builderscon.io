@@ -133,7 +133,7 @@ ubuntu-mysql:
 
 ubuntu-pip:
 	apt-get install -y python3-pip
-	pip3 install request bottle mysqlclient jinja2 redis
+	pip3 install -r /vagrant/requirements.txt
 
 ubuntu-home:
 	# Build home directory and configs.
