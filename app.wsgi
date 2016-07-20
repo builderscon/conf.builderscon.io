@@ -55,6 +55,7 @@ def session(func):
             redirect('/login')
     return _
 
+
 # Note: this has to come BEFORE other handlers
 @route('/favicon.ico')
 def favicon():
