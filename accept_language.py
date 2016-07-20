@@ -47,7 +47,7 @@ class LangDetector(object):
 
         tmp = cookie[COOKIE_NAME].value
         if self.in_languages(tmp):
-            return  tmp
+            return tmp
 
         return None
 
