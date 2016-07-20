@@ -16,7 +16,7 @@ __all__ = ["LangDetector"]
 DEFAULT_LANGS = "en",
 COOKIE_NAME = "lang"
 COOKIE_FORMAT = "%a, %d-%b-%Y %H:%M:%S UTC"
-COOKIE_EXPIRATION = 30 # days
+COOKIE_EXPIRATION = 30  # days
 
 
 class LangDetector(object):
