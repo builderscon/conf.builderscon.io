@@ -24,6 +24,11 @@ config_file = os.getenv(
 )
 with open(config_file, 'r') as f:
     cfg = json.load(f)
+    if cfg['OCTAV'].get('BASE_URI'):
+        raise Exception(
+            'DEPRECATED: {"OCTAV":{"BASE_URI"}} in config.json is deprecated.\
+ Use {"OCTAV":{"endpoint"}} and need to remove {"OCTAV":{"BASE_URI"}}.'
+        )
 
 app = application = Bottle()
 route = app.route
