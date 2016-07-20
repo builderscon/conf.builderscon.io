@@ -18,6 +18,12 @@ from redis import Redis
 from octav import Octav
 from sys import stdout
 
+def cfg_get_googlemap_api_key(cfg):
+    section = cfg.get("GOOGLE_MAP")
+    if not section:
+        return None
+    return section.get("api_key")
+
 config_file = os.getenv(
     "CONFIG_FILE",
     os.path.join(os.path.dirname(__file__), 'config.json')
@@ -29,6 +35,8 @@ with open(config_file, 'r') as f:
             'DEPRECATED: {"OCTAV":{"BASE_URI"}} in config.json is deprecated.\
  Please use {"OCTAV":{"endpoint"}} instead and remove {"OCTAV":{"BASE_URI"}}.'
         )
+
+googlemap_api_key = cfg_get_googlemap_api_key(cfg)
 
 app = application = Bottle()
 route = app.route
@@ -102,6 +110,7 @@ def login():
 @route('/login/github')
 def login_github():
     code = request.query.code
+
     if not code:
         redirect(
             'https://github.com/login/oauth/authorize' +
@@ -151,7 +160,7 @@ def conference_instance(series_slug, slug):
         'conference': conference,
         'login': {'username': _session_user()},
         'url': url,
-        'googlemap_api_key': cfg["GOOGLE_MAP"]["api_key"]
+        'googlemap_api_key': googlemap_api_key,
     }
 
 
