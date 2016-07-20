@@ -79,7 +79,7 @@ def index():
     if not conferences:
         conferences = octav.list_conference(lang=lang)
         if conferences is None:
-            raise HTTPError(status=500,body=octav.last_error())
+            raise HTTPError(status=500, body=octav.last_error())
         redis.setex(key, pickle.dumps(conferences), 600)
     print(conferences)
     return {
