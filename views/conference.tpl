@@ -50,8 +50,33 @@ function initMap() {
           <div id="map-{{ loop.index }}" style="height: 200px"></div>
 {% endfor %}
         </div>
+      </div>
+    </div>
+  </div>
+
+{% if conference.featured_speakers|length > 0 %}
+  <div class="section article">
+    <div class="inner">
+      <h1 class="section-header">Guest Speakers</h1>
+      <div class="section-content">
+{% for speaker in conference.featured_speakers %}
+        <div class="row" style="margin-left: 2em">
+<div class="large-2 columns"><img style="width: 120px; height: 120px; border: 1px solid #ccc" src="{% if speaker.avatar_url %}{{ speaker.avatar_url }}{% else %}{{ url('statics', filename='images/noprofile.png') }}{% endif %}" /></div>
+<div class="large-10 columns">
+    <h4>{{ speaker.display_name }}</h4>
+    <div>{{ speaker.description|markdown }}</div>
+</div>
+        </div>
+{% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
         <a class="expanded button" href="/{{ conference.series.slug }}/{{ conference.slug }}/sessions">sessions</a>
       </div>
     </div>
   </div>
+
+        <!--a class="expanded button" href="/{{ conference.series.slug }}/{{ conference.slug }}/sessions">sessions</a-->
 {% endblock%}
