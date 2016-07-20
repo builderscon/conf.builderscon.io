@@ -81,7 +81,6 @@ def index():
         if conferences is None:
             raise HTTPError(status=500, body=octav.last_error())
         redis.setex(key, pickle.dumps(conferences), 600)
-    print(conferences)
     return {
         'pagetitle': 'top',
         'body_id': "top",
@@ -188,14 +187,16 @@ def add_session_post(series_slug, slug):
     redirect('/')
 
 
-@route('/<series_slug>/<slug>/session/<id_:int>')
+@route('/<series_slug>/<slug>/session/<id>')
 @view('session_detail.tpl')
-def conference_session_details(series_slug, slug, id_):
-    endpoint = cfg['API_BASE_URI'] + '/session/lookup'
-    res = json.loads(requests.get(endpoint + '?id=' + id_).text)
+def conference_session_details(series_slug, slug, id):
+    lang = request.environ.get("lang")
+    session = octav.lookup_session(lang=lang, id=id)
+    if not session:
+        raise HTTPError(status=404, body=octav.last_error())
     return {
         'pagetitle': series_slug + ' ' + slug,
-        'session': res,
+        'session': session,
         'login': {'username': _session_user()},
         'url': url
     }
