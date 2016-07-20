@@ -45,6 +45,7 @@ redis = Redis(**cfg['REDIS_INFO'])
 class ConferenceNotFoundError(Exception):
     pass
 
+
 def session(func):
     @functools.wraps(func)
     def _(*a, **ka):
