@@ -231,6 +231,7 @@ def _get_conference(id, lang):
         redis.setex(key, pickle.dumps(conference), 300)
     return conference
 
+
 def _get_conference_by_slug(series_slug, slug, lang):
     slug_query = '/' + series_slug + '/' + slug
     slugkey = "conference.by_slug." + slug_query
