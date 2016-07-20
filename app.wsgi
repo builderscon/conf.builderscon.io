@@ -241,7 +241,10 @@ def _get_conference_by_slug(series_slug, slug, lang):
 
     conference = octav.lookup_conference_by_slug(slug=slug_query, lang=lang)
     if conference:
-        redis.setex("conference." + conference["id"], pickle.dumps(conference), 300)
+        key = "conference." + conference["id"]
+        value = pickle.dumps(conference)
+        seconds = 300
+        redis.setex(key, value, seconds)
         return conference
     raise ConferenceNotFoundError
 
