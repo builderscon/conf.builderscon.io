@@ -36,11 +36,11 @@ function initMap() {
 {% block main %}
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">Information</h1>
+      <h1 class="section-header">Dates</h1>
       <div class="section-content">
         <h2>Dates</h2>
 {% for date in conference.dates %}
-        <p>{{ date.date }}</p>
+        <div style="margin-left: 2em">{{ date.date }}</div>
 {% endfor %}
         <h2>Venue</h2>
         <div style="margin-left: 2em">
@@ -73,10 +73,4 @@ function initMap() {
   </div>
 {% endif %}
 
-        <a class="expanded button" href="/{{ conference.series.slug }}/{{ conference.slug }}/sessions">sessions</a>
-      </div>
-    </div>
-  </div>
-
-        <!--a class="expanded button" href="/{{ conference.series.slug }}/{{ conference.slug }}/sessions">sessions</a-->
 {% endblock%}

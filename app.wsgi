@@ -30,6 +30,7 @@ config_file = os.getenv(
     "CONFIG_FILE",
     os.path.join(os.path.dirname(__file__), 'config.json')
 )
+
 with open(config_file, 'r') as f:
     cfg = json.load(f)
     if cfg['OCTAV'].get('BASE_URI'):
