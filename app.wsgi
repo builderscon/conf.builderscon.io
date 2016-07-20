@@ -181,6 +181,7 @@ def add_session(series_slug, slug):
         'url': url
     }
 
+
 @post('/<series_slug>/<slug>/session/add')
 @session
 def add_session_post(series_slug, slug):
