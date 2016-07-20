@@ -71,7 +71,7 @@ define CONFIG_JSON
         "passwd": "vagrant"
     },
     "OCTAV": {
-        "BASE_URI": "",
+        "endpoint": "",
         "key": "",
         "secret": ""
     },
