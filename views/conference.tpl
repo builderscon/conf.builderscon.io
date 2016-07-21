@@ -17,6 +17,8 @@ function initMap() {
     var latlng = {lat: {{ venue.latitude }}, lng: {{ venue.longitude }}};
     map = new google.maps.Map(document.getElementById('map-{{ loop.index }}'), {
       center: latlng,
+      draggable: false,
+      scrollwheel: false,
       zoom: 14
     });
     var marker = new google.maps.Marker({
