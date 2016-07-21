@@ -17,6 +17,8 @@ function initMap() {
     var latlng = {lat: {{ venue.latitude }}, lng: {{ venue.longitude }}};
     map = new google.maps.Map(document.getElementById('map-{{ loop.index }}'), {
       center: latlng,
+      draggable: false,
+      scrollwheel: false,
       zoom: 14
     });
     var marker = new google.maps.Marker({
@@ -36,11 +38,11 @@ function initMap() {
 {% block main %}
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">Information</h1>
+      <h1 class="section-header">Dates</h1>
       <div class="section-content">
         <h2>Dates</h2>
 {% for date in conference.dates %}
-        <p>{{ date.date }}</p>
+        <div style="margin-left: 2em">{{ date.date }}</div>
 {% endfor %}
         <h2>Venue</h2>
         <div style="margin-left: 2em">
@@ -50,8 +52,27 @@ function initMap() {
           <div id="map-{{ loop.index }}" style="height: 200px"></div>
 {% endfor %}
         </div>
-        <a class="expanded button" href="/{{ conference.series.slug }}/{{ conference.slug }}/sessions">sessions</a>
       </div>
     </div>
   </div>
+
+{% if conference.featured_speakers|length > 0 %}
+  <div class="section article">
+    <div class="inner">
+      <h1 class="section-header">Guest Speakers</h1>
+      <div class="section-content">
+{% for speaker in conference.featured_speakers %}
+        <div class="row" style="margin-left: 2em">
+<div class="large-2 columns"><img style="width: 120px; height: 120px; border: 1px solid #ccc" src="{% if speaker.avatar_url %}{{ speaker.avatar_url }}{% else %}{{ url('statics', filename='images/noprofile.png') }}{% endif %}" /></div>
+<div class="large-10 columns">
+    <h4>{{ speaker.display_name }}</h4>
+    <div>{{ speaker.description|markdown }}</div>
+</div>
+        </div>
+{% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
 {% endblock%}

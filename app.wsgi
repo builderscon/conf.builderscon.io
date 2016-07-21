@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from bottle import Bottle, redirect, request, response, HTTPError
+import bottle
+from bottle import Bottle, redirect, request, response, HTTPError, static_file
 from bottle import jinja2_view as view
-from bottle import static_file
 from datetime import datetime, timedelta
 from requestlogger import WSGILogger, ApacheFormatter
 from logging import StreamHandler
@@ -17,6 +17,8 @@ from uuid import uuid4
 from redis import Redis
 from octav import Octav
 from sys import stdout
+import markdown
+from mdx_gfm import GithubFlavoredMarkdownExtension
 
 def cfg_get_googlemap_api_key(cfg):
     section = cfg.get("GOOGLE_MAP")
@@ -28,6 +30,7 @@ config_file = os.getenv(
     "CONFIG_FILE",
     os.path.join(os.path.dirname(__file__), 'config.json')
 )
+
 with open(config_file, 'r') as f:
     cfg = json.load(f)
     if cfg['OCTAV'].get('BASE_URI'):
@@ -38,6 +41,7 @@ with open(config_file, 'r') as f:
 
 googlemap_api_key = cfg_get_googlemap_api_key(cfg)
 
+bottle.BaseTemplate.settings.update({'filters': {'markdown': markdown.Markdown(extensions=[GithubFlavoredMarkdownExtension()]).convert}})
 app = application = Bottle()
 route = app.route
 post = app.post
