@@ -29,6 +29,7 @@
           </div>
         </nav>
       </header>
+{% block heroimage %}
       <div id="heroimage">
         <div class="wrapper">
           <div class="inner">
@@ -39,6 +40,7 @@
           </div>
         </div>
       </div>
+{% endblock %}
       <div id="contents" class="index">
         {% block main %}
         {% endblock%}

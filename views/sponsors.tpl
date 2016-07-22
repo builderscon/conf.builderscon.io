@@ -1,5 +1,7 @@
 {% extends 'base.tpl' %}
 
+{% block heroimage %}{% endblock %}
+
 {% block main %}
 <style type="text/css">
 <!--
