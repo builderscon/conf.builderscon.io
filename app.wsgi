@@ -151,6 +151,19 @@ def conference(series_slug):
     redirect('/{0}/latest'.format(series_slug))
 
 
+@route('/<series_slug>/<slug:path>/sponsors')
+@view('sponsors.tpl')
+def conference_sponsors(series_slug, slug):
+    lang = request.environ.get("lang")
+    conference = _get_conference_by_slug(series_slug, slug, lang)
+    return {
+        'pagetitle': series_slug + ' ' + slug,
+        'conference': conference,
+        'login': {'username': _session_user()},
+        'url': url
+    }
+
+@route('/speaker/<id_:int>')
 @route('/<series_slug>/<slug:path>')
 @view('conference.tpl')
 def conference_instance(series_slug, slug):
@@ -214,8 +227,6 @@ def conference_session_details(series_slug, slug, id):
         'url': url
     }
 
-
-@route('/speaker/<id_:int>')
 def speaker_details(id_):
     return {
         'pagetitle': 'spkeaker',
