@@ -40,6 +40,11 @@ endef
 define CONFIG_JSON
 {
     "DATE_FORMAT": "%Y-%m-%d",
+    "REDIS_INFO": {
+        "host": "localhost",
+        "port": 6379,
+        "db": 0
+    },
     "OCTAV": {
         "endpoint": "",
         "key": "",
@@ -68,6 +73,7 @@ ubuntu-all:
 
 ubuntu-root: \
 	ubuntu-apt \
+	ubuntu-redis \
 	ubuntu-pip
 
 ubuntu-user: \
@@ -85,6 +91,9 @@ ubuntu-apt:
 	# Update catalog and pre-installed packages.
 	apt-get update
 	apt-get upgrade -y
+
+ubuntu-redis:
+	apt-get install -y redis-server
 
 ubuntu-pip:
 	apt-get install -y python3-pip

@@ -19,6 +19,7 @@
     ```
     $ vagrant ssh
     $ cd ~/vagrant
+    $ redis-server &
     $ python3 app.wsgi
     ```
 
