@@ -1,11 +1,5 @@
 {
     "DATE_FORMAT": "%Y-%m-%d",
-    "DB_INFO": {
-        "host": "",
-        "db": "",
-        "user": "",
-        "passwd": ""
-    },
     "REDIS_INFO": {
         "host": "",
         "port": 6379,
