@@ -39,7 +39,7 @@ class Config(object):
         return self.cfg.get(name)
 
     def googlemap_api_key(self):
-        self.cfg.get("GOOGLE_MAP").get("api_key")
+        return self.cfg.get("GOOGLE_MAP").get("api_key")
 
 config_file = os.getenv(
     "CONFIG_FILE",
