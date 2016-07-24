@@ -1,4 +1,4 @@
-{% extends 'base.tpl' %}
+{% extends 'layout/base.tpl' %}
 
 {% block header %}
 <style type="text/css">

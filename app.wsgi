@@ -160,6 +160,7 @@ def conference_sponsors(series_slug, slug):
     lang = request.environ.get("lang")
     conference = _get_conference_by_slug(series_slug, slug, lang)
     return {
+        'slug': series_slug + '/' + slug,
         'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
         'login': {'username': _session_user()},
@@ -191,6 +192,7 @@ def conference_news(slug):
                 entry.date = time.strftime( '%b %d, %Y', entry.published_parsed )
             filtered_entries.append(entry)
     return {
+        'slug': slug,
         'entries': filtered_entries,
         'login': {'username': _session_user()},
         'url': url
@@ -208,6 +210,7 @@ def conference_instance(series_slug, slug):
         conference = _get_conference_by_slug(series_slug, slug, lang)
     return {
         'pagetitle': series_slug + ' ' + slug,
+        'slug': series_slug + '/' + slug,
         'conference': conference,
         'login': {'username': _session_user()},
         'url': url,

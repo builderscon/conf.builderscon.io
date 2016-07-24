@@ -1,4 +1,4 @@
-{% extends 'base.tpl' %}
+{% extends 'layout/conference.tpl' %}
 
 {% block herotext %}
 <h1>{{ conference.title }}</h1>
