@@ -5,6 +5,7 @@ import bottle
 from bottle import Bottle, redirect, request, response, HTTPError, static_file
 from bottle import jinja2_view as view
 from datetime import datetime, timedelta
+import time
 from requestlogger import WSGILogger, ApacheFormatter
 from logging import StreamHandler
 import functools
@@ -18,6 +19,7 @@ from octav import Octav
 from sys import stdout
 import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
+import feedparser
 
 class Config(object):
     def __init__(self, file):
@@ -26,7 +28,7 @@ class Config(object):
 
         for section in ['OCTAV', 'REDIS_INFO', 'GITHUB', 'GOOGLE_MAP']:
             if not self.cfg.get(section):
-                raise "missing section '" + section + "' in config file '" + file + "'"
+                raise Exception( "missing section '" + section + "' in config file '" + file + "'" )
         if self.cfg.get('OCTAV').get('BASE_URI'):
             raise Exception(
                 'DEPRECATED: {"OCTAV":{"BASE_URI"}} in config.json is deprecated.\
@@ -103,7 +105,6 @@ def index():
         'url': url
     }
 
-
 @route('/login')
 @view('login.tpl')
 def login():
@@ -164,6 +165,37 @@ def conference_sponsors(series_slug, slug):
         'login': {'username': _session_user()},
         'url': url
     }
+
+
+@route('/<slug:path>/news')
+@view('news.tpl')
+def conference_news(slug):
+    lang = request.environ.get("lang")
+    key = "news_entries.lang." + lang
+    news_entries = cache.get(key)
+    if not news_entries:
+        feed_url = 'http://blog.builderscon.io/feed.xml'
+        news = feedparser.parse(feed_url)
+        if not news.entries:
+            raise HTTPError(status=500, body="Failed to get news from Atom feed = " + feed_url + ", check if the feed is generated there." )
+        else:
+            news_entries = news.entries
+            cache.set(key, news.entries, 600)
+
+    filtered_entries = []
+    for entry in news_entries:
+        if entry.category == slug:
+            if not entry.published_parsed:
+                entry.date = ""
+            else:
+                entry.date = time.strftime( '%b %d, %Y', entry.published_parsed )
+            filtered_entries.append(entry)
+    return {
+        'entries': filtered_entries,
+        'login': {'username': _session_user()},
+        'url': url
+    }
+
 
 @route('/speaker/<id_:int>')
 @route('/<series_slug>/<slug:path>')
