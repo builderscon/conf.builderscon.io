@@ -20,6 +20,7 @@
         <nav id="menu">
           <div id="gnavi">
             <ul class="menu">
+              {% block menuitems %}{% endblock %}
               {% if not login %}
               <li><a href="login">LOGIN</a></li>
               {% else %}
