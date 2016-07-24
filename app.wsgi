@@ -11,10 +11,9 @@ import functools
 import json
 import requests
 import os
-import pickle
+import cache
 from accept_language import LangDetector
 from uuid import uuid4
-from redis import Redis
 from octav import Octav
 from sys import stdout
 import markdown
@@ -51,7 +50,7 @@ app = WSGILogger(app, [StreamHandler(stdout)], ApacheFormatter())
 
 octav = Octav(**cfg['OCTAV'])
 
-redis = Redis(**cfg['REDIS_INFO'])
+cache = cache.Redis(**cfg['REDIS_INFO'])
 
 
 class ConferenceNotFoundError(Exception):
@@ -85,14 +84,12 @@ def statics(filename):
 def index():
     lang = request.environ.get("lang")
     key = "conferences.lang." + lang
-    conferences = redis.get(key)
-    if conferences:
-        conferences = pickle.loads(conferences)
+    conferences = cache.get(key)
     if not conferences:
         conferences = octav.list_conference(lang=lang)
         if conferences is None:
             raise HTTPError(status=500, body=octav.last_error())
-        redis.setex(key, pickle.dumps(conferences), 600)
+        cache.set(key, conferences, 600)
     return {
         'pagetitle': 'top',
         'body_id': "top",
@@ -246,30 +243,27 @@ def user_details(id_):
 
 def _get_conference(id, lang):
     key = "conference." + id
-    conference = redis.get(key)
-    if conference:
-        conference = pickle.loads(conference)
-    else:
+    conference = cache.get(key)
+    if not conference:
         conference = octav.lookup_conference(id=id, lang=lang)
         if not conference:
             return ConferenceNotFoundError
-        redis.setex(key, pickle.dumps(conference), 300)
+        cache.sete(key, conference, 300)
     return conference
 
 
 def _get_conference_by_slug(series_slug, slug, lang):
     slug_query = '/' + series_slug + '/' + slug
     slugkey = "conference.by_slug." + slug_query
-    cid = redis.get(slugkey)
+    cid = cache.get(slugkey)
     if cid:
         return _get_conference(id=id, lang=lang)
 
     conference = octav.lookup_conference_by_slug(slug=slug_query, lang=lang)
     if conference:
         key = "conference." + conference["id"]
-        value = pickle.dumps(conference)
         seconds = 300
-        redis.setex(key, value, seconds)
+        cache.set(key, conference, seconds)
         return conference
     raise ConferenceNotFoundError
 
@@ -287,7 +281,7 @@ def _get_latest_conference(series_slug, lang):
 def _create_session(username):
     session_id = str(uuid4())
     expire_time = 5*60*60
-    redis.setex(session_id, username, expire_time)
+    cache.set(session_id, username, expire_time)
     response.set_cookie(
         'session_id',
         session_id,
@@ -304,7 +298,7 @@ def _session_user():
     if username is not None:
         return username
 
-    username = redis.get(session_id)
+    username = cache.get(session_id)
     if username is None:
         return ''
     request.environ["__current_session"] = username
