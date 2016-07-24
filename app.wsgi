@@ -19,26 +19,31 @@ from sys import stdout
 import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
 
-def cfg_get_googlemap_api_key(cfg):
-    section = cfg.get("GOOGLE_MAP")
-    if not section:
-        return None
-    return section.get("api_key")
+class Config(object):
+    def __init__(self, file):
+        with open(file, 'r') as f:
+            self.cfg = json.load(f)
+
+        for section in ['OCTAV', 'REDIS_INFO', 'GITHUB', 'GOOGLE_MAP']:
+            if not self.cfg.get(section):
+                raise "missing section '" + section + "' in config file '" + file + "'"
+        if self.cfg.get('OCTAV').get('BASE_URI'):
+            raise Exception(
+                'DEPRECATED: {"OCTAV":{"BASE_URI"}} in config.json is deprecated.\
+ Please use {"OCTAV":{"endpoint"}} instead and remove {"OCTAV":{"BASE_URI"}}.'
+        )
+
+    def section(self, name):
+        return self.cfg.get(name)
+
+    def googlemap_api_key(self):
+        self.cfg.get("GOOGLE_MAP").get("api_key")
 
 config_file = os.getenv(
     "CONFIG_FILE",
     os.path.join(os.path.dirname(__file__), 'config.json')
 )
-
-with open(config_file, 'r') as f:
-    cfg = json.load(f)
-    if cfg['OCTAV'].get('BASE_URI'):
-        raise Exception(
-            'DEPRECATED: {"OCTAV":{"BASE_URI"}} in config.json is deprecated.\
- Please use {"OCTAV":{"endpoint"}} instead and remove {"OCTAV":{"BASE_URI"}}.'
-        )
-
-googlemap_api_key = cfg_get_googlemap_api_key(cfg)
+cfg = Config(config_file)
 
 bottle.BaseTemplate.settings.update({'filters': {'markdown': markdown.Markdown(extensions=[GithubFlavoredMarkdownExtension()]).convert}})
 app = application = Bottle()
@@ -48,9 +53,9 @@ url = app.get_url
 app = LangDetector(app, languages=["ja", "en"])
 app = WSGILogger(app, [StreamHandler(stdout)], ApacheFormatter())
 
-octav = Octav(**cfg['OCTAV'])
+octav = Octav(**cfg.section('OCTAV'))
 
-cache = cache.Redis(**cfg['REDIS_INFO'])
+cache = cache.Redis(**cfg.section('REDIS_INFO'))
 
 
 class ConferenceNotFoundError(Exception):
@@ -111,18 +116,18 @@ def login():
 @route('/login/github')
 def login_github():
     code = request.query.code
-
+    ghcfg = cfg.section('GITHUB')
     if not code:
         redirect(
             'https://github.com/login/oauth/authorize' +
-            '?client_id=' + cfg['GITHUB']['client_id']
+            '?client_id=' + ghcfg.get('client_id')
         )
     access_token = requests.get(
         'https://github.com/login/oauth/access_token',
         params={
             'code': code,
-            'client_id': cfg['GITHUB']['client_id'],
-            'client_secret': cfg['GITHUB']['client_secret']
+            'client_id': ghcfg.get('client_id'),
+            'client_secret': ghcfg.get('client_secret')
         }
     )
     if 'error' in access_token.text:
@@ -174,7 +179,7 @@ def conference_instance(series_slug, slug):
         'conference': conference,
         'login': {'username': _session_user()},
         'url': url,
-        'googlemap_api_key': googlemap_api_key,
+        'googlemap_api_key': cfg.googlemap_api_key(),
     }
 
 
