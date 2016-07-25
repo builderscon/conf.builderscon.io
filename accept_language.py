@@ -6,9 +6,11 @@ from datetime import datetime, timedelta
 if sys.version[0] == "3":
     from http.cookies import SimpleCookie
     from urllib.parse import parse_qs
+    strtyp = str
 else:
     from Cookie import SimpleCookie
     from urlparse import parse_qs
+    strtyp = basestring
 
 __all__ = ["LangDetector"]
 
@@ -108,7 +110,7 @@ class LangDetector(object):
         parsed = parse_qs(environ.get("QUERY_STRING"))
         lang = parsed.get("lang")
 
-        if lang and not isinstance(lang, basestring):
+        if lang and not isinstance(lang, strtyp):
             # The only feasible thing that can come out other than a string
             # is a list, so hope it's a list here
             lang = lang[0]
