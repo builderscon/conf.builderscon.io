@@ -38,13 +38,13 @@ function initMap() {
 {% block main %}
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">Dates</h1>
+      <h1 class="section-header">{% trans %}Information{% endtrans %}</h1>
       <div class="section-content">
-        <h2>Dates</h2>
+        <h2>{% trans %}Dates{% endtrans %}</h2>
 {% for date in conference.dates %}
         <div style="margin-left: 2em">{{ date.date }}</div>
 {% endfor %}
-        <h2>Venue</h2>
+        <h2>{% trans %}Venue{% endtrans %}</h2>
         <div style="margin-left: 2em">
 {% for venue in conference.venues %}
           <h3>{{ venue.name }}</h3>
@@ -59,7 +59,7 @@ function initMap() {
 {% if conference.featured_speakers|length > 0 %}
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">Guest Speakers</h1>
+      <h1 class="section-header">{% trans %}Guest Speakers{% endtrans %}</h1>
       <div class="section-content">
 {% for speaker in conference.featured_speakers %}
         <div class="row" style="margin-left: 2em">

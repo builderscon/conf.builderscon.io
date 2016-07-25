@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-26 07:03+0900\n"
+"POT-Creation-Date: 2016-07-26 07:11+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,22 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+
+#: views/conference.tpl:41
+msgid "Information"
+msgstr ""
+
+#: views/conference.tpl:43
+msgid "Dates"
+msgstr ""
+
+#: views/conference.tpl:47
+msgid "Venue"
+msgstr ""
+
+#: views/conference.tpl:62
+msgid "Guest Speakers"
+msgstr ""
 
 #: views/index.tpl:31
 msgid "Welcome To builderscon"

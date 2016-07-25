@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-26 07:03+0900\n"
+"POT-Creation-Date: 2016-07-26 07:11+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+
+#: views/conference.tpl:41
+msgid "Information"
+msgstr "情報"
+
+#: views/conference.tpl:43
+msgid "Dates"
+msgstr "日程"
+
+#: views/conference.tpl:47
+msgid "Venue"
+msgstr "会場"
+
+#: views/conference.tpl:62
+msgid "Guest Speakers"
+msgstr "ゲストスピーカー"
 
 #: views/index.tpl:31
 msgid "Welcome To builderscon"
@@ -46,7 +62,6 @@ msgstr ""
 "<p>あなたが実装したクレイジーなハックを見せて下さい。あなたの好きな言語のディープな知識をシェアしてください。あなたの直面した様々な問題と、それをどう解決したかを教えてください。未来技術のような未知の領域について教えてください。</p>"
 "        <p>buildersconに参加して、あなたの情熱をシェアしてください！皆様のご参加をお待ちしております！</p>"
 "        "
-
 
 #: views/index.tpl:46
 msgid "Upcoming Conferences"
