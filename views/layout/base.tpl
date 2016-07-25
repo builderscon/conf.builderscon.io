@@ -40,6 +40,7 @@
             </div>
           </div>
         </div>
+{% block hexlogo %}{% endblock %}
       </div>
 {% endblock %}
       <div id="contents" class="index">

@@ -1,7 +1,23 @@
 {% extends 'layout/base.tpl' %}
 
+{% block header %}
+<style type="text/css">
+<!--
+  #contents.index { padding: 180px 0 0 0 }
+-->
+</style>
+{% endblock %}
+ 
+
+{% block hexlogo %}
+<div id="hexlogo">
+<div class="base"><img src="./assets/images/hex_base.png" /></div><!--  / .base /  -->
+<div class="logo"><img src="./assets/images/hex_logo.png" /></div><!--  / .logo /  -->
+</div><!--  / #hexlogo /  -->
+{% endblock %}
+
 {% block herotext %}
-<img src="{{ url('statics', filename='images/builderscon-text.png') }}">
+<img src="{{ url('statics', filename='images/builderscon-text.png') }}" width="350">
 {% endblock %}
 
 {% block main %}
