@@ -221,6 +221,7 @@ def conference_instance(series_slug, slug):
 
 @route('/<series_slug>/<slug>/sessions')
 def conference_sessions(series_slug, slug):
+    lang = request.environ.get("lang")
     if slug == 'latest':
         conference = _get_latest_conference(series_slug)
     else:
@@ -235,6 +236,7 @@ def conference_sessions(series_slug, slug):
 
 @route('/<series_slug>/<slug>/session/add')
 def add_session(series_slug, slug):
+    lang = request.environ.get("lang")
     return template('add_session.tpl', {
         'pagetitle': series_slug + ' ' + slug,
         'login': {'username': _session_user()},
