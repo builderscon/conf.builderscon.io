@@ -8,10 +8,9 @@
 <main>
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">buildersconへようこそ&#33;</h1>
+      <h1 class="section-header">{% trans %}Welcome To builderscon{% endtrans %}</h1>
       <div class="section-content">
-
-        <h3>buildersconは技術を愛する全てのギーク達のお祭りです。</h3>
+        <strong>buildersconは「知らなかった、を聞く」をテーマとした技術を愛する全てのギーク達のお祭りです。</strong>
 
         <p>buildersconではトークに関して技術的な制約はありません、特定のプログラミング言語や技術スタックによるくくりも設けません。</p>
 
@@ -28,7 +27,7 @@
 
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">Conferences</h1>
+      <h1 class="section-header">{% trans %}Upcoming Conferences{% endtrans %}</h1>
       <div class="section-content">
         <table>
           <tbody>
