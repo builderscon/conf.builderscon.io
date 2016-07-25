@@ -7,7 +7,11 @@
 -->
 </style>
 {% endblock %}
- 
+
+{% block menuitems %}
+<li><a href="/"><span class="i-home"></span></a></li>
+<li><a href="http://blog.builderscon.io">BLOG</a></li>
+{% endblock %}
 
 {% block hexlogo %}
 <div id="hexlogo">
