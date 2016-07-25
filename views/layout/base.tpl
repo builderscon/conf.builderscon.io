@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ja">
   <head>
-    <title>builderscon::{{ pagetitle }}</title>
+    <title>builderscon - {% if title %}{{ title }}{% else %}Discover Something New{% endif %}</title>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="@builderscon" name="twitter:site"/>
@@ -40,6 +40,7 @@
             </div>
           </div>
         </div>
+{% block hexlogo %}{% endblock %}
       </div>
 {% endblock %}
       <div id="contents" class="index">

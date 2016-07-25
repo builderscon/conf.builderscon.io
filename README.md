@@ -24,3 +24,29 @@
     ```
 
 4.  access <http://127.0.0.1:3000/>
+
+## i18n/l10n
+
+### Extract translatable strings from templates
+
+```
+pybabel extract --mapping babel.cfg --output messages.pot .
+```
+
+### Initialize message catalogs (ONLY DO THIS ONCE for $locale)
+
+```
+pybabel init --input-file messages.pot --output-dir translations/ --locale $locale --domain messages
+```
+
+### Update message catalogs when messages.pot changes
+
+```
+pybabel update --input-file messages.pot --output-dir translations/ --locale $locale --domain messages
+```
+
+### Compile message catalogs
+
+```
+pybabel compile --directory translations/ --domain messages
+```

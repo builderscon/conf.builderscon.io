@@ -1,19 +1,36 @@
 {% extends 'layout/base.tpl' %}
 
+{% block header %}
+<style type="text/css">
+<!--
+  #contents.index { padding: 180px 0 0 0 }
+-->
+</style>
+{% endblock %}
+
+{% block menuitems %}
+<li><a href="/"><span class="i-home"></span></a></li>
+<li><a href="http://blog.builderscon.io">BLOG</a></li>
+{% endblock %}
+
+{% block hexlogo %}
+<div id="hexlogo">
+<div class="base"><img src="./assets/images/hex_base.png" /></div><!--  / .base /  -->
+<div class="logo"><img src="./assets/images/hex_logo.png" /></div><!--  / .logo /  -->
+</div><!--  / #hexlogo /  -->
+{% endblock %}
+
 {% block herotext %}
-<h1>Conferences</h1>
-<h2>Here you can find upcoming conferences from our partners</h2>
-<h2>buildersconおよびパートナー団体が運営するカンファレンス</h2>
+<img src="{{ url('statics', filename='images/builderscon-text.png') }}" width="350">
 {% endblock %}
 
 {% block main %}
 <main>
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">buildersconへようこそ&#33;</h1>
+      <h1 class="section-header">{% trans %}Welcome To builderscon{% endtrans %}</h1>
       <div class="section-content">
-
-        <h3>buildersconは技術を愛する全てのギーク達のお祭りです。</h3>
+        <strong>buildersconは「知らなかった、を聞く」をテーマとした技術を愛する全てのギーク達のお祭りです。</strong>
 
         <p>buildersconではトークに関して技術的な制約はありません、特定のプログラミング言語や技術スタックによるくくりも設けません。</p>
 
@@ -30,7 +47,7 @@
 
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">Conferences</h1>
+      <h1 class="section-header">{% trans %}Upcoming Conferences{% endtrans %}</h1>
       <div class="section-content">
         <table>
           <tbody>

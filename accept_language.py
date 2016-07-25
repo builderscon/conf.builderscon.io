@@ -13,7 +13,7 @@ else:
 __all__ = ["LangDetector"]
 
 
-DEFAULT_LANGS = "en",
+DEFAULT_LANGS = ["en"]
 COOKIE_NAME = "lang"
 COOKIE_FORMAT = "%a, %d-%b-%Y %H:%M:%S UTC"
 COOKIE_EXPIRATION = 30  # days
@@ -107,8 +107,14 @@ class LangDetector(object):
     def __detect__(self, environ):
         parsed = parse_qs(environ.get("QUERY_STRING"))
         lang = parsed.get("lang")
-        if lang is not None and self.in_languages(lang[0]):
-            return lang[0]
+
+        if lang and not isinstance(lang, basestring):
+            # The only feasible thing that can come out other than a string
+            # is a list, so hope it's a list here
+            lang = lang[0]
+
+        if lang is not None and self.in_languages(lang):
+            return lang
 
         if self.with_cookie:
             cookie = None

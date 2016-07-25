@@ -3,7 +3,6 @@
 
 import bottle
 from bottle import Bottle, redirect, request, response, HTTPError, static_file
-from bottle import jinja2_view as view
 from datetime import datetime, timedelta
 import time
 from requestlogger import WSGILogger, ApacheFormatter
@@ -20,6 +19,7 @@ from sys import stdout
 import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
 import feedparser
+from view import jinja2_template as template
 
 class Config(object):
     def __init__(self, file):
@@ -47,7 +47,13 @@ config_file = os.getenv(
 )
 cfg = Config(config_file)
 
-bottle.BaseTemplate.settings.update({'filters': {'markdown': markdown.Markdown(extensions=[GithubFlavoredMarkdownExtension()]).convert}})
+bottle.BaseTemplate.settings.update({
+    'extensions': ['jinja2.ext.i18n'],
+    'filters': {
+        'markdown': markdown.Markdown(extensions=[GithubFlavoredMarkdownExtension()]).convert
+    }
+})
+
 app = application = Bottle()
 route = app.route
 post = app.post
@@ -87,7 +93,6 @@ def statics(filename):
 
 
 @route('/')
-@view('index.tpl')
 def index():
     lang = request.environ.get("lang")
     key = "conferences.lang." + lang
@@ -97,22 +102,21 @@ def index():
         if conferences is None:
             raise HTTPError(status=500, body=octav.last_error())
         cache.set(key, conferences, 600)
-    return {
+    return template('index.tpl', {
         'pagetitle': 'top',
         'body_id': "top",
         'conferences': conferences,
         'login': {'username': _session_user()},
         'url': url
-    }
+    }, languages=[lang])
 
 @route('/login')
-@view('login.tpl')
 def login():
-    return {
+    lang = request.environ.get("lang")
+    return template('login.tpl', {
         'pagetitle': 'login',
         'url': url
-    }
-
+    }, languages=[lang])
 
 @route('/login/github')
 def login_github():
@@ -155,21 +159,19 @@ def conference(series_slug):
 
 
 @route('/<series_slug>/<slug:path>/sponsors')
-@view('sponsors.tpl')
 def conference_sponsors(series_slug, slug):
     lang = request.environ.get("lang")
     conference = _get_conference_by_slug(series_slug, slug, lang)
-    return {
+    return template('sponsors.tpl', {
         'slug': series_slug + '/' + slug,
         'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
         'login': {'username': _session_user()},
         'url': url
-    }
+    }, languages=[lang])
 
 
 @route('/<slug:path>/news')
-@view('news.tpl')
 def conference_news(slug):
     lang = request.environ.get("lang")
     key = "news_entries.lang." + lang
@@ -191,94 +193,93 @@ def conference_news(slug):
             else:
                 entry.date = time.strftime( '%b %d, %Y', entry.published_parsed )
             filtered_entries.append(entry)
-    return {
+    return template('news.tpl', {
         'slug': slug,
         'entries': filtered_entries,
         'login': {'username': _session_user()},
         'url': url
-    }
+    }, languages=[lang])
 
 
 @route('/speaker/<id_:int>')
 @route('/<series_slug>/<slug:path>')
-@view('conference.tpl')
 def conference_instance(series_slug, slug):
     lang = request.environ.get("lang")
     if slug == 'latest':
         conference = _get_latest_conference(series_slug)
     else:
         conference = _get_conference_by_slug(series_slug, slug, lang)
-    return {
+    return template('conference.tpl', {
         'pagetitle': series_slug + ' ' + slug,
         'slug': series_slug + '/' + slug,
         'conference': conference,
         'login': {'username': _session_user()},
         'url': url,
         'googlemap_api_key': cfg.googlemap_api_key(),
-    }
+    }, languages=[lang])
 
 
 @route('/<series_slug>/<slug>/sessions')
-@view('sessions.tpl')
 def conference_sessions(series_slug, slug):
+    lang = request.environ.get("lang")
     if slug == 'latest':
         conference = _get_latest_conference(series_slug)
     else:
         conference = _get_conference_by_slug(series_slug, slug)
-    return {
+    return template('sessions.tpl', {
         'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
         'login': {'username': _session_user()},
         'url': url
-    }
+    }, languages=[lang])
 
 
 @route('/<series_slug>/<slug>/session/add')
-@view('add_session.tpl')
-@session
 def add_session(series_slug, slug):
-    return {
+    lang = request.environ.get("lang")
+    return template('add_session.tpl', {
         'pagetitle': series_slug + ' ' + slug,
         'login': {'username': _session_user()},
         'url': url
-    }
+    }, languages=[lang])
 
 
 @post('/<series_slug>/<slug>/session/add')
-@session
 def add_session_post(series_slug, slug):
     redirect('/')
 
 
 @route('/<series_slug>/<slug>/session/<id>')
-@view('session_detail.tpl')
 def conference_session_details(series_slug, slug, id):
     lang = request.environ.get("lang")
     session = octav.lookup_session(lang=lang, id=id)
     if not session:
         raise HTTPError(status=404, body=octav.last_error())
-    return {
+    return template('session_detail.tpl',{
         'pagetitle': series_slug + ' ' + slug,
         'session': session,
         'login': {'username': _session_user()},
         'url': url
-    }
+    }, languages=[lang])
 
-def speaker_details(id_):
-    return {
+@route('/speaker/<id>')
+def speaker_details(id):
+    lang = request.environ.get("lang")
+    return template('speaker_details.tpl', {
         'pagetitle': 'spkeaker',
         'login': {'username': _session_user()},
         'url': url
-    }
+    }, languages=[lang])
 
 
 @route('/user/<id_:int>')
 def user_details(id_):
-    return {
+    lang = request.environ.get("lang")
+    return template('user_details.tpl', {
         'pagetitle': 'user',
         'login': {'username': _session_user()},
         'url': url
-    }
+    }, languages=[lang])
 
 
 def _get_conference(id, lang):
