@@ -1,7 +1,8 @@
-requests
+babel
 bottle
-jinja2
-redis
-wsgi-request-logger
-py-gfm
 feedparser
+jinja2
+py-gfm
+redis
+requests
+wsgi-request-logger
