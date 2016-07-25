@@ -30,17 +30,13 @@
     <div class="inner">
       <h1 class="section-header">{% trans %}Welcome To builderscon{% endtrans %}</h1>
       <div class="section-content">
-        <strong>buildersconは「知らなかった、を聞く」をテーマとした技術を愛する全てのギーク達のお祭りです。</strong>
+        {% trans %}
+        <strong>Join builderscon and discover something new! builderscon is a festival (お祭り）for anybody who loves tech.</strong>
+        <p>builderscon is a tech-agnostic, polyglot conference. The only thing we ask of you is that you come and discuss about things that gets engineers -- the builders of modern age -- excited.</p>
+        <p>Show us your crazy hacks; Get down to the nitty-gritty details about your favorite language; Tell us the problems that you encountered, and how you solved them; Teach us about future technologies</p>
+        <p>Please join us and share your passion about tech: We would love to hear your stories!</p>
+        {% endtrans %}
 
-        <p>buildersconではトークに関して技術的な制約はありません、特定のプログラミング言語や技術スタックによるくくりも設けません。</p>
-
-        <p>我々が要求するただ1つのことは、あなたが話すことが、技術者に刺激を与え、興奮させることのみです。
-        本カンファレンスのセッションには技術者の血が騒ぐ様なトークを求めています。
-        あなたが実装したクレイジーなハックを見せて下さい。あなたの直面した様々な問題と、それをどう解決したかを教えてください。
-        未来技術のような未知の領域について教えてください。
-        </p>
-
-        <p>是非、buildersconに参加して、あなたの情熱をシェアしてください！我々はあなたの話を聞きたい！</p>
       </div>
     </div>
   </div>

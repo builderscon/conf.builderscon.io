@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-25 20:16+0900\n"
+"POT-Creation-Date: 2016-07-26 07:03+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: views/index.tpl:11
+#: views/index.tpl:31
 msgid "Welcome To builderscon"
 msgstr ""
 
-#: views/index.tpl:30
+#: views/index.tpl:33
+msgid ""
+"\n"
+"        <strong>Join builderscon and discover something new! builderscon "
+"is a festival (お祭り）for anybody who loves tech.</strong>\n"
+"        <p>builderscon is a tech-agnostic, polyglot conference. The only "
+"thing we ask of you is that you come and discuss about things that gets "
+"engineers -- the builders of modern age -- excited.</p>\n"
+"        <p>Show us your crazy hacks; Get down to the nitty-gritty details"
+" about your favorite language; Tell us the problems that you encountered,"
+" and how you solved them; Teach us about future technologies</p>\n"
+"        <p>Please join us and share your passion about tech: We would "
+"love to hear your stories!</p>\n"
+"        "
+msgstr ""
+
+#: views/index.tpl:46
 msgid "Upcoming Conferences"
 msgstr ""
 

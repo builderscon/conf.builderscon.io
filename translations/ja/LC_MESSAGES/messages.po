@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-25 20:16+0900\n"
+"POT-Creation-Date: 2016-07-26 07:03+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -18,11 +18,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: views/index.tpl:11
+#: views/index.tpl:31
 msgid "Welcome To builderscon"
 msgstr "builderscon とは"
 
-#: views/index.tpl:30
+#: views/index.tpl:33
+msgid ""
+"\n"
+"        <strong>Join builderscon and discover something new! builderscon "
+"is a festival (お祭り）for anybody who loves tech.</strong>\n"
+"        <p>builderscon is a tech-agnostic, polyglot conference. The only "
+"thing we ask of you is that you come and discuss about things that gets "
+"engineers -- the builders of modern age -- excited.</p>\n"
+"        <p>Show us your crazy hacks; Get down to the nitty-gritty details"
+" about your favorite language; Tell us the problems that you encountered,"
+" and how you solved them; Teach us about future technologies</p>\n"
+"        <p>Please join us and share your passion about tech: We would "
+"love to hear your stories!</p>\n"
+"        "
+msgstr ""
+"\n"
+"        "
+"<strong>buildersconは「知らなかった、を聞く」をテーマとした技術を愛する全てのギーク達のお祭りです。</strong"
+"        "
+"<p>buildersconではトークに関して技術的な制約はありません、特定のプログラミング言語や技術スタックによるくくりも設けません。</p>"
+"        <p>必要なのは技術者達に刺激を与えワクワクさせてくれるアイデアのみです。</p>        "
+"<p>あなたが実装したクレイジーなハックを見せて下さい。あなたの好きな言語のディープな知識をシェアしてください。あなたの直面した様々な問題と、それをどう解決したかを教えてください。未来技術のような未知の領域について教えてください。</p>"
+"        <p>buildersconに参加して、あなたの情熱をシェアしてください！皆様のご参加をお待ちしております！</p>"
+"        "
+
+
+#: views/index.tpl:46
 msgid "Upcoming Conferences"
 msgstr "近日開催予定"
 
