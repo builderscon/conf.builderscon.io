@@ -1,8 +1,7 @@
 {% extends 'layout/base.tpl' %}
 
 {% block herotext %}
-<h1>builderscon</h1>
-<h2>Discover Something New</h2>
+<img src="{{ url('statics', filename='images/builderscon-text.png') }}">
 {% endblock %}
 
 {% block main %}
