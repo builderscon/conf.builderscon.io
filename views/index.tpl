@@ -1,9 +1,8 @@
 {% extends 'layout/base.tpl' %}
 
 {% block herotext %}
-<h1>Conferences</h1>
-<h2>Here you can find upcoming conferences from our partners</h2>
-<h2>buildersconおよびパートナー団体が運営するカンファレンス</h2>
+<h1>builderscon</h1>
+<h2>Discover Something New</h2>
 {% endblock %}
 
 {% block main %}
