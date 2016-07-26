@@ -1,6 +1,8 @@
 {% extends 'layout/conference.tpl' %}
 
-{% block heroimage %}{% endblock %}
+{% block heroimage %}
+<div id="heroimage-empty"></div>
+{% endblock %}
 
 {% block main %}
 <style type="text/css">

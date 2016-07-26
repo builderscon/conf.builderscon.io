@@ -243,12 +243,21 @@ a.disabled	{ color: #555; }
   - HERO IMAGE
 ----------------------------------------------------------*/
 
+#heroimage-empty {
+	position: relative;
+	width: 100%;
+}
 #heroimage {
 	position: relative;
 	width: 100%;
 }
 
+
 @media screen and (min-width: 900px) and (max-width: 931931px) {
+	#heroimage-empty {
+		position: relative;
+		height: 110px;
+	}
 	#heroimage {
 		position: relative;
 		height: 410px;
@@ -314,6 +323,10 @@ a.disabled	{ color: #555; }
 }
 
 @media screen and (min-width: 0px) and (max-width: 899px) {
+	#heroimage-empty {
+		position: relative;
+		height: auto;
+	}
 	#heroimage {
 		position: relative;
 		height: auto;
