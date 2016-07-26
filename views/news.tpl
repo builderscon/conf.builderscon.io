@@ -8,7 +8,7 @@
 <main>
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">Recent News</h1>
+      <h1 class="section-header">{% trans %}Recent News{% endtrans %}</h1>
       <div class="section-content">
         <div class="post-content">
           <ul class="post-list">

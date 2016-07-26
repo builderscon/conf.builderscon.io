@@ -22,7 +22,7 @@
             <ul class="menu">
               {% block menuitems %}{% endblock %}
               {% if not login %}
-              <li><a href="login">LOGIN</a></li>
+              <li><a href="login">{% trans %}LOGIN{% endtrans %}</a></li>
               {% else %}
               <li><a href="logout">{{ login.username }}</a></li>
               {% endif %}
@@ -56,7 +56,7 @@
       <footer id="footer">
         <div class="inner">
           <div class="contents">
-            <p>builderscon is a festival for the technology lovers.</p>
+            <p>{% trans %}builderscon is a festival for the technology lovers.{% endtrans %}</p>
             <address>&copy; 2016 builderscon</address>
           </div>
         </div>

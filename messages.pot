@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-26 07:11+0900\n"
+"POT-Creation-Date: 2016-07-26 17:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+
+#: views/add_session.tpl:22
+msgid "Submit"
+msgstr ""
 
 #: views/conference.tpl:41
 msgid "Information"
@@ -31,6 +35,10 @@ msgstr ""
 
 #: views/conference.tpl:62
 msgid "Guest Speakers"
+msgstr ""
+
+#: views/index.tpl:13
+msgid "BLOG"
 msgstr ""
 
 #: views/index.tpl:31
@@ -55,5 +63,45 @@ msgstr ""
 
 #: views/index.tpl:46
 msgid "Upcoming Conferences"
+msgstr ""
+
+#: views/login.tpl:19
+msgid "Login"
+msgstr ""
+
+#: views/login.tpl:21
+msgid "Login with Github"
+msgstr ""
+
+#: views/news.tpl:11
+msgid "Recent News"
+msgstr ""
+
+#: views/sessions.tpl:9
+msgid "Submit your proposal"
+msgstr ""
+
+#: views/sponsors.tpl:18
+msgid "Sponsors"
+msgstr ""
+
+#: views/sponsors.tpl:20
+msgid " is supported by these sponsors"
+msgstr ""
+
+#: views/layout/base.tpl:25
+msgid "LOGIN"
+msgstr ""
+
+#: views/layout/base.tpl:59
+msgid "builderscon is a festival for the technology lovers."
+msgstr ""
+
+#: views/layout/conference.tpl:5
+msgid "NEWS"
+msgstr ""
+
+#: views/layout/conference.tpl:6
+msgid "SPONSORS"
 msgstr ""
 
