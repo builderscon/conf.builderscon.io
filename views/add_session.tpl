@@ -19,7 +19,7 @@
             </label>
           </div>
           <div class="row">
-            <button class="expanded button" href="">Submit</a>
+            <button class="expanded button" href="">{% trans %}Submit{% endtrans %}</a>
           </div>
         </form>
       </div>
