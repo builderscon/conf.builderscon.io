@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-26 17:40+0000\n"
+"POT-Creation-Date: 2016-07-27 07:41+0000\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -87,7 +87,11 @@ msgstr "GitHub IDでログイン"
 msgid "Recent News"
 msgstr "最新のニュース"
 
-#: views/sessions.tpl:9
+#: views/sessions.tpl:11
+msgid "Sessions"
+msgstr "セッション"
+
+#: views/sessions.tpl:30
 msgid "Submit your proposal"
 msgstr "トークの概要を送信"
 
@@ -114,10 +118,4 @@ msgstr "ニュース"
 #: views/layout/conference.tpl:6
 msgid "SPONSORS"
 msgstr "スポンサー"
-
-#~ msgid "NEWS</a>"
-#~ msgstr "ニュース"
-
-#~ msgid " is sponsored by these sponsors"
-#~ msgstr "はこちらのスポンサーの皆様にご支援頂いています"
 

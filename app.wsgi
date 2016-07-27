@@ -201,14 +201,28 @@ def conference_news(slug):
     }, languages=[lang])
 
 
+@route('/<series_slug>/<slug:path>/sessions')
+def conference_sessions(series_slug, slug):
+    lang = request.environ.get("lang")
+    key = "conference_sessions.lang." + lang
+    conference_sessions= cache.get(key)
+    if not conference_sessions:
+        conference = _get_conference_by_slug(series_slug, slug, lang)
+        conference_sessions = _list_session_by_conference(conference['id'])
+        cache.set(key, conference_sessions, 600)
+    return template('sessions.tpl', {
+        'pagetitle': series_slug + ' ' + slug,
+        'sessions': conference_sessions,
+        'login': {'username': _session_user()},
+        'url': url
+    }, languages=[lang])
+
+
 @route('/speaker/<id_:int>')
 @route('/<series_slug>/<slug:path>')
 def conference_instance(series_slug, slug):
     lang = request.environ.get("lang")
-    if slug == 'latest':
-        conference = _get_latest_conference(series_slug)
-    else:
-        conference = _get_conference_by_slug(series_slug, slug, lang)
+    conference = _get_conference_by_slug(series_slug, slug, lang)
     return template('conference.tpl', {
         'pagetitle': series_slug + ' ' + slug,
         'slug': series_slug + '/' + slug,
@@ -218,20 +232,6 @@ def conference_instance(series_slug, slug):
         'googlemap_api_key': cfg.googlemap_api_key(),
     }, languages=[lang])
 
-
-@route('/<series_slug>/<slug>/sessions')
-def conference_sessions(series_slug, slug):
-    lang = request.environ.get("lang")
-    if slug == 'latest':
-        conference = _get_latest_conference(series_slug)
-    else:
-        conference = _get_conference_by_slug(series_slug, slug)
-    return template('sessions.tpl', {
-        'pagetitle': series_slug + ' ' + slug,
-        'conference': conference,
-        'login': {'username': _session_user()},
-        'url': url
-    }, languages=[lang])
 
 
 @route('/<series_slug>/<slug>/session/add')
@@ -294,12 +294,14 @@ def _get_conference(id, lang):
 
 
 def _get_conference_by_slug(series_slug, slug, lang):
+    if slug == 'latest':
+        conference = _get_latest_conference(series_slug, lang)
+        return conference
     slug_query = '/' + series_slug + '/' + slug
     slugkey = "conference.by_slug." + slug_query
     cid = cache.get(slugkey)
     if cid:
         return _get_conference(id=id, lang=lang)
-
     conference = octav.lookup_conference_by_slug(slug=slug_query, lang=lang)
     if conference:
         key = "conference." + conference["id"]
@@ -310,6 +312,11 @@ def _get_conference_by_slug(series_slug, slug, lang):
 
 
 def _get_latest_conference(series_slug, lang):
+    slug_query = '/' + series_slug + '/latest'
+    slugkey = "conference.latest." + slug_query
+    cid = cache.get(slugkey)
+    if cid:
+        return _get_conference(id=id, lang=lang)
     # XXX There should be a specific API call for this
     conferences = octav.list_conference(lang=lang)
     if conferences is None:
@@ -332,6 +339,9 @@ def _create_session(username):
     request.environ["__current_session"] = username
     return session_id
 
+def _list_session_by_conference(conference_id):
+    sessions = octav.list_session_by_conference(conference_id)
+    return sessions
 
 def _session_user():
     session_id = request.get_cookie('session_id')
