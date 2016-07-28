@@ -20,6 +20,9 @@ import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
 import feedparser
 from view import jinja2_template as template
+import re
+
+CACHE_CONFERENCE_EXPIRES = 300
 
 class Config(object):
     def __init__(self, file):
@@ -159,6 +162,18 @@ def logout(p=None):
     response.set_cookie('session_id', '', expires=datetime.now()-timedelta(1))
     redirect('/')
 
+# This route maps "latest" URLs to the actual latest conference
+# URLs, so that we don't have to refer to "latest" elsewhere in 
+# the code
+@route('/<series_slug>/<rest:re:latest(/.*)?>')
+def latest(series_slug, rest):
+    lang = request.environ.get("lang")
+    latest_conference = _get_latest_conference(series_slug, lang)
+    if not latest_conference:
+        raise ConferenceNotFoundError
+    rest = re.compile('^latest').sub(latest_conference.get('slug'), rest)
+    redirect("/" + series_slug + "/" + rest)
+
 
 @route('/<series_slug>')
 def conference(series_slug):
@@ -168,9 +183,10 @@ def conference(series_slug):
 @route('/<series_slug>/<slug:path>/sponsors')
 def conference_sponsors(series_slug, slug):
     lang = request.environ.get("lang")
-    conference = _get_conference_by_slug(series_slug, slug, lang)
+    full_slug = "%s/%s" % (series_slug, slug)
+    conference = _get_conference_by_slug(full_slug, lang)
     return template('sponsors.tpl', {
-        'slug': series_slug + '/' + slug,
+        'slug': full_slug,
         'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
         'login': {'username': _session_user()},
@@ -208,17 +224,14 @@ def conference_news(slug):
     }, languages=[lang])
 
 
-@route('/speaker/<id_:int>')
 @route('/<series_slug>/<slug:path>')
 def conference_instance(series_slug, slug):
     lang = request.environ.get("lang")
-    if slug == 'latest':
-        conference = _get_latest_conference(series_slug)
-    else:
-        conference = _get_conference_by_slug(series_slug, slug, lang)
+    full_slug = "%s/%s" % (series_slug, slug)
+    conference = _get_conference_by_slug(full_slug, lang)
     return template('conference.tpl', {
         'pagetitle': series_slug + ' ' + slug,
-        'slug': series_slug + '/' + slug,
+        'slug': full_slug,
         'conference': conference,
         'login': {'username': _session_user()},
         'url': url,
@@ -229,10 +242,10 @@ def conference_instance(series_slug, slug):
 @route('/<series_slug>/<slug>/sessions')
 def conference_sessions(series_slug, slug):
     lang = request.environ.get("lang")
-    if slug == 'latest':
-        conference = _get_latest_conference(series_slug)
-    else:
-        conference = _get_conference_by_slug(series_slug, slug)
+    conference = _get_conference_by_slug(series_slug, slug)
+    if not conference:
+        raise ConferenceNotFoundError
+
     return template('sessions.tpl', {
         'pagetitle': series_slug + ' ' + slug,
         'conference': conference,
@@ -288,43 +301,68 @@ def user_details(id_):
         'url': url
     }, languages=[lang])
 
+def conference_cache_key(id, lang):
+    if not id:
+        raise Exception("faild to create conference cache key: no id")
+    return "conference.%d.lang" % id
+
+def conference_by_slug_cache_key(full_slug):
+    if not id:
+        raise Exception("faild to create conference cache key: no full_slug")
+    return "conference.by_slug.%s" % full_slug
+
+def latest_conference_cache_key(series_slug):
+    if not series_slug:
+        raise Exception("faild to create conference cache key: no series_slug")
+    return "conference.latest.%s" % series_slug
 
 def _get_conference(id, lang):
-    key = "conference." + id
+    key = conference_cache_key(conference, lang)
     conference = cache.get(key)
     if not conference:
         conference = octav.lookup_conference(id=id, lang=lang)
         if not conference:
-            return ConferenceNotFoundError
-        cache.sete(key, conference, 300)
+            return None
+        cache.set(key, conference, CACHE_CONFERENCE_EXPIRES)
     return conference
 
 
-def _get_conference_by_slug(series_slug, slug, lang):
-    slug_query = '/' + series_slug + '/' + slug
-    slugkey = "conference.by_slug." + slug_query
+def _get_conference_by_slug(slug, lang):
+    slugkey = conference_by_slug_cache_key(slug)
     cid = cache.get(slugkey)
     if cid:
-        return _get_conference(id=id, lang=lang)
+        return _get_conference(id=cid, lang=lang)
 
-    conference = octav.lookup_conference_by_slug(slug=slug_query, lang=lang)
-    if conference:
-        key = "conference." + conference["id"]
-        seconds = 300
-        cache.set(key, conference, seconds)
-        return conference
-    raise ConferenceNotFoundError
+    conference = octav.lookup_conference_by_slug(slug="/"+slug, lang=lang)
+    if not conference:
+        return None
+
+    cache.set(slugkey, cid, CACHE_CONFERENCE_EXPIRES)
+    return conference
 
 
 def _get_latest_conference(series_slug, lang):
+    key = latest_conference_cache_key(series_slug)
+    cid = cache.get(key)
+    if cid:
+        return _get_conference(id=cid, lang=lang)
+
     # XXX There should be a specific API call for this
     conferences = octav.list_conference(lang=lang)
     if conferences is None:
-        raise ConferenceNotFoundError
+        return None
+
     for conference in conferences:
-        if str(conference['series']['slug']) == series_slug:
+        series = conference.get("series")
+        if not series:
+            continue
+        slug = series.get("slug")
+        if not slug:
+            continue
+        if str(slug) == series_slug:
             return conference
 
+    return None
 
 def _create_session(username):
     session_id = str(uuid4())
