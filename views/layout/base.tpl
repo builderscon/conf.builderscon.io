@@ -13,7 +13,7 @@
     <meta property="og:image" content="{{ url('statics', filename='images/logo.png') }}"/>
     <meta property="og:site_name" content="builderscon"/>
 {% for name in ["description","og:description"] %}
-    <meta name="{{ name }}" content="{% trans %}Discover Something New{% endtrans %} - {% trans %}builderscon is a festival for those who love tech!{% endtrans %}">
+    <meta name="{{ name }}" content="{% block og_description %}{% trans %}Discover Something New{% endtrans %} - {% trans %}builderscon is a festival for those who love tech!{% endtrans %}{% endblock %}">
 {% endfor %}
     <link href="{{ url('statics', filename='images/favicon.ico') }}" rel="shortcut icon"/>
     <link href="{{ url('statics', filename='css/style.css') }}" rel="stylesheet"/>

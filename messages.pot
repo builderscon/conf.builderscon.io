@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-28 20:39+0900\n"
+"POT-Creation-Date: 2016-07-28 21:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,10 @@ msgstr ""
 
 #: views/add_session.tpl:22
 msgid "Submit"
+msgstr ""
+
+#: views/beacon.tpl:2
+msgid "Mr. B"
 msgstr ""
 
 #: views/beacon.tpl:6 views/index.tpl:16
