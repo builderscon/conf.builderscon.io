@@ -1,5 +1,7 @@
 {% extends 'layout/conference.tpl' %}
 
+{% block title %}{{ conference.title }} - builderscon{% endblock %}
+
 {% block herotext %}
 <h1>{{ conference.title }}</h1>
 <h2>{{ conference.sub_title }}</h2>

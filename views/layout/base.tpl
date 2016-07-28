@@ -1,10 +1,20 @@
 <!doctype html>
 <html lang="ja">
   <head>
-    <title>builderscon - {% if title %}{{ title }}{% else %}Discover Something New{% endif %}</title>
+    <title>{% block title %}builderscon - Discover Something New{% endblock %}</title>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="@builderscon" name="twitter:site"/>
+    <meta name="keywords" content="builderscon,tech,engineer,festival,お祭り">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@builderscon">
+    <meta property="fb:app_id" content="1537973726511652"/>
+    <meta property="og:type" content="{% block ogp_type %}{% if pagetitle == 'top' %}website{% else %}article{% endif %}{% endblock %}"/>
+    <meta property="og:image" content="{{ url('statics', filename='images/logo.png') }}"/>
+    <meta property="og:site_name" content="builderscon"/>
+{% for name in ["description","og:description"] %}
+    <meta name="{{ description }}" content="builderscon is a festival for those who love tech!">
+{% endfor %}
     <link href="{{ url('statics', filename='images/favicon.ico') }}" rel="shortcut icon"/>
     <link href="{{ url('statics', filename='css/style.css') }}" rel="stylesheet"/>
 {% block header %}{% endblock %}
