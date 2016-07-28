@@ -47,19 +47,24 @@ config_file = os.getenv(
 )
 cfg = Config(config_file)
 
+app = application = Bottle()
 bottle.BaseTemplate.settings.update({
     'extensions': ['jinja2.ext.i18n'],
+    'globals': {
+        'url': app.get_url
+    },
     'filters': {
         'markdown': markdown.Markdown(extensions=[GithubFlavoredMarkdownExtension()]).convert
     }
 })
 
-app = application = Bottle()
+
 route = app.route
 post = app.post
 url = app.get_url
 app = LangDetector(app, languages=["ja", "en"])
 app = WSGILogger(app, [StreamHandler(stdout)], ApacheFormatter())
+
 
 octav = Octav(**cfg.section('OCTAV'))
 
@@ -85,12 +90,15 @@ def session(func):
 def favicon():
     raise HTTPError(status=404)
 
-
 # Note: this has to come BEFORE other handlers
 @route('/assets/<filename:path>', name='statics')
 def statics(filename):
     return static_file(filename, root='assets')
 
+@route('/beacon')
+def beacon():
+    lang = request.environ.get("lang")
+    return template('beacon.tpl', {}, lang=lang)
 
 @route('/')
 def index():
@@ -104,7 +112,6 @@ def index():
         cache.set(key, conferences, 600)
     return template('index.tpl', {
         'pagetitle': 'top',
-        'body_id': "top",
         'conferences': conferences,
         'login': {'username': _session_user()},
         'url': url

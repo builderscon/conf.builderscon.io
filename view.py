@@ -3,6 +3,7 @@ import babel.support
 import jinja2
 import functools
 
+DEBUG=False
 TEMPLATES={}
 
 """ This class adds support for i18n/l10n on top of the base bottle.Jinja2Template """
