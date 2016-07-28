@@ -31,11 +31,6 @@
           <div id="gnavi">
             <ul class="menu">
               {% block menuitems %}{% endblock %}
-              {% if not login %}
-              <li><a href="login">{% trans %}LOGIN{% endtrans %}</a></li>
-              {% else %}
-              <li><a href="logout">{{ login.username }}</a></li>
-              {% endif %}
             </ul>
           </div>
         </nav>
