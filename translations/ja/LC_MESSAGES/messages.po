@@ -174,7 +174,7 @@ msgid ""
 "can use <a href=\"/beacon\">our Mr. B images</a> to spice up your online "
 "conversations."
 msgstr ""
-"<b>Share:</b> 是非<a href=\"http://blog.builderscon.io\">builderscon ブログ</a>をチェックしたり、buildersconをSNSサイトなどで紹介してください。また、是非<a href=\"/beacon\">ビーコン君もチェックしてくださいね</a>！"
+"<b>Share:</b> よければ<a href=\"http://blog.builderscon.io\">builderscon ブログ</a>をチェックしたり、buildersconをSNSサイトなどで紹介してください。また、是非<a href=\"/beacon\">ビーコン君もチェックしてくださいね</a>！"
 
 #: views/login.tpl:19
 msgid "Login"
