@@ -146,7 +146,7 @@ msgid ""
 "href=\"https://github.com/builderscon/conf.builderscon.io\">this "
 "site</a>. We'd love for your to send us pull requests!"
 msgstr ""
-"<b>Github:</b> buildersconでは様々なツールを<a href=\"https://github.com/builderscon\">Github</a>上で提供しています： <a href=\"https://github.com/builderscon/builderscon\">buildersconの「仕様」</a>, <a href=\"https://github.com/builderscon/octav\">APIサーバー</a>, そして<a href=\"https://github.com/builderscon/conf.builderscon.io\">本サイトのソースコード</a>等もあります。是非PR等送って下さい！"
+"<b>Github:</b> buildersconでは様々なツールを<a href=\"https://github.com/builderscon\">Github</a>上で提供しています： <a href=\"https://github.com/builderscon/builderscon\">buildersconの「仕様」</a>, <a href=\"https://github.com/builderscon/octav\">APIサーバー</a>, そして<a href=\"https://github.com/builderscon/conf.builderscon.io\">本サイトのソースコード</a>等もあります。PR等どしどし送って下さい！"
 
 #: views/index.tpl:91
 msgid ""
@@ -165,7 +165,7 @@ msgid ""
 "href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
 "updates!"
 msgstr ""
-"<b>Twitter:</b> <a href=\"https://twitter.com/builderscon\">Twitter</a>アカウントを是非フォローして、最新の情報をチェック！"
+"<b>Twitter:</b> <a href=\"https://twitter.com/builderscon\">Twitter</a>アカウントをフォローして、最新の情報をチェック！"
 
 #: views/index.tpl:107
 msgid ""
@@ -174,7 +174,7 @@ msgid ""
 "can use <a href=\"/beacon\">our Mr. B images</a> to spice up your online "
 "conversations."
 msgstr ""
-"<b>Share:</b> 是非<a href=\"http://blog.builderscon.io\">builderscon ブログ</a>をチェックしたり、buildersconをSNSサイトなどで紹介してください。また、是<a href=\"/beacon\">ビーコン君もチェックしてくださいね</a>！"
+"<b>Share:</b> 是非<a href=\"http://blog.builderscon.io\">builderscon ブログ</a>をチェックしたり、buildersconをSNSサイトなどで紹介してください。また、是非<a href=\"/beacon\">ビーコン君もチェックしてくださいね</a>！"
 
 #: views/login.tpl:19
 msgid "Login"
