@@ -36,7 +36,7 @@
   <div class="section article" id="tou">
     <div class="inner">
       <h1 class="section-header">{% trans %}Terms of Use{% endtrans %}</h1>
-      <div class="section-content no-header">
+      <div class="section-content">
         {% trans %}
         <ul>
             <li>Permission is hereby granted to use the Mr. Beacon character, in accordance with <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC 4.0 License</a></li>
