@@ -38,6 +38,17 @@ function initMap() {
 {% endblock %}
 
 {% block main %}
+{% set description = conference.get('description') %}
+{% if description %}
+  <div class="section article">
+    <div class="inner">
+      <div class="section-content no-header">
+        <div>{{ description|markdown }}</div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
   <div class="section article">
     <div class="inner">
       <h1 class="section-header">{% trans %}Information{% endtrans %}</h1>
