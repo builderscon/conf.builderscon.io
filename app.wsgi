@@ -317,7 +317,7 @@ def latest_conference_cache_key(series_slug):
     return "conference.latest.%s" % series_slug
 
 def _get_conference(id, lang):
-    key = conference_cache_key(conference, lang)
+    key = conference_cache_key(id, lang)
     conference = cache.get(key)
     if not conference:
         conference = octav.lookup_conference(id=id, lang=lang)
