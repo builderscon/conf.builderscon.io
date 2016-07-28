@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-26 17:40+0000\n"
+"POT-Creation-Date: 2016-07-28 20:39+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -22,31 +22,79 @@ msgstr ""
 msgid "Submit"
 msgstr "送信"
 
-#: views/conference.tpl:41
-msgid "Information"
-msgstr "情報"
-
-#: views/conference.tpl:43
-msgid "Dates"
-msgstr "日程"
-
-#: views/conference.tpl:47
-msgid "Venue"
-msgstr "会場"
-
-#: views/conference.tpl:62
-msgid "Guest Speakers"
-msgstr "ゲストスピーカー"
-
-#: views/index.tpl:13
+#: views/beacon.tpl:6 views/index.tpl:16
 msgid "BLOG"
 msgstr "ブログ"
 
-#: views/index.tpl:31
+#: views/beacon.tpl:13
+msgid "Meet Mr. B (Mr. Beacon)!"
+msgstr "ビーコン君！"
+
+#: views/beacon.tpl:15
+msgid ""
+"\n"
+"        <p>Mr. B is our jolly mascot beaver. He likes to build stuff, "
+"just like us</p>\n"
+"        <p>Please feel free to use Mr B. for promoting your own "
+"builderscon or to create new swags with it!</p>\n"
+"        "
+msgstr ""
+"\n"
+"        <p>ビーコン君はbuildersconマスコットのビーバーです。我々と同じように色々とモノ作りが好きな毒舌家です</p>\n"
+"        <p>グッズを作ったり、あなたのbuildersconのプロモーションに使ったりしてあげてください！</p>\n"
+"        "
+
+#: views/beacon.tpl:42
+msgid "Terms of Use"
+msgstr "利用条件"
+
+#: views/beacon.tpl:44
+msgid ""
+"\n"
+"        <ul>\n"
+"            <li>Permission is hereby granted to use the Mr. Beacon "
+"character, in accordance with <a "
+"href=\"https://creativecommons.org/licenses/by-nc/4.0/\">CC-BY-NC 4.0 "
+"License</a></li>\n"
+"            <li>Mr. Beacon was designed by <a "
+"href=\"https://twitter.com/yassang0928\">yassang</a></li>\n"
+"            <li>Attribution to the creator (\"by yassang\") is "
+"recommended but not required</li>\n"
+"            <li>Mr. Beacon is &copy; endeworks and &copy; <a "
+"href=\"https://twitter.com/yassang0928\">yassang</a></li>\n"
+"        </ul>\n"
+"        "
+msgstr ""
+"\n"
+"         <ul>\n"
+"             <li>「ビーコン君」は<a href=\"https://creativecommons.org/licenses/by-nc/4.0/\">CC-BY-NC 4.0ライセンス</a>で公開されています。</li>"
+"             <li>ビーコン君イラストは<a href=\"https://twitter.com/yassang0928\">yassang</a>氏に製作していただきました</li>"
+"             <li>利用にあたり著作者表記は任意ですが、表記があると嬉しいです</li>"
+"             <li>ビーコン君は &copy; 株式会社endeworks および &copy; <a href=\"https://twitter.com/yassang0928\">yassang</a>です</li>"
+"        </ul>\n"
+"        "
+
+#: views/conference.tpl:54
+msgid "Information"
+msgstr "情報"
+
+#: views/conference.tpl:56
+msgid "Dates"
+msgstr "日程"
+
+#: views/conference.tpl:60
+msgid "Venue"
+msgstr "会場"
+
+#: views/conference.tpl:75
+msgid "Guest Speakers"
+msgstr "ゲストスピーカー"
+
+#: views/index.tpl:34
 msgid "Welcome To builderscon"
 msgstr "builderscon とは"
 
-#: views/index.tpl:33
+#: views/index.tpl:36
 msgid ""
 "\n"
 "        <strong>Join builderscon and discover something new! builderscon "
@@ -71,9 +119,62 @@ msgstr ""
 "        <p>buildersconに参加して、あなたの情熱をシェアしてください！皆様のご参加をお待ちしております！</p>"
 "        "
 
-#: views/index.tpl:46
+#: views/index.tpl:49
 msgid "Upcoming Conferences"
 msgstr "近日開催予定"
+
+#: views/index.tpl:68
+msgid "Get Involved!"
+msgstr "参加しよう！"
+
+#: views/index.tpl:75
+msgid ""
+"<b>Slack: </b> We have <a href=\"https://builderscon.slack.com\">a Slack "
+"team</a>, and <a href=\"https://slack-invite-dot-"
+"builderscon-1248.appspot.com/\">you can invite yourself</a>. Come and "
+"share your knowledge of conference organization, or ask to get started on"
+" your own builderscon!"
+msgstr ""
+"<b>Slack: </b> カンファレンス運営のついての情報交換や今後のbuildersconについて話し合うための<a href=\"https://builderscon.slack.com\">Slackチーム</a>を用意しています。<a href=\"https://slack-invite-dot-"builderscon-1248.appspot.com/\">自動招待フォーム</a>から気軽に参加できます"
+
+#: views/index.tpl:83
+msgid ""
+"<b>Github:</b> Explore our many opensource projects on <a "
+"href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
+"href=\"https://github.com/builderscon/builderscon\">spec</a>\", our <a "
+"href=\"https://github.com/builderscon/octav\">API server</a>, and <a "
+"href=\"https://github.com/builderscon/conf.builderscon.io\">this "
+"site</a>. We'd love for your to send us pull requests!"
+msgstr ""
+"<b>Github:</b> buildersconでは様々なツールを<a href=\"https://github.com/builderscon\">Github</a>上で提供しています： <a href=\"https://github.com/builderscon/builderscon\">buildersconの「仕様」</a>, <a href=\"https://github.com/builderscon/octav\">APIサーバー</a>, そして<a href=\"https://github.com/builderscon/conf.builderscon.io\">本サイトのソースコード</a>等もあります。是非PR等送って下さい！"
+
+#: views/index.tpl:91
+msgid ""
+"<b>Facebook:</b> Peruse our <a "
+"href=\"https://www.facebook.com/builderscon\">Facebook page</a> to find "
+"various events that we host for people interested in builderscon like our"
+" now famous BBQ [<a "
+"href=\"https://www.facebook.com/events/803942576374123/\">1</a>][<a "
+"href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
+msgstr ""
+"<b>Facebook:</b> <a href=\"https://www.facebook.com/builderscon\">Facebookページ</a>を確認して、buildersconとそれ以外のミニイベントをチェック！ buildersconコミュニティで話題のBBQもやっています！ [<a href=\"https://www.facebook.com/events/803942576374123/\">1</a>][<a href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
+
+#: views/index.tpl:99
+msgid ""
+"<b>Twitter:</b> Follow us on <a "
+"href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
+"updates!"
+msgstr ""
+"<b>Twitter:</b> <a href=\"https://twitter.com/builderscon\">Twitter</a>アカウントを是非フォローして、最新の情報をチェック！"
+
+#: views/index.tpl:107
+msgid ""
+"<b>Share:</b> Read our <a href=\"http://blog.builderscon.io\">blog</a>, "
+"post on your favorite sites, and perhaps if you are feeling like it, you "
+"can use <a href=\"/beacon\">our Mr. B images</a> to spice up your online "
+"conversations."
+msgstr ""
+"<b>Share:</b> 是非<a href=\"http://blog.builderscon.io\">builderscon ブログ</a>をチェックしたり、buildersconをSNSサイトなどで紹介してください。また、是<a href=\"/beacon\">ビーコン君もチェックしてくださいね</a>！"
 
 #: views/login.tpl:19
 msgid "Login"
@@ -99,25 +200,22 @@ msgstr "スポンサーの皆様"
 msgid " is supported by these sponsors"
 msgstr "はこちらのスポンサーの皆様にご支援頂いています"
 
-#: views/layout/base.tpl:25
-msgid "LOGIN"
-msgstr "ログイン"
+#: views/layout/base.tpl:4 views/layout/base.tpl:16
+msgid "Discover Something New"
+msgstr "知らなかった、を聞く"
 
-#: views/layout/base.tpl:59
+#: views/layout/base.tpl:16
+msgid "builderscon is a festival for those who love tech!"
+msgstr "buildersconは技術を愛する全てのギーク達のお祭りです！"
+
+#: views/layout/base.tpl:64
 msgid "builderscon is a festival for the technology lovers."
 msgstr "buildersconは技術を愛する全てのギーク達のお祭りです"
 
-#: views/layout/conference.tpl:5
+#: views/layout/conference.tpl:7
 msgid "NEWS"
 msgstr "ニュース"
 
-#: views/layout/conference.tpl:6
+#: views/layout/conference.tpl:8
 msgid "SPONSORS"
 msgstr "スポンサー"
-
-#~ msgid "NEWS</a>"
-#~ msgstr "ニュース"
-
-#~ msgid " is sponsored by these sponsors"
-#~ msgstr "はこちらのスポンサーの皆様にご支援頂いています"
-

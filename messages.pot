@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-26 17:40+0000\n"
+"POT-Creation-Date: 2016-07-28 20:39+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,31 +21,67 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: views/conference.tpl:41
-msgid "Information"
-msgstr ""
-
-#: views/conference.tpl:43
-msgid "Dates"
-msgstr ""
-
-#: views/conference.tpl:47
-msgid "Venue"
-msgstr ""
-
-#: views/conference.tpl:62
-msgid "Guest Speakers"
-msgstr ""
-
-#: views/index.tpl:13
+#: views/beacon.tpl:6 views/index.tpl:16
 msgid "BLOG"
 msgstr ""
 
-#: views/index.tpl:31
+#: views/beacon.tpl:13
+msgid "Meet Mr. B (Mr. Beacon)!"
+msgstr ""
+
+#: views/beacon.tpl:15
+msgid ""
+"\n"
+"        <p>Mr. B is our jolly mascot beaver. He likes to build stuff, "
+"just like us</p>\n"
+"        <p>Please feel free to use Mr B. for promoting your own "
+"builderscon or to create new swags with it!</p>\n"
+"        "
+msgstr ""
+
+#: views/beacon.tpl:42
+msgid "Terms of Use"
+msgstr ""
+
+#: views/beacon.tpl:44
+msgid ""
+"\n"
+"        <ul>\n"
+"            <li>Permission is hereby granted to use the Mr. Beacon "
+"character, in accordance with <a "
+"href=\"https://creativecommons.org/licenses/by-nc/4.0/\">CC-BY-NC 4.0 "
+"License</a></li>\n"
+"            <li>Mr. Beacon was designed by <a "
+"href=\"https://twitter.com/yassang0928\">yassang</a></li>\n"
+"            <li>Attribution to the creator (\"by yassang\") is "
+"recommended but not required</li>\n"
+"            <li>Mr. Beacon is &copy; endeworks and &copy; <a "
+"href=\"https://twitter.com/yassang0928\">yassang</a></li>\n"
+"        </ul>\n"
+"        "
+msgstr ""
+
+#: views/conference.tpl:54
+msgid "Information"
+msgstr ""
+
+#: views/conference.tpl:56
+msgid "Dates"
+msgstr ""
+
+#: views/conference.tpl:60
+msgid "Venue"
+msgstr ""
+
+#: views/conference.tpl:75
+msgid "Guest Speakers"
+msgstr ""
+
+#: views/index.tpl:34
 msgid "Welcome To builderscon"
 msgstr ""
 
-#: views/index.tpl:33
+#: views/index.tpl:36
 msgid ""
 "\n"
 "        <strong>Join builderscon and discover something new! builderscon "
@@ -61,8 +97,56 @@ msgid ""
 "        "
 msgstr ""
 
-#: views/index.tpl:46
+#: views/index.tpl:49
 msgid "Upcoming Conferences"
+msgstr ""
+
+#: views/index.tpl:68
+msgid "Get Involved!"
+msgstr ""
+
+#: views/index.tpl:75
+msgid ""
+"<b>Slack: </b> We have <a href=\"https://builderscon.slack.com\">a Slack "
+"team</a>, and <a href=\"https://slack-invite-dot-"
+"builderscon-1248.appspot.com/\">you can invite yourself</a>. Come and "
+"share your knowledge of conference organization, or ask to get started on"
+" your own builderscon!"
+msgstr ""
+
+#: views/index.tpl:83
+msgid ""
+"<b>Github:</b> Explore our many opensource projects on <a "
+"href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
+"href=\"https://github.com/builderscon/builderscon\">spec</a>\", our <a "
+"href=\"https://github.com/builderscon/octav\">API server</a>, and <a "
+"href=\"https://github.com/builderscon/conf.builderscon.io\">this "
+"site</a>. We'd love for your to send us pull requests!"
+msgstr ""
+
+#: views/index.tpl:91
+msgid ""
+"<b>Facebook:</b> Peruse our <a "
+"href=\"https://www.facebook.com/builderscon\">Facebook page</a> to find "
+"various events that we host for people interested in builderscon like our"
+" now famous BBQ [<a "
+"href=\"https://www.facebook.com/events/803942576374123/\">1</a>][<a "
+"href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
+msgstr ""
+
+#: views/index.tpl:99
+msgid ""
+"<b>Twitter:</b> Follow us on <a "
+"href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
+"updates!"
+msgstr ""
+
+#: views/index.tpl:107
+msgid ""
+"<b>Share:</b> Read our <a href=\"http://blog.builderscon.io\">blog</a>, "
+"post on your favorite sites, and perhaps if you are feeling like it, you "
+"can use <a href=\"/beacon\">our Mr. B images</a> to spice up your online "
+"conversations."
 msgstr ""
 
 #: views/login.tpl:19
@@ -89,19 +173,23 @@ msgstr ""
 msgid " is supported by these sponsors"
 msgstr ""
 
-#: views/layout/base.tpl:25
-msgid "LOGIN"
+#: views/layout/base.tpl:4 views/layout/base.tpl:16
+msgid "Discover Something New"
 msgstr ""
 
-#: views/layout/base.tpl:59
+#: views/layout/base.tpl:16
+msgid "builderscon is a festival for those who love tech!"
+msgstr ""
+
+#: views/layout/base.tpl:64
 msgid "builderscon is a festival for the technology lovers."
 msgstr ""
 
-#: views/layout/conference.tpl:5
+#: views/layout/conference.tpl:7
 msgid "NEWS"
 msgstr ""
 
-#: views/layout/conference.tpl:6
+#: views/layout/conference.tpl:8
 msgid "SPONSORS"
 msgstr ""
 
