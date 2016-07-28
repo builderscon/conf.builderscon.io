@@ -9,7 +9,7 @@
     <link href="{{ url('statics', filename='css/style.css') }}" rel="stylesheet"/>
 {% block header %}{% endblock %}
   </head>
-  <body{% if body_id %} id="{{ body_id }}"{% endif %}>
+  <body id="{% block body_id %}top{% endblock %}">
     <div id="wrapper">
       <header id="header">
         <div class="inner">

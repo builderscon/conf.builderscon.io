@@ -14,3 +14,19 @@
     height: 410px;
     background: rgba(0,0,0,0) url(/assets/images/heroimage-hall.png) repeat-x center 0;
 }
+
+#beacon #heroimage {
+    position: relative;
+    margin-top: -59px;
+    margin-bottom: -79px;
+    height: 600px;
+    background: rgba(0,0,0,0) url(/assets/images/heroimage-beacon.png) repeat-x center 0;
+}
+
+#beacon-gallery div.gallery-slot img {
+    width: 200px;
+    height: 200px;
+}
+#beacon-gallery div.gallery-slot {
+    text-align: center;
+}
