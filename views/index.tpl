@@ -4,6 +4,9 @@
 <style type="text/css">
 <!--
   #contents.index { padding: 180px 0 0 0 }
+  #get-involved .inner .section-content div.row {
+    margin: 1em 0 0 1em;
+  }
 -->
 </style>
 {% endblock %}
@@ -60,7 +63,7 @@
     </div>
   </div>
 
-  <div class="section article">
+  <div class="section article" id="get-involved">
     <div class="inner">
       <h1 class="section-header">{% trans %}Get Involved!{% endtrans %}</h1>
       <div class="section-content">
@@ -90,10 +93,18 @@
         </div>
         <div class="row">
           <div class="large-1 column">
-            <img src="https://g.twimg.com/Twitter_logo_blue.png" style="width: 64px; height: 64px;">
+            <img src="https://g.twimg.com/Twitter_logo_blue.png" style="width: 64px; height: 52px;">
           </div>
           <div class="large-11 column">
             <p>{% trans %}<b>Twitter:</b> Follow us on <a href="https://twitter.com/builderscon">Twitter</a>, and get the latest updates!{% endtrans %}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-1 column">
+            <img src="{{ url('statics', filename='images/mrbeacon-001.png') }}" style="width: 64px; height: 64px;">
+          </div>
+          <div class="large-11 column">
+            <p>{% trans %}<b>Share:</b> Read our <a href="http://blog.builderscon.io">blog</a>, post on your favorite sites, and perhaps if you are feeling like it, you can use <a href="/beacon">our Mr. B images</a> to spice up your online conversations.{% endtrans %}</p>
           </div>
         </div>
       </div>
