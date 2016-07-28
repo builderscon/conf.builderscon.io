@@ -20,6 +20,7 @@ import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
 import feedparser
 from view import jinja2_template as template
+import re
 
 class Config(object):
     def __init__(self, file):
@@ -165,6 +166,14 @@ def conference(series_slug):
     redirect('/{0}/latest'.format(series_slug))
 
 
+@route('/<series_slug>/<rest:re:latest(/.*)?>')
+def latest(series_slug, rest):
+    lang = request.environ.get("lang")
+    latest_conference = _get_latest_conference(series_slug, lang)
+    rest = re.compile('^latest').sub(latest_conference.get('slug'), rest)
+    redirect("/" + series_slug + "/" + rest)
+
+
 @route('/<series_slug>/<slug:path>/sponsors')
 def conference_sponsors(series_slug, slug):
     lang = request.environ.get("lang")
@@ -212,10 +221,7 @@ def conference_news(slug):
 @route('/<series_slug>/<slug:path>')
 def conference_instance(series_slug, slug):
     lang = request.environ.get("lang")
-    if slug == 'latest':
-        conference = _get_latest_conference(series_slug)
-    else:
-        conference = _get_conference_by_slug(series_slug, slug, lang)
+    conference = _get_conference_by_slug(series_slug, slug, lang)
     return template('conference.tpl', {
         'pagetitle': series_slug + ' ' + slug,
         'slug': series_slug + '/' + slug,
@@ -305,26 +311,42 @@ def _get_conference_by_slug(series_slug, slug, lang):
     slugkey = "conference.by_slug." + slug_query
     cid = cache.get(slugkey)
     if cid:
-        return _get_conference(id=id, lang=lang)
-
+        return _get_conference(cid, lang)
     conference = octav.lookup_conference_by_slug(slug=slug_query, lang=lang)
     if conference:
-        key = "conference." + conference["id"]
+        conference_id = conference.get('id')
+        if conference_id is None:
+            raise HTTPError(status=500, body="Conference for " + slugkey + " doesn't have an id, which is invalid.")
+        key = "conference." + conference_id
         seconds = 300
         cache.set(key, conference, seconds)
+        cache.set(slugkey, conference_id, seconds)
         return conference
     raise ConferenceNotFoundError
 
 
 def _get_latest_conference(series_slug, lang):
+    slug_query = '/' + series_slug + '/latest'
+    slugkey = "conference.latest." + slug_query
+    cid = cache.get(slugkey)
+    if cid:
+        return _get_conference(cid, lang)
     # XXX There should be a specific API call for this
     conferences = octav.list_conference(lang=lang)
     if conferences is None:
         raise ConferenceNotFoundError
     for conference in conferences:
-        if str(conference['series']['slug']) == series_slug:
+        if conference.get('series') and conference.get('series').get('slug') and str(conference.get('series').get('slug')) == series_slug:
+            conference_id = conference.get('id')
+            #if conference_id is None, then the below cache part is skipped, but it still returns a conference unlike _get_conference_by_slug
+            #are we sure this behavior is appropriate?
+            if conference_id:
+                key = "conference." + conference_id
+                seconds = 300
+                cache.set(key, conference, seconds)
+                cache.set(slugkey, conference_id, seconds)
             return conference
-
+    raise ConferenceNotFoundError
 
 def _create_session(username):
     session_id = str(uuid4())
