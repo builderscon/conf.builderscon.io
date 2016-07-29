@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-28 21:23+0900\n"
+"POT-Creation-Date: 2016-07-29 14:38+0000\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -209,7 +209,11 @@ msgstr "GitHub IDでログイン"
 msgid "Recent News"
 msgstr "最新のニュース"
 
-#: views/sessions.tpl:9
+#: views/sessions.tpl:11
+msgid "Sessions"
+msgstr "セッション"
+
+#: views/sessions.tpl:30
 msgid "Submit your proposal"
 msgstr "トークの概要を送信"
 

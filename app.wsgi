@@ -23,6 +23,7 @@ from view import jinja2_template as template
 import re
 
 CACHE_CONFERENCE_EXPIRES = 300
+CACHE_CONFERENCE_SESSIONS_EXPIRES = 300
 
 class Config(object):
     def __init__(self, file):
@@ -194,6 +195,23 @@ def conference_sponsors(series_slug, slug):
     }, languages=[lang])
 
 
+@route('/<series_slug>/<slug:path>/sessions')
+def conference_sessions(series_slug, slug):
+    lang = request.environ.get("lang")
+    full_slug = "%s/%s" % (series_slug, slug)
+    conference = _get_conference_by_slug(full_slug, lang)
+    if not conference:
+        raise ConferenceNotFoundError
+    conference_sessions = _list_session_by_conference(conference.get('id'), lang)
+    return template('sessions.tpl', {
+        'pagetitle': series_slug + ' ' + slug,
+        'conference': conference,
+        'sessions': conference_sessions,
+        'login': {'username': _session_user()},
+        'url': url
+    }, languages=[lang])
+
+
 @route('/<slug:path>/news')
 def conference_news(slug):
     lang = request.environ.get("lang")
@@ -237,22 +255,6 @@ def conference_instance(series_slug, slug):
         'url': url,
         'googlemap_api_key': cfg.googlemap_api_key(),
     }, languages=[lang])
-
-
-@route('/<series_slug>/<slug>/sessions')
-def conference_sessions(series_slug, slug):
-    lang = request.environ.get("lang")
-    conference = _get_conference_by_slug(series_slug, slug)
-    if not conference:
-        raise ConferenceNotFoundError
-
-    return template('sessions.tpl', {
-        'pagetitle': series_slug + ' ' + slug,
-        'conference': conference,
-        'login': {'username': _session_user()},
-        'url': url
-    }, languages=[lang])
-
 
 @route('/<series_slug>/<slug>/session/add')
 def add_session(series_slug, slug):
@@ -316,6 +318,11 @@ def latest_conference_cache_key(series_slug):
         raise Exception("faild to create conference cache key: no series_slug")
     return "conference.latest.%s" % series_slug
 
+def conference_sessions_cache_key(conference_id, lang):
+    if not conference_id:
+        raise Exception("faild to create conference cache key: no id")
+    return "conference_sessions.%s.lang%s" % (conference_id, lang)
+
 def _get_conference(id, lang):
     key = conference_cache_key(id, lang)
     conference = cache.get(key)
@@ -365,6 +372,20 @@ def _get_latest_conference(series_slug, lang):
             return conference
 
     return None
+
+
+def _list_session_by_conference(conference_id, lang):
+    key = conference_sessions_cache_key(conference_id, lang)
+    conference_sessions = cache.get(key)
+    if conference_sessions:
+        return conference_sessions
+
+    conference_sessions = octav.list_session_by_conference(conference_id)
+    if conference_sessions :
+        cache.set(key, conference_sessions, CACHE_CONFERENCE_SESSIONS_EXPIRES)
+        return conference_sessions
+    return None
+
 
 def _create_session(username):
     session_id = str(uuid4())
