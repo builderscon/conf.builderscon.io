@@ -4,6 +4,7 @@
 <style type="text/css">
 <!--
   #contents.index { padding: 180px 0 0 0 }
+  #conferences .conference-name { font-size: 1.5em }
   #get-involved .inner .section-content div.row {
     margin: 1em 0 0 1em;
   }
@@ -48,12 +49,12 @@
     <div class="inner">
       <h1 class="section-header">{% trans %}Upcoming Conferences{% endtrans %}</h1>
       <div class="section-content">
-        <table>
+        <table id="conferences">
           <tbody>
             {% for conference in conferences %}
             <tr>
               <td>
-                <a href="{% if conference.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a>
+                <a class="conference-name" href="{% if conference.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a>
               </td>
             </tr>
             {% endfor %}

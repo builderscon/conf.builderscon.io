@@ -9,6 +9,10 @@
 #heroimage {
     background: rgba(0,0,0,0) url({{ conference.cover_url }}) repeat-x center 0;
 }
+div.speakers div.speaker {
+    margin-left: 2em;
+    margin-bottom: 1em;
+}
 -->
 </style>
 {% endif %}
@@ -82,12 +86,12 @@ function initMap() {
   </div>
 
 {% if conference.featured_speakers|length > 0 %}
-  <div class="section article">
+  <div class="section article speakers">
     <div class="inner">
       <h1 class="section-header">{% trans %}Guest Speakers{% endtrans %}</h1>
       <div class="section-content">
 {% for speaker in conference.featured_speakers %}
-        <div class="row" style="margin-left: 2em">
+        <div class="row speaker">
 <div class="large-2 columns"><img style="width: 120px; height: 120px; border: 1px solid #ccc" src="{% if speaker.avatar_url %}{{ speaker.avatar_url }}{% else %}{{ url('statics', filename='images/noprofile.png') }}{% endif %}" /></div>
 <div class="large-10 columns">
     <h4>{{ speaker.display_name }}</h4>
