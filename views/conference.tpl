@@ -2,6 +2,18 @@
 
 {% block title %}{{ conference.title }} - builderscon{% endblock %}
 
+{% block header %}
+{% if conference.cover_url %}
+<style type="text/css">
+<!--
+#heroimage {
+    background: rgba(0,0,0,0) url({{ conference.cover_url }}) repeat-x center 0;
+}
+-->
+</style>
+{% endif %}
+{% endblock %}
+
 {% block herotext %}
 <h1>{{ conference.title }}</h1>
 <h2>{{ conference.sub_title }}</h2>
