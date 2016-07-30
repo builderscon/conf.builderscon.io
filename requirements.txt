@@ -4,5 +4,5 @@ feedparser
 jinja2
 py-gfm
 redis
-requests
+urllib3
 wsgi-request-logger

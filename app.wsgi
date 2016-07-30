@@ -2,25 +2,35 @@
 # -*- coding:utf-8 -*-
 
 import bottle
-from bottle import Bottle, redirect, request, response, HTTPError, static_file
-from datetime import datetime, timedelta
+from bottle import request, response, HTTPError, static_file
 import time
 from requestlogger import WSGILogger, ApacheFormatter
 from logging import StreamHandler
 import functools
 import json
-import requests
 import os
 import cache
-from accept_language import LangDetector
+import accept_language
 from uuid import uuid4
 from octav import Octav
-from sys import stdout
 import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
 import feedparser
 from view import jinja2_template as template
 import re
+
+import sys
+if sys.version[0] == "3":
+    from urllib.parse import urlencode
+else:
+    from urllib import urlencode
+
+if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/') or os.getenv('SERVER_SOFTWARE', '').startswith('Development/'):
+    import urllib3.contrib.appengine
+    http = urllib3.contrib.appengine.AppEngineManager()
+else:
+    import urllib3
+    http = urllib3.PoolManager()
 
 CACHE_CONFERENCE_EXPIRES = 300
 CACHE_CONFERENCE_SESSIONS_EXPIRES = 300
@@ -51,7 +61,7 @@ config_file = os.getenv(
 )
 cfg = Config(config_file)
 
-app = application = Bottle()
+app = application = bottle.Bottle()
 bottle.BaseTemplate.settings.update({
     'extensions': ['jinja2.ext.i18n'],
     'globals': {
@@ -66,8 +76,8 @@ bottle.BaseTemplate.settings.update({
 route = app.route
 post = app.post
 url = app.get_url
-app = LangDetector(app, languages=["ja", "en"])
-app = WSGILogger(app, [StreamHandler(stdout)], ApacheFormatter())
+app = accept_language.LangDetector(app, languages=["ja", "en"])
+app = WSGILogger(app, [StreamHandler(sys.stdout)], ApacheFormatter())
 
 
 octav = Octav(**cfg.section('OCTAV'))
@@ -85,7 +95,7 @@ def session(func):
         if _session_user() != '':
             return func(*a, **ka)
         else:
-            redirect('/login')
+            bottle.redirect('/login')
     return _
 
 
@@ -134,34 +144,32 @@ def login_github():
     code = request.query.code
     ghcfg = cfg.section('GITHUB')
     if not code:
-        redirect(
+        bottle.redirect(
             'https://github.com/login/oauth/authorize' +
             '?client_id=' + ghcfg.get('client_id')
         )
-    access_token = requests.get(
-        'https://github.com/login/oauth/access_token',
-        params={
-            'code': code,
-            'client_id': ghcfg.get('client_id'),
-            'client_secret': ghcfg.get('client_secret')
-        }
-    )
+    params={
+        'code': code,
+        'client_id': ghcfg.get('client_id'),
+        'client_secret': ghcfg.get('client_secret')
+    }
+    access_token = http.request('GET', 'https://github.com/login/oauth/access_token?%s' % urlencode(params))
     if 'error' in access_token.text:
-        redirect('/login')
+        bottle.redirect('/login')
 
-    res = requests.get(
+    res = http.request('GET',
         'https://api.github.com/user?' + access_token.text
     )
     user_info = res.json()
     _create_session(user_info['login'])
-    redirect('/')
+    bottle.redirect('/')
 
 
 @route('/logout')
 @route('/<p:path>/logout')
 def logout(p=None):
-    response.set_cookie('session_id', '', expires=datetime.now()-timedelta(1))
-    redirect('/')
+    response.set_cookie('session_id', '', expires=0)
+    bottle.redirect('/')
 
 # This route maps "latest" URLs to the actual latest conference
 # URLs, so that we don't have to refer to "latest" elsewhere in 
@@ -173,12 +181,12 @@ def latest(series_slug, rest):
     if not latest_conference:
         raise ConferenceNotFoundError
     rest = re.compile('^latest').sub(latest_conference.get('slug'), rest)
-    redirect("/" + series_slug + "/" + rest)
+    bottle.redirect("/" + series_slug + "/" + rest)
 
 
 @route('/<series_slug>')
 def conference(series_slug):
-    redirect('/{0}/latest'.format(series_slug))
+    bottle.redirect('/{0}/latest'.format(series_slug))
 
 
 @route('/<series_slug>/<slug:path>/sponsors')
@@ -268,7 +276,7 @@ def add_session(series_slug, slug):
 
 @post('/<series_slug>/<slug>/session/add')
 def add_session_post(series_slug, slug):
-    redirect('/')
+    bottle.redirect('/')
 
 
 @route('/<series_slug>/<slug>/session/<id>')
