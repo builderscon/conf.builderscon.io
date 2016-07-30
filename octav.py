@@ -1,5 +1,5 @@
 """OCTAV Client Library"""
-"""DO NOT EDIT: This file was generated from ../spec/v1/api.json on Sat Jul 30 18:12:21 2016"""
+"""DO NOT EDIT: This file was generated from ../spec/v1/api.json on Sat Jul 30 20:11:41 2016"""
 
 import json
 import os
@@ -8,6 +8,12 @@ if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/') or os.geten
     from urllib3.contrib.appengine import AppEngineManager as PoolManager
 else:
     from urllib3 import PoolManager
+
+import sys
+if sys.version[0] == "3":
+    from urllib.parse import urlencode
+else:
+    from urllib import urlencode
 
 class Octav(object):
   def __init__(self, endpoint, key, secret, debug=False):
@@ -29,7 +35,7 @@ class Octav(object):
       js = r.json()
       self.error = js["message"]
     except:
-      self.error = r.status_code
+      self.error = r.status
 
   def last_error(self):
     return self.error
@@ -91,9 +97,10 @@ class Octav(object):
         if id is not None:
             payload['id'] = id
         uri = '%s/user/lookup' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -120,9 +127,10 @@ class Octav(object):
         if auth_via is not None:
             payload['auth_via'] = auth_via
         uri = '%s/user/lookup_by_auth_user_id' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -221,9 +229,10 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/user/list' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -288,9 +297,10 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/venue/list' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -312,9 +322,10 @@ class Octav(object):
         if id is not None:
             payload['id'] = id
         uri = '%s/venue/lookup' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -481,9 +492,10 @@ class Octav(object):
         if id is not None:
             payload['id'] = id
         uri = '%s/room/lookup' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -542,9 +554,10 @@ class Octav(object):
         if venue_id is not None:
             payload['venue_id'] = venue_id
         uri = '%s/room/list' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -605,9 +618,10 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/conference_series/list' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -944,9 +958,10 @@ class Octav(object):
         if lang is not None:
             payload['lang'] = lang
         uri = '%s/conference/lookup' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -970,9 +985,10 @@ class Octav(object):
         if slug is not None:
             payload['slug'] = slug
         uri = '%s/conference/lookup_by_slug' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -1001,9 +1017,10 @@ class Octav(object):
         if status is not None:
             payload['status'] = status
         uri = '%s/conference/list' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -1204,9 +1221,10 @@ class Octav(object):
         if id is not None:
             payload['id'] = id
         uri = '%s/session/lookup' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -1336,9 +1354,10 @@ class Octav(object):
         if date is not None:
             payload['date'] = date
         uri = '%s/schedule/list' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -1370,9 +1389,10 @@ class Octav(object):
         if user_id is not None:
             payload['user_id'] = user_id
         uri = '%s/question/create' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -1426,9 +1446,10 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/question/list' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -1484,9 +1505,10 @@ class Octav(object):
         if user_prior_knowledge is not None:
             payload['user_prior_knowledge'] = user_prior_knowledge
         uri = '%s/survey_session_response/create' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -1554,9 +1576,10 @@ class Octav(object):
         if lang is not None:
             payload['lang'] = lang
         uri = '%s/featured_speaker/lookup' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -1581,9 +1604,10 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/featured_speaker/list' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -1731,9 +1755,10 @@ class Octav(object):
         if lang is not None:
             payload['lang'] = lang
         uri = '%s/sponsor/lookup' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:
@@ -1758,9 +1783,10 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/sponsor/list' % self.endpoint
+        qs = urlencode(payload)
         if self.debug:
-            print("GET " + uri)
-        res = self.http.request('GET', uri, body=json.dumps(payload))
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs))
         if self.debug:
             print(res)
         if res.status != 200:

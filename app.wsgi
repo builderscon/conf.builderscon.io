@@ -255,6 +255,9 @@ def conference_instance(series_slug, slug):
     lang = request.environ.get("lang")
     full_slug = "%s/%s" % (series_slug, slug)
     conference = _get_conference_by_slug(full_slug, lang)
+    if not conference:
+        raise HTTPError(status=404, body=octav.last_error())
+
     return template('conference.tpl', {
         'pagetitle': series_slug + ' ' + slug,
         'slug': full_slug,
