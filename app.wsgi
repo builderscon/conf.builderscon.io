@@ -304,10 +304,10 @@ def user_details(id_):
 def conference_cache_key(id, lang):
     if not id:
         raise Exception("faild to create conference cache key: no id")
-    return "conference.%d.lang" % id
+    return "conference.%s.lang.%s" % (id, lang)
 
 def conference_by_slug_cache_key(full_slug):
-    if not id:
+    if not full_slug:
         raise Exception("faild to create conference cache key: no full_slug")
     return "conference.by_slug.%s" % full_slug
 
@@ -337,7 +337,9 @@ def _get_conference_by_slug(slug, lang):
     if not conference:
         return None
 
-    cache.set(slugkey, cid, CACHE_CONFERENCE_EXPIRES)
+    cid = conference.get('id')
+    if cid:
+        cache.set(slugkey, cid, CACHE_CONFERENCE_EXPIRES)
     return conference
 
 
