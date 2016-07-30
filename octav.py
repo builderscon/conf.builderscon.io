@@ -156,7 +156,6 @@ class Octav(object):
   def update_user (self, id, user_id, email=None, first_name=None, last_name=None, nickname=None, tshirt_size=None):
     try:
         payload = {}
-        hdrs = {}
         if id is None:
             raise MissingRequiredArgument('property id must be provided')
         payload['id'] = id
@@ -807,6 +806,9 @@ class Octav(object):
         uri = '%s/conference/dates/delete' % self.endpoint
         if self.debug:
             print('POST %s' % uri)
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         hdrs['Content-Type']= 'application/json'
         res = self.http.request('POST', uri, headers=hdrs, body=json.dumps(payload))
         if self.debug:
