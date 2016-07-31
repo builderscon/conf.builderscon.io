@@ -10,7 +10,7 @@
     <meta name="twitter:site" content="@builderscon">
     <meta property="fb:app_id" content="1537973726511652"/>
     <meta property="og:type" content="{% block ogp_type %}{% if pagetitle == 'top' %}website{% else %}article{% endif %}{% endblock %}"/>
-    <meta property="og:image" content="{{ url('statics', filename='images/logo.png') }}"/>
+    <meta property="og:image" content="{% block og_image %}{{ url('statics', filename='images/logo.png') }}{% endblock %}"/>
     <meta property="og:site_name" content="builderscon"/>
 {% for name in ["description","og:description"] %}
     <meta name="{{ name }}" content="{% block og_description %}{% trans %}Discover Something New{% endtrans %} - {% trans %}builderscon is a festival for those who love tech!{% endtrans %}{% endblock %}">

@@ -1,6 +1,7 @@
 {% extends 'layout/base.tpl' %}
 {% block title %}{% trans %}Mr. B{% endtrans %} - builderscon{% endblock %}
 {% block og_description %}{% trans %}Meet Mr. B (Mr. Beacon)!{% endtrans %}{% endblock %}
+{% block og_image %}{{ url('statics', filename='images/mrbeacon-004.png') }}{% endblock %}
 {% block body_id %}beacon{% endblock %}
 {% block menuitems %}
 <li><a href="/"><span class="i-home"></span></a></li>
