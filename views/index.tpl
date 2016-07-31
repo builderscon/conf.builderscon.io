@@ -4,7 +4,7 @@
 <style type="text/css">
 <!--
   #contents.index { padding: 180px 0 0 0 }
-  #conferences .conference-name { font-size: 1.5em }
+  #conferences .conference-name { font-size: 1.5em; vertical-align: middle }
   #get-involved .inner .section-content div.row {
     margin: 1em 0 0 1em;
   }
@@ -45,21 +45,20 @@
     </div>
   </div>
 
-  <div class="section article">
+  <div class="section article" id="conferences">
     <div class="inner">
       <h1 class="section-header">{% trans %}Upcoming Conferences{% endtrans %}</h1>
       <div class="section-content">
-        <table id="conferences">
-          <tbody>
-            {% for conference in conferences %}
-            <tr>
-              <td>
-                <a class="conference-name" href="{% if conference.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+        {% for conference in conferences %}
+        <div class="row">
+          <div class="large-1 column">
+            <img src="{{ url('statics', filename='images/hex_logo.png') }}" style="width: 32px; height: 32px">
+          </div>
+          <div class="large-11 column">
+            <a class="conference-name" href="{% if conference.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a> ({{ conference.dates[0] | dateobj(lang=lang) }})
+          </div>
+        </div>
+        {% endfor %}
       </div>
     </div>
   </div>

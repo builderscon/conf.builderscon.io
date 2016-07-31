@@ -21,7 +21,7 @@ div.speakers div.speaker {
 {% block herotext %}
 <h1>{{ conference.title }}</h1>
 <h2>{{ conference.sub_title }}</h2>
-<h2>{% if conference.dates|length == 1 %}{{ conference.dates[0].date }}{% endif %}</h2>
+<h2>{% if conference.dates|length == 1 %}{{ conference.dates[0]|dateobj(lang=lang) }}{% endif %}</h2>
 {% endblock %}
 
 {% block scripts %}

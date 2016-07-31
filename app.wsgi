@@ -18,6 +18,7 @@ from mdx_gfm import GithubFlavoredMarkdownExtension
 import feedparser
 from view import jinja2_template as template
 import re
+import model
 
 import sys
 if sys.version[0] == "3":
@@ -68,7 +69,8 @@ bottle.BaseTemplate.settings.update({
         'url': app.get_url
     },
     'filters': {
-        'markdown': markdown.Markdown(extensions=[GithubFlavoredMarkdownExtension()]).convert
+        'markdown': markdown.Markdown(extensions=[GithubFlavoredMarkdownExtension()]).convert,
+        'dateobj': model.ConferenceDate
     }
 })
 
@@ -125,6 +127,7 @@ def index():
             raise HTTPError(status=500, body=octav.last_error())
         cache.set(key, conferences, 600)
     return template('index.tpl', {
+        'lang': lang,
         'pagetitle': 'top',
         'conferences': conferences,
         'login': {'username': _session_user()},
@@ -262,6 +265,7 @@ def conference_instance(series_slug, slug):
         'pagetitle': series_slug + ' ' + slug,
         'slug': full_slug,
         'conference': conference,
+        'lang': lang,
         'login': {'username': _session_user()},
         'url': url,
         'googlemap_api_key': cfg.googlemap_api_key(),
