@@ -433,6 +433,20 @@ def conference_sessions(series_slug, slug):
     )
 
 
+
+@flaskapp.route('/<series_slug>/<path:slug>/cfp')
+def conference_call_for_paper(series_slug, slug):
+    lang = get_locale()
+    full_slug = "%s/%s" % (series_slug, slug)
+    conference = _get_conference_by_slug(full_slug, lang)
+    if not conference:
+        raise ConferenceNotFoundError
+    return flask.render_template('call_for_paper.tpl',
+        pagetitle=series_slug + ' ' + slug,
+        conference=conference,
+    )
+
+
 @flaskapp.route('/<regex("(.+)"):slug>/news')
 def conference_news(slug):
     key = "news_entries.lang." + flask.g.lang
