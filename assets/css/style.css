@@ -30,3 +30,22 @@
 #beacon-gallery div.gallery-slot {
     text-align: center;
 }
+
+div.sponsor-tier {
+    margin-bottom: 1em;
+}
+
+div.sponsor-slot img {
+    border: 5px solid #ccc;
+}
+div.sponsor-slot {
+    padding: 5px;
+    text-align: center;
+}
+div.tier-2 div.sponsor-name {
+    font-size: 80%;
+}
+div.tier-3 div.sponsor-name {
+    font-size: 60%;
+}
+

@@ -103,5 +103,5 @@ function initMap() {
     </div>
   </div>
 {% endif %}
-
+{% include 'sponsor_block.tpl' %}
 {% endblock%}
