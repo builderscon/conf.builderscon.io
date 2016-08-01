@@ -11,13 +11,11 @@ import functools
 import json
 import os
 import cache
-import accept_language
 from uuid import uuid4
 from octav import Octav
 import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
 import feedparser
-from view import jinja2_template as template
 import re
 import model
 import flasktools
