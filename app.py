@@ -6,11 +6,9 @@ import flask_babel
 import time
 from requestlogger import WSGILogger, ApacheFormatter
 from logging import StreamHandler
-import functools
 import json
 import os
 import cache
-from uuid import uuid4
 from octav import Octav
 import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
@@ -128,10 +126,9 @@ def index():
 @flaskapp.route('/login')
 def login():
     lang = get_locale()
-    return flask.render_template('login.tpl', {
-        'pagetitle': 'login',
-        'url': url
-    }, languages=[lang])
+    return flask.render_template('login.tpl',
+        pagetitle='login'
+    )
 
 @flaskapp.route('/login/github')
 def login_github():
