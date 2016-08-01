@@ -179,7 +179,7 @@ def latest(series_slug, rest):
     if not latest_conference:
         raise ConferenceNotFoundError
     rest = re.compile('^latest').sub(latest_conference.get('slug'), rest)
-    flask.redirect("/" + series_slug + "/" + rest)
+    return flask.redirect("/" + series_slug + "/" + rest)
 
 
 @flaskapp.route('/<series_slug>')
@@ -214,7 +214,7 @@ def conference_sessions(series_slug, slug):
     )
 
 
-@flaskapp.route('/<path:slug>/news')
+@flaskapp.route('/<regex("(.+)"):slug>/news')
 def conference_news(slug):
     lang = get_locale()
     key = "news_entries.lang." + lang
