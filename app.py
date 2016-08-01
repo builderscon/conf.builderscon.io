@@ -211,8 +211,7 @@ def conference_sessions(series_slug, slug):
     return flask.render_template('sessions.tpl',
         pagetitle=series_slug + ' ' + slug,
         conference=conference,
-        sessions=conference_sessions,
-        login={'username': _session_user()},
+        sessions=conference_sessions
     )
 
 
@@ -239,8 +238,7 @@ def conference_news(slug):
             filtered_entries.append(entry)
     return flask.render_template('news.tpl',
         slug=slug,
-        entries=filtered_entries,
-        login={'username': _session_user()}
+        entries=filtered_entries
     )
 
 
@@ -288,8 +286,7 @@ def conference_session_details(series_slug, slug, id):
 def speaker_details(id):
     lang = get_locale()
     return flask.render_template('speaker_details.tpl',
-        pagetitle='spkeaker',
-        login={'username': _session_user()},
+        pagetitle='spkeaker'
     )
 
 
@@ -297,8 +294,7 @@ def speaker_details(id):
 def user_details(id_):
     lang = get_locale()
     return flask.render_template('user_details.tpl',
-        pagetitle='user',
-        login={'username': _session_user()}
+       pagetitle='user'
     )
 
 def conference_cache_key(id, lang):
