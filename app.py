@@ -3,7 +3,6 @@
 
 import flask
 import flask_babel
-import babel.support
 import time
 from requestlogger import WSGILogger, ApacheFormatter
 from logging import StreamHandler
