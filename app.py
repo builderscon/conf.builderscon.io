@@ -125,7 +125,6 @@ def index():
 
 @flaskapp.route('/login')
 def login():
-    lang = get_locale()
     return flask.render_template('login.tpl',
         pagetitle='login'
     )
@@ -164,7 +163,7 @@ def login_github():
 @flaskapp.route('/logout')
 @flaskapp.route('/<path:p>/logout')
 def logout(p=None):
-    response.set_cookie('session_id', '', expires=0)
+    flask.session.clear()
     flask.redirect('/')
 
 # This route maps "latest" URLs to the actual latest conference
@@ -257,7 +256,6 @@ def conference_instance(series_slug, slug):
 
 @flaskapp.route('/<series_slug>/<slug>/session/add')
 def add_session(series_slug, slug):
-    lang = get_locale()
     return flask.render_template('add_session.tpl', 
         pagetitle=series_slug + ' ' + slug
     )
@@ -281,7 +279,6 @@ def conference_session_details(series_slug, slug, id):
 
 @flaskapp.route('/speaker/<id>')
 def speaker_details(id):
-    lang = get_locale()
     return flask.render_template('speaker_details.tpl',
         pagetitle='spkeaker'
     )
@@ -289,7 +286,6 @@ def speaker_details(id):
 
 @flaskapp.route('/user/<int:id_>')
 def user_details(id_):
-    lang = get_locale()
     return flask.render_template('user_details.tpl',
        pagetitle='user'
     )
