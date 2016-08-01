@@ -106,7 +106,10 @@ def get_locale():
     l = flask.request.args.get('lang')
     if l:
         return l
-    return flask.request.accept_languages.best_match(['ja', 'en'])
+    l = flask.request.accept_languages.best_match(['ja', 'en'])
+    if l:
+        return l
+    return 'en'
 
 @flaskapp.route('/')
 def index():
