@@ -78,16 +78,6 @@ class ConferenceNotFoundError(Exception):
     pass
 
 
-def session(func):
-    @functools.wraps(func)
-    def _(*a, **ka):
-        if _session_user() != '':
-            return func(*a, **ka)
-        else:
-            flask.redirect('/login')
-    return _
-
-
 # Note: this has to come BEFORE other handlers
 @flaskapp.route('/favicon.ico')
 def favicon():
@@ -165,7 +155,12 @@ def login_github():
         'https://api.github.com/user?' + access_token.text
     )
     user_info = res.json()
-    _create_session(user_info['login'])
+
+    flask.session['user'] = {
+        'auth_via': 'github',
+        'username': user_info['login']
+    }
+
     return flask.redirect('/')
 
 
@@ -388,20 +383,6 @@ def _list_session_by_conference(conference_id, lang):
         cache.set(key, conference_sessions, CACHE_CONFERENCE_SESSIONS_EXPIRES)
         return conference_sessions
     return None
-
-
-def _create_session(username):
-    session_id = str(uuid4())
-    expire_time = 5*60*60
-    cache.set(session_id, username, expire_time)
-    response.set_cookie(
-        'session_id',
-        session_id,
-        expires=expire_time,
-        path='/'
-    )
-    request.environ["__current_session"] = username
-    return session_id
 
 
 if __name__ == '__main__':
