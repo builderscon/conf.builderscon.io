@@ -18,7 +18,7 @@ img.login-icon {
     <div class="inner">
       <h1 class="section-header">{% trans %}Login{% endtrans %}</h1>
       <div class="section-content">
-        <h2><img src="/assets/images/GitHub-Mark-120px-plus.png" class="login-icon"> <a class="post-link" href="/login/github">{% trans %}Login with Github{% endtrans %}</a></h2>
+        <h2><img src="/static/images/GitHub-Mark-120px-plus.png" class="login-icon"> <a class="post-link" href="/login/github">{% trans %}Login with Github{% endtrans %}</a></h2>
       </div>
     </div>
   </div>

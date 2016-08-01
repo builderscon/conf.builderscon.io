@@ -12,7 +12,7 @@
       <div class="section-content">
         <div class="row" style="margin-left: 2em">
           <div class="large-2 columns">
-            <img style="width: 120px; height: 120px; border: 1px solid #ccc" src="https://builderscon.io/assets/images/noprofile.png"/>
+            <img style="width: 120px; height: 120px; border: 1px solid #ccc" src="{{ url('static', '/images/noprofile.png') }}"/>
           </div>
           <div class="large-10 columns">
             <div class="row" style="margin-left: 2em">

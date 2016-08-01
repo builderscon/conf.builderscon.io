@@ -12,7 +12,7 @@
 #top #heroimage {
     position: relative;
     height: 410px;
-    background: rgba(0,0,0,0) url(/assets/images/heroimage-hall.png) repeat-x center 0;
+    background: rgba(0,0,0,0) url(/static/images/heroimage-hall.png) repeat-x center 0;
 }
 
 #beacon #heroimage {
@@ -20,7 +20,7 @@
     margin-top: -62px;
     margin-bottom: -79px;
     height: 600px;
-    background: rgba(0,0,0,0) url(/assets/images/heroimage-beacon.png) repeat-x center 0;
+    background: rgba(0,0,0,0) url(/static/images/heroimage-beacon.png) repeat-x center 0;
 }
 
 #beacon-gallery div.gallery-slot img {

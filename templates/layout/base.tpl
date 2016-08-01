@@ -4,7 +4,7 @@
     <title>{% block title %}builderscon - {% trans %}Discover Something New{% endtrans %}{% endblock %}</title>
     <meta property="fb:app_id" content="1537973726511652" />
     <meta property="og:type" content="{% block ogp_type %}{% if pagetitle == 'top' %}website{% else %}article{% endif %}{% endblock %}" />
-    <meta property="og:image" content="{% block og_image %}https://builderscon.io{{ url('statics', filename='images/hex_logo.png') }}{% endblock %}" />
+    <meta property="og:image" content="{% block og_image %}https://builderscon.io{{ url('static', filename='images/hex_logo.png') }}{% endblock %}" />
     <meta property="og:site_name" content="builderscon" />
 {% for name in ["description","og:description"] %}
     <meta {% if name == 'og:description' %}property{% else %}name{% endif %}="{{ name }}" content="{% block og_description %}{% trans %}Discover Something New{% endtrans %} - {% trans %}builderscon is a festival for those who love tech!{% endtrans %}{% endblock %}" />
@@ -15,8 +15,8 @@
     <meta name="keywords" content="builderscon,tech,engineer,festival,お祭り" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@builderscon" />
-    <link href="{{ url('statics', filename='images/favicon.ico') }}" rel="shortcut icon"/>
-    <link href="{{ url('statics', filename='css/style.css') }}" rel="stylesheet"/>
+    <link href="{{ url('static', filename='images/favicon.ico') }}" rel="shortcut icon"/>
+    <link href="{{ url('static', filename='css/style.css') }}" rel="stylesheet"/>
 {% block header %}{% endblock %}
   </head>
   <body id="{% block body_id %}top{% endblock %}">
@@ -24,7 +24,7 @@
       <header id="header">
         <div class="inner">
           <h1>
-            <a href="/"><img alt="builderscon" src="{{ url('statics', filename='images/logo.png') }}"/></a>
+            <a href="/"><img alt="builderscon" src="{{ url('static', filename='images/logo.png') }}"/></a>
           </h1>
         </div>
         <nav id="menu">
@@ -68,10 +68,10 @@
       </footer>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
-    <script src="{{ url('statics', filename='js/functions.js') }}"></script>
-    <script src="{{ url('statics', filename='js/jquery.cookie.js') }}"></script>
-    <script src="{{ url('statics', filename='js/jquery.easing.1.3.js') }}"></script>
-    <script src="{{ url('statics', filename='js/jquery.rotate.js') }}"></script>
+    <script src="{{ url('static', filename='js/functions.js') }}"></script>
+    <script src="{{ url('static', filename='js/jquery.cookie.js') }}"></script>
+    <script src="{{ url('static', filename='js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ url('static', filename='js/jquery.rotate.js') }}"></script>
     {% block scripts %}{% endblock %}
   </body>
 </html>

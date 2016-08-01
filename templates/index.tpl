@@ -19,13 +19,13 @@
 
 {% block hexlogo %}
 <div id="hexlogo">
-<div class="base"><img src="./assets/images/hex_base.png" /></div><!--  / .base /  -->
-<div class="logo"><img src="./assets/images/hex_logo.png" /></div><!--  / .logo /  -->
+<div class="base"><img src="/static/images/hex_base.png" /></div><!--  / .base /  -->
+<div class="logo"><img src="/static/images/hex_logo.png" /></div><!--  / .logo /  -->
 </div><!--  / #hexlogo /  -->
 {% endblock %}
 
 {% block herotext %}
-<img src="{{ url('statics', filename='images/builderscon-text.png') }}" width="350">
+<img src="{{ url('static', filename='images/builderscon-text.png') }}" width="350">
 {% endblock %}
 
 {% block main %}
@@ -52,7 +52,7 @@
         {% for conference in conferences %}
         <div class="row">
           <div class="large-1 column">
-            <img src="{{ url('statics', filename='images/hex_logo.png') }}" style="width: 32px; height: 32px">
+            <img src="{{ url('static', filename='images/hex_logo.png') }}" style="width: 32px; height: 32px">
           </div>
           <div class="large-11 column">
             <a class="conference-name" href="{% if conference.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a> ({{ conference.dates[0] | dateobj(lang=lang) }})
@@ -101,7 +101,7 @@
         </div>
         <div class="row">
           <div class="large-1 column">
-            <img src="{{ url('statics', filename='images/mrbeacon-001.png') }}" style="width: 64px; height: 64px;">
+            <img src="{{ url('static', filename='images/mrbeacon-001.png') }}" style="width: 64px; height: 64px;">
           </div>
           <div class="large-11 column">
             <p>{% trans %}<b>Share:</b> Read our <a href="http://blog.builderscon.io">blog</a>, post on your favorite sites, and perhaps if you are feeling like it, you can use <a href="/beacon">our Mr. B images</a> to spice up your online conversations.{% endtrans %}</p>
