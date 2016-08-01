@@ -1,7 +1,7 @@
 {% extends 'layout/base.tpl' %}
 {% block title %}{% trans %}Mr. B{% endtrans %} - builderscon{% endblock %}
 {% block og_description %}{% trans %}Meet Mr. B (Mr. Beacon)!{% endtrans %}{% endblock %}
-{% block og_image %}https://builderscon.io{{ url('statics', filename='images/mrbeacon-004.png') }}{% endblock %}
+{% block og_image %}https://builderscon.io{{ url('static', filename='images/mrbeacon-004.png') }}{% endblock %}
 {% block body_id %}beacon{% endblock %}
 {% block menuitems %}
 <li><a href="/"><span class="i-home"></span></a></li>
@@ -29,7 +29,7 @@
         <div class="row">
 {% endif %}
           <div class="large-4 columns gallery-slot">
-            <a href="{{ url('statics', filename='images/mrbeacon-%03d.png' % i) }}"><img src="{{ url('statics', filename='images/mrbeacon-%03d.png' % i) }}"></a>
+            <a href="{{ url('static', filename='images/mrbeacon-%03d.png' % i) }}"><img src="{{ url('static', filename='images/mrbeacon-%03d.png' % i) }}"></a>
             <div class="title">mrbeacon-{{ '%03d' % i }}.png</div>
           </div>
 {% if i % 3 == 0 or loop.last %}

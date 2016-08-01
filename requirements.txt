@@ -1,8 +1,9 @@
-babel
-bottle
 feedparser
+flask
+flask_babel
 jinja2
 py-gfm
 redis
 urllib3
 wsgi-request-logger
+werkzeug

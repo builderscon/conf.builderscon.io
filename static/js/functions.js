@@ -2,15 +2,15 @@ function include(scriptUrl) {
 	document.write('<script src="' + scriptUrl + '"></script>');
 }
 
-include('/assets/js/jquery.cookie.js');
-include('/assets/js/jquery.easing.1.3.js');
-include('/assets/js/jquery.rotate.js');
+include('/static/js/jquery.cookie.js');
+include('/static/js/jquery.easing.1.3.js');
+include('/static/js/jquery.rotate.js');
 
 (function ($) {
 	var windowSize = window.innerWidth ? window.innerWidth: $(window).width();
 	var maxWidth = 900;
 	if (windowSize <= 899) {
-		include('/assets/js/jquery.mmenu.all.min.js');
+		include('/static/js/jquery.mmenu.all.min.js');
 		$(document).ready(function () {
 			$('nav#menu').mmenu({
 				offCanvas: {
