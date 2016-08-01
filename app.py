@@ -69,23 +69,7 @@ cfg = Config(config_file)
 flaskapp = flask.Flask("builderscon")
 flaskapp.url_map.converters['regex'] = flasktools.RegexConverter
 babel = flask_babel.Babel(flaskapp)
-
-
-#bottle.BaseTemplate.settings.update({
-#    'extensions': ['jinja2.ext.i18n'],
-#    'globals': {
-#        'url': app.get_url
-#    },
-#    'filters': {
-#        'markdown': markdown.Markdown(extensions=[GithubFlavoredMarkdownExtension()]).convert,
-#        'dateobj': model.ConferenceDate
-#    }
-#})
-
-
-route = flaskapp.route
-app = accept_language.LangDetector(flaskapp, languages=["ja", "en"])
-app = WSGILogger(app, [StreamHandler(sys.stdout)], ApacheFormatter())
+app = WSGILogger(flaskapp, [StreamHandler(sys.stdout)], ApacheFormatter())
 
 
 octav = Octav(**cfg.section('OCTAV'))
@@ -108,16 +92,11 @@ def session(func):
 
 
 # Note: this has to come BEFORE other handlers
-@route('/favicon.ico')
+@flaskapp.route('/favicon.ico')
 def favicon():
     flask.abort(404)
 
-# Note: this has to come BEFORE other handlers
-#@app.route('/assets/<filename:path>', name='statics')
-#def statics(filename):
-#    return static_file(filename, root='assets')
-
-@route('/beacon')
+@flaskapp.route('/beacon')
 def beacon():
     return flask.render_template('beacon.tpl')
 
@@ -139,9 +118,12 @@ def inject_template_vars():
 
 @babel.localeselector
 def get_locale():
+    l = flask.request.args.get('lang')
+    if l:
+        return l
     return flask.request.accept_languages.best_match(['ja', 'en'])
 
-@route('/')
+@flaskapp.route('/')
 def index():
     lang = get_locale()
     key = "conferences.lang." + lang
@@ -156,7 +138,7 @@ def index():
         conferences=conferences
     )
 
-@route('/login')
+@flaskapp.route('/login')
 def login():
     lang = get_locale()
     return flask.render_template('login.tpl', {
@@ -164,7 +146,7 @@ def login():
         'url': url
     }, languages=[lang])
 
-@route('/login/github')
+@flaskapp.route('/login/github')
 def login_github():
     code = flask.request.query.code
     ghcfg = cfg.section('GITHUB')
@@ -190,8 +172,8 @@ def login_github():
     return flask.redirect('/')
 
 
-@route('/logout')
-@route('/<path:p>/logout')
+@flaskapp.route('/logout')
+@flaskapp.route('/<path:p>/logout')
 def logout(p=None):
     response.set_cookie('session_id', '', expires=0)
     flask.redirect('/')
@@ -199,7 +181,7 @@ def logout(p=None):
 # This route maps "latest" URLs to the actual latest conference
 # URLs, so that we don't have to refer to "latest" elsewhere in 
 # the code
-@route('/<series_slug>/<regex("latest(/.*)?"):rest>')
+@flaskapp.route('/<series_slug>/<regex("latest(/.*)?"):rest>')
 def latest(series_slug, rest):
     lang = get_locale()
     latest_conference = _get_latest_conference(series_slug, lang)
@@ -209,12 +191,12 @@ def latest(series_slug, rest):
     flask.redirect("/" + series_slug + "/" + rest)
 
 
-@route('/<series_slug>')
+@flaskapp.route('/<series_slug>')
 def conference(series_slug):
     flask.redirect('/{0}/latest'.format(series_slug))
 
 
-@route('/<series_slug>/<path:slug>/sponsors')
+@flaskapp.route('/<series_slug>/<path:slug>/sponsors')
 def conference_sponsors(series_slug, slug):
     lang = get_locale()
     full_slug = "%s/%s" % (series_slug, slug)
@@ -226,7 +208,7 @@ def conference_sponsors(series_slug, slug):
     )
 
 
-@route('/<series_slug>/<path:slug>/sessions')
+@flaskapp.route('/<series_slug>/<path:slug>/sessions')
 def conference_sessions(series_slug, slug):
     lang = get_locale()
     full_slug = "%s/%s" % (series_slug, slug)
@@ -242,7 +224,7 @@ def conference_sessions(series_slug, slug):
     )
 
 
-@route('/<path:slug>/news')
+@flaskapp.route('/<path:slug>/news')
 def conference_news(slug):
     lang = get_locale()
     key = "news_entries.lang." + lang
@@ -271,7 +253,7 @@ def conference_news(slug):
     )
 
 
-@route('/<series_slug>/<path:slug>')
+@flaskapp.route('/<series_slug>/<path:slug>')
 def conference_instance(series_slug, slug):
     lang = get_locale()
     full_slug = "%s/%s" % (series_slug, slug)
@@ -287,7 +269,7 @@ def conference_instance(series_slug, slug):
         googlemap_api_key=cfg.googlemap_api_key()
     )
 
-@route('/<series_slug>/<slug>/session/add')
+@flaskapp.route('/<series_slug>/<slug>/session/add')
 def add_session(series_slug, slug):
     lang = get_locale()
     return flask.render_template('add_session.tpl', 
@@ -295,12 +277,12 @@ def add_session(series_slug, slug):
     )
 
 
-@route('/<series_slug>/<slug>/session/add', methods=['POST'])
+@flaskapp.route('/<series_slug>/<slug>/session/add', methods=['POST'])
 def add_session_post(series_slug, slug):
     flask.redirect('/')
 
 
-@route('/<series_slug>/<slug>/session/<id>')
+@flaskapp.route('/<series_slug>/<slug>/session/<id>')
 def conference_session_details(series_slug, slug, id):
     lang = get_locale()
     session = octav.lookup_session(lang=lang, id=id)
@@ -311,7 +293,7 @@ def conference_session_details(series_slug, slug, id):
         session=session
     )
 
-@route('/speaker/<id>')
+@flaskapp.route('/speaker/<id>')
 def speaker_details(id):
     lang = get_locale()
     return flask.render_template('speaker_details.tpl',
@@ -320,7 +302,7 @@ def speaker_details(id):
     )
 
 
-@route('/user/<int:id_>')
+@flaskapp.route('/user/<int:id_>')
 def user_details(id_):
     lang = get_locale()
     return flask.render_template('user_details.tpl',
