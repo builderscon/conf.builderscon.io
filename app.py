@@ -128,7 +128,7 @@ def index():
     if not conferences:
         conferences = octav.list_conference(lang=lang)
         if conferences is None:
-            raise HTTPError(status=500, body=octav.last_error())
+            return octav.last_error(), 500
         cache.set(key, conferences, 600)
     return flask.render_template('index.tpl',
         pagetitle='top',
@@ -230,10 +230,9 @@ def conference_news(slug):
         feed_url = 'http://blog.builderscon.io/feed.xml'
         news = feedparser.parse(feed_url)
         if not news.entries:
-            raise HTTPError(status=500, body="Failed to get news from Atom feed = " + feed_url + ", check if the feed is generated there." )
-        else:
-            news_entries = news.entries
-            cache.set(key, news.entries, 600)
+            return 'Failed to get news from Atom feed = %, check if the feed is generated there.' % feed_url, 500
+        news_entries = news.entries
+        cache.set(key, news.entries, 600)
 
     filtered_entries = []
     for entry in news_entries:
@@ -256,7 +255,7 @@ def conference_instance(series_slug, slug):
     full_slug = "%s/%s" % (series_slug, slug)
     conference = _get_conference_by_slug(full_slug, lang)
     if not conference:
-        raise HTTPError(status=404, body=octav.last_error())
+        return octav.last_error(), 404
 
     return flask.render_template('conference.tpl',
         pagetitle=series_slug + ' ' + slug,
