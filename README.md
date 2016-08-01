@@ -1,4 +1,4 @@
-# conf.builderscon.io
+# builderscon.io
 
 ## How to run on Vagrant
 

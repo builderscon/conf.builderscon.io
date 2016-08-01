@@ -80,7 +80,7 @@
             <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" style="width: 64px; height: 64px;">
           </div>
           <div class="large-11 column">
-            <p>{% trans %}<b>Github:</b> Explore our many opensource projects on <a href="https://github.com/builderscon">Github</a>, including our "<a href="https://github.com/builderscon/builderscon">spec</a>", our <a href="https://github.com/builderscon/octav">API server</a>, and <a href="https://github.com/builderscon/conf.builderscon.io">this site</a>. We'd love for your to send us pull requests!{% endtrans %}</p>
+            <p>{% trans %}<b>Github:</b> Explore our many opensource projects on <a href="https://github.com/builderscon">Github</a>, including our "<a href="https://github.com/builderscon/builderscon">spec</a>", our <a href="https://github.com/builderscon/octav">API server</a>, and <a href="https://github.com/builderscon/builderscon.io">this site</a>. We'd love for your to send us pull requests!{% endtrans %}</p>
           </div>
         </div>
         <div class="row">

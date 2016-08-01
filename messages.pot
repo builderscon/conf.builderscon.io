@@ -124,7 +124,7 @@ msgid ""
 "href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
 "href=\"https://github.com/builderscon/builderscon\">spec</a>\", our <a "
 "href=\"https://github.com/builderscon/octav\">API server</a>, and <a "
-"href=\"https://github.com/builderscon/conf.builderscon.io\">this "
+"href=\"https://github.com/builderscon/builderscon.io\">this "
 "site</a>. We'd love for your to send us pull requests!"
 msgstr ""
 
