@@ -5,4 +5,4 @@ install:
   - pip install -r requirements.txt
   - pip install pyflakes
 script:
-  - pyflakes app.wsgi
+  - pyflakes app.py
