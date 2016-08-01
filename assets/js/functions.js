@@ -10,7 +10,7 @@ include('/assets/js/jquery.rotate.js');
 	var windowSize = window.innerWidth ? window.innerWidth: $(window).width();
 	var maxWidth = 900;
 	if (windowSize <= 899) {
-		include('./assets/js/jquery.mmenu.all.min.js');
+		include('/assets/js/jquery.mmenu.all.min.js');
 		$(document).ready(function () {
 			$('nav#menu').mmenu({
 				offCanvas: {
