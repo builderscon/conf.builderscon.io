@@ -16,6 +16,7 @@ import feedparser
 import re
 import model
 import flasktools
+import functools
 
 import sys
 if sys.version[0] == "3":
@@ -71,10 +72,33 @@ octav = Octav(**cfg.section('OCTAV'))
 
 cache = cache.Redis(**cfg.section('REDIS_INFO'))
 
-
 class ConferenceNotFoundError(Exception):
     pass
 
+# stash is where we keep values that get automatically passed
+# to the template when rendering
+@flaskapp.before_request
+def init_stash():
+    flask.g.stash = dict()
+
+# Inject the stash and other assorted goodes so that they are
+# available in the template
+@flaskapp.context_processor
+def inject_template_vars():
+    stash = flask.g.stash
+    stash["flask_session"] = flask.session
+    stash["url"] = flask.url_for
+    return stash
+
+def require_login(cb):
+    def check_login(cb, **args):
+        if not 'user' in flask.session:
+            query = urlencode({
+                '.next': flask.request.path + "?" + urlencode(flask.request.args)
+            })
+            return flask.redirect("/login?" + query)
+        return cb(**args)
+    return functools.update_wrapper(functools.partial(check_login, cb), cb)
 
 # Note: this has to come BEFORE other handlers
 @flaskapp.route('/favicon.ico')
@@ -93,13 +117,6 @@ markdown_converter = markdown.Markdown(extensions=[GithubFlavoredMarkdownExtensi
 @flaskapp.template_filter('markdown')
 def markdown_filter(s):
     return markdown_converter(s)
-
-@flaskapp.context_processor
-def inject_template_vars():
-    return dict(
-        flask_session=flask.session,
-        url=flask.url_for
-    )
 
 @babel.localeselector
 def get_locale():
