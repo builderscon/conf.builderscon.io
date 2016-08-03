@@ -40,6 +40,11 @@ class OAuth2(object):
     def extract_userinfo(self, h):
         return h
 
+    def make_headers(self, **extra):
+        h=extra
+        h["User-Agent"] = 'python/urrlib3/0.6'
+        return h
+
     def redirect_authorize_url(self, state):
         qs = flasktools.urlencode({
             'client_id': self.client_id,
@@ -57,8 +62,10 @@ class OAuth2(object):
             'redirect_uri': self.redirect_uri,
             'state': state
         })
-        res = self.http.request('GET', '%s?%s' % (self.access_token_url, qs), headers={'Accept': 'application/json'})
+        hdrs = self.make_headers(Accept='application/json')
+        res = self.http.request('GET', '%s?%s' % (self.access_token_url, qs), headers=hdrs)
         if res.status != 200:
+            print(res.data)
             self.error = OAuthResult(
                 error='failed to exchange access token',
                 redirect='/login?.error=failed+to+acquire+token'
@@ -78,8 +85,10 @@ class OAuth2(object):
             'state': state,
             'access_token': token
         })
-        res = self.http.request('GET', '%s?%s' % (self.userinfo_url, qs))
+        hdrs = self.make_headers()
+        res = self.http.request('GET', '%s?%s' % (self.userinfo_url, qs), headers=hdrs)
         if res.status != 200:
+            print(res.data)
             self.error = OAuthResult(
                 error='failed to get userinfo',
                 redirect='/login?.error=failed+to+acquire+userinfo'
