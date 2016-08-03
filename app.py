@@ -17,12 +17,8 @@ import re
 import model
 import flasktools
 import functools
-
 import sys
-if sys.version[0] == "3":
-    from urllib.parse import urlencode
-else:
-    from urllib import urlencode
+import oauth
 
 if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/') or os.getenv('SERVER_SOFTWARE', '').startswith('Development/'):
     import urllib3.contrib.appengine
@@ -79,7 +75,11 @@ class ConferenceNotFoundError(Exception):
 # to the template when rendering
 @flaskapp.before_request
 def init_stash():
-    flask.g.stash = dict()
+    lang = get_locale()
+    flask.g.lang = lang # this gets a special slot
+    flask.g.stash = dict(
+        lang=lang
+    )
 
 # Inject the stash and other assorted goodes so that they are
 # available in the template
@@ -90,11 +90,12 @@ def inject_template_vars():
     stash["url"] = flask.url_for
     return stash
 
+# Check if we have the user session field pre-populated.
 def require_login(cb):
     def check_login(cb, **args):
         if not 'user' in flask.session:
-            query = urlencode({
-                '.next': flask.request.path + "?" + urlencode(flask.request.args)
+            query = flasktools.urlencode({
+                '.next': flask.request.path + "?" + flasktools.urlencode(flask.request.args)
             })
             return flask.redirect("/login?" + query)
         return cb(**args)
@@ -130,11 +131,11 @@ def get_locale():
 
 @flaskapp.route('/')
 def index():
-    lang = get_locale()
-    key = "conferences.lang." + lang
+    key = "conferences.lang." + flask.g.lang
+
     conferences = cache.get(key)
     if not conferences:
-        conferences = octav.list_conference(lang=lang)
+        conferences = octav.list_conference(lang=flask.g.lang)
         if conferences is None:
             return octav.last_error(), 500
         cache.set(key, conferences, 600)
@@ -151,33 +152,24 @@ def login():
 
 @flaskapp.route('/login/github')
 def login_github():
-    code = flask.request.query.code
-    ghcfg = cfg.section('GITHUB')
-    if not code:
-        return flask.redirect(
-            'https://github.com/login/oauth/authorize' +
-            '?client_id=' + ghcfg.get('client_id')
-        )
-    params={
-        'code': code,
-        'client_id': ghcfg.get('client_id'),
-        'client_secret': ghcfg.get('client_secret')
-    }
-    access_token = http.request('GET', 'https://github.com/login/oauth/access_token?%s' % urlencode(params))
-    if 'error' in access_token.text:
-        return flask.redirect('/login')
+    return do_oauth(oauth.Github(http, cfg.section('GITHUB')))
 
-    res = http.request('GET',
-        'https://api.github.com/user?' + access_token.text
-    )
-    user_info = res.json()
+@flaskapp.route('/login/facebook')
+def login_facebook():
+    return do_oauth(oauth.Facebook(http, cfg.section('FACEBOOK')))
 
-    flask.session['user'] = {
-        'auth_via': 'github',
-        'username': user_info['login']
-    }
+@flaskapp.route('/login/twitter')
+def login_twitter():
+    return do_oauth(oauth.Facebook(http, cfg.section('TWITTER')))
 
-    return flask.redirect('/')
+def do_oauth(v):
+    res = v.handle_auth()
+    if res.is_redirect():
+        return flask.redirect(res.redirect)
+    if res.is_error():
+        return res.error, 500
+
+    flask.session["user"] = res.userinfo
 
 
 @flaskapp.route('/logout')
@@ -191,8 +183,7 @@ def logout(p=None):
 # the code
 @flaskapp.route('/<series_slug>/<regex("latest(/.*)?"):rest>')
 def latest(series_slug, rest):
-    lang = get_locale()
-    latest_conference = _get_latest_conference(series_slug, lang)
+    latest_conference = _get_latest_conference(series_slug, flask.g.lang)
     if not latest_conference:
         raise ConferenceNotFoundError
     rest = re.compile('^latest').sub(latest_conference.get('slug'), rest)
@@ -206,9 +197,8 @@ def conference(series_slug):
 
 @flaskapp.route('/<series_slug>/<path:slug>/sponsors')
 def conference_sponsors(series_slug, slug):
-    lang = get_locale()
     full_slug = "%s/%s" % (series_slug, slug)
-    conference = _get_conference_by_slug(full_slug, lang)
+    conference = _get_conference_by_slug(full_slug, flask.g.lang)
     return flask.render_template('sponsors.tpl',
         slug=full_slug,
         pagetitle=series_slug + ' ' + slug,
@@ -218,12 +208,11 @@ def conference_sponsors(series_slug, slug):
 
 @flaskapp.route('/<series_slug>/<path:slug>/sessions')
 def conference_sessions(series_slug, slug):
-    lang = get_locale()
     full_slug = "%s/%s" % (series_slug, slug)
-    conference = _get_conference_by_slug(full_slug, lang)
+    conference = _get_conference_by_slug(full_slug, flask.g.lang)
     if not conference:
         raise ConferenceNotFoundError
-    conference_sessions = _list_session_by_conference(conference.get('id'), lang)
+    conference_sessions = _list_session_by_conference(conference.get('id'), flask.g.lang)
     return flask.render_template('sessions.tpl',
         pagetitle=series_slug + ' ' + slug,
         conference=conference,
@@ -233,8 +222,7 @@ def conference_sessions(series_slug, slug):
 
 @flaskapp.route('/<regex("(.+)"):slug>/news')
 def conference_news(slug):
-    lang = get_locale()
-    key = "news_entries.lang." + lang
+    key = "news_entries.lang." + flask.g.lang
     news_entries = cache.get(key)
     if not news_entries:
         feed_url = 'http://blog.builderscon.io/feed.xml'
@@ -260,9 +248,8 @@ def conference_news(slug):
 
 @flaskapp.route('/<series_slug>/<path:slug>')
 def conference_instance(series_slug, slug):
-    lang = get_locale()
     full_slug = "%s/%s" % (series_slug, slug)
-    conference = _get_conference_by_slug(full_slug, lang)
+    conference = _get_conference_by_slug(full_slug, flask.g.lang)
     if not conference:
         return octav.last_error(), 404
 
@@ -270,7 +257,6 @@ def conference_instance(series_slug, slug):
         pagetitle=series_slug + ' ' + slug,
         slug=full_slug,
         conference=conference,
-        lang=lang,
         googlemap_api_key=cfg.googlemap_api_key()
     )
 
@@ -288,8 +274,7 @@ def add_session_post(series_slug, slug):
 
 @flaskapp.route('/<series_slug>/<slug>/session/<id>')
 def conference_session_details(series_slug, slug, id):
-    lang = get_locale()
-    session = octav.lookup_session(lang=lang, id=id)
+    session = octav.lookup_session(lang=flask.g.lang, id=id)
     if not session:
         return octav.last_error(), 404
     return flask.render_template('session_detail.tpl',
