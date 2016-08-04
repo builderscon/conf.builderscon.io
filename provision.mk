@@ -96,8 +96,8 @@ ubuntu-redis:
 	apt-get install -y redis-server
 
 ubuntu-pip:
-	apt-get install -y python3-pip
-	pip3 install -r /vagrant/requirements.txt
+	apt-get install -y python-pip
+	pip install -r /vagrant/requirements.txt
 
 ubuntu-home:
 	# Build home directory and configs.
