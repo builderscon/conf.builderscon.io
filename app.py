@@ -389,7 +389,7 @@ def login_twitter_callback(resp):
 @flaskapp.route('/<path:p>/logout')
 def logout(p=None):
     flask.session.clear()
-    flask.redirect('/')
+    return flask.redirect('/')
 
 # This route maps "latest" URLs to the actual latest conference
 # URLs, so that we don't have to refer to "latest" elsewhere in 
