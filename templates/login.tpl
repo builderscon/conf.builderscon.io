@@ -33,7 +33,7 @@
             <img src="{{ image }}">
           </div>
           <div class="login-link large-11 columns">
-            <a href="{{ href }}">{% trans %}Login with {{ name }}{% endtrans %}</a>
+            <a href="{{ href }}{% if next_url %}?.next={{ next_url | urlencode }}{% endif %}">{% trans %}Login with {{ name }}{% endtrans %}</a>
           </div>
         </div>
 {% endfor %}

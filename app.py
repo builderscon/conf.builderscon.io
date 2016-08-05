@@ -3,6 +3,7 @@
 
 import flask
 import flask_babel
+import markupsafe
 import time
 from requestlogger import WSGILogger, ApacheFormatter
 from logging import StreamHandler
@@ -120,6 +121,14 @@ def inject_template_vars():
     stash["url"] = flask.url_for
     return stash
 
+@flaskapp.template_filter('urlencode')
+def urlencode_filter(s):
+    if type(s) == 'Markup':
+        s = s.unescape()
+    s = s.encode('utf8')
+    s = flasktools.quote_plus(s)
+    return markupsafe.Markup(s)
+
 # Check if we have the user session field pre-populated.
 def require_login(cb):
     def check_login(cb, **args):
@@ -174,6 +183,19 @@ def index():
         conferences=conferences
     )
 
+@flaskapp.route('/dashboard')
+def dashboard():
+    user = flask.session.get('user')
+    if not user:
+        return flask.redirect('/login?.next=%2Fdashboard')
+
+    conferences = octav.list_conferences_by_organizer(organizer_id=user.get('id'))
+
+    return flask.render_template('dashboard.tpl',
+        user=user,
+        conferences=conferences
+    )
+
 def start_oauth(oauth_handler, callback):
     args = {}
     if flask.request.args.get('.next'):
@@ -187,7 +209,8 @@ def start_oauth(oauth_handler, callback):
 @flaskapp.route('/login')
 def login():
     return flask.render_template('login.tpl',
-        pagetitle='login'
+        pagetitle='login',
+        next_url=flask.request.args.get('.next')
     )
 
 @github.tokengetter
@@ -479,12 +502,6 @@ def speaker_details(id):
         pagetitle='spkeaker'
     )
 
-
-@flaskapp.route('/user/<int:id_>')
-def user_details(id_):
-    return flask.render_template('user_details.tpl',
-       pagetitle='user'
-    )
 
 def conference_cache_key(id, lang):
     if not id:
