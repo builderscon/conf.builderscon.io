@@ -180,7 +180,7 @@ def start_oauth(oauth_handler, callback):
         args['.next'] = flask.request.args.get('.next')
 
     if len(args.keys()) > 0:
-        callback = '%s?%s' % (callback, urlencode(args))
+        callback = '%s?%s' % (callback, flasktools.urlencode(args))
 
     return oauth_handler.authorize(callback=callback)
 
