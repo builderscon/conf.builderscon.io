@@ -180,7 +180,7 @@ def start_oauth(oauth_handler, callback):
         args['.next'] = flask.request.args.get('.next')
 
     if len(args.keys()) > 0:
-        callback = '%s?%s' % (callback, urllencode(args))
+        callback = '%s?%s' % (callback, urlencode(args))
 
     return oauth_handler.authorize(callback=callback)
 
@@ -266,7 +266,7 @@ def login_facebook_callback(resp):
     )
     res = facebook.request('/me')
     if res.status != 200:
-        falsk.flash('failed to fetch user information after oauth')
+        flask.flash('failed to fetch user information after oauth')
         return flask.redirect('/login')
 
     data = res.data
@@ -329,7 +329,7 @@ def login_twitter_callback(resp):
 
     res = twitter.request('/account/verify_credentials.json')
     if res.Status() != 200:
-        falsk.flash('failed to fetch user information after oauth')
+        flask.flash('failed to fetch user information after oauth')
         return flask.redirect('/login')
 
     data = res.data
