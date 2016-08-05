@@ -77,7 +77,7 @@
         </div>
         <div class="row">
           <div class="large-1 column">
-            <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" style="width: 64px; height: 64px;">
+            <img src="/static/images/github-120px.png" style="width: 64px; height: 64px;">
           </div>
           <div class="large-11 column">
             <p>{% trans %}<b>Github:</b> Explore our many opensource projects on <a href="https://github.com/builderscon">Github</a>, including our "<a href="https://github.com/builderscon/builderscon">spec</a>", our <a href="https://github.com/builderscon/octav">API server</a>, and <a href="https://github.com/builderscon/builderscon.io">this site</a>. We'd love for your to send us pull requests!{% endtrans %}</p>
@@ -85,7 +85,7 @@
         </div>
         <div class="row">
           <div class="large-1 column">
-            <img src="https://www.facebookbrand.com/img/fb-art.jpg" style="width: 64px; height: 64px;">
+            <img src="/static/images/facebook-120px.jpg" style="width: 64px; height: 64px;">
           </div>
           <div class="large-11 column">
             <p>{% trans %}<b>Facebook:</b> Peruse our <a href="https://www.facebook.com/builderscon">Facebook page</a> to find various events that we host for people interested in builderscon like our now famous BBQ [<a href="https://www.facebook.com/events/803942576374123/">1</a>][<a href="https://www.facebook.com/events/1091601347586795/">2</a>]</a>{% endtrans %}</p>
@@ -93,7 +93,7 @@
         </div>
         <div class="row">
           <div class="large-1 column">
-            <img src="https://g.twimg.com/Twitter_logo_blue.png" style="width: 64px; height: 52px;">
+            <img src="/static/images/twitter-120px.png" style="width: 64px; height: 52px;">
           </div>
           <div class="large-11 column">
             <p>{% trans %}<b>Twitter:</b> Follow us on <a href="https://twitter.com/builderscon">Twitter</a>, and get the latest updates!{% endtrans %}</p>
