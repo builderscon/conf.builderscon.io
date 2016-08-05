@@ -16,12 +16,9 @@ import feedparser
 import re
 import model
 import flasktools
-
+import functools
 import sys
-if sys.version[0] == "3":
-    from urllib.parse import urlencode
-else:
-    from urllib import urlencode
+import oauth
 
 if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/') or os.getenv('SERVER_SOFTWARE', '').startswith('Development/'):
     import urllib3.contrib.appengine
@@ -62,6 +59,7 @@ config_file = os.getenv(
 cfg = Config(config_file)
 
 flaskapp = flask.Flask("builderscon")
+flaskapp.secret_key = cfg.section('Flask').get('secret_key')
 flaskapp.url_map.converters['regex'] = flasktools.RegexConverter
 babel = flask_babel.Babel(flaskapp)
 app = WSGILogger(flaskapp, [StreamHandler(sys.stdout)], ApacheFormatter())
@@ -71,10 +69,67 @@ octav = Octav(**cfg.section('OCTAV'))
 
 cache = cache.Redis(**cfg.section('REDIS_INFO'))
 
+twitter = oauth.Init('twitter', 
+    base_url='https://api.twitter.com/1.1/',
+    request_token_url='https://api.twitter.com/oauth/request_token',
+    access_token_url='https://api.twitter.com/oauth/access_token',
+    authorize_url='https://api.twitter.com/oauth/authenticate',
+    consumer_key=cfg.section('TWITTER').get('client_id'),
+    consumer_secret=cfg.section('TWITTER').get('client_secret').encode('ASCII')
+)
+
+facebook = oauth.Init('facebook',
+    base_url='https://graph.facebook.com/',
+    request_token_url=None,
+    access_token_url='/oauth/access_token',
+    authorize_url='https://www.facebook.com/dialog/oauth',
+    consumer_key=cfg.section('FACEBOOK').get('client_id'),
+    consumer_secret=cfg.section('FACEBOOK').get('client_secret').encode('ASCII'),
+    request_token_params={'scope': 'email'}
+)
+
+github = oauth.Init('github',
+    base_url='https://api.github.com',
+    request_token_url=None,
+    authorize_url='https://github.com/login/oauth/authorize',
+    access_token_url='https://github.com/login/oauth/access_token',
+    consumer_key=cfg.section('GITHUB').get('client_id'),
+    consumer_secret=cfg.section('GITHUB').get('client_secret').encode('ASCII'),
+    request_token_params={'scope': 'user'}
+)
 
 class ConferenceNotFoundError(Exception):
     pass
 
+# stash is where we keep values that get automatically passed
+# to the template when rendering
+@flaskapp.before_request
+def init_stash():
+    lang = get_locale()
+    flask.g.lang = lang # this gets a special slot
+    flask.g.stash = dict(
+        lang=lang
+    )
+
+# Inject the stash and other assorted goodes so that they are
+# available in the template
+@flaskapp.context_processor
+def inject_template_vars():
+    stash = flask.g.stash
+    stash["flask_session"] = flask.session
+    stash["url"] = flask.url_for
+    return stash
+
+# Check if we have the user session field pre-populated.
+def require_login(cb):
+    def check_login(cb, **args):
+        if not 'user' in flask.session:
+            query = flasktools.urlencode({
+                '.next': flask.request.path + "?" + flasktools.urlencode(flask.request.args)
+            })
+            return flask.redirect("/login?" + query)
+        return cb(**args)
+    return functools.update_wrapper(functools.partial(check_login, cb), cb)
 
 # Note: this has to come BEFORE other handlers
 @flaskapp.route('/favicon.ico')
@@ -94,13 +149,6 @@ markdown_converter = markdown.Markdown(extensions=[GithubFlavoredMarkdownExtensi
 def markdown_filter(s):
     return markdown_converter(s)
 
-@flaskapp.context_processor
-def inject_template_vars():
-    return dict(
-        flask_session=flask.session,
-        url=flask.url_for
-    )
-
 @babel.localeselector
 def get_locale():
     l = flask.request.args.get('lang')
@@ -113,11 +161,11 @@ def get_locale():
 
 @flaskapp.route('/')
 def index():
-    lang = get_locale()
-    key = "conferences.lang." + lang
+    key = "conferences.lang." + flask.g.lang
+
     conferences = cache.get(key)
     if not conferences:
-        conferences = octav.list_conference(lang=lang)
+        conferences = octav.list_conference(lang=flask.g.lang)
         if conferences is None:
             return octav.last_error(), 500
         cache.set(key, conferences, 600)
@@ -126,40 +174,192 @@ def index():
         conferences=conferences
     )
 
+def start_oauth(oauth_handler, callback):
+    args = {}
+    if flask.request.args.get('.next'):
+        args['.next'] = flask.request.args.get('.next')
+
+    if len(args.keys()) > 0:
+        callback = '%s?%s' % (callback, flasktools.urlencode(args))
+
+    return oauth_handler.authorize(callback=callback)
+
 @flaskapp.route('/login')
 def login():
     return flask.render_template('login.tpl',
         pagetitle='login'
     )
 
+@github.tokengetter
+def get_github_token(token=None):
+    return flask.session.get('github_token')
+
 @flaskapp.route('/login/github')
 def login_github():
-    code = flask.request.query.code
-    ghcfg = cfg.section('GITHUB')
-    if not code:
-        return flask.redirect(
-            'https://github.com/login/oauth/authorize' +
-            '?client_id=' + ghcfg.get('client_id')
-        )
-    params={
-        'code': code,
-        'client_id': ghcfg.get('client_id'),
-        'client_secret': ghcfg.get('client_secret')
-    }
-    access_token = http.request('GET', 'https://github.com/login/oauth/access_token?%s' % urlencode(params))
-    if 'error' in access_token.text:
+    return start_oauth(github, 'https://builderscon.io/login/github/callback')
+
+@flaskapp.route('/login/github/callback')
+@github.authorized_handler
+def login_github_callback(resp):
+    if resp is None:
+        flask.flash('authentication denied')
         return flask.redirect('/login')
 
-    res = http.request('GET',
-        'https://api.github.com/user?' + access_token.text
+    flask.session['github_token'] = (
+        resp['access_token'],
+        ''
     )
-    user_info = res.json()
+    res = github.request('/user')
+    if res.status != 200:
+        flask.flash('failed to fetch user information after oauth')
+        return flask.redirect('/login')
 
-    flask.session['user'] = {
-        'auth_via': 'github',
-        'username': user_info['login']
-    }
+    data = res.data
 
+    # Load user via github id
+    user = octav.lookup_user_by_auth_user_id(auth_via='github', auth_user_id=str(data['id']))
+    if user:
+        flask.session['user'] = user
+        return flask.redirect('/')
+
+    names = re.compile('\s+').split(data.get('name'))
+    first_name = 'Unknown'
+    last_name = 'Unknown'
+    if len(names) > 1:
+        first_name = names[0]
+        last_name = names[-1]
+    elif len(names) == 1:
+        first_name = names[0]
+
+    user = octav.create_user (
+        str(data.get('id')),
+        auth_via='github',
+        nickname=data.get('login'),
+        first_name=first_name,
+        last_name=last_name
+    )
+    if not user:
+        flask.flash('failed to register user in the backend server')
+        return flask.redirect('/login')
+
+    flask.session['user'] = user
+    return flask.redirect('/')
+
+@facebook.tokengetter
+def get_facebook_token(token=None):
+    return flask.session.get('facebook_token')
+
+@flaskapp.route('/login/facebook')
+def login_facebook():
+    return start_oauth(facebook, 'https://builderscon.io/login/facebook/callback')
+
+@flaskapp.route('/login/facebook/callback')
+@facebook.authorized_handler
+def login_facebook_callback(resp):
+    if resp is None:
+        flask.flash('authentication denied')
+        return flask.redirect('/login')
+
+    flask.session['facebook_token'] = (
+        resp['access_token'],
+        ''
+    )
+    res = facebook.request('/me')
+    if res.status != 200:
+        flask.flash('failed to fetch user information after oauth')
+        return flask.redirect('/login')
+
+    data = res.data
+
+    # Load user via facebook id
+    user = octav.lookup_user_by_auth_user_id(auth_via='facebook', auth_user_id=data['id'])
+    if user:
+        flask.session['user'] = user
+        return flask.redirect('/')
+
+    names = re.compile('\s+').split(data.get('name'))
+    first_name = 'Unknown'
+    last_name = 'Unknown'
+    if len(names) > 1:
+        first_name = names[0]
+        last_name = names[-1]
+    elif len(names) == 1:
+        first_name = names[0]
+
+    user = octav.create_user (
+        data.get('id'),
+        auth_via='facebook',
+        nickname=data.get('name'),
+        first_name=first_name,
+        last_name=last_name
+    )
+    if not user:
+        flask.flash('failed to register user in the backend server')
+        return flask.redirect('/login')
+
+    flask.session['user'] = user
+    return flask.redirect('/')
+
+@twitter.tokengetter
+def get_twitter_token(token=None):
+    return flask.session.get('twitter_token')
+
+@flaskapp.route('/login/twitter')
+def login_twitter():
+    return start_oauth(twitter, 'https://builderscon.io/login/twitter/callback')
+
+@flaskapp.route('/login/twitter/callback')
+@twitter.authorized_handler
+def login_twitter_callback(resp):
+    if resp is None:
+        flask.flash('authentication denied')
+        return flask.redirect('/login')
+
+    flask.session['twitter_token'] = (
+        resp['oauth_token'],
+        resp['oauth_token_secret']
+    )
+
+    # Load user via twitter id
+    user = octav.lookup_user_by_auth_user_id(auth_via='twitter', auth_user_id=resp['user_id'])
+    if user:
+        flask.session['user'] = user
+        # TODO need to get a better URL
+        return flask.redirect('/')
+
+    res = twitter.request('/account/verify_credentials.json')
+    if res.Status() != 200:
+        flask.flash('failed to fetch user information after oauth')
+        return flask.redirect('/login')
+
+    data = res.data
+
+    avatar_url = data.get('profile_image_url')
+    if avatar_url:
+        avatar_url = re.compile('_normal\.').sub('_bigger.', avatar_url)
+
+    names = re.compile('\s+').split(data.get('name'))
+    first_name = 'Unknown'
+    last_name = 'Unknown'
+    if len(names) > 1:
+        first_name = names[0]
+        last_name = names[-1]
+    elif len(names) == 1:
+        first_name = names[0]
+
+    user = octav.create_user (
+        data.get('id_str'),
+        auth_via='twitter',
+        nickname=data.get('screen_name'),
+        avatar_url=avatar_url, 
+        first_name=first_name,
+        last_name=last_name,
+    )
+    if not user:
+        flask.flash('failed to register user in the backend server')
+        return flask.redirect('/login')
+
+    flask.session['user'] = user
     return flask.redirect('/')
 
 
@@ -174,8 +374,7 @@ def logout(p=None):
 # the code
 @flaskapp.route('/<series_slug>/<regex("latest(/.*)?"):rest>')
 def latest(series_slug, rest):
-    lang = get_locale()
-    latest_conference = _get_latest_conference(series_slug, lang)
+    latest_conference = _get_latest_conference(series_slug, flask.g.lang)
     if not latest_conference:
         raise ConferenceNotFoundError
     rest = re.compile('^latest').sub(latest_conference.get('slug'), rest)
@@ -189,9 +388,8 @@ def conference(series_slug):
 
 @flaskapp.route('/<series_slug>/<path:slug>/sponsors')
 def conference_sponsors(series_slug, slug):
-    lang = get_locale()
     full_slug = "%s/%s" % (series_slug, slug)
-    conference = _get_conference_by_slug(full_slug, lang)
+    conference = _get_conference_by_slug(full_slug, flask.g.lang)
     return flask.render_template('sponsors.tpl',
         slug=full_slug,
         pagetitle=series_slug + ' ' + slug,
@@ -201,12 +399,11 @@ def conference_sponsors(series_slug, slug):
 
 @flaskapp.route('/<series_slug>/<path:slug>/sessions')
 def conference_sessions(series_slug, slug):
-    lang = get_locale()
     full_slug = "%s/%s" % (series_slug, slug)
-    conference = _get_conference_by_slug(full_slug, lang)
+    conference = _get_conference_by_slug(full_slug, flask.g.lang)
     if not conference:
         raise ConferenceNotFoundError
-    conference_sessions = _list_session_by_conference(conference.get('id'), lang)
+    conference_sessions = _list_session_by_conference(conference.get('id'), flask.g.lang)
     return flask.render_template('sessions.tpl',
         pagetitle=series_slug + ' ' + slug,
         conference=conference,
@@ -216,8 +413,7 @@ def conference_sessions(series_slug, slug):
 
 @flaskapp.route('/<regex("(.+)"):slug>/news')
 def conference_news(slug):
-    lang = get_locale()
-    key = "news_entries.lang." + lang
+    key = "news_entries.lang." + flask.g.lang
     news_entries = cache.get(key)
     if not news_entries:
         feed_url = 'http://blog.builderscon.io/feed.xml'
@@ -243,9 +439,8 @@ def conference_news(slug):
 
 @flaskapp.route('/<series_slug>/<path:slug>')
 def conference_instance(series_slug, slug):
-    lang = get_locale()
     full_slug = "%s/%s" % (series_slug, slug)
-    conference = _get_conference_by_slug(full_slug, lang)
+    conference = _get_conference_by_slug(full_slug, flask.g.lang)
     if not conference:
         return octav.last_error(), 404
 
@@ -253,7 +448,6 @@ def conference_instance(series_slug, slug):
         pagetitle=series_slug + ' ' + slug,
         slug=full_slug,
         conference=conference,
-        lang=lang,
         googlemap_api_key=cfg.googlemap_api_key()
     )
 
@@ -271,8 +465,7 @@ def add_session_post(series_slug, slug):
 
 @flaskapp.route('/<series_slug>/<slug>/session/<id>')
 def conference_session_details(series_slug, slug, id):
-    lang = get_locale()
-    session = octav.lookup_session(lang=lang, id=id)
+    session = octav.lookup_session(lang=flask.g.lang, id=id)
     if not session:
         return octav.last_error(), 404
     return flask.render_template('session_detail.tpl',

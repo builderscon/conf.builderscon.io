@@ -3,10 +3,19 @@
 {% block header %}
 <style type="text/css">
 <!--
-img.login-icon {
+.section-content div.login-row {
+  margin: 1em;
+}
+
+.login-icon img{
   padding: 0;
   width: 40px;
   height: 40px;
+}
+
+.login-link {
+  font-weight: bold;
+  font-size: 2em;
 }
 -->
 </style>
@@ -18,7 +27,16 @@ img.login-icon {
     <div class="inner">
       <h1 class="section-header">{% trans %}Login{% endtrans %}</h1>
       <div class="section-content">
-        <h2><img src="/static/images/GitHub-Mark-120px-plus.png" class="login-icon"> <a class="post-link" href="/login/github">{% trans %}Login with Github{% endtrans %}</a></h2>
+{% for href, name, image in [ ('/login/github', 'GitHub', '/static/images/github-120px.png'), ('/login/facebook', 'Facebook','/static/images/facebook-120px.jpg'), ( '/login/twitter', 'Twitter','/static/images/twitter-120px.png') ] %}
+        <div class="login-row row">
+          <div class="login-icon large-1 columns">
+            <img src="{{ image }}">
+          </div>
+          <div class="login-link large-11 columns">
+            <a href="{{ href }}">{% trans %}Login with {{ name }}{% endtrans %}</a>
+          </div>
+        </div>
+{% endfor %}
       </div>
     </div>
   </div>
