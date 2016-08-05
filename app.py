@@ -59,6 +59,7 @@ config_file = os.getenv(
 cfg = Config(config_file)
 
 flaskapp = flask.Flask("builderscon")
+flaskapp.secret_key = cfg.section('Flask').get('secret_key')
 flaskapp.url_map.converters['regex'] = flasktools.RegexConverter
 babel = flask_babel.Babel(flaskapp)
 app = WSGILogger(flaskapp, [StreamHandler(sys.stdout)], ApacheFormatter())
@@ -67,6 +68,35 @@ app = WSGILogger(flaskapp, [StreamHandler(sys.stdout)], ApacheFormatter())
 octav = Octav(**cfg.section('OCTAV'))
 
 cache = cache.Redis(**cfg.section('REDIS_INFO'))
+
+twitter = oauth.Init('twitter', 
+    base_url='https://api.twitter.com/1.1/',
+    request_token_url='https://api.twitter.com/oauth/request_token',
+    access_token_url='https://api.twitter.com/oauth/access_token',
+    authorize_url='https://api.twitter.com/oauth/authenticate',
+    consumer_key=cfg.section('TWITTER').get('client_id'),
+    consumer_secret=cfg.section('TWITTER').get('client_secret').encode('ASCII')
+)
+
+facebook = oauth.Init('facebook',
+    base_url='https://graph.facebook.com/',
+    request_token_url=None,
+    access_token_url='/oauth/access_token',
+    authorize_url='https://www.facebook.com/dialog/oauth',
+    consumer_key=cfg.section('FACEBOOK').get('client_id'),
+    consumer_secret=cfg.section('FACEBOOK').get('client_secret').encode('ASCII'),
+    request_token_params={'scope': 'email'}
+)
+
+github = oauth.Init('github',
+    base_url='https://api.github.com',
+    request_token_url=None,
+    authorize_url='https://github.com/login/oauth/authorize',
+    access_token_url='https://github.com/login/oauth/access_token',
+    consumer_key=cfg.section('GITHUB').get('client_id'),
+    consumer_secret=cfg.section('GITHUB').get('client_secret').encode('ASCII'),
+    request_token_params={'scope': 'user'}
+)
 
 class ConferenceNotFoundError(Exception):
     pass
@@ -144,32 +174,193 @@ def index():
         conferences=conferences
     )
 
+def start_oauth(oauth_handler, callback):
+    args = {}
+    if flask.request.args.get('.next'):
+        args['.next'] = flask.request.args.get('.next')
+
+    if len(args.keys()) > 0:
+        callback = '%s?%s' % (callback, urllencode(args))
+
+    return oauth_handler.authorize(callback=callback)
+
 @flaskapp.route('/login')
 def login():
     return flask.render_template('login.tpl',
         pagetitle='login'
     )
 
+@github.tokengetter
+def get_github_token(token=None):
+    return flask.session.get('github_token')
+
 @flaskapp.route('/login/github')
 def login_github():
-    return do_oauth(oauth.Github(http, cfg.section('GITHUB')))
+    return start_oauth(github, 'https://builderscon.io/login/github/callback')
+
+@flaskapp.route('/login/github/callback')
+@github.authorized_handler
+def login_github_callback(resp):
+    if resp is None:
+        flask.flash('authentication denied')
+        return flask.redirect('/login')
+
+    flask.session['github_token'] = (
+        resp['access_token'],
+        ''
+    )
+    res = github.request('/user')
+    if res.status != 200:
+        flask.flash('failed to fetch user information after oauth')
+        return flask.redirect('/login')
+
+    data = res.data
+
+    # Load user via github id
+    user = octav.lookup_user_by_auth_user_id(auth_via='github', auth_user_id=str(data['id']))
+    if user:
+        flask.session['user'] = user
+        return flask.redirect('/')
+
+    names = re.compile('\s+').split(data.get('name'))
+    first_name = 'Unknown'
+    last_name = 'Unknown'
+    if len(names) > 1:
+        first_name = names[0]
+        last_name = names[-1]
+    elif len(names) == 1:
+        first_name = names[0]
+
+    user = octav.create_user (
+        str(data.get('id')),
+        auth_via='github',
+        nickname=data.get('login'),
+        first_name=first_name,
+        last_name=last_name
+    )
+    if not user:
+        flask.flash('failed to register user in the backend server')
+        return flask.redirect('/login')
+
+    flask.session['user'] = user
+    return flask.redirect('/')
+
+@facebook.tokengetter
+def get_facebook_token(token=None):
+    return flask.session.get('facebook_token')
 
 @flaskapp.route('/login/facebook')
 def login_facebook():
-    return do_oauth(oauth.Facebook(http, cfg.section('FACEBOOK')))
+    return start_oauth(facebook, 'https://builderscon.io/login/facebook/callback')
+
+@flaskapp.route('/login/facebook/callback')
+@facebook.authorized_handler
+def login_facebook_callback(resp):
+    if resp is None:
+        flask.flash('authentication denied')
+        return flask.redirect('/login')
+
+    flask.session['facebook_token'] = (
+        resp['access_token'],
+        ''
+    )
+    res = facebook.request('/me')
+    if res.status != 200:
+        falsk.flash('failed to fetch user information after oauth')
+        return flask.redirect('/login')
+
+    data = res.data
+
+    # Load user via facebook id
+    user = octav.lookup_user_by_auth_user_id(auth_via='facebook', auth_user_id=data['id'])
+    if user:
+        flask.session['user'] = user
+        return flask.redirect('/')
+
+    names = re.compile('\s+').split(data.get('name'))
+    first_name = 'Unknown'
+    last_name = 'Unknown'
+    if len(names) > 1:
+        first_name = names[0]
+        last_name = names[-1]
+    elif len(names) == 1:
+        first_name = names[0]
+
+    user = octav.create_user (
+        data.get('id'),
+        auth_via='facebook',
+        nickname=data.get('name'),
+        first_name=first_name,
+        last_name=last_name
+    )
+    if not user:
+        flask.flash('failed to register user in the backend server')
+        return flask.redirect('/login')
+
+    flask.session['user'] = user
+    return flask.redirect('/')
+
+@twitter.tokengetter
+def get_twitter_token(token=None):
+    return flask.session.get('twitter_token')
 
 @flaskapp.route('/login/twitter')
 def login_twitter():
-    return do_oauth(oauth.Facebook(http, cfg.section('TWITTER')))
+    return start_oauth(twitter, 'https://builderscon.io/login/twitter/callback')
 
-def do_oauth(v):
-    res = v.handle_auth()
-    if res.is_redirect():
-        return flask.redirect(res.redirect)
-    if res.is_error():
-        return res.error, 500
+@flaskapp.route('/login/twitter/callback')
+@twitter.authorized_handler
+def login_twitter_callback(resp):
+    if resp is None:
+        flask.flash('authentication denied')
+        return flask.redirect('/login')
 
-    flask.session["user"] = res.userinfo
+    flask.session['twitter_token'] = (
+        resp['oauth_token'],
+        resp['oauth_token_secret']
+    )
+
+    # Load user via twitter id
+    user = octav.lookup_user_by_auth_user_id(auth_via='twitter', auth_user_id=resp['user_id'])
+    if user:
+        flask.session['user'] = user
+        # TODO need to get a better URL
+        return flask.redirect('/')
+
+    res = twitter.request('/account/verify_credentials.json')
+    if res.Status() != 200:
+        falsk.flash('failed to fetch user information after oauth')
+        return flask.redirect('/login')
+
+    data = res.data
+
+    avatar_url = data.get('profile_image_url')
+    if avatar_url:
+        avatar_url = re.compile('_normal\.').sub('_bigger.', avatar_url)
+
+    names = re.compile('\s+').split(data.get('name'))
+    first_name = 'Unknown'
+    last_name = 'Unknown'
+    if len(names) > 1:
+        first_name = names[0]
+        last_name = names[-1]
+    elif len(names) == 1:
+        first_name = names[0]
+
+    user = octav.create_user (
+        data.get('id_str'),
+        auth_via='twitter',
+        nickname=data.get('screen_name'),
+        avatar_url=avatar_url, 
+        first_name=first_name,
+        last_name=last_name,
+    )
+    if not user:
+        flask.flash('failed to register user in the backend server')
+        return flask.redirect('/login')
+
+    flask.session['user'] = user
+    return flask.redirect('/')
 
 
 @flaskapp.route('/logout')
