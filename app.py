@@ -243,7 +243,7 @@ def login_github_callback(resp):
     user = octav.lookup_user_by_auth_user_id(auth_via='github', auth_user_id=str(data['id']))
     if user:
         flask.session['user'] = user
-        return flask.redirect('/')
+        return flask.redirect(flask.request.args.get('.next') or '/')
 
     names = re.compile('\s+').split(data.get('name'))
     first_name = 'Unknown'
@@ -266,7 +266,7 @@ def login_github_callback(resp):
         return flask.redirect('/login')
 
     flask.session['user'] = user
-    return flask.redirect('/')
+    return flask.redirect(flask.request.args.get('.next') or '/')
 
 @facebook.tokengetter
 def get_facebook_token(token=None):
@@ -298,7 +298,7 @@ def login_facebook_callback(resp):
     user = octav.lookup_user_by_auth_user_id(auth_via='facebook', auth_user_id=data['id'])
     if user:
         flask.session['user'] = user
-        return flask.redirect('/')
+        return flask.redirect(flask.request.args.get('.next') or '/')
 
     names = re.compile('\s+').split(data.get('name'))
     first_name = 'Unknown'
@@ -321,7 +321,7 @@ def login_facebook_callback(resp):
         return flask.redirect('/login')
 
     flask.session['user'] = user
-    return flask.redirect('/')
+    return flask.redirect(flask.request.args.get('.next') or '/')
 
 @twitter.tokengetter
 def get_twitter_token(token=None):
@@ -347,8 +347,7 @@ def login_twitter_callback(resp):
     user = octav.lookup_user_by_auth_user_id(auth_via='twitter', auth_user_id=resp['user_id'])
     if user:
         flask.session['user'] = user
-        # TODO need to get a better URL
-        return flask.redirect('/')
+        return flask.redirect(flask.request.args.get('.next') or '/')
 
     res = twitter.request('/account/verify_credentials.json')
     if res.Status() != 200:
@@ -383,7 +382,7 @@ def login_twitter_callback(resp):
         return flask.redirect('/login')
 
     flask.session['user'] = user
-    return flask.redirect('/')
+    return flask.redirect(flask.request.args.get('.next') or '/')
 
 
 @flaskapp.route('/logout')
