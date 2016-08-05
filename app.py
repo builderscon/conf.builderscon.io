@@ -209,7 +209,6 @@ def start_oauth(oauth_handler, callback):
 @flaskapp.route('/login')
 def login():
     return flask.render_template('login.tpl',
-        pagetitle='login',
         next_url=flask.request.args.get('.next')
     )
 
@@ -407,48 +406,54 @@ def latest(series_slug, rest):
 def conference(series_slug):
     flask.redirect('/{0}/latest'.format(series_slug))
 
+def conference_by_slug(cb):
+    def prepare_conference(cb, series_slug, slug, **args):
+        print(series_slug)
+        print(slug)
+        full_slug = "%s/%s" % (series_slug, slug)
+        conference = _get_conference_by_slug(full_slug, flask.g.lang)
+        if not conference:
+            return "page not found", 404
+        flask.g.stash['series_slug'] = series_slug
+        flask.g.stash['slug'] = slug
+        flask.g.stash['full_slug'] = full_slug
+        flask.g.stash['conference'] = conference
+        return cb(**args)
+    return functools.update_wrapper(functools.partial(prepare_conference, cb), cb)
 
 @flaskapp.route('/<series_slug>/<path:slug>/sponsors')
-def conference_sponsors(series_slug, slug):
-    full_slug = "%s/%s" % (series_slug, slug)
-    conference = _get_conference_by_slug(full_slug, flask.g.lang)
-    return flask.render_template('sponsors.tpl',
-        slug=full_slug,
-        pagetitle=series_slug + ' ' + slug,
-        conference=conference,
-    )
+@conference_by_slug
+def conference_sponsors():
+    return flask.render_template('sponsors.tpl')
 
 
 @flaskapp.route('/<series_slug>/<path:slug>/sessions')
-def conference_sessions(series_slug, slug):
-    full_slug = "%s/%s" % (series_slug, slug)
-    conference = _get_conference_by_slug(full_slug, flask.g.lang)
-    if not conference:
-        raise ConferenceNotFoundError
+@conference_by_slug
+def conference_sessions():
+    conference = flask.g.stash.get('conference')
     conference_sessions = _list_session_by_conference(conference.get('id'), flask.g.lang)
-    return flask.render_template('sessions.tpl',
-        pagetitle=series_slug + ' ' + slug,
-        conference=conference,
-        sessions=conference_sessions
-    )
+    return flask.render_template('sessions.tpl', sessions=conference_sessions)
 
 
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp')
-def conference_call_for_paper(series_slug, slug):
-    lang = get_locale()
-    full_slug = "%s/%s" % (series_slug, slug)
-    conference = _get_conference_by_slug(full_slug, lang)
-    if not conference:
-        raise ConferenceNotFoundError
-    return flask.render_template('call_for_paper.tpl',
-        pagetitle=series_slug + ' ' + slug,
-        conference=conference,
-    )
+@conference_by_slug
+def conference_cfp():
+    conference = flask.g.stash.get('conference')
+    session_types = octav.list_session_types_by_conference(conference_id=conference.get('id'), lang=flask.g.lang)
+    if not session_types:
+        session_types = []
 
+    return flask.render_template('cfp.tpl', session_types=session_types)
 
-@flaskapp.route('/<regex("(.+)"):slug>/news')
-def conference_news(slug):
+@flaskapp.route('/<series_slug>/<path:slug>/cfp_done')
+@conference_by_slug
+def confernece_cfp_done():
+    return flask.render_template('cfp_done.tpl')
+
+@flaskapp.route('/<series_slug>/<path:slug>/news')
+@conference_by_slug
+def conference_news():
     key = "news_entries.lang." + flask.g.lang
     news_entries = cache.get(key)
     if not news_entries:
@@ -460,6 +465,7 @@ def conference_news(slug):
         cache.set(key, news.entries, 600)
 
     filtered_entries = []
+    slug = flask.g.stash.get('full_slug')
     for entry in news_entries:
         if entry.category == slug:
             if not entry.published_parsed:
@@ -467,54 +473,35 @@ def conference_news(slug):
             else:
                 entry.date = time.strftime( '%b %d, %Y', entry.published_parsed )
             filtered_entries.append(entry)
-    return flask.render_template('news.tpl',
-        slug=slug,
-        entries=filtered_entries
-    )
+    return flask.render_template('news.tpl', entries=filtered_entries)
 
 
 @flaskapp.route('/<series_slug>/<path:slug>')
-def conference_instance(series_slug, slug):
-    full_slug = "%s/%s" % (series_slug, slug)
-    conference = _get_conference_by_slug(full_slug, flask.g.lang)
-    if not conference:
-        return octav.last_error(), 404
-
-    return flask.render_template('conference.tpl',
-        pagetitle=series_slug + ' ' + slug,
-        slug=full_slug,
-        conference=conference,
-        googlemap_api_key=cfg.googlemap_api_key()
-    )
+@conference_by_slug
+def conference_instance():
+    return flask.render_template('conference.tpl', googlemap_api_key=cfg.googlemap_api_key())
 
 @flaskapp.route('/<series_slug>/<slug>/session/add')
-def add_session(series_slug, slug):
-    return flask.render_template('add_session.tpl', 
-        pagetitle=series_slug + ' ' + slug
-    )
+@conference_by_slug
+def add_session():
+    return flask.render_template('add_session.tpl')
 
 
 @flaskapp.route('/<series_slug>/<slug>/session/add', methods=['POST'])
-def add_session_post(series_slug, slug):
+@conference_by_slug
+def add_session_post():
     flask.redirect('/')
 
 
-@flaskapp.route('/<series_slug>/<slug>/session/<id>')
-def conference_session_details(series_slug, slug, id):
+@flaskapp.route('/<series_slug>/<path:slug>/session/<id>')
+@conference_by_slug
+def conference_session_details(id):
     session = octav.lookup_session(lang=flask.g.lang, id=id)
     if not session:
         return octav.last_error(), 404
     return flask.render_template('session_detail.tpl',
-        pagetitle=series_slug + ' ' + slug,
         session=session
     )
-
-@flaskapp.route('/speaker/<id>')
-def speaker_details(id):
-    return flask.render_template('speaker_details.tpl',
-        pagetitle='spkeaker'
-    )
-
 
 def conference_cache_key(id, lang):
     if not id:
