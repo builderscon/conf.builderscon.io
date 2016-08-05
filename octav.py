@@ -1,5 +1,5 @@
 """OCTAV Client Library"""
-"""DO NOT EDIT: This file was generated from ../spec/v1/api.json on Fri Aug  5 09:37:28 2016"""
+"""DO NOT EDIT: This file was generated from ../spec/v1/api.json on Fri Aug  5 13:34:16 2016"""
 
 import json
 import os
@@ -1211,6 +1211,35 @@ class Octav(object):
         if slug is not None:
             payload['slug'] = slug
         uri = '%s/conference/lookup_by_slug' % self.endpoint
+        qs = urlencode(payload)
+        if self.debug:
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs), headers=hdrs)
+        if self.debug:
+            print(res)
+        if res.status != 200:
+            self.extract_error(res)
+            return None
+        return json.loads(res.data)
+    except BaseException, e:
+        if self.debug:
+            print("error during http access: " + repr(e))
+        self.error = repr(e)
+        return None
+
+  def list_conferences_by_organizer (self, lang=None, limit=None, organizer_id=None, since=None):
+    try:
+        payload = {}
+        hdrs = {}
+        if lang is not None:
+            payload['lang'] = lang
+        if limit is not None:
+            payload['limit'] = limit
+        if organizer_id is not None:
+            payload['organizer_id'] = organizer_id
+        if since is not None:
+            payload['since'] = since
+        uri = '%s/conference/list_by_organizer' % self.endpoint
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
