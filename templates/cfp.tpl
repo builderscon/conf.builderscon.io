@@ -198,11 +198,16 @@
 
 {% block scripts %}
 <script>
-  function handleTermsOfUseAgree(element){
-    if(element.checked)
-      document.getElementById("submit-button").className = "expanded button";
-    else
-      document.getElementById("submit-button").className = "expanded button disabled";
-  }
+<!--
+$(function() {
+  $("#terms_of_use_yes").change(function() {
+    if ($("#terms_of_use_yes").prop('checked')) {
+      $("#submit-button").removeClass("disabled");
+    } else {
+      $("#submit-button").addClass("disabled")
+    }
+  });
+})
+-->
 </script>
 {% endblock %}
