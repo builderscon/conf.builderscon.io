@@ -1,6 +1,7 @@
 feedparser
 flask
 flask_babel
+flask_oauth
 jinja2
 py-gfm
 redis
