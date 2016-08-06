@@ -5,6 +5,7 @@ flask_oauth
 jinja2
 py-gfm
 redis
+python-memcached
 urllib3
 wsgi-request-logger
 werkzeug
