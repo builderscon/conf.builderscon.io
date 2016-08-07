@@ -37,26 +37,6 @@ termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
 hardstatus string "%?%H %?[screen %n%?: %t%?] %h"
 endef
 
-define CONFIG_JSON
-{
-    "DATE_FORMAT": "%Y-%m-%d",
-    "REDIS_INFO": {
-        "host": "localhost",
-        "port": 6379,
-        "db": 0
-    },
-    "OCTAV": {
-        "endpoint": "",
-        "key": "",
-        "secret": ""
-    },
-    "GITHUB": {
-        "client_id": "",
-        "client_secret": ""
-    }
-}
-endef
-
 export UBUNTU_MIRRORS
 export BASHRC
 export SCREENRC
@@ -106,5 +86,9 @@ ubuntu-home:
 	echo "$$BASHRC" >> "${HOME_DIR}/.bashrc"
 	echo "$$SCREENRC" >> "${HOME_DIR}/.screenrc"
 	echo "$$MYCNF_USER" >> "${HOME_DIR}/.my.cnf"
-	echo "$$CONFIG_JSON" > "${HOME_DIR}/vagrant/config.json"
+	@if [ ! -f "${HOME_DIR}/vagrant/config.json" ]; \
+		then \
+		echo "copying ${HOME_DIR}/vagrant/config.json.default to ${HOME_DIR}/vagrant/config.json"; \
+		cp "${HOME_DIR}/vagrant/config.json.default" "${HOME_DIR}/vagrant/config.json"; \
+	fi
 

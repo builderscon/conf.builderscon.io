@@ -1,5 +1,8 @@
 {
     "DATE_FORMAT": "%Y-%m-%d",
+    "Flask": {
+        "secret_key": ""
+    },
     "REDIS_INFO": {
         "host": "localhost",
         "port": 6379,
@@ -12,6 +15,14 @@
     },
     "GITHUB": {
         "client_id": "",
+        "client_secret": ""
+    },
+    "FACEBOOK": {
+        "client_id":     "",
+        "client_secret": ""
+    },
+    "TWITTER": {
+        "client_id":     "",
         "client_secret": ""
     }
 }
