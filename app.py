@@ -510,6 +510,7 @@ def conference_cfp_input():
         )
     except:
         # TODO: capture, and do the right thing
+        pass
 
     if not session:
         raise Exception(octav.last_error())
