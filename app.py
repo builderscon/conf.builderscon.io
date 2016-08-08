@@ -508,8 +508,8 @@ def conference_cfp_input():
             slide_language   = form.get('slide_language'),
             spoken_language  = form.get('spoken_language'),
         )
-    except BaseException, e:
-        raise Exception(octav.last_error())
+    except:
+        # TODO: capture, and do the right thing
 
     if not session:
         raise Exception(octav.last_error())
