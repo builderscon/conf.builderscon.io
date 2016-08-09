@@ -5,6 +5,9 @@
       <h1 class="section-header">{% trans %}Submission Form{% endtrans %}</h1>
       <div class="section-content">
         <form class="cfp-form" action="{{ action }}" method="post">
+{% if for_edit %}
+          <input type="hidden" name="id" value="{{ session.id }}">
+{% endif %}
           <div class="row">
             <div class="large-12 columns"><h3>{% trans %}Proposal Details{% endtrans %}</h3></div>
           </div>
@@ -156,16 +159,20 @@
 {% endfor %}
             </div>
           </div>
+{% if not for_edit %}
           <div class="row tos-agreement">
             <div class="large-12 columns">
               <p>I hereby confirm that I understand and agree to the <a href="" target="_blank">terms of use</a> and the various release agreements described with regards to submitting a proposal for builderscon.</p>
               <input type="checkbox" name="terms_of_use" value=true id="terms_of_use_yes" onchange="handleTermsOfUseAgree(this);" /> <span class="yes-no">{% trans %}Yes{% endtrans %}</span>
             </div>
           </div>
+{% endif %}
           <div class="row">
             <div class="large-12 columns">
-              <button id="submit-button" type="submit" class="expanded button disabled" disabled="disabled">{% trans %}Submit your proposal{% endtrans %}</button>
+              <button id="submit-button" type="submit" class="expanded button{% if not for_edit %} disabled{% endif %}"{% if not for_edit %} disabled="disabled"{% endif %}>{% trans %}Submit your proposal{% endtrans %}</button>
+{% if not for_edit %}
               <p class="notice-small">Please check &#34;Yes&#34; above to agree to terms of use, before submitting your proposal.</p>
+{% endif %}
             </div>
           </div>
         </form>

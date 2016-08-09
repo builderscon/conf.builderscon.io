@@ -8,13 +8,9 @@
 {% include 'session/form_header.tpl' %}
 {% endblock %}
 
-{% block scripts %}
-{% include 'session/form_scripts.tpl' %}
-{% endblock %}
-
 {% block main %}
 <main>
-{% with action='/session/update' %}
+{% with action='/session/update', for_edit=True %}
   {% include 'session/form.tpl' %}
 {% endwith %}
 </main>
