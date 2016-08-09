@@ -28,6 +28,10 @@ div.conference-history {
   padding-left: 2em;
 }
 
+.invalid {
+  color: #ccc;
+}
+
 -->
 </style>
 {% endblock %}
@@ -65,8 +69,22 @@ div.conference-history {
 {% if not proposals %}
             <p>{% trans %}No proposals have been submitted{% endtrans %}</p>
 {% else %}
-            <div class="proposal-history">
-            </div>
+            <table class="proposal-history">
+            <thead>
+              <tr>
+                <td>{% trans %}Title{% endtrans %}</td>
+                <td>&nbsp;</td>
+              </tr>
+            </thead>
+            <tbody>
+{% for proposal in proposals %}
+              <tr>
+                <td><span{% if proposal.conference.status == 'private' %} class="invalid"{% endif %}>{{ proposal.title or 'N/A' }}</span></td>
+                <td><a href="/session/edit?id={{ proposal.id }}">{% trans %}Edit{% endtrans %}</a></td>
+              </tr>
+{% endfor %}
+            </tbody>
+            </table>
 {% endif %}
           </div>
         </div>

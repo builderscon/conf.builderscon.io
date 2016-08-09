@@ -195,10 +195,12 @@ def dashboard():
         return flask.redirect('/login?.next=%2Fdashboard')
 
     conferences = octav.list_conferences_by_organizer(organizer_id=user.get('id'))
+    proposals = octav.list_sessions(speaker_id=user.get('id'), status='pending', lang=flask.g.lang)
 
     return flask.render_template('dashboard.tpl',
         user=user,
-        conferences=conferences
+        conferences=conferences,
+        proposals=proposals
     )
 
 def start_oauth(oauth_handler, callback):
@@ -512,9 +514,10 @@ def conference_cfp_input():
         # TODO: capture, and do the right thing
         pass
 
-    if not session:
-        raise Exception(octav.last_error())
-        session_types = octav.list_session_types_by_conference(conference_id=conference.get('id'), lang=flask.g.lang)
+    if session:
+        return flask.redirect('/%s/cfp/done' % flask.g.stash.get('full_slug'))
+
+    session_types = octav.list_session_types_by_conference(conference_id=conference.get('id'), lang=flask.g.lang)
     
     return flask.render_template('cfp.tpl', session_types=session_types)
 
@@ -574,6 +577,14 @@ def conference_session_details(id):
     return flask.render_template('session_detail.tpl',
         session=session
     )
+
+@flaskapp.route('/session/edit')
+def session_edit():
+    id = flask.request.args.get("id")
+    session = octav.lookup_session(id=id, lang=flask.g.lang)
+    if not session:
+        return octav.last_error(), 404
+    return flask.render_template('session/edit.tpl', session=session)
 
 def conference_cache_key(id, lang):
     if not id:
