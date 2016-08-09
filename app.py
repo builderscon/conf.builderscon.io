@@ -445,15 +445,34 @@ def conference_sessions():
     conference_sessions = _list_session_by_conference(conference.get('id'), flask.g.lang)
     return flask.render_template('sessions.tpl', sessions=conference_sessions)
 
-@flaskapp.route('/<series_slug>/<path:slug>/cfp')
-@conference_by_slug
-@require_login
-def conference_cfp():
-    conference = flask.g.stash.get('conference')
-    session_types = octav.list_session_types_by_conference(conference_id=conference.get('id'), lang=flask.g.lang)
-    if not session_types:
-        session_types = []
+def with_session_types(cb):
+    def load_session_types(cb, **args):
+        conference_id = ''
+        conference = flask.g.stash.get('conference')
+        if conference:
+            conference_id = conference.id
+        else:
+            session = flask.g.stash.get('session')
+            if session:
+                conference_id = session.get('conference_id')
 
+        if conference_id:
+            session_types = octav.list_session_types_by_conference(conference_id=conference_id, lang=flask.g.lang)
+
+        if not session_types:
+            session_types = []
+
+        flask.g.stash["session_types"] = session_types
+
+        return cb(**args)
+
+    return functools.update_wrapper(functools.partial(load_session_types, cb), cb)
+
+@flaskapp.route('/<series_slug>/<path:slug>/cfp')
+@require_login
+@conference_by_slug
+@with_session_types
+def conference_cfp():
     return flask.render_template('cfp.tpl', session_types=session_types)
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp/input', methods=['GET','POST'])
@@ -463,9 +482,9 @@ def conference_cfp_input():
         return flask.redirect('/%s/cfp' % flask.g.stash.get('full_slug'))
 
     form = flask.request.form
+
     # Silly to do this by hand, but I'm going to do this
-    # right now so that we get better error reporting to
-    # uers
+    # right now so that we get better error reporting to uers
     required = ['session_type_id']
     flask.g.stash['missing'] = {}
     for f in required:
@@ -473,7 +492,7 @@ def conference_cfp_input():
             print("missing %s" % f)
             flask.g.stash['errors'] = True
             flask.g.stash['missing'][f] = True
-    
+    l10n = {}
     required = ['title', 'abstract']
     flask.g.stash['missing'] = {}
     for f in required:
@@ -485,8 +504,11 @@ def conference_cfp_input():
             v = l.get('value')
             if v == "en":
                 continue
-            if form.get('%s#%s' %(f, v)):
+            l10nk = '%s#%s' %(f, v)
+            l10nv = form.get(l10nk)
+            if l10nv:
                 has_l10n_field = True
+                l10n[l10nk] = l10nv
                 break
 
         if not has_l10n_field:
@@ -515,6 +537,7 @@ def conference_cfp_input():
             video_permission = form.get('video_permission'),
             slide_language   = form.get('slide_language'),
             spoken_language  = form.get('spoken_language'),
+            **l10n
         )
     except:
         # TODO: capture, and do the right thing
@@ -584,13 +607,87 @@ def conference_session_details(id):
         session=session
     )
 
+def with_session(cb, fname='id'):
+    def load_session(cb, **args):
+        id = flask.request.values.get(fname)
+        session = octav.lookup_session(id=id, lang=flask.g.lang)
+        flask.g.stash["session"] = session
+        if not session:
+            return octav.last_error(), 404
+        return cb(**args)
+    return functools.update_wrapper(functools.partial(load_session, cb), cb)
+
+@flaskapp.route('/session/update', methods=['POST'])
+@with_session
+@with_session_types
+def session_update():
+    form = flask.request.form
+    # Silly to do this by hand, but I'm going to do this
+    # right now so that we get better error reporting to uers
+    required = ['session_type_id']
+    flask.g.stash['missing'] = {}
+    for f in required:
+        if not form.get(f):
+            print("missing %s" % f)
+            flask.g.stash['errors'] = True
+            flask.g.stash['missing'][f] = True
+    l10n = {}
+    required = ['title', 'abstract']
+    flask.g.stash['missing'] = {}
+    for f in required:
+        if form.get(f):
+            continue
+
+        has_l10n_field = False
+        for l in LANGUAGES:
+            v = l.get('value')
+            if v == "en":
+                continue
+            l10nk = '%s#%s' %(f, v)
+            l10nv = form.get(l10nk)
+            if l10nv:
+                has_l10n_field = True
+                l10n[l10nk] = l10nv
+                break
+
+        if not has_l10n_field:
+            print("missing %s" % f)
+            flask.g.stash['errors'] = True
+            flask.g.stash['missing'][f] = True
+    
+    if flask.g.stash.get('errors') > 0:
+        flask.g.stash["session"] = form
+        return flask.render_template('session/edit.tpl')
+
+    conference = flask.g.stash.get('conference')
+    user = flask.session.get('user')
+    try:
+        octav.update_session(
+            id = flask.g.stash.get('session').get('id'),
+            abstract         = form.get('abstract'),
+            session_type_id  = form.get('session_type_id'),
+            user_id          = user.get('id'),
+            title            = form.get('title'),
+            category         = form.get('category'),
+            material_level   = form.get('material_level'),
+            memo             = form.get('memo'),
+            photo_permission = form.get('photo_permission'),
+            video_permission = form.get('video_permission'),
+            slide_language   = form.get('slide_language'),
+            spoken_language  = form.get('spoken_language'),
+            **l10n
+        )
+    except:
+        pass
+
+    # XXX redirect to a proper location
+    return flask.render_template('session/edit.tpl')
+
 @flaskapp.route('/session/edit')
+@with_session
+@with_session_types
 def session_edit():
-    id = flask.request.args.get("id")
-    session = octav.lookup_session(id=id, lang=flask.g.lang)
-    if not session:
-        return octav.last_error(), 404
-    return flask.render_template('session/edit.tpl', session=session)
+    return flask.render_template('session/edit.tpl')
 
 def conference_cache_key(id, lang):
     if not id:
