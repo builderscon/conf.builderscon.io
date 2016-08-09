@@ -467,7 +467,7 @@ def with_session_types(cb):
 @with_conference_by_slug
 @with_session_types
 def conference_cfp():
-    return flask.render_template('cfp.tpl', session_types=session_types)
+    return flask.render_template('cfp.tpl')
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp/input', methods=['GET','POST'])
 @with_conference_by_slug
