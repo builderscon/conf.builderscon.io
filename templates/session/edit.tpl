@@ -10,7 +10,7 @@
 
 {% block main %}
 <main>
-{% with action='/session/update', for_edit=True %}
+{% with action='/session/update', for_edit=True, video_url=True if flask_session.user.is_admin else False, slide_url=True %}
   {% include 'session/form.tpl' %}
 {% endwith %}
 </main>

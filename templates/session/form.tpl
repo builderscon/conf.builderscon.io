@@ -113,10 +113,26 @@
           </div>
           <div class="row">
             <div class="large-12 columns">
-              <h3>{% trans %}Videos and Photos{% endtrans %}</h3>
+              <h3>{% trans %}Videos, Photos, and Materials{% endtrans %}</h3>
               <p class="notice-small">Please refer to our <a href="." target="_blank">terms of use</a> about how builderscon uses videos, photos, and other materials.</p>
             </div>
           </div>
+{% if slide_url %}
+          <div class="row">
+            <div class="large-{{ left }} columns"><label>Slide URL</label></div>
+            <div class="large-{{ right }} columns">
+              <input type="text" name="slide_url" placeholder="{% trans %}Please provide the URL of where you uploaded your slide{% endtrans %}"{% if session %} value="{{ session.slide_url }}"{% endif %}>
+            </div>
+          </div>
+{% endif %}
+{% if video_url %}
+          <div class="row">
+            <div class="large-{{ left }} columns"><label>Video URL</label></div>
+            <div class="large-{{ right }} columns">
+              <input type="text" name="slide_url"{% if session %} value="{{ session.video_url }}"{% endif %}>
+            </div>
+          </div>
+{% endif %}
           <div class="row">
             <div class="large-{{ left }} columns"><label>Photo Release</label></div>
             <div class="large-{{ right }} columns">
