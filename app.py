@@ -413,8 +413,8 @@ def latest(series_slug, rest):
 def conference(series_slug):
     flask.redirect('/{0}/latest'.format(series_slug))
 
-def conference_by_slug(cb):
-    def prepare_conference(cb, series_slug, slug, **args):
+def with_conference_by_slug(cb):
+    def load_conference_by_slug(cb, series_slug, slug, **args):
         full_slug = "%s/%s" % (series_slug, slug)
         conference = _get_conference_by_slug(full_slug, flask.g.lang)
         if not conference:
@@ -424,16 +424,16 @@ def conference_by_slug(cb):
         flask.g.stash['full_slug'] = full_slug
         flask.g.stash['conference'] = conference
         return cb(**args)
-    return functools.update_wrapper(functools.partial(prepare_conference, cb), cb)
+    return functools.update_wrapper(functools.partial(load_conference_by_slug, cb), cb)
 
 @flaskapp.route('/<series_slug>/<path:slug>/sponsors')
-@conference_by_slug
+@with_conference_by_slug
 def conference_sponsors():
     return flask.render_template('sponsors.tpl')
 
 
 @flaskapp.route('/<series_slug>/<path:slug>/sessions')
-@conference_by_slug
+@with_conference_by_slug
 def conference_sessions():
     conference = flask.g.stash.get('conference')
     conference_sessions = _list_session_by_conference(conference.get('id'), flask.g.lang)
@@ -444,7 +444,7 @@ def with_session_types(cb):
         conference_id = ''
         conference = flask.g.stash.get('conference')
         if conference:
-            conference_id = conference.id
+            conference_id = conference.get('id')
         else:
             session = flask.g.stash.get('session')
             if session:
@@ -464,13 +464,13 @@ def with_session_types(cb):
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp')
 @require_login
-@conference_by_slug
+@with_conference_by_slug
 @with_session_types
 def conference_cfp():
     return flask.render_template('cfp.tpl', session_types=session_types)
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp/input', methods=['GET','POST'])
-@conference_by_slug
+@with_conference_by_slug
 def conference_cfp_input():
     if flask.request.method != 'POST':
         return flask.redirect('/%s/cfp' % flask.g.stash.get('full_slug'))
@@ -545,12 +545,12 @@ def conference_cfp_input():
     return flask.render_template('cfp.tpl', session_types=session_types)
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp_done')
-@conference_by_slug
+@with_conference_by_slug
 def confernece_cfp_done():
     return flask.render_template('cfp_done.tpl')
 
 @flaskapp.route('/<series_slug>/<path:slug>/news')
-@conference_by_slug
+@with_conference_by_slug
 def conference_news():
     key = "news_entries.lang." + flask.g.lang
     news_entries = cache.get(key)
@@ -575,24 +575,24 @@ def conference_news():
 
 
 @flaskapp.route('/<series_slug>/<path:slug>')
-@conference_by_slug
+@with_conference_by_slug
 def conference_instance():
     return flask.render_template('conference.tpl', googlemap_api_key=cfg.googlemap_api_key())
 
 @flaskapp.route('/<series_slug>/<slug>/session/add')
-@conference_by_slug
+@with_conference_by_slug
 def add_session():
     return flask.render_template('add_session.tpl')
 
 
 @flaskapp.route('/<series_slug>/<slug>/session/add', methods=['POST'])
-@conference_by_slug
+@with_conference_by_slug
 def add_session_post():
     flask.redirect('/')
 
 
 @flaskapp.route('/<series_slug>/<path:slug>/session/<id>')
-@conference_by_slug
+@with_conference_by_slug
 def conference_session_details(id):
     session = octav.lookup_session(lang=flask.g.lang, id=id)
     if not session:
@@ -608,10 +608,11 @@ def with_session(cb, fname='id'):
         flask.g.stash["session"] = session
         if not session:
             return octav.last_error(), 404
+
         return cb(**args)
     return functools.update_wrapper(functools.partial(load_session, cb), cb)
 
-@flaskapp.route('/session/update', methods=['POST'])
+@flaskapp.route('/<series_slug>/<path:slug>/session/update', methods=['POST'])
 @with_session
 @with_session_types
 def session_update():
@@ -677,7 +678,8 @@ def session_update():
     # XXX redirect to a proper location
     return flask.render_template('session/edit.tpl')
 
-@flaskapp.route('/session/edit')
+@flaskapp.route('/<series_slug>/<path:slug>/session/edit')
+@with_conference_by_slug
 @with_session
 @with_session_types
 def session_edit():

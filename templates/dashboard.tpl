@@ -59,7 +59,7 @@ div.conference-history {
             <div class="conference-history">
 {% for conference in conferences %}
               <div class="row">
-                <div class="large-3 columns"><a href="/{{ conference.series.slug }}/{{ conference.slug }}">{{ conference.title }}</a></div>
+                <div class="large-3 columns"><a href="/{{ conference.full_slug }}">{{ conference.title }}</a></div>
               </div>
 {% endfor %}
             </div>
@@ -84,9 +84,9 @@ div.conference-history {
               <tr>
                 <td>{% if proposal.conference %}{{ proposal.conference.title }}{% endif %}</td>
                 <td><span{% if proposal.conference.status == 'private' %} class="invalid"{% endif %}>{{ proposal.title or 'N/A' }}</span></td>
-                <td><a href="/session/edit?id={{ proposal.id }}"><span class="i-mode_edit" /></a></td>
+                <td><a href="/{{ proposal.conference.full_slug }}/session/edit?id={{ proposal.id }}"><span class="i-mode_edit" /></a></td>
                 <td>{{ _(proposal.status) }}</td>
-                <td><button><span class="i-delete" /></button></td>
+                <td><button data-id="{{ session.id }}"><span class="i-delete" /></button></td>
               </tr>
 {% endfor %}
             </tbody>
