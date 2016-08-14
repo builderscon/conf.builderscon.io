@@ -25,9 +25,7 @@
 
 4.  access <http://127.0.0.1:3000/>
 
-## How to run on GAE local dev server (work in progress, as we did not migrate to GAE yet)
-
-GAE doesn't support Redis. So you need to use Memcache instead.
+## How to run on GAE local dev server (work in progress, as we did not fully migrate to GAE yet)
 
 1.  setup GAE SDK
 
