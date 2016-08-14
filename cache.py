@@ -25,7 +25,6 @@ class Redis(object):
 class Memcached:
     def __init__(self, servers=[], debug=0):
         if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/') or os.getenv('SERVER_SOFTWARE', '').startswith('Development/'):
-            print "GAE memcache used"
             self.client = memcache
         else:
             def server_str(server):
@@ -42,7 +41,6 @@ class Memcached:
                 raise Exception("servers missing in memcache settings")
             else:
                 server_settings = map( server_str, servers )
-            print "Normal memcache used"
             self.client = memcache.Client(server_settings, debug)
 
     def set(self, key, val, expires=0):
