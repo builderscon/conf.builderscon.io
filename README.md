@@ -29,36 +29,11 @@
 
 GAE doesn't support Redis. So you need to use Memcache instead.
 
-1.  setup
+1.  setup GAE SDK
 
-  - Install [GAE Python SDK](https://cloud.google.com/appengine/downloads)
-    
+  - Install [GAE Python SDK](https://cloud.google.com/appengine/downloads)   
 
-2.  In config.json,
-
-   Remove the "REDIS_INFO" section :
-   
-   ```
-       "REDIS_INFO": {
-         ...
-       },
-   ```
-
-   and add the "MEMCACHE" section like below
-
-   ```
-    "MEMCACHE": {
-        "servers" : [
-            {
-                "host": "localhost",
-                "port": "11211"
-            }
-        ],
-        "debug": 0
-    },  
-   ```
-
-3.  start GAE local dev server
+2.  start GAE local dev server
   
     do not forget the last dot (.) in the command
 

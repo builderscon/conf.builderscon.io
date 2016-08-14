@@ -38,15 +38,13 @@ class Config(object):
         with open(file, 'r') as f:
             self.cfg = json.load(f)
 
-        for section in ['OCTAV', 'GITHUB', 'GOOGLE_MAP']:
+        for section in ['OCTAV', 'GITHUB', 'REDIS_INFO', 'GOOGLE_MAP']:
             if not self.cfg.get(section):
                 raise Exception( "missing section '" + section + "' in config file '" + file + "'" )
         if self.cfg.get('OCTAV').get('BASE_URI'):
             raise Exception(
                 'DEPRECATED: {"OCTAV":{"BASE_URI"}} in config.json is deprecated.\
  Please use {"OCTAV":{"endpoint"}} instead and remove {"OCTAV":{"BASE_URI"}}.')
-        if self.cfg.get('REDIS_INFO') and self.cfg.get('MEMCACHE'):
-            raise Exception( 'In config.json, do not specify both "REDIS_INFO" and "MEMCACHE". Use only either of them.' )
 
 
     def section(self, name):
@@ -70,14 +68,15 @@ app = WSGILogger(flaskapp, [StreamHandler(sys.stdout)], ApacheFormatter())
 
 octav = Octav(**cfg.section('OCTAV'))
 
-if cfg.section('REDIS_INFO'):
+backend = os.getenv('CACHE_BACKEND', 'Redis')
+if backend == 'Redis':
     cache = cache.Redis(**cfg.section('REDIS_INFO'))
-elif cfg.section('MEMCACHE'):
-    cache = cache.Memcache(**cfg.section('MEMCACHE'))
+elif backend == 'Memcached':
+    cache = cache.Memcached(**cfg.section('MEMCACHED'))
 else:
-    raise Exception( 'config.json must specify either of "REDIS_INFO" or "MEMCACHE"' )
+    raise Exception('Unknown backend "%s"' % backend)
 
-twitter = oauth.Init('twitter', 
+twitter = oauth.Init('twitter',
     base_url='https://api.twitter.com/1.1/',
     request_token_url='https://api.twitter.com/oauth/request_token',
     access_token_url='https://api.twitter.com/oauth/access_token',

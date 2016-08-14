@@ -11,3 +11,6 @@ handlers:
 libraries:
 - name: jinja2
   version: latest
+
+env_variables:
+  CACHE_BACKEND: 'Memcached'

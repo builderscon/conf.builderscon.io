@@ -22,7 +22,7 @@ class Redis(object):
 
         return pickle.loads(thing)
 
-class Memcache:
+class Memcached:
     def __init__(self, servers=[], debug=0):
         if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/') or os.getenv('SERVER_SOFTWARE', '').startswith('Development/'):
             print "GAE memcache used"
@@ -49,9 +49,5 @@ class Memcache:
         self.client .set(key, val, expires)
 
     def get(self, key):
-        thing = self.client .get(key)
-        if not thing:
-            return None
-
-        return thing
+        return self.client.get(key)
 

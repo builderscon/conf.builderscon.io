@@ -8,6 +8,15 @@
         "port": 6379,
         "db": 0
     },
+    "MEMCACHED": {
+        "servers" : [
+            {
+                "host": "localhost",
+                "port": "11211"
+            }
+        ],
+        "debug": 0
+    },
     "OCTAV": {
         "endpoint": "",
         "key": "",
