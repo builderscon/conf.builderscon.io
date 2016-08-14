@@ -68,9 +68,15 @@ app = WSGILogger(flaskapp, [StreamHandler(sys.stdout)], ApacheFormatter())
 
 octav = Octav(**cfg.section('OCTAV'))
 
-cache = cache.Redis(**cfg.section('REDIS_INFO'))
+backend = os.getenv('CACHE_BACKEND', 'Redis')
+if backend == 'Redis':
+    cache = cache.Redis(**cfg.section('REDIS_INFO'))
+elif backend == 'Memcached':
+    cache = cache.Memcached(**cfg.section('MEMCACHED'))
+else:
+    raise Exception('Unknown backend "%s"' % backend)
 
-twitter = oauth.Init('twitter', 
+twitter = oauth.Init('twitter',
     base_url='https://api.twitter.com/1.1/',
     request_token_url='https://api.twitter.com/oauth/request_token',
     access_token_url='https://api.twitter.com/oauth/access_token',

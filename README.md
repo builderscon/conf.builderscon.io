@@ -20,10 +20,27 @@
     $ vagrant ssh
     $ cd ~/vagrant
     $ redis-server &
-    $ python3 app.wsgi
+    $ python app.py
     ```
 
 4.  access <http://127.0.0.1:3000/>
+
+## How to run on GAE local dev server (work in progress, as we did not fully migrate to GAE yet)
+
+1.  setup GAE SDK
+
+  - Install [GAE Python SDK](https://cloud.google.com/appengine/downloads)   
+
+2.  start GAE local dev server
+  
+    do not forget the last dot (.) in the command
+
+    ```
+    $ dev_appserver.py .
+    ```
+
+4.  access <http://127.0.0.1:8080/>
+
 
 ## i18n/l10n
 

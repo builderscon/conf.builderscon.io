@@ -54,6 +54,7 @@ ubuntu-all:
 ubuntu-root: \
 	ubuntu-apt \
 	ubuntu-redis \
+	ubuntu-memcached \
 	ubuntu-pip
 
 ubuntu-user: \
@@ -74,6 +75,9 @@ ubuntu-apt:
 
 ubuntu-redis:
 	apt-get install -y redis-server
+
+ubuntu-memcached:
+	apt-get install -y memcached
 
 ubuntu-pip:
 	apt-get install -y python-pip
