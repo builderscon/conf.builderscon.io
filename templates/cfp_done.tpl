@@ -12,32 +12,22 @@
 
 {% block main %}
 <main>
+{% if 'cfp_post_submission_instructions' in conference %}
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">プロポーザル送信後の流れ</h1>
-      <div class="section-content">
-        <div style="margin: 20px 0px;">
-          <h4>プロポーザル受理の確認、修正</h4>
-          <p>応募者がプロポーザルを送信した後は、主催者はメールにてプロポーザルが受理されたことを連絡します。
-          応募者は<a href="." target="_blank">こちらのページ</a>にアクセスして自身のプロポーザルを閲覧することができ、
-          また締切日(octavとリンク)前までは自分のプロポーザルを修正することができます。</p>
-          <h4>プロポーザルの採択通知</h4>
-          <p>プロポーザル受理の締め切り(octavとリンク)日ののちに、審査期間を経て、主催者はメールにて採択されたスピーカーに採択通知を送ります。
-          また<a href="." target="_blank">セッション一覧のページ</a>にて採択されたトークを発表します。セッション一覧に自分のトークが採択されているのに、
-          採択通知を受け取っていないスピーカーは速やかに主催者にメールで連絡してください。</p>
-          <h4>採択されたスピーカー者による登壇可否の確認</h4>
-          <p>採択通知を受け取ったスピーカーは必ず○○日(octavとリンク)までに、採択された枠で登壇可能であることを主催者に通達してください。
-          主催者への登壇可否の通達は、採択通知のメールに返信する形で行ってください。
-          期限の○○日(octavとリンク)までにスピーカーからの登壇可否の確認がなかった場合、主催者は当該の応募については不採用になったものとして取り扱います。<p>
-          <h4>急な事情による不参加</h4>
-          <p>登壇確認をしたのちに、やむを得ない事情により登壇ができなくなった場合は、 スピーカーは速やかにメールにて主催者に連絡してください。</p>
-          <h4>スピーカー向けチケットの特典</h4>
-          <p>TBD</p>
-          <h4>カンファレンス当日</h4>
-          <p>カンファレンス当日は、時間に余裕をもって会場までお越しください。リラックスして、あなたの素晴らしいトークを思う存分披露してください。</p>
-        </div>
+      <div class="section-content no-header">
+        {{ conference.cfp_post_submission_instructions | markdown }}
       </div>
     </div>
   </div>
+{% endif %}
+  <div class="section article">
+    <div class="inner">
+      <div class="section-content no-header">
+        <a href="/{{ session.conference.full_slug }}/session/{{ session.id }}">{% trans %}Your submission can be viewd here{% endtrans %}</a>
+      </div>
+    </div>
+  </div>
+
 </main>
 {% endblock %}

@@ -46,7 +46,7 @@
           </div>
           <div class="row">
             <div class="large-{{ left }} columns">
-              <label>Abstract</label>
+              <label>{% trans %}Abstract{% endtrans %}</label>
               <div>{% trans %}You must provide at least one abstract in any of the supported languages{% endtrans %}</div>
               {% if errors and missing.get('abstract') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}
             </div>

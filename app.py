@@ -5,6 +5,8 @@ import flask
 import flask_babel
 import markupsafe
 import time
+import hashlib
+import random
 from requestlogger import WSGILogger, ApacheFormatter
 from logging import StreamHandler
 import json
@@ -467,10 +469,14 @@ def with_session_types(cb):
 @with_conference_by_slug
 @with_session_types
 def conference_cfp():
-    return flask.render_template('cfp.tpl')
+    f = '%s/cfp.tpl' % flask.g.stash.get('full_slug')
+    print(f)
+    return flask.render_template([f, 'cfp.tpl'])
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp/input', methods=['GET','POST'])
+@require_login
 @with_conference_by_slug
+@with_session_types
 def conference_cfp_input():
     if flask.request.method != 'POST':
         return flask.redirect('/%s/cfp' % flask.g.stash.get('full_slug'))
@@ -512,41 +518,82 @@ def conference_cfp_input():
     
     if flask.g.stash.get('errors') > 0:
         flask.g.stash["session"] = form
-        return conference_cfp( flask.g.stash.get('series_slug'), flask.g.stash.get('slug') )
+        return flask.render_template('cfp.tpl')
+
+    h = hashlib.sha256()
+    h.update('%f' % time.time())
+    h.update('%f' % random.random())
+    h.update('%d' % os.getpid())
+    key = 'cfp_submission_%s' % h.hexdigest()
+    flask.g.stash["submission_key"] = key
 
     conference = flask.g.stash.get('conference')
     user = flask.session.get('user')
+    flask.session[key] = dict(
+        conference_id    = conference.get('id'),
+        abstract         = form.get('abstract'),
+        session_type_id  = form.get('session_type_id'),
+        speaker_id       = user.get('id'),
+        user_id          = user.get('id'),
+        title            = form.get('title'),
+        category         = form.get('category'),
+        material_level   = form.get('material_level'),
+        memo             = form.get('memo'),
+        photo_permission = form.get('photo_permission'),
+        video_permission = form.get('video_permission'),
+        slide_language   = form.get('slide_language'),
+        spoken_language  = form.get('spoken_language'),
+        **l10n
+    )
+    return flask.redirect('/%s/cfp/confirm?key=%s' % (conference.get('full_slug'), key))
+
+@flaskapp.route('/<series_slug>/<path:slug>/cfp/confirm')
+@with_conference_by_slug
+def conference_cfp_confirm():
+    key = flask.request.args.get('key')
+    session = flask.session.get(key)
+    if not session:
+        return "not found", 404
+    flask.g.stash['session'] = session
+    flask.g.stash['submission_key'] = key
+    return flask.render_template('cfp_confirm.tpl')
+
+@flaskapp.route('/<series_slug>/<path:slug>/cfp/commit', methods=['GET','POST'])
+@with_conference_by_slug
+@with_session_types
+def conference_cfp_commit():
+    if flask.request.method != 'POST':
+        return flask.redirect('/%s/cfp' % flask.g.stash.get('full_slug'))
+
+    key = flask.request.form.get('key')
+    values = flask.session.get(key)
+    if not values:
+        return "not found", 404
+    conference = flask.g.stash.get('conference')
+    user = flask.session.get('user')
     try:
-        session = octav.create_session(
-            conference_id    = conference.get('id'),
-            abstract         = form.get('abstract'),
-            session_type_id  = form.get('session_type_id'),
-            speaker_id       = user.get('id'),
-            user_id          = user.get('id'),
-            title            = form.get('title'),
-            category         = form.get('category'),
-            material_level   = form.get('material_level'),
-            memo             = form.get('memo'),
-            photo_permission = form.get('photo_permission'),
-            video_permission = form.get('video_permission'),
-            slide_language   = form.get('slide_language'),
-            spoken_language  = form.get('spoken_language'),
-            **l10n
-        )
+        session = octav.create_session(**values)
     except:
         # TODO: capture, and do the right thing
         pass
 
     if session:
-        return flask.redirect('/%s/cfp/done' % flask.g.stash.get('full_slug'))
+        return flask.redirect('/%s/cfp_done?id=%s' % (flask.g.stash.get('full_slug'), session.get('id')))
 
-    session_types = octav.list_session_types_by_conference(conference_id=conference.get('id'), lang=flask.g.lang)
-    
-    return flask.render_template('cfp.tpl', session_types=session_types)
+    return flask.render_template('cfp.tpl')
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp_done')
 @with_conference_by_slug
+@with_session_types
 def confernece_cfp_done():
+    id = flask.request.values.get('id')
+    session = octav.lookup_session(lang='all', id=id)
+    if not session:
+        return octav.last_error(), 404
+
+    print(session["session_type"])
+
+    flask.g.stash["session"] = session
     return flask.render_template('cfp_done.tpl')
 
 @flaskapp.route('/<series_slug>/<path:slug>/news')
@@ -578,18 +625,6 @@ def conference_news():
 @with_conference_by_slug
 def conference_instance():
     return flask.render_template('conference.tpl', googlemap_api_key=cfg.googlemap_api_key())
-
-@flaskapp.route('/<series_slug>/<slug>/session/add')
-@with_conference_by_slug
-def add_session():
-    return flask.render_template('add_session.tpl')
-
-
-@flaskapp.route('/<series_slug>/<slug>/session/add', methods=['POST'])
-@with_conference_by_slug
-def add_session_post():
-    flask.redirect('/')
-
 
 @flaskapp.route('/<series_slug>/<path:slug>/session/<id>')
 @with_conference_by_slug
