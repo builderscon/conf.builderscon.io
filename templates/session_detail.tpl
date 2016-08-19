@@ -7,14 +7,12 @@
       <h1 class="section-header">{{session.title}}</h1>
       <div class="section-content">
 
-{% if session.session_type %}
         <div class="row">
           <div class="small-6 large-2 columns">
             <img style="width: 120px; height: 120px; border: 1px solid #ccc" src="{% if session.speaker.avatar_url %}{{ session.speaker.avatar_url }}{% else %}{{ url('static', filename='images/noprofile.png') }}{% endif %}" />
             <div class="text-center"><a  href="." target="_blank">{{session.speaker.nickname}}</a></div>
           </div>
         </div>
-{% endif %}
 
         <div class="row">
           <div class="small-12 columns">
@@ -34,12 +32,10 @@
               <td>Starts On</td>
               <td>{{session.starts_on}}</td>
             </tr>
-{% if session.session_type %}
             <tr>
               <td>Duration</td>
               <td>{{session.session_type.name}}</td>
             </tr>
-{% endif %}
             <tr>
               <td>Spoken Language</td>
               <td>{{session.spoken_language}}</td>
