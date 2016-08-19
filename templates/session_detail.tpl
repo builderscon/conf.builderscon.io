@@ -59,20 +59,6 @@
           </table>
         </div>
 
-{% if session.video_embed_html %}
-        <div class="row text-center">
-          <div class="small-12 columns">
-            {{session.video_embed_html}}
-          </div>
-        </div>
-{% endif %}
-
-{% if session.slide_embed_html  %}
-        <div class="row text-center">
-          {{session.slide_embed_html}}
-        </div>
-{% endif %}
-
       </div>
     </div>
   </div>
