@@ -49,3 +49,7 @@ div.tier-3 div.sponsor-name {
     font-size: 60%;
 }
 
+.social-button {
+    display: inline-block;
+    vertical-align: top;
+}
