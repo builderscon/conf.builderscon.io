@@ -28,10 +28,12 @@
               <td>Material Level</td>
               <td>{{session.material_level}}</td>
             </tr>
+{% if session.starts_on %}
             <tr>
               <td>Starts On</td>
               <td>{{session.starts_on}}</td>
             </tr>
+{% endif %}
             <tr>
               <td>Duration</td>
               <td>{{session.session_type.name}}</td>
