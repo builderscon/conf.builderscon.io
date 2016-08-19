@@ -33,7 +33,7 @@
         <div class="row">
           <div class="small-12 columns">
             <p>
-              {{session.abstract}}
+              {{session.abstract | markdown}}
             </p>
           </div>
         </div>
