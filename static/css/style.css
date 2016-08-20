@@ -49,7 +49,14 @@ div.tier-3 div.sponsor-name {
     font-size: 60%;
 }
 
-.social-button {
+div.social-button {
+    margin: 10px 0px;
     display: inline-block;
     vertical-align: top;
+}
+
+@media screen and (min-width: 64em) {
+    div.social-button {
+        display: block;
+    }
 }

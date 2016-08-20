@@ -9,11 +9,11 @@
       <div class="section-content">
 
         <div class="row">
-          <div class="text-center small-4 large-2 columns">
+          <div class="text-center large-2 columns">
             <img style="width: 120px; height: 120px; border: 1px solid #ccc" src="{% if session.speaker.avatar_url %}{{ session.speaker.avatar_url }}{% else %}{{ url('static', filename='images/noprofile.png') }}{% endif %}" />
-            <div class="text-center"><a  href="." target="_blank">{{session.speaker.nickname}}</a></div>
-          </div>
-          <div class="small-8 large-10 columns">
+            <div class="text-center">
+              <a  href="." target="_blank">{{session.speaker.nickname}}</a>
+            </div>
             <div class="social-button">
               <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
             </div>
@@ -26,12 +26,11 @@
             <div class="social-button">
               <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
             </div>
+
+            <!-- add new buttons here e.g. edit session details button -->
+
           </div>
-        </div>
-
-
-        <div class="row">
-          <div class="small-12 columns">
+          <div class="large-10 columns">
             <p>
               {{session.abstract | markdown}}
             </p>
