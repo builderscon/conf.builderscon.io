@@ -545,7 +545,7 @@ def conference_cfp_input():
         spoken_language  = form.get('spoken_language'),
         **l10n
     )
-    return flask.redirect('/%s/cfp/confirm?key=%s' % (conference.get('full_slug'), key))
+    return flask.redirect('/%s/cfp/confirm?key=%s' % (flask.g.stash.get('full_slug'), key))
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp/confirm')
 @with_conference_by_slug
