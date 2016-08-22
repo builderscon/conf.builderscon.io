@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-29 14:38+0000\n"
+"POT-Creation-Date: 2016-08-22 11:11+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: views/add_session.tpl:22
+#: templates/add_session.tpl:22
 msgid "Submit"
 msgstr ""
 
-#: views/beacon.tpl:2
+#: templates/beacon.tpl:2
 msgid "Mr. B"
 msgstr ""
 
-#: views/beacon.tpl:6 views/index.tpl:16
-msgid "BLOG"
-msgstr ""
-
-#: views/beacon.tpl:13
+#: templates/beacon.tpl:3 templates/beacon.tpl:15
 msgid "Meet Mr. B (Mr. Beacon)!"
 msgstr ""
 
-#: views/beacon.tpl:15
+#: templates/beacon.tpl:8 templates/index.tpl:17
+msgid "BLOG"
+msgstr ""
+
+#: templates/beacon.tpl:17
 msgid ""
 "\n"
 "        <p>Mr. B is our jolly mascot beaver. He likes to build stuff, "
@@ -43,11 +43,11 @@ msgid ""
 "        "
 msgstr ""
 
-#: views/beacon.tpl:42
+#: templates/beacon.tpl:44
 msgid "Terms of Use"
 msgstr ""
 
-#: views/beacon.tpl:44
+#: templates/beacon.tpl:46
 msgid ""
 "\n"
 "        <ul>\n"
@@ -65,27 +65,116 @@ msgid ""
 "        "
 msgstr ""
 
-#: views/conference.tpl:54
+#: templates/catalog.tpl:4
+msgid "English"
+msgstr ""
+
+#: templates/catalog.tpl:5
+msgid "Japanese"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:26
+msgid "Submission Details"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:30
+msgid "Title (English)"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:34
+msgid "Title (Japanese)"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:38 templates/session/form.tpl:39
+msgid "Session Type"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:42
+msgid "Abstract (English)"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:46
+msgid "Abstract (Japanese)"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:50 templates/session/form.tpl:75
+msgid "Expected audience level"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:54 templates/session/form.tpl:91
+msgid "Spoken Language"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:58 templates/session/form.tpl:103
+msgid "Slide Language"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:62 templates/session/form.tpl:115
+msgid "Comments"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:66 templates/session/form.tpl:144
+msgid "Photo Release"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:70 templates/session/form.tpl:158
+msgid "Recording Release"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:74 templates/session/form.tpl:172
+msgid "Materials Release"
+msgstr ""
+
+#: templates/cfp_confirm.tpl:82 templates/session/form.tpl:195
+#: templates/sessions.tpl:30
+msgid "Submit your proposal"
+msgstr ""
+
+#: templates/cfp_done.tpl:27
+msgid "Your submission can be viewd here"
+msgstr ""
+
+#: templates/conference.tpl:70
 msgid "Information"
 msgstr ""
 
-#: views/conference.tpl:56
+#: templates/conference.tpl:72
 msgid "Dates"
 msgstr ""
 
-#: views/conference.tpl:60
+#: templates/conference.tpl:76
 msgid "Venue"
 msgstr ""
 
-#: views/conference.tpl:75
+#: templates/conference.tpl:91
 msgid "Guest Speakers"
 msgstr ""
 
-#: views/index.tpl:34
+#: templates/dashboard.tpl:58
+msgid "Organizer"
+msgstr ""
+
+#: templates/dashboard.tpl:70
+msgid "No proposals have been submitted"
+msgstr ""
+
+#: templates/dashboard.tpl:75
+msgid "Conference"
+msgstr ""
+
+#: templates/dashboard.tpl:76 templates/session/form.tpl:16
+msgid "Title"
+msgstr ""
+
+#: templates/dashboard.tpl:78
+msgid "Status"
+msgstr ""
+
+#: templates/index.tpl:35
 msgid "Welcome To builderscon"
 msgstr ""
 
-#: views/index.tpl:36
+#: templates/index.tpl:37
 msgid ""
 "\n"
 "        <strong>Join builderscon and discover something new! builderscon "
@@ -101,15 +190,15 @@ msgid ""
 "        "
 msgstr ""
 
-#: views/index.tpl:49
+#: templates/index.tpl:50
 msgid "Upcoming Conferences"
 msgstr ""
 
-#: views/index.tpl:68
+#: templates/index.tpl:68
 msgid "Get Involved!"
 msgstr ""
 
-#: views/index.tpl:75
+#: templates/index.tpl:75
 msgid ""
 "<b>Slack: </b> We have <a href=\"https://builderscon.slack.com\">a Slack "
 "team</a>, and <a href=\"https://slack-invite-dot-"
@@ -118,17 +207,17 @@ msgid ""
 " your own builderscon!"
 msgstr ""
 
-#: views/index.tpl:83
+#: templates/index.tpl:83
 msgid ""
 "<b>Github:</b> Explore our many opensource projects on <a "
 "href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
 "href=\"https://github.com/builderscon/builderscon\">spec</a>\", our <a "
 "href=\"https://github.com/builderscon/octav\">API server</a>, and <a "
-"href=\"https://github.com/builderscon/builderscon.io\">this "
-"site</a>. We'd love for your to send us pull requests!"
+"href=\"https://github.com/builderscon/builderscon.io\">this site</a>. "
+"We'd love for your to send us pull requests!"
 msgstr ""
 
-#: views/index.tpl:91
+#: templates/index.tpl:91
 msgid ""
 "<b>Facebook:</b> Peruse our <a "
 "href=\"https://www.facebook.com/builderscon\">Facebook page</a> to find "
@@ -138,14 +227,14 @@ msgid ""
 "href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
 msgstr ""
 
-#: views/index.tpl:99
+#: templates/index.tpl:99
 msgid ""
 "<b>Twitter:</b> Follow us on <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
 "updates!"
 msgstr ""
 
-#: views/index.tpl:107
+#: templates/index.tpl:107
 msgid ""
 "<b>Share:</b> Read our <a href=\"http://blog.builderscon.io\">blog</a>, "
 "post on your favorite sites, and perhaps if you are feeling like it, you "
@@ -153,51 +242,173 @@ msgid ""
 "conversations."
 msgstr ""
 
-#: views/login.tpl:19
+#: templates/login.tpl:28
 msgid "Login"
 msgstr ""
 
-#: views/login.tpl:21
-msgid "Login with Github"
+#: templates/login.tpl:36
+#, python-format
+msgid "Login with %(name)s"
 msgstr ""
 
-#: views/news.tpl:11
+#: templates/news.tpl:11
 msgid "Recent News"
 msgstr ""
 
-#: views/sessions.tpl:11
+#: templates/sessions.tpl:11
 msgid "Sessions"
 msgstr ""
 
-#: views/sessions.tpl:30
-msgid "Submit your proposal"
-msgstr ""
-
-#: views/sponsors.tpl:18
+#: templates/sponsor_block.tpl:3
 msgid "Sponsors"
 msgstr ""
 
-#: views/sponsors.tpl:20
-msgid " is supported by these sponsors"
-msgstr ""
-
-#: views/layout/base.tpl:4 views/layout/base.tpl:16
+#: templates/layout/base.tpl:4 templates/layout/base.tpl:10
 msgid "Discover Something New"
 msgstr ""
 
-#: views/layout/base.tpl:16
+#: templates/layout/base.tpl:10
 msgid "builderscon is a festival for those who love tech!"
 msgstr ""
 
-#: views/layout/base.tpl:64
+#: templates/layout/base.tpl:64
 msgid "builderscon is a festival for the technology lovers."
 msgstr ""
 
-#: views/layout/conference.tpl:7
+#: templates/layout/conference.tpl:8
 msgid "NEWS"
 msgstr ""
 
-#: views/layout/conference.tpl:8
+#: templates/layout/conference.tpl:9
 msgid "SPONSORS"
+msgstr ""
+
+#: templates/session/form.tpl:5
+msgid "Submission Form"
+msgstr ""
+
+#: templates/session/form.tpl:12
+msgid "Proposal Details"
+msgstr ""
+
+#: templates/session/form.tpl:17
+msgid "You must provide at least one title in any of the supported languages"
+msgstr ""
+
+#: templates/session/form.tpl:18 templates/session/form.tpl:40
+#: templates/session/form.tpl:54
+msgid "required field"
+msgstr ""
+
+#: templates/session/form.tpl:31
+#, python-format
+msgid "Please provide the session title in %(lang)s"
+msgstr ""
+
+#: templates/session/form.tpl:45
+msgid "SUBMISSION CURRENTLY CLOSED"
+msgstr ""
+
+#: templates/session/form.tpl:52
+msgid "Abstract"
+msgstr ""
+
+#: templates/session/form.tpl:53
+msgid "You must provide at least one abstract in any of the supported languages"
+msgstr ""
+
+#: templates/session/form.tpl:66
+#, python-format
+msgid ""
+"Please provide the session abstract in %(lang)s\n"
+"\n"
+"You may use Markdown in this field"
+msgstr ""
+
+#: templates/session/form.tpl:80
+msgid "Beginner"
+msgstr ""
+
+#: templates/session/form.tpl:81
+msgid "Intermediate"
+msgstr ""
+
+#: templates/session/form.tpl:82
+msgid "Expert"
+msgstr ""
+
+#: templates/session/form.tpl:99
+msgid "Please select which language you will be speaking in."
+msgstr ""
+
+#: templates/session/form.tpl:111
+msgid "Please select which language you will write your slides in."
+msgstr ""
+
+#: templates/session/form.tpl:117
+msgid ""
+"Specify any communication that you might want to relay to the organizer: "
+"e.g. special financial requirements, required documents, specific dates "
+"during the conference you might not be able to attend, etc"
+msgstr ""
+
+#: templates/session/form.tpl:123
+msgid "Videos, Photos, and Materials"
+msgstr ""
+
+#: templates/session/form.tpl:124
+msgid ""
+"Please refer to our <a href=\".\" target=\"_blank\">terms of use</a> "
+"about how builderscon uses videos, photos, and other materials."
+msgstr ""
+
+#: templates/session/form.tpl:131
+msgid "Please provide the URL of where you uploaded your slide"
+msgstr ""
+
+#: templates/session/form.tpl:146
+msgid ""
+"By selecting \"Allow\" below, you agree to allow builderscon to take your"
+" photo during the duration of the event, and to distribute and place "
+"those photos on our website(s)."
+msgstr ""
+
+#: templates/session/form.tpl:149 templates/session/form.tpl:163
+#: templates/session/form.tpl:177
+msgid "Allow"
+msgstr ""
+
+#: templates/session/form.tpl:150 templates/session/form.tpl:164
+#: templates/session/form.tpl:178
+msgid "Disallow"
+msgstr ""
+
+#: templates/session/form.tpl:160
+msgid ""
+"By selecting \"Allow\" below, you agree to allow builderscon to record "
+"your presentation on video, and to distribute and place those recordings "
+"on our website(s)."
+msgstr ""
+
+#: templates/session/form.tpl:174
+msgid ""
+"By selecting \"Allow\" below, you agree to allow builderscon to "
+"distribute and place materials from your presentation (such as slides) on"
+" our website(s), including from our API."
+msgstr ""
+
+#: templates/session/form.tpl:188
+msgid ""
+"I hereby confirm that I am submitting this proposal after reading the <a "
+"href=\"\" target=\"_blank\">terms of use</a>, and that I understand and "
+"agree to its contents."
+msgstr ""
+
+#: templates/session/form.tpl:189
+msgid "Yes, I agree to the Terms Of Use"
+msgstr ""
+
+#: templates/session/form.tpl:197
+msgid "Please check agree to our Terms Of Use before submitting your proposal."
 msgstr ""
 
