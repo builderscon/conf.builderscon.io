@@ -66,6 +66,7 @@ cfg = Config(config_file)
 
 flaskapp = flask.Flask("builderscon")
 flaskapp.secret_key = cfg.section('Flask').get('secret_key')
+flaskapp.base_url = cfg.section('Flask').get('base_url', 'https://builderscon.io')
 flaskapp.url_map.converters['regex'] = flasktools.RegexConverter
 babel = flask_babel.Babel(flaskapp)
 app = WSGILogger(flaskapp, [StreamHandler(sys.stdout)], ApacheFormatter())
@@ -233,7 +234,7 @@ def get_github_token(token=None):
 
 @flaskapp.route('/login/github')
 def login_github():
-    return start_oauth(github, 'http://127.0.0.1:8000/login/github/callback')
+    return start_oauth(github, flaskapp.base_url + '/login/github/callback')
 
 @flaskapp.route('/login/github/callback')
 @github.authorized_handler
@@ -288,7 +289,7 @@ def get_facebook_token(token=None):
 
 @flaskapp.route('/login/facebook')
 def login_facebook():
-    return start_oauth(facebook, 'https://builderscon.io/login/facebook/callback')
+    return start_oauth(facebook, flaskapp.base_url + '/login/facebook/callback')
 
 @flaskapp.route('/login/facebook/callback')
 @facebook.authorized_handler
@@ -343,7 +344,7 @@ def get_twitter_token(token=None):
 
 @flaskapp.route('/login/twitter')
 def login_twitter():
-    return start_oauth(twitter, 'https://builderscon.io/login/twitter/callback')
+    return start_oauth(twitter, flaskapp.base_url + '/login/twitter/callback')
 
 @flaskapp.route('/login/twitter/callback')
 @twitter.authorized_handler
