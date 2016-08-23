@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-23 20:23+0900\n"
+"POT-Creation-Date: 2016-08-23 15:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -333,7 +333,7 @@ msgid "required field"
 msgstr ""
 
 #: templates/session/form.tpl:22
-msgid "You must provide at least one title in any of the supported languages"
+msgid "Please select a language below and provide the title"
 msgstr ""
 
 #: templates/session/form.tpl:31
@@ -354,7 +354,7 @@ msgid "Abstract"
 msgstr ""
 
 #: templates/session/form.tpl:58
-msgid "You must provide at least one abstract in any of the supported languages"
+msgid "Please select a language below and provide the abstract"
 msgstr ""
 
 #: templates/session/form.tpl:66

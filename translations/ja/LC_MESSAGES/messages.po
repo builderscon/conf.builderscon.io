@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-23 20:23+0900\n"
+"POT-Creation-Date: 2016-08-23 15:27+0000\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -377,8 +377,8 @@ msgid "required field"
 msgstr "必須"
 
 #: templates/session/form.tpl:22
-msgid "You must provide at least one title in any of the supported languages"
-msgstr "選択可能な言語の中からひとつ以上のタイトルを記入してください"
+msgid "Please select a language below and provide the title"
+msgstr "以下から言語を選択してタイトルを記入してください"
 
 #: templates/session/form.tpl:31
 #, python-format
@@ -398,8 +398,8 @@ msgid "Abstract"
 msgstr "概要"
 
 #: templates/session/form.tpl:58
-msgid "You must provide at least one abstract in any of the supported languages"
-msgstr "選択可能な言語の中からひとつ以上の概要を記入してください"
+msgid "Please select a language below and provide the abstract"
+msgstr "以下から言語を選択して概要を記入してください"
 
 #: templates/session/form.tpl:66
 #, python-format
@@ -502,4 +502,3 @@ msgstr "応募前に利用規約に同意してください"
 #: templates/session/view.tpl:61
 msgid "Starts On"
 msgstr "開始日時"
-
