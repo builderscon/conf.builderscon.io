@@ -19,7 +19,7 @@
             <div class="large-{{ right }} columns">
               <div class="row" style="margin-left: 0em">
                 <div class="large-11 columns">
-                  <p class="notice-small">{% trans %}You must provide at least one title in any of the supported languages{% endtrans %}</p>
+                  <p class="notice-small">{% trans %}Please select a language below and provide the title{% endtrans %}</p>
                   <select id="select-title-lang">
 {% for l in languages %}
                     <option value="{{ l.value }}">{{ _(l.name) }}</option>
@@ -55,7 +55,7 @@
             <div class="large-{{ right }} columns">
               <div class="row" style="margin-left: 0em">
                 <div class="large-11 columns">
-                  <p class="notice-small">{% trans %}You must provide at least one abstract in any of the supported languages{% endtrans %}</p>
+                  <p class="notice-small">{% trans %}Please select a language below and provide the abstract{% endtrans %}</p>
                   <select id="select-abstract-lang">
 {% for l in languages %}
                     <option value="{{ l.value }}">{{ _(l.name) }}</option>
