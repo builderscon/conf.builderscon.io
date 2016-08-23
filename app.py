@@ -381,7 +381,7 @@ def login_twitter_callback(resp):
         return flask.redirect(flask.request.args.get('.next') or '/')
 
     res = twitter.request('/account/verify_credentials.json')
-    if res.Status() != 200:
+    if res.status != 200:
         flask.flash('failed to fetch user information after oauth')
         return flask.redirect('/login')
 
