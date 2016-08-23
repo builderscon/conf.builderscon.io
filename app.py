@@ -576,8 +576,6 @@ def conference_cfp_commit():
     values = flask.session.get(key)
     if not values:
         return "not found", 404
-    conference = flask.g.stash.get('conference')
-    user = flask.session.get('user')
     try:
         session = octav.create_session(**values)
     except:
@@ -696,7 +694,6 @@ def session_update():
         flask.g.stash["session"] = form
         return flask.render_template('session/edit.tpl')
 
-    conference = flask.g.stash.get('conference')
     user = flask.session.get('user')
     try:
         octav.update_session(
