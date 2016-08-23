@@ -1,5 +1,5 @@
 """OCTAV Client Library"""
-"""DO NOT EDIT: This file was generated from ../spec/v1/api.json on Tue Aug 23 15:47:21 2016"""
+"""DO NOT EDIT: This file was generated from ../spec/v1/api.json on Wed Aug 24 07:01:43 2016"""
 
 import json
 import os
@@ -109,6 +109,9 @@ class Octav(object):
         if id is not None:
             payload['id'] = id
         uri = '%s/user/lookup' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -140,6 +143,9 @@ class Octav(object):
         if auth_via is not None:
             payload['auth_via'] = auth_via
         uri = '%s/user/lookup_user_by_auth_user_id' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -250,6 +256,9 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/user/list' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -325,6 +334,9 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/venue/list' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -600,6 +612,9 @@ class Octav(object):
         if venue_id is not None:
             payload['venue_id'] = venue_id
         uri = '%s/room/list' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -666,6 +681,9 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/conference_series/list' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -1110,6 +1128,9 @@ class Octav(object):
         if lang is not None:
             payload['lang'] = lang
         uri = '%s/session_type/lookup' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -1188,6 +1209,9 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/session_type/list' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -1273,6 +1297,9 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/conference/list_by_organizer' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -1306,6 +1333,9 @@ class Octav(object):
         if status is not None:
             payload['status'] = status
         uri = '%s/conference/list' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -1529,6 +1559,9 @@ class Octav(object):
         if lang is not None:
             payload['lang'] = lang
         uri = '%s/session/lookup' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -1681,6 +1714,9 @@ class Octav(object):
         if status is not None:
             payload['status'] = status
         uri = '%s/session/list' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -1779,6 +1815,9 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/question/list' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -1952,6 +1991,9 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/featured_speaker/list' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -2117,6 +2159,9 @@ class Octav(object):
         if lang is not None:
             payload['lang'] = lang
         uri = '%s/sponsor/lookup' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
@@ -2146,6 +2191,9 @@ class Octav(object):
         if since is not None:
             payload['since'] = since
         uri = '%s/sponsor/list' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
         qs = urlencode(payload)
         if self.debug:
             print('GET %s?%s' % (uri, qs))
