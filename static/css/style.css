@@ -55,6 +55,10 @@ div.social-button {
     vertical-align: top;
 }
 
+strong {
+    font-weight: bold;
+}
+
 @media screen and (min-width: 64em) {
     div.social-button {
         display: block;

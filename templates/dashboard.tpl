@@ -28,6 +28,10 @@ div.conference-history {
   padding-left: 2em;
 }
 
+.invalid {
+  color: #ccc;
+}
+
 -->
 </style>
 {% endblock %}
@@ -55,7 +59,7 @@ div.conference-history {
             <div class="conference-history">
 {% for conference in conferences %}
               <div class="row">
-                <div class="large-3 columns"><a href="/{{ conference.series.slug }}/{{ conference.slug }}">{{ conference.title }}</a></div>
+                <div class="large-3 columns"><a href="/{{ conference.full_slug }}">{{ conference.title }}</a></div>
               </div>
 {% endfor %}
             </div>
@@ -65,8 +69,28 @@ div.conference-history {
 {% if not proposals %}
             <p>{% trans %}No proposals have been submitted{% endtrans %}</p>
 {% else %}
-            <div class="proposal-history">
-            </div>
+            <table class="proposal-history">
+            <thead>
+              <tr>
+                <td>{% trans %}Conference{% endtrans %}</td>
+                <td>{% trans %}Title{% endtrans %}</td>
+                <td>&nbsp;</td>
+                <td>{% trans %}Status{% endtrans %}</td>
+                <td>&nbsp;</td>
+              </tr>
+            </thead>
+            <tbody>
+{% for proposal in proposals %}
+              <tr>
+                <td>{% if proposal.conference %}{{ proposal.conference.title }}{% endif %}</td>
+                <td><span{% if proposal.conference.status == 'private' %} class="invalid"{% endif %}>{{ proposal.title or 'N/A' }}</span></td>
+                <td><a href="/{{ proposal.conference.full_slug }}/session/{{ proposal.id }}/edit"><span class="i-mode_edit" /></a></td>
+                <td>{{ _(proposal.status) }}</td>
+                <td><a href="/{{ proposal.conference.full_slug }}/session/{{ proposal.id }}/delete"><span class="i-delete" /></a></td>
+              </tr>
+{% endfor %}
+            </tbody>
+            </table>
 {% endif %}
           </div>
         </div>

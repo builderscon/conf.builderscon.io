@@ -5,6 +5,8 @@ import flask
 import flask_babel
 import markupsafe
 import time
+import hashlib
+import random
 from requestlogger import WSGILogger, ApacheFormatter
 from logging import StreamHandler
 import json
@@ -30,8 +32,10 @@ else:
 
 CACHE_CONFERENCE_EXPIRES = 300
 CACHE_CONFERENCE_SESSIONS_EXPIRES = 300
-
-
+LANGUAGES=[
+ dict({'name': 'English', 'value': 'en'}),
+ dict({'name': 'Japanese', 'value': 'ja'})
+]
 
 class Config(object):
     def __init__(self, file):
@@ -61,6 +65,7 @@ cfg = Config(config_file)
 
 flaskapp = flask.Flask("builderscon")
 flaskapp.secret_key = cfg.section('Flask').get('secret_key')
+flaskapp.base_url = cfg.section('Flask').get('base_url', 'https://builderscon.io')
 flaskapp.url_map.converters['regex'] = flasktools.RegexConverter
 babel = flask_babel.Babel(flaskapp)
 app = WSGILogger(flaskapp, [StreamHandler(sys.stdout)], ApacheFormatter())
@@ -123,9 +128,27 @@ def init_stash():
 @flaskapp.context_processor
 def inject_template_vars():
     stash = flask.g.stash
+    stash["languages"] = LANGUAGES
     stash["flask_session"] = flask.session
     stash["url"] = flask.url_for
     return stash
+
+# Used in templates, when all you have is the user's input value
+@flaskapp.template_filter('permname')
+def permission_value_to_name(v):
+    return v.title()
+
+@flaskapp.template_filter('audlevelname')
+def audience_level_value_to_name(v):
+    return v.title()
+
+# Used in templates, when all you have is the user's input value
+@flaskapp.template_filter('langname')
+def lang_value_to_name(v):
+    for l in LANGUAGES:
+        if l.get('value') == v:
+            return l.get('name')
+    return ""
 
 @flaskapp.template_filter('urlencode')
 def urlencode_filter(s):
@@ -135,16 +158,17 @@ def urlencode_filter(s):
     s = flasktools.quote_plus(s)
     return markupsafe.Markup(s)
 
-# Check if we have the user session field pre-populated.
-def require_login(cb):
-    def check_login(cb, **args):
-        if not 'user' in flask.session:
-            query = flasktools.urlencode({
-                '.next': flask.request.path + "?" + flasktools.urlencode(flask.request.args)
-            })
-            return flask.redirect("/login?" + query)
+def check_login(cb, **args):
+    if 'user' in flask.session:
         return cb(**args)
-    return functools.update_wrapper(functools.partial(check_login, cb), cb)
+
+    next_url = flask.request.path + "?" + flasktools.urlencode(flask.request.args)
+    query = flasktools.urlencode({'.next': next_url})
+    return flask.redirect("/login?" + query)
+
+# Check if we have the user session field pre-populated.
+def require_login(cb, **args):
+    return functools.update_wrapper(functools.partial(check_login, cb, **args), cb)
 
 # Note: this has to come BEFORE other handlers
 @flaskapp.route('/favicon.ico')
@@ -196,10 +220,12 @@ def dashboard():
         return flask.redirect('/login?.next=%2Fdashboard')
 
     conferences = octav.list_conferences_by_organizer(organizer_id=user.get('id'))
+    proposals = octav.list_sessions(speaker_id=user.get('id'), status='pending', lang=flask.g.lang)
 
     return flask.render_template('dashboard.tpl',
         user=user,
-        conferences=conferences
+        conferences=conferences,
+        proposals=proposals
     )
 
 def start_oauth(oauth_handler, callback):
@@ -224,7 +250,7 @@ def get_github_token(token=None):
 
 @flaskapp.route('/login/github')
 def login_github():
-    return start_oauth(github, 'https://builderscon.io/login/github/callback')
+    return start_oauth(github, flaskapp.base_url + '/login/github/callback')
 
 @flaskapp.route('/login/github/callback')
 @github.authorized_handler
@@ -279,7 +305,7 @@ def get_facebook_token(token=None):
 
 @flaskapp.route('/login/facebook')
 def login_facebook():
-    return start_oauth(facebook, 'https://builderscon.io/login/facebook/callback')
+    return start_oauth(facebook, flaskapp.base_url + '/login/facebook/callback')
 
 @flaskapp.route('/login/facebook/callback')
 @facebook.authorized_handler
@@ -334,7 +360,7 @@ def get_twitter_token(token=None):
 
 @flaskapp.route('/login/twitter')
 def login_twitter():
-    return start_oauth(twitter, 'https://builderscon.io/login/twitter/callback')
+    return start_oauth(twitter, flaskapp.base_url + '/login/twitter/callback')
 
 @flaskapp.route('/login/twitter/callback')
 @twitter.authorized_handler
@@ -412,10 +438,8 @@ def latest(series_slug, rest):
 def conference(series_slug):
     flask.redirect('/{0}/latest'.format(series_slug))
 
-def conference_by_slug(cb):
-    def prepare_conference(cb, series_slug, slug, **args):
-        print(series_slug)
-        print(slug)
+def with_conference_by_slug(cb):
+    def load_conference_by_slug(cb, series_slug, slug, **args):
         full_slug = "%s/%s" % (series_slug, slug)
         conference = _get_conference_by_slug(full_slug, flask.g.lang)
         if not conference:
@@ -425,40 +449,205 @@ def conference_by_slug(cb):
         flask.g.stash['full_slug'] = full_slug
         flask.g.stash['conference'] = conference
         return cb(**args)
-    return functools.update_wrapper(functools.partial(prepare_conference, cb), cb)
+    return functools.update_wrapper(functools.partial(load_conference_by_slug, cb), cb)
 
 @flaskapp.route('/<series_slug>/<path:slug>/sponsors')
-@conference_by_slug
+@with_conference_by_slug
 def conference_sponsors():
     return flask.render_template('sponsors.tpl')
 
 
 @flaskapp.route('/<series_slug>/<path:slug>/sessions')
-@conference_by_slug
+@with_conference_by_slug
 def conference_sessions():
     conference = flask.g.stash.get('conference')
     conference_sessions = _list_session_by_conference(conference.get('id'), flask.g.lang)
     return flask.render_template('sessions.tpl', sessions=conference_sessions)
 
+def with_session_types(cb):
+    def load_session_types(cb, **args):
+        conference_id = ''
+        conference = flask.g.stash.get('conference')
+        if conference:
+            conference_id = conference.get('id')
+        else:
+            session = flask.g.stash.get('session')
+            if session:
+                conference_id = session.get('conference_id')
 
+        if conference_id:
+            session_types = octav.list_session_types_by_conference(conference_id=conference_id, lang=flask.g.lang)
+
+        if not session_types:
+            session_types = []
+
+        flask.g.stash["session_types"] = session_types
+
+        return cb(**args)
+
+    return functools.update_wrapper(functools.partial(load_session_types, cb), cb)
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp')
-@conference_by_slug
+@require_login
+@with_conference_by_slug
+@with_session_types
 def conference_cfp():
-    conference = flask.g.stash.get('conference')
-    session_types = octav.list_session_types_by_conference(conference_id=conference.get('id'), lang=flask.g.lang)
-    if not session_types:
-        session_types = []
+    key = flask.request.args.get('key')
+    print(key)
+    if key:
+        session = flask.session.get(key)
+        if not session:
+            return "not found", 404
+        flask.g.stash["session"] = session
 
-    return flask.render_template('cfp.tpl', session_types=session_types)
+    f = '%s/cfp.tpl' % flask.g.stash.get('full_slug')
+    return flask.render_template([f, 'cfp.tpl'])
+
+@flaskapp.route('/<series_slug>/<path:slug>/cfp/input', methods=['GET','POST'])
+@require_login
+@with_conference_by_slug
+@with_session_types
+def conference_cfp_input():
+    if flask.request.method != 'POST':
+        return flask.redirect('/%s/cfp' % flask.g.stash.get('full_slug'))
+
+    form = flask.request.form
+    # Silly to do this by hand, but I'm going to do this
+    # right now so that we get better error reporting to uers
+    required = ['session_type_id']
+    flask.g.stash['missing'] = {}
+    for f in required:
+        if not form.get(f):
+            print("missing %s" % f)
+            flask.g.stash['errors'] = True
+            flask.g.stash['missing'][f] = True
+    l10n = {}
+    required = ['title', 'abstract']
+    flask.g.stash['missing'] = {}
+    for f in required:
+        if form.get(f):
+            continue
+
+        has_l10n_field = False
+        for l in LANGUAGES:
+            v = l.get('value')
+            if v == "en":
+                continue
+            l10nk = '%s#%s' %(f, v)
+            l10nv = form.get(l10nk)
+            if l10nv:
+                has_l10n_field = True
+                l10n[l10nk] = l10nv
+                break
+
+        if not has_l10n_field:
+            print("missing %s" % f)
+            flask.g.stash['errors'] = True
+            flask.g.stash['missing'][f] = True
+    
+    if flask.g.stash.get('errors') > 0:
+        flask.g.stash["session"] = form
+        return flask.render_template('cfp.tpl')
+
+    h = hashlib.sha256()
+    h.update('%f' % time.time())
+    h.update('%f' % random.random())
+    h.update('%d' % os.getpid())
+    key = 'cfp_submission_%s' % h.hexdigest()
+    flask.g.stash["submission_key"] = key
+
+    conference = flask.g.stash.get('conference')
+    user = flask.session.get('user')
+    flask.session[key] = dict(
+        expires           = time.time() + 900,
+        conference_id     = conference.get('id'),
+        abstract          = form.get('abstract'),
+        session_type_id   = form.get('session_type_id'),
+        speaker_id        = user.get('id'),
+        user_id           = user.get('id'),
+        title             = form.get('title'),
+        category          = form.get('category'),
+        material_level    = form.get('material_level'),
+        memo              = form.get('memo'),
+        photo_release     = form.get('photo_release'),
+        recording_release = form.get('recording_release'),
+        materials_release = form.get('materials_release'),
+        slide_language    = form.get('slide_language'),
+        spoken_language   = form.get('spoken_language'),
+        **l10n
+    )
+
+    pat = re.compile('^cfp_submission_')
+    now = time.time()
+    for k in flask.session:
+        if not pat.match(k):
+            continue
+        v = flask.session.get(k)
+        if v.get('expires') > now:
+            continue
+        del flask.session[k]
+
+    return flask.redirect('/%s/cfp/confirm?key=%s' % (flask.g.stash.get('full_slug'), key))
+
+@flaskapp.route('/<series_slug>/<path:slug>/cfp/confirm')
+@require_login
+@with_conference_by_slug
+@with_session_types
+def conference_cfp_confirm():
+    key = flask.request.args.get('key')
+    session = flask.session.get(key)
+    if not session:
+        return "not found", 404
+
+    session_type_id = session.get('session_type_id')
+    for stype in flask.g.stash.get('session_types'):
+        if stype.get('id') == session_type_id:
+            flask.g.stash['session_type'] = stype
+            break
+    flask.g.stash['session'] = session
+    flask.g.stash['submission_key'] = key
+    return flask.render_template('cfp_confirm.tpl')
+
+@flaskapp.route('/<series_slug>/<path:slug>/cfp/commit', methods=['GET','POST'])
+@with_conference_by_slug
+@with_session_types
+def conference_cfp_commit():
+    if flask.request.method != 'POST':
+        return flask.redirect('/%s/cfp' % flask.g.stash.get('full_slug'))
+
+    key = flask.request.form.get('key')
+    values = flask.session.get(key)
+    if not values:
+        return "not found", 404
+    try:
+        del values['expires']
+        session = octav.create_session(**values)
+        if session:
+            del flask.session[key]
+    except:
+        # TODO: capture, and do the right thing
+        pass
+
+    if session:
+        return flask.redirect('/%s/cfp_done?id=%s' % (flask.g.stash.get('full_slug'), session.get('id')))
+
+    return flask.render_template('cfp.tpl')
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp_done')
-@conference_by_slug
+@require_login
+@with_conference_by_slug
+@with_session_types
 def confernece_cfp_done():
+    id = flask.request.values.get('id')
+    session = octav.lookup_session(lang='all', id=id)
+    if not session:
+        return octav.last_error(), 404
+
+    flask.g.stash["session"] = session
     return flask.render_template('cfp_done.tpl')
 
 @flaskapp.route('/<series_slug>/<path:slug>/news')
-@conference_by_slug
+@with_conference_by_slug
 def conference_news():
     key = "news_entries.lang." + flask.g.lang
     news_entries = cache.get(key)
@@ -483,31 +672,176 @@ def conference_news():
 
 
 @flaskapp.route('/<series_slug>/<path:slug>')
-@conference_by_slug
+@with_conference_by_slug
 def conference_instance():
     return flask.render_template('conference.tpl', googlemap_api_key=cfg.googlemap_api_key())
 
-@flaskapp.route('/<series_slug>/<slug>/session/add')
-@conference_by_slug
-def add_session():
-    return flask.render_template('add_session.tpl')
+def with_session(cb, lang=''):
+    def load_session(cb, id, lang, **args):
+        if not lang:
+            lang = flask.g.lang
+
+        session = octav.lookup_session(id=id, lang=lang)
+        flask.g.stash["session"] = session
+        if not session:
+            return octav.last_error(), 404
+
+        if flask.g.stash["conference"]:
+            if flask.g.stash["conference"].get('id') != session.get('conference_id'):
+                return "Not found", 404
+
+        return cb(**args)
+    return functools.update_wrapper(functools.partial(load_session, cb, lang=lang), cb)
+
+def with_session_from_args(cb, fname='id'):
+    def load_session_from_args(cb, **args):
+        id = flask.request.values.get(fname)
+        session = octav.lookup_session(id=id, lang=flask.g.lang)
+        flask.g.stash["session"] = session
+        if not session:
+            return octav.last_error(), 404
+
+        return cb(**args)
+    return functools.update_wrapper(functools.partial(load_session_from_args, cb), cb)
 
 
-@flaskapp.route('/<series_slug>/<slug>/session/add', methods=['POST'])
-@conference_by_slug
-def add_session_post():
-    flask.redirect('/')
+@flaskapp.route('/<series_slug>/<path:slug>/session/<id>/update', methods=['POST'])
+@with_conference_by_slug
+@functools.partial(with_session, lang='all')
+@with_session_types
+def session_update():
+    form = flask.request.form
+    # Silly to do this by hand, but I'm going to do this
+    # right now so that we get better error reporting to uers
+    required = ['session_type_id']
+    flask.g.stash['missing'] = {}
+    for f in required:
+        if not form.get(f):
+            print("missing %s" % f)
+            flask.g.stash['errors'] = True
+            flask.g.stash['missing'][f] = True
+    l10n = {}
+    required = ['title', 'abstract']
+    flask.g.stash['missing'] = {}
+    for f in required:
+        if form.get(f):
+            continue
 
+        has_l10n_field = False
+        for l in LANGUAGES:
+            v = l.get('value')
+            if v == "en":
+                continue
+            l10nk = '%s#%s' %(f, v)
+            l10nv = form.get(l10nk)
+            if l10nv:
+                has_l10n_field = True
+                l10n[l10nk] = l10nv
+                break
 
+        if not has_l10n_field:
+            print("missing %s" % f)
+            flask.g.stash['errors'] = True
+            flask.g.stash['missing'][f] = True
+    
+    if flask.g.stash.get('errors') > 0:
+        flask.g.stash["session"] = form
+        return flask.render_template('session/edit.tpl')
+
+    print(form)
+
+    user = flask.session.get('user')
+    try:
+        id = flask.g.stash.get('session').get('id')
+        ok = octav.update_session(
+            id                = id,
+            abstract          = form.get('abstract'),
+            session_type_id   = form.get('session_type_id'),
+            user_id           = user.get('id'),
+            title             = form.get('title'),
+            category          = form.get('category'),
+            material_level    = form.get('material_level'),
+            memo              = form.get('memo'),
+            photo_release     = form.get('photo_release'),
+            recording_release = form.get('recording_release'),
+            materials_release = form.get('materials_release'),
+            slide_language    = form.get('slide_language'),
+            spoken_language   = form.get('spoken_language'),
+            **l10n
+        )
+        if ok:
+            return flask.redirect('/%s/session/%s' % (flask.g.stash.get('full_slug'), id))
+        else:
+            flask.g.stash["error"] = octav.last_error()
+    except BaseException as e:
+        flask.g.stash["error"] = e
+        print(e)
+        pass
+
+    # XXX redirect to a proper location
+    return flask.render_template('session/edit.tpl')
+
+@flaskapp.route('/<series_slug>/<path:slug>/session/<id>/edit')
+@with_conference_by_slug
+@functools.partial(with_session, lang='all')
+@with_session_types
+def session_edit():
+    return flask.render_template('session/edit.tpl')
+
+@flaskapp.route('/<series_slug>/<path:slug>/session/<id>/delete', methods=['GET', 'POST'])
+@require_login
+@with_conference_by_slug
+@with_session
+def session_delete():
+    method = flask.request.method
+
+    pat = re.compile('^del_session_')
+    now = time.time()
+    for k in flask.session:
+        if not pat.match(k):
+            continue
+        v = flask.session.get(k)
+        if v.get('expires') > now:
+            continue
+        del flask.session[k]
+
+    session = flask.g.stash["session"]
+    if method == 'GET':
+        token = "del_session_"
+        flask.g.stash["delete_token"] = token
+        flask.session[token] = dict(
+            expires = time.time() + 900,
+            id      = session.get('id')
+        )
+        return flask.render_template('session/delete.tpl')
+    elif method == 'POST':
+        token = flask.request.form.get('delete_token')
+        data  = flask.session[token]
+        if not data:
+            return "", 404
+
+        if data.get('id') != session.get('id'):
+            return "Invalid token", 500
+
+        del flask.session[token]
+        user = flask.session.get("user")
+        ok = octav.delete_session(
+            id      = session.get('id'),
+            user_id = user.get('id')
+        )
+        if not ok:
+            flask.g.stash["error"] = octav.last_error()
+            return flask.render_template('session/delete.tpl')
+
+        return flask.redirect('/dashboard')
+    else:
+        return "", 401
+        
 @flaskapp.route('/<series_slug>/<path:slug>/session/<id>')
-@conference_by_slug
-def conference_session_details(id):
-    session = octav.lookup_session(lang=flask.g.lang, id=id)
-    if not session:
-        return octav.last_error(), 404
-    return flask.render_template('session_detail.tpl',
-        session=session
-    )
+@with_conference_by_slug
+@with_session
+def session_view():
+    return flask.render_template('session/view.tpl')
 
 def conference_cache_key(id, lang):
     if not id:

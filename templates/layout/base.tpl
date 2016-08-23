@@ -30,7 +30,10 @@
         <nav id="menu">
           <div id="gnavi">
             <ul class="menu">
-              {% block menuitems %}{% endblock %}
+              {% block menuitems %}
+                <li><a href="/"><span class="i-home"></span></a></li>
+                <li><a href="/dashboard"><span class="i-user"></span></a></li>
+              {% endblock %}
             </ul>
           </div>
         </nav>

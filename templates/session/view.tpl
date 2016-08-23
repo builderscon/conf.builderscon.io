@@ -1,19 +1,33 @@
-{% extends 'layout/base.tpl' %}
+{% extends 'layout/conference.tpl' %}
+
+{% block heroimage %}
+<div id="heroimage-empty"></div>
+{% endblock %}
+
+{% block header %}
+<style type="text/css">
+<!--
+#session-edit-btn {
+  margin-top: 5px;
+}
+-->
+</style>
+
+{% endblock %}
 
 {% block main %}
 <div id="fb-root"></div>
 <main>
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">{{session.title}}</h1>
+      <h1 class="section-header">{{session.title}}
+        {% if session.speaker.id == flask_session.get('user').id %}<a id="session-edit-btn" href="/{{ conference.full_slug }}/session/{{ session.id }}/edit"><span class="i-edit"></span></a>{% endif %}
+      </h1>
       <div class="section-content">
-
         <div class="row">
           <div class="text-center large-2 columns">
             <img style="width: 120px; height: 120px; border: 1px solid #ccc" src="{% if session.speaker.avatar_url %}{{ session.speaker.avatar_url }}{% else %}{{ url('static', filename='images/noprofile.png') }}{% endif %}" />
-            <div class="text-center">
-              <a  href="." target="_blank">{{session.speaker.nickname}}</a>
-            </div>
+            <div class="text-center"><a href="/user/{{ session.speaker.id }}" target="_blank">{{session.speaker.nickname}}</a></div>
             <div class="social-button">
               <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
             </div>
@@ -40,34 +54,36 @@
         <div class="row">
           <table>
             <tr>
-              <td>Material Level</td>
-              <td>{{session.material_level}}</td>
-            </tr>
-{% if session.starts_on %}
-            <tr>
-              <td>Starts On</td>
-              <td>{{session.starts_on}}</td>
-            </tr>
-{% endif %}
-            <tr>
-              <td>Duration</td>
-              <td>{{session.session_type.name}}</td>
+              <td>{% trans %}Material Level{% endtrans %}</td>
+              <td>{{ _(session.material_level|audlevelname) }}</td>
             </tr>
             <tr>
-              <td>Spoken Language</td>
-              <td>{{session.spoken_language}}</td>
+              <td>{% trans %}Starts On{% endtrans %}</td>
+              <td>{% if session.starts_on %}{{session.starts_on}}{% else %}N/A{% endif %}</td>
             </tr>
             <tr>
-              <td>Slide Language</td>
-              <td>{{session.slide_language}}</td>
+              <td>{% trans %}Session Duration{% endtrans %}</td>
+              <td>{{ _(session.session_type.name) }}</td>
             </tr>
             <tr>
-              <td>May we take your photo?</td>
-              <td>{{session.photo_permission}}</td>
+              <td>{% trans %}Spoken Language{% endtrans %}</td>
+              <td>{{ _(session.spoken_language|langname) }}</td>
             </tr>
             <tr>
-              <td>May we record your session?</td>
-              <td>{{session.video_permission}}</td>
+              <td>{% trans %}Slide Language{% endtrans %}</td>
+              <td>{{ _(session.slide_language|langname) }}</td>
+            </tr>
+            <tr>
+              <td>{% trans %}Photo Release{% endtrans %}</td>
+              <td>{{ _(session.photo_release|permname) }}</td>
+            </tr>
+            <tr>
+              <td>{% trans %}Recording Release{% endtrans %}</td>
+              <td>{{ _(session.recording_release|permname) }}</td>
+            </tr>
+            <tr>
+              <td>{% trans %}Materials Release{% endtrans %}</td>
+              <td>{{ _(session.materials_release|permname) }}</td>
             </tr>
           </table>
         </div>
