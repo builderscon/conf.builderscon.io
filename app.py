@@ -37,7 +37,6 @@ LANGUAGES=[
  dict({'name': 'Japanese', 'value': 'ja'})
 ]
 
-
 class Config(object):
     def __init__(self, file):
         with open(file, 'r') as f:
@@ -133,6 +132,23 @@ def inject_template_vars():
     stash["flask_session"] = flask.session
     stash["url"] = flask.url_for
     return stash
+
+# Used in templates, when all you have is the user's input value
+@flaskapp.template_filter('permname')
+def permission_value_to_name(v):
+    return v.title()
+
+@flaskapp.template_filter('audlevelname')
+def audience_level_value_to_name(v):
+    return v.title()
+
+# Used in templates, when all you have is the user's input value
+@flaskapp.template_filter('langname')
+def lang_value_to_name(v):
+    for l in LANGUAGES:
+        if l.get('value') == v:
+            return l.get('name')
+    return ""
 
 @flaskapp.template_filter('urlencode')
 def urlencode_filter(s):
@@ -476,8 +492,15 @@ def with_session_types(cb):
 @with_conference_by_slug
 @with_session_types
 def conference_cfp():
+    key = flask.request.args.get('key')
+    print(key)
+    if key:
+        session = flask.session.get(key)
+        if not session:
+            return "not found", 404
+        flask.g.stash["session"] = session
+
     f = '%s/cfp.tpl' % flask.g.stash.get('full_slug')
-    print(f)
     return flask.render_template([f, 'cfp.tpl'])
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp/input', methods=['GET','POST'])
@@ -489,7 +512,6 @@ def conference_cfp_input():
         return flask.redirect('/%s/cfp' % flask.g.stash.get('full_slug'))
 
     form = flask.request.form
-
     # Silly to do this by hand, but I'm going to do this
     # right now so that we get better error reporting to uers
     required = ['session_type_id']
@@ -537,30 +559,38 @@ def conference_cfp_input():
     conference = flask.g.stash.get('conference')
     user = flask.session.get('user')
     flask.session[key] = dict(
-        conference_id    = conference.get('id'),
-        abstract         = form.get('abstract'),
-        session_type_id  = form.get('session_type_id'),
-        speaker_id       = user.get('id'),
-        user_id          = user.get('id'),
-        title            = form.get('title'),
-        category         = form.get('category'),
-        material_level   = form.get('material_level'),
-        memo             = form.get('memo'),
-        photo_permission = form.get('photo_permission'),
-        video_permission = form.get('video_permission'),
-        slide_language   = form.get('slide_language'),
-        spoken_language  = form.get('spoken_language'),
+        conference_id     = conference.get('id'),
+        abstract          = form.get('abstract'),
+        session_type_id   = form.get('session_type_id'),
+        speaker_id        = user.get('id'),
+        user_id           = user.get('id'),
+        title             = form.get('title'),
+        category          = form.get('category'),
+        material_level    = form.get('material_level'),
+        memo              = form.get('memo'),
+        photo_release     = form.get('photo_release'),
+        recording_release = form.get('recording_release'),
+        materials_release = form.get('materials_release'),
+        slide_language    = form.get('slide_language'),
+        spoken_language   = form.get('spoken_language'),
         **l10n
     )
     return flask.redirect('/%s/cfp/confirm?key=%s' % (flask.g.stash.get('full_slug'), key))
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp/confirm')
 @with_conference_by_slug
+@with_session_types
 def conference_cfp_confirm():
     key = flask.request.args.get('key')
     session = flask.session.get(key)
     if not session:
         return "not found", 404
+
+    session_type_id = session.get('session_type_id')
+    for stype in flask.g.stash.get('session_types'):
+        if stype.get('id') == session_type_id:
+            flask.g.stash['session_type'] = stype
+            break
     flask.g.stash['session'] = session
     flask.g.stash['submission_key'] = key
     return flask.render_template('cfp_confirm.tpl')
@@ -595,8 +625,6 @@ def confernece_cfp_done():
     session = octav.lookup_session(lang='all', id=id)
     if not session:
         return octav.last_error(), 404
-
-    print(session["session_type"])
 
     flask.g.stash["session"] = session
     return flask.render_template('cfp_done.tpl')
@@ -697,18 +725,19 @@ def session_update():
     user = flask.session.get('user')
     try:
         octav.update_session(
-            id = flask.g.stash.get('session').get('id'),
-            abstract         = form.get('abstract'),
-            session_type_id  = form.get('session_type_id'),
-            user_id          = user.get('id'),
-            title            = form.get('title'),
-            category         = form.get('category'),
-            material_level   = form.get('material_level'),
-            memo             = form.get('memo'),
-            photo_permission = form.get('photo_permission'),
-            video_permission = form.get('video_permission'),
-            slide_language   = form.get('slide_language'),
-            spoken_language  = form.get('spoken_language'),
+            id                = flask.g.stash.get('session').get('id'),
+            abstract          = form.get('abstract'),
+            session_type_id   = form.get('session_type_id'),
+            user_id           = user.get('id'),
+            title             = form.get('title'),
+            category          = form.get('category'),
+            material_level    = form.get('material_level'),
+            memo              = form.get('memo'),
+            photo_release     = form.get('photo_release'),
+            recording_release = form.get('recording_release'),
+            materials_release = form.get('materials_release'),
+            slide_language    = form.get('slide_language'),
+            spoken_language   = form.get('spoken_language'),
             **l10n
         )
     except:

@@ -144,13 +144,13 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
             <div class="large-{{ left }} columns"><label>{% trans %}Photo Release{% endtrans %}</label></div>
             <div class="large-{{ right }} columns">
               <p>{% trans %}By selecting "Allow" below, you agree to allow builderscon to take your photo during the duration of the event, and to distribute and place those photos on our website(s).{% endtrans %}</p>
-{% set sel_photo_permission = session.get('photo_permission', 'allow') if session else 'allow' %}
-{% set photo_permission_choices = [
+{% set sel_photo_release = session.get('photo_release', 'allow') if session else 'allow' %}
+{% set photo_release_choices = [
     {'name': _('Allow'), 'value': 'allow' },
     {'name': _('Disallow'), 'value': 'disallow' }
 ] %}
-{% for choice in photo_permission_choices %}
-              <input type="radio" name="photo_permission" value="{{ choice.value }}"{% if sel_photo_permission == choice.value %} checked="checked"{% endif %}/><span class="yes-no">{{ _(choice.name) }}</span>
+{% for choice in photo_release_choices %}
+              <input type="radio" name="photo_release" value="{{ choice.value }}"{% if sel_photo_release == choice.value %} checked="checked"{% endif %}/><span class="yes-no">{{ _(choice.name) }}</span>
 {% endfor %}
             </div>
           </div>
@@ -158,13 +158,13 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
             <div class="large-{{ left }} columns"><label>{% trans %}Recording Release{% endtrans %}</label></div>
             <div class="large-{{ right }} columns">
               <p>{% trans %}By selecting "Allow" below, you agree to allow builderscon to record your presentation on video, and to distribute and place those recordings on our website(s).{% endtrans %}</p>
-{% set sel_video_permission = session.get('video_permission', 'allow') if session else 'allow' %}
-{% set video_permission_choices = [
+{% set sel_recording_release = session.get('recording_release', 'allow') if session else 'allow' %}
+{% set recording_release_choices = [
     {'name': _('Allow'), 'value': 'allow' },
     {'name': _('Disallow'), 'value': 'disallow' }
 ] %}
-{% for choice in video_permission_choices %}
-              <input type="radio" name="video_permission" value="{{ choice.value }}"{% if sel_video_permission == choice.value %} checked="checked"{% endif %}/><span class="yes-no">{{ _(choice.name) }}</span>
+{% for choice in recording_release_choices %}
+              <input type="radio" name="recording_release" value="{{ choice.value }}"{% if sel_recording_release == choice.value %} checked="checked"{% endif %}/><span class="yes-no">{{ _(choice.name) }}</span>
 {% endfor %}
             </div>
           </div>

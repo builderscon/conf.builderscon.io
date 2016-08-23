@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-23 11:45+0900\n"
+"POT-Creation-Date: 2016-08-23 12:56+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -97,66 +97,80 @@ msgstr "60分"
 msgid "30 min"
 msgstr "30分"
 
-#: templates/cfp_confirm.tpl:26
+#: templates/cfp_confirm.tpl:43
 msgid "Submission Details"
-msgstr ""
+msgstr "応募内容"
 
-#: templates/cfp_confirm.tpl:30
-msgid "Title (English)"
-msgstr ""
+#: templates/cfp_confirm.tpl:47
+msgid ""
+"Please review your submission details below. If you have corrections to "
+"make, click the button below to edit your submission"
+msgstr "以下の応募内容をご確認ください。修正が必要な場合以下のボタンをクリックし、編集を行って下さい"
 
-#: templates/cfp_confirm.tpl:34
-msgid "Title (Japanese)"
-msgstr ""
+#: templates/cfp_confirm.tpl:53
+msgid "Edit your proposal"
+msgstr "応募内容を修正する"
 
-#: templates/cfp_confirm.tpl:38 templates/session/form.tpl:39
-msgid "Session Type"
-msgstr "セッション種別"
+#: templates/cfp_confirm.tpl:60
+msgid "Session Title (English)"
+msgstr "セッションタイトル（英語）"
 
-#: templates/cfp_confirm.tpl:42
-msgid "Abstract (English)"
-msgstr ""
+#: templates/cfp_confirm.tpl:64
+msgid "Session Title (Japanese)"
+msgstr "セッションタイトル（日本語）"
 
-#: templates/cfp_confirm.tpl:46
-msgid "Abstract (Japanese)"
-msgstr ""
+#: templates/cfp_confirm.tpl:68
+msgid "Session Duration"
+msgstr "セッション時間"
 
-#: templates/cfp_confirm.tpl:50 templates/session/form.tpl:75
+#: templates/cfp_confirm.tpl:72
+msgid "Session Abstract (English)"
+msgstr "セッション概要（英語）"
+
+#: templates/cfp_confirm.tpl:76
+msgid "Session Abstract (Japanese)"
+msgstr "セッション概要（日本語）"
+
+#: templates/cfp_confirm.tpl:80 templates/session/form.tpl:75
 msgid "Expected audience level"
 msgstr "想定される聴衆"
 
-#: templates/cfp_confirm.tpl:54 templates/session/form.tpl:91
+#: templates/cfp_confirm.tpl:84 templates/session/form.tpl:91
 msgid "Spoken Language"
 msgstr "講演に使用される言語"
 
-#: templates/cfp_confirm.tpl:58 templates/session/form.tpl:103
+#: templates/cfp_confirm.tpl:88 templates/session/form.tpl:103
 msgid "Slide Language"
 msgstr "スライド言語"
 
-#: templates/cfp_confirm.tpl:62 templates/session/form.tpl:115
+#: templates/cfp_confirm.tpl:92 templates/session/form.tpl:115
 msgid "Comments"
 msgstr "コメント"
 
-#: templates/cfp_confirm.tpl:66 templates/session/form.tpl:144
+#: templates/cfp_confirm.tpl:96 templates/session/form.tpl:144
 msgid "Photo Release"
 msgstr "撮影許可"
 
-#: templates/cfp_confirm.tpl:70 templates/session/form.tpl:158
+#: templates/cfp_confirm.tpl:100 templates/session/form.tpl:158
 msgid "Recording Release"
 msgstr "録画許可"
 
-#: templates/cfp_confirm.tpl:74 templates/session/form.tpl:172
+#: templates/cfp_confirm.tpl:104 templates/session/form.tpl:172
 msgid "Materials Release"
-msgstr "素材掲載許可"
+msgstr "素材利用許可"
 
-#: templates/cfp_confirm.tpl:82 templates/session/form.tpl:195
+#: templates/cfp_confirm.tpl:112 templates/session/form.tpl:195
 #: templates/sessions.tpl:30
 msgid "Submit your proposal"
-msgstr "プロポーザルを応募する"
+msgstr "応募する"
+
+#: templates/cfp_done.tpl:27
+msgid "Thank your for your submission!"
+msgstr "応募ありがとうございました！"
 
 #: templates/cfp_done.tpl:27
 msgid "Your submission can be viewd here"
-msgstr ""
+msgstr "応募されたプロポーザルはこちらから確認できます"
 
 #: templates/conference.tpl:70
 msgid "Information"
@@ -356,6 +370,10 @@ msgstr "選択可能な言語の中からひとつ以上のタイトルを記入
 #, python-format
 msgid "Please provide the session title in %(lang)s"
 msgstr "%(lang)s でセッションタイトルを指定してください"
+
+#: templates/session/form.tpl:39
+msgid "Session Type"
+msgstr "セッション種別"
 
 #: templates/session/form.tpl:45
 msgid "SUBMISSION CURRENTLY CLOSED"

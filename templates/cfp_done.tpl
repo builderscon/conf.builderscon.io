@@ -12,22 +12,21 @@
 
 {% block main %}
 <main>
-{% if 'cfp_post_submission_instructions' in conference %}
   <div class="section article">
     <div class="inner">
       <div class="section-content no-header">
-        {{ conference.cfp_post_submission_instructions | markdown }}
+        <p>{% trans %}Thank your for your submission!{% endtrans %} <a href="/{{ session.conference.full_slug }}/session/{{ session.id }}">{% trans %}Your submission can be viewd here{% endtrans %}</a></p>
+      </div>
+    </div>
+  </div>
+{% if conference.get('cfp_post_submit_instructions') %}
+  <div class="section article">
+    <div class="inner">
+      <div class="section-content no-header">
+        {{ conference.cfp_post_submit_instructions | markdown }}
       </div>
     </div>
   </div>
 {% endif %}
-  <div class="section article">
-    <div class="inner">
-      <div class="section-content no-header">
-        <a href="/{{ session.conference.full_slug }}/session/{{ session.id }}">{% trans %}Your submission can be viewd here{% endtrans %}</a>
-      </div>
-    </div>
-  </div>
-
 </main>
 {% endblock %}
