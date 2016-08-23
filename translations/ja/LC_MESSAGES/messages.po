@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-22 11:11+0900\n"
+"POT-Creation-Date: 2016-08-23 11:45+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -88,6 +88,14 @@ msgstr "英語"
 #: templates/catalog.tpl:5
 msgid "Japanese"
 msgstr "日本語"
+
+#: templates/catalog.tpl:6
+msgid "60 min"
+msgstr "60分"
+
+#: templates/catalog.tpl:7
+msgid "30 min"
+msgstr "30分"
 
 #: templates/cfp_confirm.tpl:26
 msgid "Submission Details"
@@ -335,14 +343,14 @@ msgstr "応募フォーム"
 msgid "Proposal Details"
 msgstr "詳細情報"
 
-#: templates/session/form.tpl:17
-msgid "You must provide at least one title in any of the supported languages"
-msgstr "選択可能な言語の中からひとつ以上のタイトルを記入してください"
-
-#: templates/session/form.tpl:18 templates/session/form.tpl:40
-#: templates/session/form.tpl:54
+#: templates/session/form.tpl:17 templates/session/form.tpl:40
+#: templates/session/form.tpl:53
 msgid "required field"
 msgstr "必須"
+
+#: templates/session/form.tpl:22
+msgid "You must provide at least one title in any of the supported languages"
+msgstr "選択可能な言語の中からひとつ以上のタイトルを記入してください"
 
 #: templates/session/form.tpl:31
 #, python-format
@@ -357,7 +365,7 @@ msgstr "受付期間外"
 msgid "Abstract"
 msgstr "概要"
 
-#: templates/session/form.tpl:53
+#: templates/session/form.tpl:58
 msgid "You must provide at least one abstract in any of the supported languages"
 msgstr "選択可能な言語の中からひとつ以上の概要を記入してください"
 
@@ -384,11 +392,11 @@ msgstr "中級者"
 msgid "Expert"
 msgstr "上級者"
 
-#: templates/session/form.tpl:99
+#: templates/session/form.tpl:93
 msgid "Please select which language you will be speaking in."
 msgstr "講演の際に使用される言語を指定してください"
 
-#: templates/session/form.tpl:111
+#: templates/session/form.tpl:105
 msgid "Please select which language you will write your slides in."
 msgstr "講演スライドで使用される言語を指定してください"
 
@@ -397,9 +405,7 @@ msgid ""
 "Specify any communication that you might want to relay to the organizer: "
 "e.g. special financial requirements, required documents, specific dates "
 "during the conference you might not be able to attend, etc"
-msgstr ""
-"イベント運営スタッフに伝えたい連絡事項等、をご記入ください。"
-"例： ドキュメント等の準備、登壇できる・できない日程等"
+msgstr "イベント運営スタッフに伝えたい連絡事項等、をご記入ください。例： ドキュメント等の準備、登壇できる・できない日程等"
 
 #: templates/session/form.tpl:123
 msgid "Videos, Photos, and Materials"
@@ -409,8 +415,7 @@ msgstr "動画、写真、素材等"
 msgid ""
 "Please refer to our <a href=\".\" target=\"_blank\">terms of use</a> "
 "about how builderscon uses videos, photos, and other materials."
-msgstr ""
-"提供いただく写真、動画、素材等がどのように利用されるかは利用規約をご確認ください"
+msgstr "提供いただく写真、動画、素材等がどのように利用されるかは利用規約をご確認ください"
 
 #: templates/session/form.tpl:131
 msgid "Please provide the URL of where you uploaded your slide"

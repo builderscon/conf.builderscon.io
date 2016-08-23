@@ -42,7 +42,7 @@
             <div class="large-{{ right }} columns">
               <select name="session_type_id">
 {% for stype in session_types %}
-                <option value="{{ stype.id }}"{% if stype.is_accepting_submission %}{% if loop.first %} selected="selected"{% endif %}{% else %} disabled="disabled"{% endif %}>{{ stype.name }}{% if not stype.is_accepting_submission %} [{% trans %}SUBMISSION CURRENTLY CLOSED{% endtrans %}]{% endif %}</option>
+                <option value="{{ stype.id }}"{% if stype.is_accepting_submission %}{% if loop.first %} selected="selected"{% endif %}{% else %} disabled="disabled"{% endif %}>{{ _(stype.name) }}{% if not stype.is_accepting_submission %} [{% trans %}SUBMISSION CURRENTLY CLOSED{% endtrans %}]{% endif %}</option>
 {% endfor %}
               </select>
             </div>
