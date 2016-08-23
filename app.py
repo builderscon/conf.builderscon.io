@@ -559,6 +559,7 @@ def conference_cfp_input():
     conference = flask.g.stash.get('conference')
     user = flask.session.get('user')
     flask.session[key] = dict(
+        expires           = time.time() + 900,
         conference_id     = conference.get('id'),
         abstract          = form.get('abstract'),
         session_type_id   = form.get('session_type_id'),
@@ -575,9 +576,21 @@ def conference_cfp_input():
         spoken_language   = form.get('spoken_language'),
         **l10n
     )
+
+    pat = re.compile('^cfp_submission_')
+    now = time.time()
+    for k in flask.session:
+        if not pat.match(k):
+            continue
+        v = flask.session.get(k)
+        if v.get('expires') > now:
+            continue
+        del flask.session[k]
+
     return flask.redirect('/%s/cfp/confirm?key=%s' % (flask.g.stash.get('full_slug'), key))
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp/confirm')
+@require_login
 @with_conference_by_slug
 @with_session_types
 def conference_cfp_confirm():
@@ -607,7 +620,10 @@ def conference_cfp_commit():
     if not values:
         return "not found", 404
     try:
+        del values['expires']
         session = octav.create_session(**values)
+        if session:
+            del flask.session[key]
     except:
         # TODO: capture, and do the right thing
         pass
@@ -618,6 +634,7 @@ def conference_cfp_commit():
     return flask.render_template('cfp.tpl')
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp_done')
+@require_login
 @with_conference_by_slug
 @with_session_types
 def confernece_cfp_done():
@@ -659,18 +676,25 @@ def conference_news():
 def conference_instance():
     return flask.render_template('conference.tpl', googlemap_api_key=cfg.googlemap_api_key())
 
-@flaskapp.route('/<series_slug>/<path:slug>/session/<id>')
-@with_conference_by_slug
-def conference_session_details(id):
-    session = octav.lookup_session(lang=flask.g.lang, id=id)
-    if not session:
-        return octav.last_error(), 404
-    return flask.render_template('session_detail.tpl',
-        session=session
-    )
+def with_session(cb, lang=''):
+    def load_session(cb, id, lang, **args):
+        if not lang:
+            lang = flask.g.lang
 
-def with_session(cb, fname='id'):
-    def load_session(cb, **args):
+        session = octav.lookup_session(id=id, lang=lang)
+        flask.g.stash["session"] = session
+        if not session:
+            return octav.last_error(), 404
+
+        if flask.g.stash["conference"]:
+            if flask.g.stash["conference"].get('id') != session.get('conference_id'):
+                return "Not found", 404
+
+        return cb(**args)
+    return functools.update_wrapper(functools.partial(load_session, cb, lang=lang), cb)
+
+def with_session_from_args(cb, fname='id'):
+    def load_session_from_args(cb, **args):
         id = flask.request.values.get(fname)
         session = octav.lookup_session(id=id, lang=flask.g.lang)
         flask.g.stash["session"] = session
@@ -678,10 +702,12 @@ def with_session(cb, fname='id'):
             return octav.last_error(), 404
 
         return cb(**args)
-    return functools.update_wrapper(functools.partial(load_session, cb), cb)
+    return functools.update_wrapper(functools.partial(load_session_from_args, cb), cb)
 
-@flaskapp.route('/<series_slug>/<path:slug>/session/update', methods=['POST'])
-@with_session
+
+@flaskapp.route('/<series_slug>/<path:slug>/session/<id>/update', methods=['POST'])
+@with_conference_by_slug
+@functools.partial(with_session, lang='all')
 @with_session_types
 def session_update():
     form = flask.request.form
@@ -722,10 +748,13 @@ def session_update():
         flask.g.stash["session"] = form
         return flask.render_template('session/edit.tpl')
 
+    print(form)
+
     user = flask.session.get('user')
     try:
-        octav.update_session(
-            id                = flask.g.stash.get('session').get('id'),
+        id = flask.g.stash.get('session').get('id')
+        ok = octav.update_session(
+            id                = id,
             abstract          = form.get('abstract'),
             session_type_id   = form.get('session_type_id'),
             user_id           = user.get('id'),
@@ -740,18 +769,79 @@ def session_update():
             spoken_language   = form.get('spoken_language'),
             **l10n
         )
-    except:
+        if ok:
+            return flask.redirect('/%s/session/%s' % (flask.g.stash.get('full_slug'), id))
+        else:
+            flask.g.stash["error"] = octav.last_error()
+    except e:
+        flask.g.stash["error"] = e
+        print(e)
         pass
 
     # XXX redirect to a proper location
     return flask.render_template('session/edit.tpl')
 
-@flaskapp.route('/<series_slug>/<path:slug>/session/edit')
+@flaskapp.route('/<series_slug>/<path:slug>/session/<id>/edit')
 @with_conference_by_slug
-@with_session
+@functools.partial(with_session, lang='all')
 @with_session_types
 def session_edit():
     return flask.render_template('session/edit.tpl')
+
+@flaskapp.route('/<series_slug>/<path:slug>/session/<id>/delete', methods=['GET', 'POST'])
+@require_login
+@with_conference_by_slug
+@with_session
+def session_delete():
+    method = flask.request.method
+
+    pat = re.compile('^del_session_')
+    now = time.time()
+    for k in flask.session:
+        if not pat.match(k):
+            continue
+        v = flask.session.get(k)
+        if v.get('expires') > now:
+            continue
+        del flask.session[k]
+
+    session = flask.g.stash["session"]
+    if method == 'GET':
+        token = "del_session_"
+        flask.g.stash["delete_token"] = token
+        flask.session[token] = dict(
+            expires = time.time() + 900,
+            id      = session.get('id')
+        )
+        return flask.render_template('session/delete.tpl')
+    elif method == 'POST':
+        token = flask.request.form.get('delete_token')
+        data  = flask.session[token]
+        if not data:
+            return "", 404
+
+        if data.get('id') != session.get('id'):
+            return "Invalid token", 500
+
+        del flask.session[token]
+        user = flask.session.get("user")
+        ok = octav.delete_session(
+            id      = session.get('id'),
+            user_id = user.get('id')
+        )
+        if not ok:
+            flask.g.stash["error"] = octav.last_error()
+            return flask.render_template('session/delete.tpl')
+
+        return flask.redirect('/dashboard')
+    else:
+        return "", 401
+        
+@flaskapp.route('/<series_slug>/<path:slug>/session/<id>')
+@with_conference_by_slug
+@with_session
+def session_view():
+    return flask.render_template('session/view.tpl')
 
 def conference_cache_key(id, lang):
     if not id:

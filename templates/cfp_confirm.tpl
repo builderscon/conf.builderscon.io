@@ -77,7 +77,7 @@
           <div class="large-{{ rightcol }} columns value">{% if session.get('abstract#ja') %}{{ session.get('abstract#ja') | markdown }}{% else %}-{% endif %}</div>
         </div>
         <div class="row">
-          <div class="large-{{ leftcol }} columns">{% trans %}Expected audience level{% endtrans %}</div>
+          <div class="large-{{ leftcol }} columns">{% trans %}Material Level{% endtrans %}</div>
           <div class="large-{{ rightcol }} columns value">{{ _(session.material_level|audlevelname) }}</div>
         </div>
         <div class="row">

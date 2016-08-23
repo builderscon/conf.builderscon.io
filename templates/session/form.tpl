@@ -72,7 +72,7 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
             </div>
           </div>
           <div class="row">
-            <div class="large-{{ left }} columns"><label>{% trans %}Expected audience level{% endtrans %}</label></div>
+            <div class="large-{{ left }} columns"><label>{% trans %}Material Level{% endtrans %}</label></div>
             <div class="large-{{ right }} columns">
 {% set sel_material_level = session.get('material_level', 'beginner') if session else 'beginner' %}
               <select name="material_level">

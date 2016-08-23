@@ -84,9 +84,9 @@ div.conference-history {
               <tr>
                 <td>{% if proposal.conference %}{{ proposal.conference.title }}{% endif %}</td>
                 <td><span{% if proposal.conference.status == 'private' %} class="invalid"{% endif %}>{{ proposal.title or 'N/A' }}</span></td>
-                <td><a href="/{{ proposal.conference.full_slug }}/session/edit?id={{ proposal.id }}"><span class="i-mode_edit" /></a></td>
+                <td><a href="/{{ proposal.conference.full_slug }}/session/{{ proposal.id }}/edit"><span class="i-mode_edit" /></a></td>
                 <td>{{ _(proposal.status) }}</td>
-                <td><button data-id="{{ session.id }}"><span class="i-delete" /></button></td>
+                <td><a href="/{{ proposal.conference.full_slug }}/session/{{ proposal.id }}/delete"><span class="i-delete" /></a></td>
               </tr>
 {% endfor %}
             </tbody>
