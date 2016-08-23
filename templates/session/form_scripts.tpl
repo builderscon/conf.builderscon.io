@@ -51,6 +51,9 @@ $(function() {
     }
     textarea.show();
   });
+
+  $("#select-title-lang").val("{{ lang }}").change()
+  $("#select-abstract-lang").val("{{ lang }}").change()
 })
 -->
 </script>
