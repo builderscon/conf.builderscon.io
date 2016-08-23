@@ -773,7 +773,7 @@ def session_update():
             return flask.redirect('/%s/session/%s' % (flask.g.stash.get('full_slug'), id))
         else:
             flask.g.stash["error"] = octav.last_error()
-    except e, BaseException:
+    except BaseException as e:
         flask.g.stash["error"] = e
         print(e)
         pass
