@@ -214,11 +214,9 @@ def index():
     )
 
 @flaskapp.route('/dashboard')
+@require_login
 def dashboard():
     user = flask.session.get('user')
-    if not user:
-        return flask.redirect('/login?.next=%2Fdashboard')
-
     conferences = octav.list_conferences_by_organizer(organizer_id=user.get('id'))
     proposals = octav.list_sessions(speaker_id=user.get('id'), status='pending', lang=flask.g.lang)
 
@@ -724,10 +722,10 @@ def session_update():
     required = ['title', 'abstract']
     flask.g.stash['missing'] = {}
     for f in required:
+        has_field = False
         if form.get(f):
-            continue
+            has_field = True
 
-        has_l10n_field = False
         for l in LANGUAGES:
             v = l.get('value')
             if v == "en":
@@ -735,11 +733,11 @@ def session_update():
             l10nk = '%s#%s' %(f, v)
             l10nv = form.get(l10nk)
             if l10nv:
-                has_l10n_field = True
+                has_field = True
                 l10n[l10nk] = l10nv
                 break
 
-        if not has_l10n_field:
+        if not has_field:
             print("missing %s" % f)
             flask.g.stash['errors'] = True
             flask.g.stash['missing'][f] = True
