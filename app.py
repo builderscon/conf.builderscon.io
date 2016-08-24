@@ -578,7 +578,7 @@ def conference_cfp_input():
 
     pat = re.compile('^cfp_submission_')
     now = time.time()
-    for k in flask.session:
+    for k in list(flask.session):
         if not pat.match(k):
             continue
         v = flask.session.get(k)
@@ -799,7 +799,7 @@ def session_delete():
 
     pat = re.compile('^del_session_')
     now = time.time()
-    for k in flask.session:
+    for k in list(flask.session):
         if not pat.match(k):
             continue
         v = flask.session.get(k)
