@@ -32,6 +32,7 @@ else:
 
 CACHE_CONFERENCE_EXPIRES = 300
 CACHE_CONFERENCE_SESSIONS_EXPIRES = 300
+CACHE_SESSION_EXPIRES = 300
 LANGUAGES=[
  dict({'name': 'English', 'value': 'en'}),
  dict({'name': 'Japanese', 'value': 'ja'})
@@ -679,10 +680,10 @@ def with_session(cb, lang=''):
         if not lang:
             lang = flask.g.lang
 
-        session = octav.lookup_session(id=id, lang=lang)
-        flask.g.stash["session"] = session
+        session = _get_session(id=id, lang=lang)
         if not session:
             return octav.last_error(), 404
+        flask.g.stash["session"] = session
 
         if flask.g.stash["conference"]:
             if flask.g.stash["conference"].get('id') != session.get('conference_id'):
@@ -768,6 +769,9 @@ def session_update():
             **l10n
         )
         if ok:
+            for l in LANGUAGES:
+                cache.delete(session_cache_key(id=id, lang=l.get('value')))
+            cache.delete(session_cache_key(id=id, lang='all'))
             return flask.redirect('/%s/session/%s' % (flask.g.stash.get('full_slug'), id))
         else:
             flask.g.stash["error"] = octav.last_error()
@@ -823,14 +827,18 @@ def session_delete():
 
         del flask.session[token]
         user = flask.session.get("user")
+        id = session.get('id')
         ok = octav.delete_session(
-            id      = session.get('id'),
+            id      = id,
             user_id = user.get('id')
         )
         if not ok:
             flask.g.stash["error"] = octav.last_error()
             return flask.render_template('session/delete.tpl')
 
+        for l in LANGUAGES:
+            cache.delete(session_cache_key(id=id, lang=l.get('value')))
+        cache.delete(session_cache_key(id=id, lang='all'))
         return flask.redirect('/dashboard')
     else:
         return "", 401
@@ -840,6 +848,11 @@ def session_delete():
 @with_session
 def session_view():
     return flask.render_template('session/view.tpl')
+
+def session_cache_key(id, lang):
+    if not id:
+        raise Exception("faild to create session cache key: no id")
+    return "session.%s.lang.%s" % (id, lang)
 
 def conference_cache_key(id, lang):
     if not id:
@@ -860,6 +873,16 @@ def conference_sessions_cache_key(conference_id, lang):
     if not conference_id:
         raise Exception("faild to create conference cache key: no id")
     return "conference_sessions.%s.lang%s" % (conference_id, lang)
+
+def _get_session(id, lang):
+    key = session_cache_key(id, lang)
+    session = cache.get(key)
+    if not session:
+        session = octav.lookup_session(id=id, lang=lang)
+        if not session:
+            return None
+        cache.set(key, session, CACHE_SESSION_EXPIRES)
+    return session
 
 def _get_conference(id, lang):
     key = conference_cache_key(id, lang)

@@ -22,6 +22,9 @@ class Redis(object):
 
         return pickle.loads(thing)
 
+    def delete(self, key):
+        return self.redis.delete(key)
+
 class Memcached:
     def __init__(self, servers=[], debug=0):
         if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/') or os.getenv('SERVER_SOFTWARE', '').startswith('Development/'):
@@ -44,8 +47,10 @@ class Memcached:
             self.client = memcache.Client(server_settings, debug)
 
     def set(self, key, val, expires=0):
-        self.client .set(key, val, expires)
+        self.client.set(key, val, expires)
 
     def get(self, key):
         return self.client.get(key)
 
+    def delete(self, key):
+        return self.client.delete(key)
