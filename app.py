@@ -219,12 +219,16 @@ def index():
 def dashboard():
     user = flask.session.get('user')
     conferences = octav.list_conferences_by_organizer(organizer_id=user.get('id'))
-    proposals = octav.list_sessions(speaker_id=user.get('id'), status='pending', lang=flask.g.lang)
+    sessions = octav.list_sessions(
+        speaker_id = user.get('id'),
+        status     = ['pending', 'accepted', 'rejected'],
+        lang       = flask.g.lang
+    )
 
     return flask.render_template('dashboard.tpl',
         user=user,
         conferences=conferences,
-        proposals=proposals
+        sessions=sessions
     )
 
 def start_oauth(oauth_handler, callback):
@@ -460,7 +464,7 @@ def conference_sponsors():
 @with_conference_by_slug
 def conference_sessions():
     conference = flask.g.stash.get('conference')
-    conference_sessions = _list_session_by_conference(conference.get('id'), flask.g.lang)
+    conference_sessions = _list_sessions(conference.get('id'), 'accepted', flask.g.lang)
     return flask.render_template('sessions.tpl', sessions=conference_sessions)
 
 def with_session_types(cb):
@@ -869,10 +873,10 @@ def latest_conference_cache_key(series_slug):
         raise Exception("faild to create conference cache key: no series_slug")
     return "conference.latest.%s" % series_slug
 
-def conference_sessions_cache_key(conference_id, lang):
+def conference_sessions_cache_key(conference_id, status, lang):
     if not conference_id:
         raise Exception("faild to create conference cache key: no id")
-    return "conference_sessions.%s.lang%s" % (conference_id, lang)
+    return "conference_sessions.%s.status.%s.lang.%s" % (conference_id, status, lang)
 
 def _get_session(id, lang):
     key = session_cache_key(id, lang)
@@ -935,13 +939,13 @@ def _get_latest_conference(series_slug, lang):
     return None
 
 
-def _list_session_by_conference(conference_id, lang):
-    key = conference_sessions_cache_key(conference_id, lang)
+def _list_sessions(conference_id, status, lang):
+    key = conference_sessions_cache_key(conference_id, status, lang)
     conference_sessions = cache.get(key)
     if conference_sessions:
         return conference_sessions
 
-    conference_sessions = octav.list_session_by_conference(conference_id)
+    conference_sessions = octav.list_sessions(conference_id, lang=lang)
     if conference_sessions :
         cache.set(key, conference_sessions, CACHE_CONFERENCE_SESSIONS_EXPIRES)
         return conference_sessions

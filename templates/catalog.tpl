@@ -5,3 +5,6 @@
 {{ _("Japanese") }}
 {{ _("60 min") }}
 {{ _("30 min") }}
+{{ _("accepted") }}
+{{ _("pending") }}
+{{ _("rejected") }}
