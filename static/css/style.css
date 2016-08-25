@@ -55,6 +55,11 @@ div.social-button {
     vertical-align: top;
 }
 
+#footer .inner .contents p.privacy-policy a {
+    font-size: 80%;
+    color: #fff;
+}
+
 strong {
     font-weight: bold;
 }

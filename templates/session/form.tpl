@@ -185,8 +185,9 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
 {% if not for_edit %}
           <div class="row tos-agreement">
             <div class="large-12 columns">
-              <p>{% trans %}I hereby confirm that I am submitting this proposal after reading the <a href="" target="_blank">terms of use</a>, and that I understand and agree to its contents.{% endtrans %}</p>
-              <input type="checkbox" name="terms_of_use" value=true id="terms_of_use_yes" onchange="handleTermsOfUseAgree(this);" /> <span class="yes-no">{% trans %}Yes, I agree to the Terms Of Use{% endtrans %}</span>
+              <div>{% trans %}I hereby confirm that I am submitting this proposal after reading the <a href="" target="_blank">terms of use</a>, and that I understand and agree to its contents.{% endtrans %}</div>
+              <div><span class="i-documents"></span><a href="https://docs.google.com/document/d/1dX6RaYwjZ4VF31_UgrFgQYlkH1ayH39kEG0T3lCPOxo/edit?usp=sharing">{% trans %}Terms Of Use{% endtrans %}</a></div>
+              <div><input type="checkbox" name="terms_of_use" value=true id="terms_of_use_yes" onchange="handleTermsOfUseAgree(this);" /> <span class="yes-no">{% trans %}Yes, I agree to the Terms Of Use{% endtrans %}</span></div>
             </div>
           </div>
 {% endif %}

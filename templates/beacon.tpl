@@ -41,7 +41,7 @@
   </div>
   <div class="section article" id="tou">
     <div class="inner">
-      <h1 class="section-header">{% trans %}Terms of Use{% endtrans %}</h1>
+      <h1 class="section-header">{% trans %}Terms Of Use{% endtrans %}</h1>
       <div class="section-content">
         {% trans %}
         <ul>
