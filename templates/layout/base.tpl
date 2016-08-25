@@ -65,6 +65,7 @@
         <div class="inner">
           <div class="contents">
             <p>{% trans %}builderscon is a festival for the technology lovers.{% endtrans %}</p>
+            <p class="privacy-policy"><a href="https://docs.google.com/document/d/1mAL15VVObqIIqqKIGovnLQ4a4qQEuoACPHksq9sXbzs/edit?usp=sharing">{% trans %}Privacy Policy{% endtrans %}</a></p>
             <address>&copy; 2016 builderscon</address>
           </div>
         </div>
