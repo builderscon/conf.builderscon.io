@@ -464,13 +464,25 @@ def conference_sponsors():
 @with_conference_by_slug
 def conference_sessions():
     conference = flask.g.stash.get('conference')
-    conference_sessions = _list_sessions(conference.get('id'), 'accepted', flask.g.lang)
-    return flask.render_template('sessions.tpl', sessions=conference_sessions)
+    sessions = _list_sessions(conference.get('id'), ['accepted', 'pending'], flask.g.lang)
+
+    accepted = []
+    pending  = []
+    for session in sessions:
+        if session.get('status') == 'accepted':
+            accepted.append(session)
+        else:
+            pending.append(session)
+
+    flask.g.stash['accepted_sessions'] = accepted
+    flask.g.stash['pending_sessions']  = pending
+    return flask.render_template('sessions.tpl')
 
 def with_session_types(cb):
     def load_session_types(cb, **args):
         conference_id = ''
         conference = flask.g.stash.get('conference')
+
         if conference:
             conference_id = conference.get('id')
         else:
@@ -945,7 +957,7 @@ def _list_sessions(conference_id, status, lang):
     if conference_sessions:
         return conference_sessions
 
-    conference_sessions = octav.list_sessions(conference_id, lang=lang)
+    conference_sessions = octav.list_sessions(conference_id, lang=lang, status=status)
     if conference_sessions :
         cache.set(key, conference_sessions, CACHE_CONFERENCE_SESSIONS_EXPIRES)
         return conference_sessions
