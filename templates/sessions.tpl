@@ -8,7 +8,7 @@
 <style type="text/css">
 <!--
 .sessions-container {
-    margin-left: 2em !important;
+    padding-left: 2em !important;
 }
 
 .speaker-name {
@@ -33,12 +33,20 @@ table.session-info td {
 </style>
 {% endblock %}
 
-{% block main %}
-<main>
+{% macro list_description(title) %}
+{% if title == _('Pending Proposals') %}
+<div>
+{% trans %}These proposals have not yet been accepted for this conference. If you would like to see them in the conference, please help by sharing them on other media, as the number of shares will be taken into consideration when selection takes place{% endtrans %}
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro session_list(sessions, title) %}
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">{% trans %}Sessions{% endtrans %}</h1>
+      <h1 class="section-header">{{ title }}</h1>
       <div class="section-content sessions-container">
+        {{ list_description(title) }}
 {% for session in sessions %}
 {% with conference = session.conference %}
         <div class="row session">
@@ -75,5 +83,11 @@ table.session-info td {
       </div>
     </div>
   </div>
+{% endmacro %}
+
+{% block main %}
+<main>
+{{ session_list(accepted_sessions, _('Accepted Sessions')) }}
+{{ session_list(pending_sessions, _('Pending Proposals')) }}
 </main>
 {% endblock%}
