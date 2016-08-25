@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-23 20:23+0900\n"
+"POT-Creation-Date: 2016-08-25 13:40+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,6 +81,18 @@ msgstr ""
 msgid "30 min"
 msgstr ""
 
+#: templates/catalog.tpl:8
+msgid "accepted"
+msgstr ""
+
+#: templates/catalog.tpl:9
+msgid "pending"
+msgstr ""
+
+#: templates/catalog.tpl:10
+msgid "rejected"
+msgstr ""
+
 #: templates/cfp_confirm.tpl:43
 msgid "Submission Details"
 msgstr ""
@@ -150,7 +162,6 @@ msgid "Materials Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:112 templates/session/form.tpl:195
-#: templates/sessions.tpl:30
 msgid "Submit your proposal"
 msgstr ""
 
@@ -183,7 +194,7 @@ msgid "Organizer"
 msgstr ""
 
 #: templates/dashboard.tpl:70
-msgid "No proposals have been submitted"
+msgid "No sessions have been submitted"
 msgstr ""
 
 #: templates/dashboard.tpl:75
@@ -281,10 +292,6 @@ msgstr ""
 
 #: templates/news.tpl:11
 msgid "Recent News"
-msgstr ""
-
-#: templates/sessions.tpl:11
-msgid "Sessions"
 msgstr ""
 
 #: templates/sponsor_block.tpl:3

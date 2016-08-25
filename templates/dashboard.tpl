@@ -66,10 +66,10 @@ div.conference-history {
 {% endif %}
 
             <h3>Proposals</h3>
-{% if not proposals %}
+{% if not sessions %}
             <p>{% trans %}No proposals have been submitted{% endtrans %}</p>
 {% else %}
-            <table class="proposal-history">
+            <table class="session-history">
             <thead>
               <tr>
                 <td>{% trans %}Conference{% endtrans %}</td>
@@ -80,13 +80,13 @@ div.conference-history {
               </tr>
             </thead>
             <tbody>
-{% for proposal in proposals %}
+{% for session in sessions %}
               <tr>
-                <td>{% if proposal.conference %}{{ proposal.conference.title }}{% endif %}</td>
-                <td><span{% if proposal.conference.status == 'private' %} class="invalid"{% endif %}>{% if proposal.title %}<a href="/{{ proposal.conference.full_slug }}/session/{{ proposal.id }}">{{ proposal.title }}</a>{% else %}N/A{% endif %}</span></td>
-                <td><a href="/{{ proposal.conference.full_slug }}/session/{{ proposal.id }}/edit"><span class="i-mode_edit" /></a></td>
-                <td>{{ _(proposal.status) }}</td>
-                <td><a href="/{{ proposal.conference.full_slug }}/session/{{ proposal.id }}/delete"><span class="i-delete" /></a></td>
+                <td>{% if session.conference %}{{ session.conference.title }}{% endif %}</td>
+                <td><span{% if session.conference.status == 'private' %} class="invalid"{% endif %}>{% if session.title %}<a href="/{{ session.conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a>{% else %}N/A{% endif %}</span></td>
+                <td><a href="/{{ session.conference.full_slug }}/session/{{ session.id }}/edit"><span class="i-mode_edit" /></a></td>
+                <td>{{ _(session.status) }}</td>
+                <td><a href="/{{ session.conference.full_slug }}/session/{{ session.id }}/delete"><span class="i-delete" /></a></td>
               </tr>
 {% endfor %}
             </tbody>
