@@ -47,6 +47,7 @@ table.session-info td {
       <h1 class="section-header">{{ title }}</h1>
       <div class="section-content sessions-container">
         {{ list_description(title) }}
+        <div class="session-list">
 {% for session in sessions %}
 {% with conference = session.conference %}
         <div class="row session">
@@ -80,6 +81,7 @@ table.session-info td {
         </div>
 {% endwith %}
 {% endfor %}
+        </div>
       </div>
     </div>
   </div>
