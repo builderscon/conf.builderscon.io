@@ -77,6 +77,7 @@ table.session-info td {
 </table>
 </div>
 </div>
+             <div class="session-abstract">{{ _(session.abstract|markdown) }}</div>
           </div>
         </div>
 {% endwith %}
@@ -93,3 +94,25 @@ table.session-info td {
 {{ session_list(pending_sessions, _('Pending Proposals')) }}
 </main>
 {% endblock%}
+
+{% block scripts %}
+<script>
+$(function(){
+    var $setText = $('.session-abstract');
+    var cutFigure = 100;
+    var afterText = '...';
+
+    $setText.each(function(){
+        var textLength = $(this).text().length;
+        if(textLength > cutFigure){
+          var textTrim = $(this).text().substr(0,cutFigure);
+          $(this).text(textTrim + afterText);
+        }
+        else {
+          var text = $(this).text();
+          $(this).text(text);
+        }
+    });
+});
+</script>
+{% endblock %}
