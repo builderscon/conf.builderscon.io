@@ -189,13 +189,19 @@ markdown_converter = markdown.Markdown(extensions=[GithubFlavoredMarkdownExtensi
 def markdown_filter(s):
     return markdown_converter(s)
 
+jarx = re.compile('^ja(?:-\w+)$')
 @babel.localeselector
 def get_locale():
     l = flask.request.args.get('lang')
+    if not l:
+        # This is silly, accept_languages.best_match doesn't
+        # match against ja-JP if the arguments are just 'ja'
+        # TODO: Lookup Accept-Language, and change its value
+        # to make the matching easier
+        l = flask.request.accept_languages.best_match(['ja', 'ja-JP', 'en'])
     if l:
-        return l
-    l = flask.request.accept_languages.best_match(['ja', 'en'])
-    if l:
+        if jarx.match(l):
+            l = 'ja'
         return l
     return 'en'
 
