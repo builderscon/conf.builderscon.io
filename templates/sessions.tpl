@@ -49,37 +49,24 @@ table.session-info td {
         {{ list_description(title) }}
         <div class="session-list">
 {% for session in sessions %}
-{% with conference = session.conference %}
         <div class="row session">
           <div class="large-2 columns">
 {% with speaker = session.speaker %}
             <div class="speaker-avatar"><img class="speaker-avatar" src="{{ speaker.avatar_url }}"/></div>
-            <div class="speaker-name"><a href="/user/{{ speaker.id }}">{{ speaker.nickname }}</a></div>
-{% endwith %}
           </div>
           <div class="large-10 columns">
             <h4><a href="/{{ conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a></h4>
-<div class="row">
-<div class="large-6 columns">
-<table class="session-info">
-<tr>
-    <td>{% trans %}Starts On{% endtrans %}</td>
-    <td>{{ session.starts_on or '-' }}</td>
-</tr>
-<tr>
-    <td>{% trans %}Duration{% endtrans %}</td>
-    <td>{{ _(session.session_type.name) }}</td>
-</tr>
-<tr>
-    <td>{% trans %}Spoken Language{% endtrans %}</td>
-    <td>{{ _(session.spoken_language|langname) }}</td>
-</tr>
-</table>
-</div>
-</div>
+            <div>
+              <span class="label speaker-label">{% trans %}Speaker{% endtrans %}&#58; <a href="/user/{{ speaker.id }}">{{ speaker.nickname }}</a></span>
+{% endwith %}
+{% with conference = session.conference %}
+              <span class="label session-label">{% trans %}Material Level{% endtrans %}&#58; {{ _(session.material_level|audlevelname) }}</span>
+              <span class="label session-label">{% trans %}Duration{% endtrans %}&#58; {{ _(session.session_type.name) }}</span>
+              <span class="label session-label">{% trans %}Spoken Language{% endtrans %}&#58; {{ _(session.spoken_language|langname) }}</span>
+{% endwith %}
+            </div>
           </div>
         </div>
-{% endwith %}
 {% endfor %}
         </div>
       </div>
