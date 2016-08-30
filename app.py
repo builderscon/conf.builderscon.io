@@ -171,6 +171,19 @@ def check_login(cb, **args):
 def require_login(cb, **args):
     return functools.update_wrapper(functools.partial(check_login, cb, **args), cb)
 
+def check_email(cb, **args):
+    user = flask.session.get('user')
+    if not user:
+        return "require_login must be called first", 500
+
+    if not user.get('email'):
+        return flask.redirect('/user/email/register')
+
+    return cb(**args)
+
+def require_email(cb, **args):
+    return functools.update_wrapper(functools.partial(check_email, cb, **args), cb)
+
 # Note: this has to come BEFORE other handlers
 @flaskapp.route('/favicon.ico')
 def favicon():
@@ -426,10 +439,60 @@ def login_twitter_callback(resp):
 
 
 @flaskapp.route('/logout')
-@flaskapp.route('/<path:p>/logout')
 def logout(p=None):
     flask.session.clear()
     return flask.redirect('/')
+
+@flaskapp.route('/user/email/register', methods=['GET'])
+@require_login
+def email_register():
+    return flask.render_template('user/email_register.tpl')
+
+@flaskapp.route('/user/email/register', methods=['POST'])
+@require_login
+def email_register_post():
+    email = flask.request.form.get('email')
+    if not email:
+        return "email is required", 500
+
+    ok = octav.create_temporary_email(
+        user_id = flask.session.get('user').get('id'),
+        target_id = flask.session.get('user').get('id'),
+        email = email
+    )
+    if not ok:
+        return octav.last_error(), 500
+    flask.g.stash['show_directions'] = True
+    return flask.redirect('/user/email/confirm')
+
+@flaskapp.route('/user/email/confirm', methods=['GET'])
+@require_login
+def email_confirm():
+    v = flask.request.args.get('confirmation_key')
+    if v:
+        flask.g.stash['confirmation_key'] = v
+    return flask.render_template('user/email_confirm.tpl')
+
+@flaskapp.route('/user/email/confirm', methods=['POST'])
+@require_login
+def email_confirm_post():
+    confirmation_key = flask.request.form.get('confirmation_key')
+    if not confirmation_key:
+        return "confirmation_key is required", 500
+
+    ok = octav.confirm_temporary_email(
+        user_id = flask.session.get('user').get('id'),
+        target_id = flask.session.get('user').get('id'),
+        confirmation_key = confirmation_key
+    )
+    if not ok:
+        return octav.last_error(), 500
+    return flask.redirect('/user/email/done')
+
+@flaskapp.route('/user/email/done', methods=['GET'])
+@require_login
+def email_done():
+    return flask.render_template('user/email_done.tpl')
 
 # This route maps "latest" URLs to the actual latest conference
 # URLs, so that we don't have to refer to "latest" elsewhere in 
@@ -510,11 +573,11 @@ def with_session_types(cb):
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp')
 @require_login
+@require_email
 @with_conference_by_slug
 @with_session_types
 def conference_cfp():
     key = flask.request.args.get('key')
-    print(key)
     if key:
         session = flask.session.get(key)
         if not session:
@@ -526,6 +589,7 @@ def conference_cfp():
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp/input', methods=['GET','POST'])
 @require_login
+@require_email
 @with_conference_by_slug
 @with_session_types
 def conference_cfp_input():
@@ -612,6 +676,7 @@ def conference_cfp_input():
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp/confirm')
 @require_login
+@require_email
 @with_conference_by_slug
 @with_session_types
 def conference_cfp_confirm():
@@ -656,6 +721,7 @@ def conference_cfp_commit():
 
 @flaskapp.route('/<series_slug>/<path:slug>/cfp_done')
 @require_login
+@require_email
 @with_conference_by_slug
 @with_session_types
 def confernece_cfp_done():
