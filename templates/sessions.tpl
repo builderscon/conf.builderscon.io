@@ -29,6 +29,24 @@ table.session-info td {
     font-size: 70%;
     padding: 2px !important;
 }
+
+.session-list>div:nth-child(odd) {
+	background-color: white;
+}
+
+.session-list>div:nth-child(even) {
+	background-color: #f1f1f1;
+}
+
+.session-label {
+	background-color: #9e9e9e;
+}
+
+.speaker-label>a {
+	color  : white;
+}
+
+}
 -->
 </style>
 {% endblock %}
