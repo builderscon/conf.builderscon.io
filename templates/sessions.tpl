@@ -11,10 +11,6 @@
     padding-left: 2em !important;
 }
 
-.speaker-name {
-    text-align: center;
-}
-
 div.speaker-avatar {
     text-align: center;
 }
@@ -72,15 +68,10 @@ table.session-info td {
 {% with speaker = session.speaker %}
             <div class="speaker-avatar"><img class="speaker-avatar" src="{{ speaker.avatar_url }}"/></div>
           </div>
-          <div class="large-10 columns">
-            <h4><a href="/{{ conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a></h4>
+          <div class="small-8 large-10 columns">
             <div>
-              <span class="label speaker-label">{% trans %}Speaker{% endtrans %}&#58; <a href="/user/{{ speaker.id }}">{{ speaker.nickname }}</a></span>
-{% endwith %}
-{% with conference = session.conference %}
-              <span class="label session-label">{% trans %}Material Level{% endtrans %}&#58; {{ _(session.material_level|audlevelname) }}</span>
-              <span class="label session-label">{% trans %}Duration{% endtrans %}&#58; {{ _(session.session_type.name) }}</span>
-              <span class="label session-label">{% trans %}Spoken Language{% endtrans %}&#58; {{ _(session.spoken_language|langname) }}</span>
+              <h4><a href="/{{ conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a></h4>
+              <div><a href="/user/{{ speaker.id }}">{{ speaker.nickname }}</a></div>
 {% endwith %}
             </div>
           </div>
