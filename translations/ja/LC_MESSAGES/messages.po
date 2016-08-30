@@ -381,7 +381,7 @@ msgstr "buildersconは技術を愛する全てのギーク達のお祭りです"
 
 #: templates/layout/base.tpl:68
 msgid "Privacy Policy"
-msgstr ""
+msgstr "プライバシーポリシー"
 
 #: templates/layout/conference.tpl:9
 msgid "NEWS"
