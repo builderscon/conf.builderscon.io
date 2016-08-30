@@ -16,8 +16,8 @@ div.speaker-avatar {
 }
 img.speaker-avatar {
     margin: 5px auto 2px auto;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border: 1px solid #ccc;
 }
 
@@ -55,27 +55,36 @@ table.session-info td {
 {% endif %}
 {% endmacro %}
 
+
+{% macro session_item(session, speaker, conference) %}
+  <div class="small-3 large-3 columns">
+    <div class="speaker-avatar"><img class="speaker-avatar" src="{{ speaker.avatar_url }}"/></div>
+  </div>
+  <div class="small-9 large-9 columns">
+    <div>
+      <h4><a href="/{{ conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a></h4>
+      <div><a href="/user/{{ speaker.id }}">{{ speaker.nickname }}</a></div>
+    </div>
+  </div>
+{% endmacro %}
+
 {% macro session_list(sessions, title) %}
   <div class="section article">
     <div class="inner">
       <h1 class="section-header">{{ title }}</h1>
       <div class="section-content sessions-container">
         {{ list_description(title) }}
-        <div class="session-list">
+        <div class="session-list row">
 {% for session in sessions %}
-        <div class="row session">
-          <div class="large-2 columns">
-{% with speaker = session.speaker %}
-            <div class="speaker-avatar"><img class="speaker-avatar" src="{{ speaker.avatar_url }}"/></div>
-          </div>
-          <div class="small-8 large-10 columns">
-            <div>
-              <h4><a href="/{{ conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a></h4>
-              <div><a href="/user/{{ speaker.id }}">{{ speaker.nickname }}</a></div>
-{% endwith %}
+{% if loop.index0 % 2 == 0 %}
+          <div class="row">
+{% endif %}
+            <div class="large-6 columns">
+                {{ session_item(session, session.speaker, conference) }}
             </div>
+{% if loop.index0 % 2 == 1 or loop.last %}
           </div>
-        </div>
+{% endif %}
 {% endfor %}
         </div>
       </div>
