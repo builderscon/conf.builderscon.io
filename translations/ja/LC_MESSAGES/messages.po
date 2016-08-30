@@ -274,7 +274,7 @@ msgstr ""
 "<b>Slack: </b> カンファレンス運営のついての情報交換や今後のbuildersconについて話し合うための<a "
 "href=\"https://builderscon.slack.com\">Slackチーム</a>を用意しています。<a "
 "href=\"https://slack-invite-"
-"dot-\"builderscon-1248.appspot.com/\">自動招待フォーム</a>から気軽に参加できます"
+"dot-builderscon-1248.appspot.com/\">自動招待フォーム</a>から気軽に参加できます"
 
 #: templates/index.tpl:84
 msgid ""
