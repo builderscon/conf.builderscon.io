@@ -537,15 +537,16 @@ def conference_sessions():
 
     accepted = []
     pending  = []
-    for session in sessions:
-        if session.get('status') == 'accepted':
-            accepted.append(session)
-        else:
-            pending.append(session)
+    if sessions:
+        for session in sessions:
+            if session.get('status') == 'accepted':
+                accepted.append(session)
+            else:
+                pending.append(session)
 
     flask.g.stash['accepted_sessions'] = accepted
     flask.g.stash['pending_sessions']  = pending
-    return flask.render_template('sessions.tpl')
+    return flask.render_template('session/list.tpl')
 
 def with_session_types(cb):
     def load_session_types(cb, **args):

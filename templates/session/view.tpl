@@ -1,5 +1,8 @@
 {% extends 'layout/conference.tpl' %}
 
+{% block title %}{{ session.title }} - {{ session.conference.title }}{% endblock %}
+{% block og_image %}{{ session.speaker.avatar_url or url('static', filename='images/noprofile.png') }}{% endblock %}
+
 {% block heroimage %}
 <div id="heroimage-empty"></div>
 {% endblock %}
