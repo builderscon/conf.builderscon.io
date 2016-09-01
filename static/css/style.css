@@ -112,3 +112,13 @@ img.speaker-avatar {
 .session-list>div:nth-child(even) {
 	background-color: #f1f1f1;
 }
+
+#contents .article h1.section-header:before {
+    background: none;
+}
+
+#contents .article h1.section-header {
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+    background: rgba(234, 84, 50, 1);
+}
