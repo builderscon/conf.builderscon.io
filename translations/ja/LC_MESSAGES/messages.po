@@ -336,7 +336,7 @@ msgstr "ログイン"
 #: templates/login.tpl:36
 #, python-format
 msgid "Login with %(name)s"
-msgstr "%(name) でログイン"
+msgstr "%(name)s でログイン"
 
 #: templates/news.tpl:11
 msgid "Recent News"
