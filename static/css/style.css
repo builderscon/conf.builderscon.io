@@ -69,3 +69,46 @@ strong {
         display: block;
     }
 }
+
+div.description-pending {
+    padding: 1em;
+}
+
+div.session {
+    padding: 1em;
+    font-family: "MetroNovaPro-Medium","ヒラギノ角ゴ Pro W6",HiraKakuPro-W6,sans-serif;
+}
+
+div.session-title {
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+div.session-language {
+    font-size: 0.6em;
+    padding: 0;
+    text-align: center;
+}
+
+div.speaker-name {
+    font-size: 0.8em;
+}
+
+div.speaker-avatar {
+    text-align: center;
+}
+
+img.speaker-avatar {
+    margin: 0px auto 5px auto;
+    width: 75px;
+    height: 75px;
+    border: 1px solid #ccc;
+}
+
+.session-list>div:nth-child(odd) {
+	background-color: white;
+}
+
+.session-list>div:nth-child(even) {
+	background-color: #f1f1f1;
+}
