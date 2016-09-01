@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-01 13:02+0900\n"
+"POT-Creation-Date: 2016-09-01 14:07+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -108,6 +108,14 @@ msgstr "保留"
 #: templates/catalog.tpl:10
 msgid "rejected"
 msgstr "不採用"
+
+#: templates/cfp.tpl:22
+msgid "Call For Papers"
+msgstr "トーク募集中"
+
+#: templates/cfp.tpl:34
+msgid "Submission Instructions"
+msgstr "応募方法"
 
 #: templates/cfp_confirm.tpl:43
 msgid "Submission Details"
