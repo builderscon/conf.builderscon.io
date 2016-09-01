@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-29 20:34+0000\n"
+"POT-Creation-Date: 2016-08-30 14:17+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,8 +43,8 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/beacon.tpl:44
-msgid "Terms of Use"
+#: templates/beacon.tpl:44 templates/session/form.tpl:189
+msgid "Terms Of Use"
 msgstr ""
 
 #: templates/beacon.tpl:46
@@ -194,7 +194,7 @@ msgid "Organizer"
 msgstr ""
 
 #: templates/dashboard.tpl:70
-msgid "No sessions have been submitted"
+msgid "No proposals have been submitted"
 msgstr ""
 
 #: templates/dashboard.tpl:75
@@ -332,6 +332,10 @@ msgstr ""
 
 #: templates/layout/base.tpl:67
 msgid "builderscon is a festival for the technology lovers."
+msgstr ""
+
+#: templates/layout/base.tpl:68
+msgid "Privacy Policy"
 msgstr ""
 
 #: templates/layout/conference.tpl:9
@@ -475,10 +479,6 @@ msgid ""
 "agree to its contents."
 msgstr ""
 
-#: templates/session/form.tpl:189
-msgid "Terms Of Use"
-msgstr ""
-
 #: templates/session/form.tpl:190
 msgid "Yes, I agree to the Terms Of Use"
 msgstr ""
@@ -489,5 +489,34 @@ msgstr ""
 
 #: templates/session/view.tpl:61
 msgid "Starts On"
+msgstr ""
+
+#: templates/user/email_confirm.tpl:21 templates/user/email_done.tpl:21
+msgid "Confirm Email Address"
+msgstr ""
+
+#: templates/user/email_confirm.tpl:24
+msgid ""
+"To proceed with your registration, please enter your confirmation key "
+"below"
+msgstr ""
+
+#: templates/user/email_confirm.tpl:34 templates/user/email_register.tpl:34
+msgid "Register this email address"
+msgstr ""
+
+#: templates/user/email_done.tpl:24
+msgid "Thank you! Your email has been registered."
+msgstr ""
+
+#: templates/user/email_register.tpl:21
+msgid "Register Your Email"
+msgstr ""
+
+#: templates/user/email_register.tpl:24
+msgid ""
+"In order to proceed with your submission, you must first register a valid"
+" email address. This is required so we know how to contact you regarding "
+"your submission, and to notify you of any important updates."
 msgstr ""
 
