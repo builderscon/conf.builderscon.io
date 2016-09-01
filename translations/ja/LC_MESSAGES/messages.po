@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-30 14:17+0900\n"
+"POT-Creation-Date: 2016-09-01 13:02+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -131,7 +131,7 @@ msgstr "セッションタイトル（英語）"
 msgid "Session Title (Japanese)"
 msgstr "セッションタイトル（日本語）"
 
-#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:65
+#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:68
 msgid "Session Duration"
 msgstr "セッション時間"
 
@@ -144,17 +144,17 @@ msgid "Session Abstract (Japanese)"
 msgstr "セッション概要（日本語）"
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:75
-#: templates/session/view.tpl:57 templates/sessions.tpl:62
+#: templates/session/view.tpl:60
 msgid "Material Level"
 msgstr "レベル"
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:91
-#: templates/session/view.tpl:69
+#: templates/session/view.tpl:72
 msgid "Spoken Language"
 msgstr "講演に使用される言語"
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:103
-#: templates/session/view.tpl:73
+#: templates/session/view.tpl:76
 msgid "Slide Language"
 msgstr "スライド言語"
 
@@ -163,17 +163,17 @@ msgid "Comments"
 msgstr "コメント"
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:144
-#: templates/session/view.tpl:77
+#: templates/session/view.tpl:80
 msgid "Photo Release"
 msgstr "撮影許可"
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:158
-#: templates/session/view.tpl:81
+#: templates/session/view.tpl:84
 msgid "Recording Release"
 msgstr "録画許可"
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:172
-#: templates/session/view.tpl:85
+#: templates/session/view.tpl:88
 msgid "Materials Release"
 msgstr "素材利用許可"
 
@@ -189,19 +189,23 @@ msgstr "応募ありがとうございました！"
 msgid "Your submission can be viewd here"
 msgstr "応募されたプロポーザルはこちらから確認できます"
 
-#: templates/conference.tpl:70
+#: templates/conference.tpl:61
+msgid "About The Conference"
+msgstr "カンファレンス概要"
+
+#: templates/conference.tpl:71
 msgid "Information"
 msgstr "情報"
 
-#: templates/conference.tpl:72
+#: templates/conference.tpl:73
 msgid "Dates"
 msgstr "日程"
 
-#: templates/conference.tpl:76
+#: templates/conference.tpl:77
 msgid "Venue"
 msgstr "会場"
 
-#: templates/conference.tpl:91
+#: templates/conference.tpl:92
 msgid "Guest Speakers"
 msgstr "ゲストスピーカー"
 
@@ -272,7 +276,8 @@ msgid ""
 msgstr ""
 "<b>Slack: </b> カンファレンス運営のついての情報交換や今後のbuildersconについて話し合うための<a "
 "href=\"https://builderscon.slack.com\">Slackチーム</a>を用意しています。<a "
-"href=\"https://slack-invite-dot-builderscon-1248.appspot.com/\">自動招待フォーム</a>から気軽に参加できます"
+"href=\"https://slack-invite-dot-"
+"builderscon-1248.appspot.com/\">自動招待フォーム</a>から気軽に参加できます"
 
 #: templates/index.tpl:84
 msgid ""
@@ -336,32 +341,6 @@ msgstr "%(name) でログイン"
 #: templates/news.tpl:11
 msgid "Recent News"
 msgstr "最新のニュース"
-
-#: templates/sessions.tpl:37 templates/sessions.tpl:79
-msgid "Pending Proposals"
-msgstr "審査中のプロポーザル"
-
-#: templates/sessions.tpl:39
-msgid ""
-"These proposals have not yet been accepted for this conference. If you "
-"would like to see them in the conference, please help by sharing them on "
-"other media, as the number of shares will be taken into consideration "
-"when selection takes place"
-msgstr ""
-"以下のプロポーザルはまだ採択されていません。もし見たいセッションがありましたら、"
-"ぜひシェアしてください。プロポーザル採択の審査には、SNSでのシェア数も考慮に入れられます。"
-
-#: templates/sessions.tpl:60
-msgid "Speaker"
-msgstr "スピーカー"
-
-#: templates/sessions.tpl:63
-msgid "Duration"
-msgstr "時間"
-
-#: templates/sessions.tpl:78
-msgid "Accepted Sessions"
-msgstr "採択されたセッション"
 
 #: templates/sponsor_block.tpl:3
 msgid "Sponsors"
@@ -535,7 +514,23 @@ msgstr "利用規約に同意します"
 msgid "Please check agree to our Terms Of Use before submitting your proposal."
 msgstr "応募前に利用規約に同意してください"
 
-#: templates/session/view.tpl:61
+#: templates/session/list.tpl:8 templates/session/list.tpl:56
+msgid "Pending Proposals"
+msgstr "審査中のプロポーザル"
+
+#: templates/session/list.tpl:10
+msgid ""
+"These proposals have not yet been accepted for this conference. If you "
+"would like to see them in the conference, please help by sharing them on "
+"other media, as the number of shares will be taken into consideration "
+"when selection takes place"
+msgstr "以下のプロポーザルはまだ採択されていません。もし見たいセッションがありましたら、ぜひシェアしてください。プロポーザル採択の審査には、SNSでのシェア数も考慮に入れられます。"
+
+#: templates/session/list.tpl:55
+msgid "Accepted Sessions"
+msgstr "採択されたセッション"
+
+#: templates/session/view.tpl:64
 msgid "Starts On"
 msgstr "開始日時"
 
@@ -566,7 +561,5 @@ msgid ""
 "In order to proceed with your submission, you must first register a valid"
 " email address. This is required so we know how to contact you regarding "
 "your submission, and to notify you of any important updates."
-msgstr "セッションに応募するにはメールアドレスの登録が必要となります。この"
-"メールアドレスは応募された内容に関する連絡や、その他連絡事項にのみ使用"
-"されます。"
+msgstr "セッションに応募するにはメールアドレスの登録が必要となります。このメールアドレスは応募された内容に関する連絡や、その他連絡事項にのみ使用されます。"
 

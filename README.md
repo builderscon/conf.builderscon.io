@@ -53,13 +53,13 @@ pybabel extract --mapping babel.cfg --output messages.pot .
 ### Initialize message catalogs (ONLY DO THIS ONCE for $locale)
 
 ```
-pybabel init --input-file messages.pot --output-dir translations/ --locale $locale --domain messages
+pybabel init --input-file messages.pot --output-dir translations/ --domain messages --locale $locale 
 ```
 
 ### Update message catalogs when messages.pot changes
 
 ```
-pybabel update --input-file messages.pot --output-dir translations/ --locale $locale --domain messages
+pybabel update --input-file messages.pot --output-dir translations/ --domain messages --locale $locale 
 ```
 
 ### Compile message catalogs
