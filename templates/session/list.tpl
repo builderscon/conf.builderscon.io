@@ -52,7 +52,7 @@
 
 {% block main %}
 <main>
-{{ session_list(accepted_sessions, _('Accepted Sessions')) }}
-{{ session_list(pending_sessions, _('Pending Proposals')) }}
+{% if accepted_sessions %}{{ session_list(accepted_sessions, _('Accepted Sessions')) }}{% endif %}
+{% if pending_sessions %}{{ session_list(pending_sessions, _('Pending Proposals')) }}{% endif %}
 </main>
 {% endblock%}
