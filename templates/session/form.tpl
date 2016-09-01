@@ -36,19 +36,6 @@
           </div>
           <div class="row">
             <div class="large-{{ left }} columns">
-              <label>{% trans %}Session Type{% endtrans %}</label>
-              {% if errors and missing.get('session_type_id') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}
-            </div>
-            <div class="large-{{ right }} columns">
-              <select name="session_type_id">
-{% for stype in session_types %}
-                <option value="{{ stype.id }}"{% if stype.is_accepting_submission %}{% if loop.first %} selected="selected"{% endif %}{% else %} disabled="disabled"{% endif %}>{{ _(stype.name) }}{% if not stype.is_accepting_submission %} [{% trans %}SUBMISSION CURRENTLY CLOSED{% endtrans %}]{% endif %}</option>
-{% endfor %}
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-{{ left }} columns">
               <label>{% trans %}Abstract{% endtrans %}</label>
               {% if errors and missing.get('abstract') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}
             </div>
@@ -69,6 +56,19 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
 {% endfor %}
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-{{ left }} columns">
+              <label>{% trans %}Session Type{% endtrans %}</label>
+              {% if errors and missing.get('session_type_id') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}
+            </div>
+            <div class="large-{{ right }} columns">
+              <select name="session_type_id">
+                {% for stype in session_types %}
+                <option value="{{ stype.id }}"{% if stype.is_accepting_submission %}{% if loop.first %} selected="selected"{% endif %}{% else %} disabled="disabled"{% endif %}>{{ _(stype.name) }}{% if not stype.is_accepting_submission %} [{% trans %}SUBMISSION CURRENTLY CLOSED{% endtrans %}]{% endif %}</option>
+                {% endfor %}
+              </select>
             </div>
           </div>
           <div class="row">
