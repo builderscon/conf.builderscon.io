@@ -58,7 +58,8 @@ function initMap() {
 {% if description %}
   <div class="section article">
     <div class="inner">
-      <div class="section-content no-header">
+      <h1 class="section-header">{% trans %}About The Conference{% endtrans %}</h1>
+      <div class="section-content">
         <div>{{ description|markdown }}</div>
       </div>
     </div>

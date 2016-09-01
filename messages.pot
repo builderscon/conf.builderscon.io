@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-30 14:17+0900\n"
+"POT-Creation-Date: 2016-09-01 13:02+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,7 +115,7 @@ msgstr ""
 msgid "Session Title (Japanese)"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:65
+#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:68
 msgid "Session Duration"
 msgstr ""
 
@@ -128,17 +128,17 @@ msgid "Session Abstract (Japanese)"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:75
-#: templates/session/view.tpl:57 templates/sessions.tpl:62
+#: templates/session/view.tpl:60
 msgid "Material Level"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:91
-#: templates/session/view.tpl:69
+#: templates/session/view.tpl:72
 msgid "Spoken Language"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:103
-#: templates/session/view.tpl:73
+#: templates/session/view.tpl:76
 msgid "Slide Language"
 msgstr ""
 
@@ -147,17 +147,17 @@ msgid "Comments"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:144
-#: templates/session/view.tpl:77
+#: templates/session/view.tpl:80
 msgid "Photo Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:158
-#: templates/session/view.tpl:81
+#: templates/session/view.tpl:84
 msgid "Recording Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:172
-#: templates/session/view.tpl:85
+#: templates/session/view.tpl:88
 msgid "Materials Release"
 msgstr ""
 
@@ -173,19 +173,23 @@ msgstr ""
 msgid "Your submission can be viewd here"
 msgstr ""
 
-#: templates/conference.tpl:70
+#: templates/conference.tpl:61
+msgid "About The Conference"
+msgstr ""
+
+#: templates/conference.tpl:71
 msgid "Information"
 msgstr ""
 
-#: templates/conference.tpl:72
+#: templates/conference.tpl:73
 msgid "Dates"
 msgstr ""
 
-#: templates/conference.tpl:76
+#: templates/conference.tpl:77
 msgid "Venue"
 msgstr ""
 
-#: templates/conference.tpl:91
+#: templates/conference.tpl:92
 msgid "Guest Speakers"
 msgstr ""
 
@@ -292,30 +296,6 @@ msgstr ""
 
 #: templates/news.tpl:11
 msgid "Recent News"
-msgstr ""
-
-#: templates/sessions.tpl:37 templates/sessions.tpl:79
-msgid "Pending Proposals"
-msgstr ""
-
-#: templates/sessions.tpl:39
-msgid ""
-"These proposals have not yet been accepted for this conference. If you "
-"would like to see them in the conference, please help by sharing them on "
-"other media, as the number of shares will be taken into consideration "
-"when selection takes place"
-msgstr ""
-
-#: templates/sessions.tpl:60
-msgid "Speaker"
-msgstr ""
-
-#: templates/sessions.tpl:63
-msgid "Duration"
-msgstr ""
-
-#: templates/sessions.tpl:78
-msgid "Accepted Sessions"
 msgstr ""
 
 #: templates/sponsor_block.tpl:3
@@ -487,7 +467,23 @@ msgstr ""
 msgid "Please check agree to our Terms Of Use before submitting your proposal."
 msgstr ""
 
-#: templates/session/view.tpl:61
+#: templates/session/list.tpl:8 templates/session/list.tpl:56
+msgid "Pending Proposals"
+msgstr ""
+
+#: templates/session/list.tpl:10
+msgid ""
+"These proposals have not yet been accepted for this conference. If you "
+"would like to see them in the conference, please help by sharing them on "
+"other media, as the number of shares will be taken into consideration "
+"when selection takes place"
+msgstr ""
+
+#: templates/session/list.tpl:55
+msgid "Accepted Sessions"
+msgstr ""
+
+#: templates/session/view.tpl:64
 msgid "Starts On"
 msgstr ""
 
