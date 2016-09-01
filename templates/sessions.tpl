@@ -8,11 +8,7 @@
 <style type="text/css">
 <!--
 .sessions-container {
-    margin-left: 2em !important;
-}
-
-.speaker-name {
-    text-align: center;
+    padding-left: 2em !important;
 }
 
 div.speaker-avatar {
@@ -20,8 +16,8 @@ div.speaker-avatar {
 }
 img.speaker-avatar {
     margin: 5px auto 2px auto;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border: 1px solid #ccc;
 }
 
@@ -29,51 +25,76 @@ table.session-info td {
     font-size: 70%;
     padding: 2px !important;
 }
+
+.session-list>div:nth-child(odd) {
+	background-color: white;
+}
+
+.session-list>div:nth-child(even) {
+	background-color: #f1f1f1;
+}
+
+.session-label {
+	background-color: #9e9e9e;
+}
+
+.speaker-label>a {
+	color  : white;
+}
+
+}
 -->
 </style>
 {% endblock %}
 
-{% block main %}
-<main>
+{% macro list_description(title) %}
+{% if title == _('Pending Proposals') %}
+<div>
+{% trans %}These proposals have not yet been accepted for this conference. If you would like to see them in the conference, please help by sharing them on other media, as the number of shares will be taken into consideration when selection takes place{% endtrans %}
+</div>
+{% endif %}
+{% endmacro %}
+
+
+{% macro session_item(session, speaker, conference) %}
+  <div class="small-3 large-3 columns">
+    <div class="speaker-avatar"><img class="speaker-avatar" src="{{ speaker.avatar_url }}"/></div>
+  </div>
+  <div class="small-9 large-9 columns">
+    <div>
+      <h4><a href="/{{ conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a></h4>
+      <div><a href="/user/{{ speaker.id }}">{{ speaker.nickname }}</a></div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro session_list(sessions, title) %}
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">{% trans %}Sessions{% endtrans %}</h1>
+      <h1 class="section-header">{{ title }}</h1>
       <div class="section-content sessions-container">
+        {{ list_description(title) }}
+        <div class="session-list row">
 {% for session in sessions %}
-{% with conference = session.conference %}
-        <div class="row session">
-          <div class="large-2 columns">
-{% with speaker = session.speaker %}
-            <div class="speaker-avatar"><img class="speaker-avatar" src="{{ speaker.avatar_url }}"/></div>
-            <div class="speaker-name"><a href="/user/{{ speaker.id }}">{{ speaker.nickname }}</a></div>
-{% endwith %}
+{% if loop.index0 % 2 == 0 %}
+          <div class="row">
+{% endif %}
+            <div class="large-6 columns">
+                {{ session_item(session, session.speaker, conference) }}
+            </div>
+{% if loop.index0 % 2 == 1 or loop.last %}
           </div>
-          <div class="large-10 columns">
-            <h4><a href="/{{ conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a></h4>
-<div class="row">
-<div class="large-6 columns">
-<table class="session-info">
-<tr>
-    <td>{% trans %}Starts On{% endtrans %}</td>
-    <td>{{ session.starts_on or '-' }}</td>
-</tr>
-<tr>
-    <td>{% trans %}Duration{% endtrans %}</td>
-    <td>{{ _(session.session_type.name) }}</td>
-</tr>
-<tr>
-    <td>{% trans %}Spoken Language{% endtrans %}</td>
-    <td>{{ _(session.spoken_language|langname) }}</td>
-</tr>
-</table>
-</div>
-</div>
-          </div>
-        </div>
-{% endwith %}
+{% endif %}
 {% endfor %}
+        </div>
       </div>
     </div>
   </div>
+{% endmacro %}
+
+{% block main %}
+<main>
+{{ session_list(accepted_sessions, _('Accepted Sessions')) }}
+{{ session_list(pending_sessions, _('Pending Proposals')) }}
 </main>
 {% endblock%}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-25 14:12+0900\n"
+"POT-Creation-Date: 2016-08-29 20:34+0000\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -144,7 +144,7 @@ msgid "Session Abstract (Japanese)"
 msgstr "セッション概要（日本語）"
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:75
-#: templates/session/view.tpl:57
+#: templates/session/view.tpl:57 templates/sessions.tpl:62
 msgid "Material Level"
 msgstr "レベル"
 
@@ -178,7 +178,6 @@ msgid "Materials Release"
 msgstr "素材利用許可"
 
 #: templates/cfp_confirm.tpl:112 templates/session/form.tpl:196
-#: templates/sessions.tpl:30
 msgid "Submit your proposal"
 msgstr "応募する"
 
@@ -273,8 +272,7 @@ msgid ""
 msgstr ""
 "<b>Slack: </b> カンファレンス運営のついての情報交換や今後のbuildersconについて話し合うための<a "
 "href=\"https://builderscon.slack.com\">Slackチーム</a>を用意しています。<a "
-"href=\"https://slack-invite-"
-"dot-builderscon-1248.appspot.com/\">自動招待フォーム</a>から気軽に参加できます"
+"href=\"https://slack-invite-dot-builderscon-1248.appspot.com/\">自動招待フォーム</a>から気軽に参加できます"
 
 #: templates/index.tpl:84
 msgid ""
@@ -338,6 +336,32 @@ msgstr "%(name) でログイン"
 #: templates/news.tpl:11
 msgid "Recent News"
 msgstr "最新のニュース"
+
+#: templates/sessions.tpl:37 templates/sessions.tpl:79
+msgid "Pending Proposals"
+msgstr "審査中のプロポーザル"
+
+#: templates/sessions.tpl:39
+msgid ""
+"These proposals have not yet been accepted for this conference. If you "
+"would like to see them in the conference, please help by sharing them on "
+"other media, as the number of shares will be taken into consideration "
+"when selection takes place"
+msgstr ""
+"以下のプロポーザルはまだ採択されていません。もし見たいセッションがありましたら、"
+"ぜひシェアしてください。プロポーザル採択の審査には、SNSでのシェア数も考慮に入れられます。"
+
+#: templates/sessions.tpl:60
+msgid "Speaker"
+msgstr "スピーカー"
+
+#: templates/sessions.tpl:63
+msgid "Duration"
+msgstr "時間"
+
+#: templates/sessions.tpl:78
+msgid "Accepted Sessions"
+msgstr "採択されたセッション"
 
 #: templates/sponsor_block.tpl:3
 msgid "Sponsors"
