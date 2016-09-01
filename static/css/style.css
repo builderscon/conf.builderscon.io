@@ -123,7 +123,6 @@ img.speaker-avatar {
     background: rgba(234, 84, 50, 1);
 }
 
-
 .tabs.cfptabs {
     border: 0;
     border-bottom: 1px solid #cacaca;
@@ -174,6 +173,7 @@ a.cfptabs-title-inside {
   color: #0a0;
   padding: 0.2em;
 }
+
 #dashboard div.profile-content {
   padding-left: 1em;
 }
