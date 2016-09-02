@@ -10,7 +10,21 @@
 {% endif %}
           <div class="row">
             <div class="large-12 columns"><h3>{% trans %}Proposal Details{% endtrans %}</h3></div>
+            <p class="notice-small">{% trans %}You must provide at least one title in any of the supported languages{% endtrans %}</p>
           </div>
+          <div class="tabs" data-tabs id="example-tabs">
+{% for l in languages %}
+{% if loop.first %}
+            <div class="tabs-title is-active"><a href="#panel1" aria-selected="true">{{l.name}}</a></div>
+{% else %}
+            <div class="tabs-title"><a href="#panel{{ loop.index }}">{{l.name}}</a></div>
+{% endif %}
+{% endfor %}
+          </div>
+          <div class="tabs-content" data-tabs-content="example-tabs">
+{% for l in languages %}
+{% set panelClass = 'tabs-panel is-active' if loop.first else 'tabs-panel' %}
+          <div class="{{ panelClass }}" id="panel{{ loop.index }}">
           <div class="row">
             <div class="large-{{ left }} columns">
               <label>{% trans %}Title{% endtrans %}</label>
@@ -19,17 +33,8 @@
             <div class="large-{{ right }} columns">
               <div class="row" style="margin-left: 0em">
                 <div class="large-11 columns">
-                  <p class="notice-small">{% trans %}You must provide at least one title in any of the supported languages{% endtrans %}</p>
-                  <select id="select-title-lang">
-{% for l in languages %}
-                    <option value="{{ l.value }}">{{ _(l.name) }}</option>
-{% endfor %}
-                  </select>
-
-{% for l in languages %}
 {% set itemName = 'title#' + l.value if l.value != 'en' else 'title' %}
                   <input type="text" class="title-input" name="{{ itemName }}"{% if session %} value="{{ session.get(itemName, '') }}"{% endif %} placeholder="{% trans lang=_(l.name) %}Please provide the session title in {{ lang }}{% endtrans %}"/>
-{% endfor %}
                 </div>
               </div>
             </div>
@@ -42,21 +47,15 @@
             <div class="large-{{ right }} columns">
               <div class="row" style="margin-left: 0em">
                 <div class="large-11 columns">
-                  <p class="notice-small">{% trans %}You must provide at least one abstract in any of the supported languages{% endtrans %}</p>
-                  <select id="select-abstract-lang">
-{% for l in languages %}
-                    <option value="{{ l.value }}">{{ _(l.name) }}</option>
-{% endfor %}
-                  </select>
-{% for l in languages %}
 {% set itemName = 'abstract#' + l.value if l.value != 'en' else 'abstract' %}
                   <textarea class="abstract-textarea" name="{{ itemName }}" rows="8" placeholder="{% trans lang=_(l.name) %}Please provide the session abstract in {{ lang }}
-
 You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get(itemName, '') }}{% endif %}</textarea>
-{% endfor %}
                 </div>
               </div>
             </div>
+          </div>
+          </div>
+{% endfor %}
           </div>
           <div class="row">
             <div class="large-{{ left }} columns">

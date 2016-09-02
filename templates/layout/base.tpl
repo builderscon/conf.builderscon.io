@@ -72,10 +72,15 @@
       </footer>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+    <script src="{{ url('static', filename='js/foundation.min.js') }}"></script>
     <script src="{{ url('static', filename='js/functions.js') }}"></script>
     <script src="{{ url('static', filename='js/jquery.cookie.js') }}"></script>
     <script src="{{ url('static', filename='js/jquery.easing.1.3.js') }}"></script>
     <script src="{{ url('static', filename='js/jquery.rotate.js') }}"></script>
+    <script>
+      var a = $(document);
+      a.foundation();
+    </script>
     {% block scripts %}{% endblock %}
   </body>
 </html>
