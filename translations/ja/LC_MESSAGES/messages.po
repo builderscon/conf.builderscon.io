@@ -424,11 +424,9 @@ msgstr "概要"
 #, python-format
 msgid ""
 "Please provide the session abstract in %(lang)s\n"
-"\n"
 "You may use Markdown in this field"
 msgstr ""
 "%(lang)s でセッション概要を記入してください\n"
-"\n"
 "このフィールドにはMarkdown記法を使う事ができます"
 
 #: templates/session/form.tpl:79
