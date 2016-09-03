@@ -11,28 +11,48 @@
           <div class="row">
             <div class="large-12 columns"><h3>{% trans %}Proposal Details{% endtrans %}</h3></div>
           </div>
-          <div class="row">
-            <div class="large-{{ left }} columns">
-              <label>{% trans %}Title{% endtrans %}</label>
-              {% if errors and missing.get('title') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}
+            <div class="tabs cfptabs" data-tabs id="cfptabs">
+{% for l in languages %}
+              <div class="tabs-title cfptabs-title{% if loop.first %} is-active{% endif %}">
+                <a href="#panel-{{languages[loop.index0].value}}" {% if loop.first %}aria-selected="true"{% endif %} class="cfptabs-title-inside">{% trans lang=_(l.name) %}{{lang}}{% endtrans %}</a>
+              </div>
+{% endfor %}
             </div>
-            <div class="large-{{ right }} columns">
-              <div class="row" style="margin-left: 0em">
-                <div class="large-11 columns">
-                  <p class="notice-small">{% trans %}You must provide at least one title in any of the supported languages{% endtrans %}</p>
-                  <select id="select-title-lang">
+            <div class="tabs-content cfptabs-content" data-tabs-content="cfptabs">
 {% for l in languages %}
-                    <option value="{{ l.value }}">{{ _(l.name) }}</option>
-{% endfor %}
-                  </select>
-
-{% for l in languages %}
+            <div id="panel-{{languages[loop.index0 ].value}}" class="tabs-panel cfptabs-panel{% if loop.first %} is-active{% endif %}">
+            <div class="row">
+              <p class="notice-small">{% trans %}You must provide at least one title and abstract in any of the supported languages{% endtrans %}</p>
+              <div class="large-{{ left }} columns">
+                <label>{% trans %}Title{% endtrans %}</label>
+                {% if errors and missing.get('title') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}
+              </div>
+              <div class="large-{{ right }} columns">
+                <div class="row" style="margin-left: 0em">
+                  <div class="large-11 columns">
 {% set itemName = 'title#' + l.value if l.value != 'en' else 'title' %}
-                  <input type="text" class="title-input" name="{{ itemName }}"{% if session %} value="{{ session.get(itemName, '') }}"{% endif %} placeholder="{% trans lang=_(l.name) %}Please provide the session title in {{ lang }}{% endtrans %}"/>
-{% endfor %}
+                    <input type="text" class="title-input" name="{{ itemName }}"{% if session %} value="{{ session.get(itemName, '') }}"{% endif %} placeholder="{% trans lang=_(l.name) %}Please provide the session title in {{ lang }}{% endtrans %}"/>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="row">
+              <div class="large-{{ left }} columns">
+                <label>{% trans %}Abstract{% endtrans %}</label>
+                {% if errors and missing.get('abstract') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}
+              </div>
+              <div class="large-{{ right }} columns">
+                <div class="row" style="margin-left: 0em">
+                  <div class="large-11 columns">
+{% set itemName = 'abstract#' + l.value if l.value != 'en' else 'abstract' %}
+                    <textarea class="abstract-textarea" name="{{ itemName }}" rows="8" placeholder="{% trans lang=_(l.name) %}Please provide the session abstract in {{ lang }}
+You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get(itemName, '') }}{% endif %}</textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+{% endfor %}
           </div>
           <div class="row">
             <div class="large-{{ left }} columns">
@@ -41,34 +61,10 @@
             </div>
             <div class="large-{{ right }} columns">
               <select name="session_type_id">
-{% for stype in session_types %}
+                {% for stype in session_types %}
                 <option value="{{ stype.id }}"{% if stype.is_accepting_submission %}{% if loop.first %} selected="selected"{% endif %}{% else %} disabled="disabled"{% endif %}>{{ _(stype.name) }}{% if not stype.is_accepting_submission %} [{% trans %}SUBMISSION CURRENTLY CLOSED{% endtrans %}]{% endif %}</option>
-{% endfor %}
+                {% endfor %}
               </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-{{ left }} columns">
-              <label>{% trans %}Abstract{% endtrans %}</label>
-              {% if errors and missing.get('abstract') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}
-            </div>
-            <div class="large-{{ right }} columns">
-              <div class="row" style="margin-left: 0em">
-                <div class="large-11 columns">
-                  <p class="notice-small">{% trans %}You must provide at least one abstract in any of the supported languages{% endtrans %}</p>
-                  <select id="select-abstract-lang">
-{% for l in languages %}
-                    <option value="{{ l.value }}">{{ _(l.name) }}</option>
-{% endfor %}
-                  </select>
-{% for l in languages %}
-{% set itemName = 'abstract#' + l.value if l.value != 'en' else 'abstract' %}
-                  <textarea class="abstract-textarea" name="{{ itemName }}" rows="8" placeholder="{% trans lang=_(l.name) %}Please provide the session abstract in {{ lang }}
-
-You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get(itemName, '') }}{% endif %}</textarea>
-{% endfor %}
-                </div>
-              </div>
             </div>
           </div>
           <div class="row">

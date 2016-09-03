@@ -122,3 +122,35 @@ img.speaker-avatar {
     border-radius: 10px 10px 0 0;
     background: rgba(234, 84, 50, 1);
 }
+
+
+.tabs.cfptabs {
+    border: 0;
+    border-bottom: 1px solid #cacaca;
+}
+
+.tabs-title.cfptabs-title {
+    margin-bottom: -1px;
+}
+
+a.cfptabs-title-inside {
+    border-radius: 10px 10px 0px 0px;
+    font-size: 1em;
+}
+.is-active > a.cfptabs-title-inside {
+    border: 1px solid #cacaca;
+    border-bottom-color: transparent;
+    background-color: white;
+    color: #000000;
+}
+
+.tabs-content.cfptabs-content {
+    border-radius: 0px 0px 10px 10px;
+    border:    1px solid #cacaca;
+    border-top: 0;
+    margin-bottom: 15px;
+}
+
+.tabs-panel.cfptabs-panel {
+    padding: 10px;
+}
