@@ -662,6 +662,16 @@ def conference_cfp_input():
         spoken_language   = form.get('spoken_language'),
         **l10n
     )
+    multi_lang_fields = ['title', 'abstract']
+    for f in multi_lang_fields:
+        for l in LANGUAGES:
+            v = l.get('value')
+            if v == "en":
+                continue
+            l10nk = '%s#%s' %(f, v)
+            l10nv = form.get(l10nk)
+            if l10nv:
+                flask.session[key][l10nk] = l10nv
 
     pat = re.compile('^cfp_submission_')
     now = time.time()
