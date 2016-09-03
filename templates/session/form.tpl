@@ -13,17 +13,14 @@
           </div>
             <div class="tabs cfptabs" data-tabs id="cfptabs">
 {% for l in languages %}
-{% if loop.first %}
-              <div class="tabs-title cfptabs-title is-active"><a href="#panel-{{languages[loop.index0].value}}" aria-selected="true" class="cfptabs-title-inside">{% trans lang=_(l.name) %}{{lang}}{% endtrans %}</a></div>
-{% else %}
-              <div class="tabs-title cfptabs-title"><a href="#panel-{{languages[loop.index0 ].value}}" class="cfptabs-title-inside">{% trans lang=_(l.name) %}{{lang}}{% endtrans %}</a></div>
-{% endif %}
+              <div class="tabs-title cfptabs-title{% if loop.first %} is-active{% endif %}">
+                <a href="#panel-{{languages[loop.index0].value}}" {% if loop.first %}aria-selected="true"{% endif %} class="cfptabs-title-inside">{% trans lang=_(l.name) %}{{lang}}{% endtrans %}</a>
+              </div>
 {% endfor %}
             </div>
             <div class="tabs-content cfptabs-content" data-tabs-content="cfptabs">
 {% for l in languages %}
-{% set panelClass = 'tabs-panel cfptabs-panel is-active' if loop.first else 'tabs-panel cfptabs-panel' %}
-            <div class="{{ panelClass }}" id="panel{{ loop.index }}">
+            <div id="panel-{{languages[loop.index0 ].value}}" class="tabs-panel cfptabs-panel{% if loop.first %} is-active{% endif %}">
             <div class="row">
               <p class="notice-small">{% trans %}You must provide at least one title and abstract in any of the supported languages{% endtrans %}</p>
               <div class="large-{{ left }} columns">
