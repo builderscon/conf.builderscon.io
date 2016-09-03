@@ -13,6 +13,9 @@ $(function() {
   });
 
   $("#cfptabs").foundation("selectTab", "#panel-{{ lang }}");
+
+  $("#select-spoken-language").val("{{ lang }}");
+  $("#select-slide-language").val("{{ lang }}");
 })
 -->
 </script>
