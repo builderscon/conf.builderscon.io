@@ -10,22 +10,22 @@
 {% endif %}
           <div class="row">
             <div class="large-12 columns"><h3>{% trans %}Proposal Details{% endtrans %}</h3></div>
-            <p class="notice-small">{% trans %}You must provide at least one title in any of the supported languages{% endtrans %}</p>
           </div>
-          <div class="tabs" data-tabs id="example-tabs">
+          <div class="tabs cfptabs" data-tabs id="example-tabs">
 {% for l in languages %}
 {% if loop.first %}
-            <div class="tabs-title is-active"><a href="#panel1" aria-selected="true">{{l.name}}</a></div>
+            <div class="tabs-title cfptabs-title is-active"><a href="#panel1" aria-selected="true" class="cfptabs-title-inside">{{l.name}}</a></div>
 {% else %}
-            <div class="tabs-title"><a href="#panel{{ loop.index }}">{{l.name}}</a></div>
+            <div class="tabs-title cfptabs-title"><a href="#panel{{ loop.index }}" class="cfptabs-title-inside">{{l.name}}</a></div>
 {% endif %}
 {% endfor %}
           </div>
-          <div class="tabs-content" data-tabs-content="example-tabs">
+          <div class="tabs-content cfptabs-content" data-tabs-content="example-tabs">
 {% for l in languages %}
-{% set panelClass = 'tabs-panel is-active' if loop.first else 'tabs-panel' %}
+{% set panelClass = 'tabs-panel cfptabs-panel is-active' if loop.first else 'tabs-panel cfptabs-panel' %}
           <div class="{{ panelClass }}" id="panel{{ loop.index }}">
           <div class="row">
+            <p class="notice-small">{% trans %}You must provide at least one title in any of the supported languages{% endtrans %}</p>
             <div class="large-{{ left }} columns">
               <label>{% trans %}Title{% endtrans %}</label>
               {% if errors and missing.get('title') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}
