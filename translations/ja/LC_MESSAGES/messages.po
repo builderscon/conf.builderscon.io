@@ -463,10 +463,12 @@ msgid "Videos, Photos, and Materials"
 msgstr "動画、写真、素材等"
 
 #: templates/session/form.tpl:123
+#, python-format
 msgid ""
-"Please refer to our <a href=\".\" target=\"_blank\">terms of use</a> "
-"about how builderscon uses videos, photos, and other materials."
-msgstr "提供いただく写真、動画、素材等がどのように利用されるかは利用規約をご確認ください"
+"Please refer to our <a href=\"%(termsOfUseURL)s\" target=\"_blank\">terms"
+" of use</a> about how builderscon uses videos, photos, and other "
+"materials."
+msgstr "提供いただく写真、動画、素材等がどのように利用されるかは<a href=\"%(termsOfUseURL)s\" target=\"_blank\">利用規約</a>をご確認ください"
 
 #: templates/session/form.tpl:130
 msgid "Please provide the URL of where you uploaded your slide"
@@ -505,9 +507,8 @@ msgstr "以下の「許可」を選択することによりbuildersconがあな�
 
 #: templates/session/form.tpl:187
 msgid ""
-"I hereby confirm that I am submitting this proposal after reading the <a "
-"href=\"\" target=\"_blank\">terms of use</a>, and that I understand and "
-"agree to its contents."
+"I hereby confirm that I am submitting this proposal after reading the "
+"terms of use, and that I understand and agree to its contents."
 msgstr "利用規約を読み、内容を理解した上で本プロポーザルを応募することを認めます"
 
 #: templates/session/form.tpl:189
