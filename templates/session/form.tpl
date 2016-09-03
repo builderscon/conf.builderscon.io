@@ -13,7 +13,7 @@
           </div>
           <div class="tabs cfptabs" data-tabs id="example-tabs">
 {% for l in languages %}
-{% if loop.first %}
+{% if l.value == lang %}
             <div class="tabs-title cfptabs-title is-active"><a href="#panel1" aria-selected="true" class="cfptabs-title-inside">{% trans lang=_(l.name) %}{{lang}}{% endtrans %}</a></div>
 {% else %}
             <div class="tabs-title cfptabs-title"><a href="#panel{{ loop.index }}" class="cfptabs-title-inside">{% trans lang=_(l.name) %}{{lang}}{% endtrans %}</a></div>
