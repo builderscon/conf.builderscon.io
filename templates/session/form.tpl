@@ -25,7 +25,7 @@
 {% set panelClass = 'tabs-panel cfptabs-panel is-active' if loop.first else 'tabs-panel cfptabs-panel' %}
             <div class="{{ panelClass }}" id="panel{{ loop.index }}">
             <div class="row">
-              <p class="notice-small">{% trans %}You must provide at least one title in any of the supported languages{% endtrans %}</p>
+              <p class="notice-small">{% trans %}You must provide at least one title and abstract in any of the supported languages{% endtrans %}</p>
               <div class="large-{{ left }} columns">
                 <label>{% trans %}Title{% endtrans %}</label>
                 {% if errors and missing.get('title') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}

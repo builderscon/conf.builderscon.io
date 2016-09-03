@@ -48,7 +48,7 @@ msgstr ""
 "        <p>グッズを作ったり、あなたのbuildersconのプロモーションに使ったりしてあげてください！</p>\n"
 "        "
 
-#: templates/beacon.tpl:44 templates/session/form.tpl:189
+#: templates/beacon.tpl:44 templates/session/form.tpl:188
 msgid "Terms Of Use"
 msgstr "利用規約"
 
@@ -151,41 +151,41 @@ msgstr "セッション概要（英語）"
 msgid "Session Abstract (Japanese)"
 msgstr "セッション概要（日本語）"
 
-#: templates/cfp_confirm.tpl:80 templates/session/form.tpl:75
+#: templates/cfp_confirm.tpl:80 templates/session/form.tpl:74
 #: templates/session/view.tpl:60
 msgid "Material Level"
 msgstr "レベル"
 
-#: templates/cfp_confirm.tpl:84 templates/session/form.tpl:91
+#: templates/cfp_confirm.tpl:84 templates/session/form.tpl:90
 #: templates/session/view.tpl:72
 msgid "Spoken Language"
 msgstr "講演に使用される言語"
 
-#: templates/cfp_confirm.tpl:88 templates/session/form.tpl:103
+#: templates/cfp_confirm.tpl:88 templates/session/form.tpl:102
 #: templates/session/view.tpl:76
 msgid "Slide Language"
 msgstr "スライド言語"
 
-#: templates/cfp_confirm.tpl:92 templates/session/form.tpl:115
+#: templates/cfp_confirm.tpl:92 templates/session/form.tpl:114
 msgid "Comments"
 msgstr "コメント"
 
-#: templates/cfp_confirm.tpl:96 templates/session/form.tpl:144
+#: templates/cfp_confirm.tpl:96 templates/session/form.tpl:143
 #: templates/session/view.tpl:80
 msgid "Photo Release"
 msgstr "撮影許可"
 
-#: templates/cfp_confirm.tpl:100 templates/session/form.tpl:158
+#: templates/cfp_confirm.tpl:100 templates/session/form.tpl:157
 #: templates/session/view.tpl:84
 msgid "Recording Release"
 msgstr "録画許可"
 
-#: templates/cfp_confirm.tpl:104 templates/session/form.tpl:172
+#: templates/cfp_confirm.tpl:104 templates/session/form.tpl:171
 #: templates/session/view.tpl:88
 msgid "Materials Release"
 msgstr "素材利用許可"
 
-#: templates/cfp_confirm.tpl:112 templates/session/form.tpl:196
+#: templates/cfp_confirm.tpl:112 templates/session/form.tpl:195
 msgid "Submit your proposal"
 msgstr "応募する"
 
@@ -229,7 +229,7 @@ msgstr "応募されたプロポーザルはありません"
 msgid "Conference"
 msgstr "カンファレンス"
 
-#: templates/dashboard.tpl:76 templates/session/form.tpl:16
+#: templates/dashboard.tpl:76 templates/session/form.tpl:30
 msgid "Title"
 msgstr "タイトル"
 
@@ -394,37 +394,33 @@ msgstr "応募フォーム"
 msgid "Proposal Details"
 msgstr "詳細情報"
 
-#: templates/session/form.tpl:17 templates/session/form.tpl:40
-#: templates/session/form.tpl:53
+#: templates/session/form.tpl:31 templates/session/form.tpl:45
+#: templates/session/form.tpl:63
 msgid "required field"
 msgstr "必須"
 
-#: templates/session/form.tpl:22
-msgid "You must provide at least one title in any of the supported languages"
-msgstr "選択可能な言語の中からひとつ以上のタイトルを記入してください"
+#: templates/session/form.tpl:28
+msgid "You must provide at least one title and abstract in any of the supported languages"
+msgstr "選択可能な言語の中からひとつ以上のタイトルと概要を記入してください"
 
-#: templates/session/form.tpl:31
+#: templates/session/form.tpl:37
 #, python-format
 msgid "Please provide the session title in %(lang)s"
 msgstr "%(lang)s でセッションタイトルを指定してください"
 
-#: templates/session/form.tpl:39
+#: templates/session/form.tpl:62
 msgid "Session Type"
 msgstr "セッション種別"
 
-#: templates/session/form.tpl:45
+#: templates/session/form.tpl:68
 msgid "SUBMISSION CURRENTLY CLOSED"
 msgstr "受付期間外"
 
-#: templates/session/form.tpl:52
+#: templates/session/form.tpl:44
 msgid "Abstract"
 msgstr "概要"
 
-#: templates/session/form.tpl:58
-msgid "You must provide at least one abstract in any of the supported languages"
-msgstr "選択可能な言語の中からひとつ以上の概要を記入してください"
-
-#: templates/session/form.tpl:66
+#: templates/session/form.tpl:51
 #, python-format
 msgid ""
 "Please provide the session abstract in %(lang)s\n"
@@ -435,90 +431,90 @@ msgstr ""
 "\n"
 "このフィールドにはMarkdown記法を使う事ができます"
 
-#: templates/session/form.tpl:80
+#: templates/session/form.tpl:79
 msgid "Beginner"
 msgstr "初級者"
 
-#: templates/session/form.tpl:81
+#: templates/session/form.tpl:80
 msgid "Intermediate"
 msgstr "中級者"
 
-#: templates/session/form.tpl:82
+#: templates/session/form.tpl:81
 msgid "Expert"
 msgstr "上級者"
 
-#: templates/session/form.tpl:93
+#: templates/session/form.tpl:92
 msgid "Please select which language you will be speaking in."
 msgstr "講演の際に使用される言語を指定してください"
 
-#: templates/session/form.tpl:105
+#: templates/session/form.tpl:104
 msgid "Please select which language you will write your slides in."
 msgstr "講演スライドで使用される言語を指定してください"
 
-#: templates/session/form.tpl:117
+#: templates/session/form.tpl:116
 msgid ""
 "Specify any communication that you might want to relay to the organizer: "
 "e.g. special financial requirements, required documents, specific dates "
 "during the conference you might not be able to attend, etc"
 msgstr "イベント運営スタッフに伝えたい連絡事項等、をご記入ください。例： ドキュメント等の準備、登壇できる・できない日程等"
 
-#: templates/session/form.tpl:123
+#: templates/session/form.tpl:122
 msgid "Videos, Photos, and Materials"
 msgstr "動画、写真、素材等"
 
-#: templates/session/form.tpl:124
+#: templates/session/form.tpl:123
 msgid ""
 "Please refer to our <a href=\".\" target=\"_blank\">terms of use</a> "
 "about how builderscon uses videos, photos, and other materials."
 msgstr "提供いただく写真、動画、素材等がどのように利用されるかは利用規約をご確認ください"
 
-#: templates/session/form.tpl:131
+#: templates/session/form.tpl:130
 msgid "Please provide the URL of where you uploaded your slide"
 msgstr ""
 
-#: templates/session/form.tpl:146
+#: templates/session/form.tpl:145
 msgid ""
 "By selecting \"Allow\" below, you agree to allow builderscon to take your"
 " photo during the duration of the event, and to distribute and place "
 "those photos on our website(s)."
 msgstr "以下の「許可」を選択することによりbuildersconがイベント会期中にあなたの写真を撮影すること、およびそれらの写真をbuilderscon関連のサイト上に配置したり、同サイトから配信することを許諾したものと見なされます"
 
-#: templates/session/form.tpl:149 templates/session/form.tpl:163
-#: templates/session/form.tpl:177
+#: templates/session/form.tpl:148 templates/session/form.tpl:162
+#: templates/session/form.tpl:176
 msgid "Allow"
 msgstr "許可"
 
-#: templates/session/form.tpl:150 templates/session/form.tpl:164
-#: templates/session/form.tpl:178
+#: templates/session/form.tpl:149 templates/session/form.tpl:163
+#: templates/session/form.tpl:177
 msgid "Disallow"
 msgstr "不許可"
 
-#: templates/session/form.tpl:160
+#: templates/session/form.tpl:159
 msgid ""
 "By selecting \"Allow\" below, you agree to allow builderscon to record "
 "your presentation on video, and to distribute and place those recordings "
 "on our website(s)."
 msgstr "以下の「許可」を選択することによりbuildersconがイベント会期中にあなたの講演を動画撮影すること、およびそれらの動画をbuilderscon関連のサイト上に配置したり、同サイトから配信することを許諾したものと見なされます"
 
-#: templates/session/form.tpl:174
+#: templates/session/form.tpl:173
 msgid ""
 "By selecting \"Allow\" below, you agree to allow builderscon to "
 "distribute and place materials from your presentation (such as slides) on"
 " our website(s), including from our API."
 msgstr "以下の「許可」を選択することによりbuildersconがあなたの講演の素材（スライド等）をbuilderscon関連のサイト上に配置したり、同サイトから配信することを許諾したものと見なされます"
 
-#: templates/session/form.tpl:188
+#: templates/session/form.tpl:187
 msgid ""
 "I hereby confirm that I am submitting this proposal after reading the <a "
 "href=\"\" target=\"_blank\">terms of use</a>, and that I understand and "
 "agree to its contents."
 msgstr "利用規約を読み、内容を理解した上で本プロポーザルを応募することを認めます"
 
-#: templates/session/form.tpl:190
+#: templates/session/form.tpl:189
 msgid "Yes, I agree to the Terms Of Use"
 msgstr "利用規約に同意します"
 
-#: templates/session/form.tpl:198
+#: templates/session/form.tpl:197
 msgid "Please check agree to our Terms Of Use before submitting your proposal."
 msgstr "応募前に利用規約に同意してください"
 
