@@ -11,6 +11,8 @@ $(function() {
       $btn.prop("disabled", true);
     }
   });
+
+  $("#cfptabs").foundation("selectTab", "#panel-{{ lang }}");
 })
 -->
 </script>

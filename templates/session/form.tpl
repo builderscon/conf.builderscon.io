@@ -11,16 +11,16 @@
           <div class="row">
             <div class="large-12 columns"><h3>{% trans %}Proposal Details{% endtrans %}</h3></div>
           </div>
-            <div class="tabs cfptabs" data-tabs id="example-tabs">
+            <div class="tabs cfptabs" data-tabs id="cfptabs">
 {% for l in languages %}
-{% if l.value == lang %}
-              <div class="tabs-title cfptabs-title is-active"><a href="#panel1" aria-selected="true" class="cfptabs-title-inside">{% trans lang=_(l.name) %}{{lang}}{% endtrans %}</a></div>
+{% if loop.first %}
+              <div class="tabs-title cfptabs-title is-active"><a href="#panel-{{languages[loop.index0].value}}" aria-selected="true" class="cfptabs-title-inside">{% trans lang=_(l.name) %}{{lang}}{% endtrans %}</a></div>
 {% else %}
-              <div class="tabs-title cfptabs-title"><a href="#panel{{ loop.index }}" class="cfptabs-title-inside">{% trans lang=_(l.name) %}{{lang}}{% endtrans %}</a></div>
+              <div class="tabs-title cfptabs-title"><a href="#panel-{{languages[loop.index0 ].value}}" class="cfptabs-title-inside">{% trans lang=_(l.name) %}{{lang}}{% endtrans %}</a></div>
 {% endif %}
 {% endfor %}
             </div>
-            <div class="tabs-content cfptabs-content" data-tabs-content="example-tabs">
+            <div class="tabs-content cfptabs-content" data-tabs-content="cfptabs">
 {% for l in languages %}
 {% set panelClass = 'tabs-panel cfptabs-panel is-active' if loop.first else 'tabs-panel cfptabs-panel' %}
             <div class="{{ panelClass }}" id="panel{{ loop.index }}">
