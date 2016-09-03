@@ -87,7 +87,7 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
             <div class="large-{{ left }} columns"><label>{% trans %}Spoken Language{% endtrans %}</label></div>
             <div class="large-{{ right }} columns">
               <p class="notice-small">{% trans %}Please select which language you will be speaking in.{% endtrans %}</p>
-              <select name="spoken_language">
+              <select name="spoken_language" id="select-spoken-language">
 {% set sel_spoken_language = session.get('spoken_language', 'en') if session else 'en' %}
 {% for l in languages %}
                 <option value="{{ l.value }}"{% if l.value == sel_spoken_language %} selected="selected"{% endif %}>{{ _(l.name) }}</option>
@@ -99,7 +99,7 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
             <div class="large-{{ left }} columns"><label>{% trans %}Slide Language{% endtrans %}</label></div>
             <div class="large-{{ right }} columns">
               <p class="notice-small">{% trans %}Please select which language you will write your slides in.{% endtrans %}</p>
-              <select name="slide_language">
+              <select name="slide_language" id="select-slide-language">
 {% set sel_slide_language = session.get('slide_language', 'en') if session else 'en' %}
 {% for l in languages %}
                 <option value="{{ l.value }}"{% if l.value == sel_slide_language %} selected="selected"{% endif %}>{{ _(l.name) }}</option>
