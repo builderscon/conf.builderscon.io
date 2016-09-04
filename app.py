@@ -611,9 +611,6 @@ def conference_cfp_input():
     required = ['title', 'abstract']
     flask.g.stash['missing'] = {}
     for f in required:
-        if form.get(f):
-            continue
-
         has_l10n_field = False
         for l in LANGUAGES:
             v = l.get('value')
@@ -626,7 +623,7 @@ def conference_cfp_input():
                 l10n[l10nk] = l10nv
                 break
 
-        if not has_l10n_field:
+        if not has_l10n_field and not form.get(f):
             print("missing %s" % f)
             flask.g.stash['errors'] = True
             flask.g.stash['missing'][f] = True
