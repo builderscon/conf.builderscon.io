@@ -387,7 +387,6 @@ msgstr ""
 #, python-format
 msgid ""
 "Please provide the session abstract in %(lang)s\n"
-"\n"
 "You may use Markdown in this field"
 msgstr ""
 
@@ -424,8 +423,9 @@ msgstr ""
 
 #: templates/session/form.tpl:123
 msgid ""
-"Please refer to our <a href=\".\" target=\"_blank\">terms of use</a> "
-"about how builderscon uses videos, photos, and other materials."
+"Please refer to our <a href=\"%(termsOfUseURL)s\" target=\"_blank\">terms"
+" of use</a> about how builderscon uses videos, photos, and other "
+"materials."
 msgstr ""
 
 #: templates/session/form.tpl:130
@@ -465,9 +465,8 @@ msgstr ""
 
 #: templates/session/form.tpl:187
 msgid ""
-"I hereby confirm that I am submitting this proposal after reading the <a "
-"href=\"\" target=\"_blank\">terms of use</a>, and that I understand and "
-"agree to its contents."
+"I hereby confirm that I am submitting this proposal after reading the "
+"terms of use, and that I understand and agree to its contents."
 msgstr ""
 
 #: templates/session/form.tpl:189

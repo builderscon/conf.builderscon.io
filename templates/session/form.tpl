@@ -5,6 +5,7 @@
       <h1 class="section-header">{% trans %}Submission Form{% endtrans %}</h1>
       <div class="section-content">
         <form class="cfp-form" action="{{ action }}" method="post">
+{% set termsOfUseURL = 'https://docs.google.com/document/d/1dX6RaYwjZ4VF31_UgrFgQYlkH1ayH39kEG0T3lCPOxo/edit?usp=sharing' %}
 {% if for_edit %}
           <input type="hidden" name="id" value="{{ session.id }}">
 {% endif %}
@@ -117,7 +118,7 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
           <div class="row">
             <div class="large-12 columns">
               <h3>{% trans %}Videos, Photos, and Materials{% endtrans %}</h3>
-              <p class="notice-small">{% trans %}Please refer to our <a href="." target="_blank">terms of use</a> about how builderscon uses videos, photos, and other materials.{% endtrans %}</p>
+              <p class="notice-small">{% trans %}Please refer to our <a href="{{termsOfUseURL}}" target="_blank">terms of use</a> about how builderscon uses videos, photos, and other materials.{% endtrans %}</p>
             </div>
           </div>
 {% if slide_url %}
@@ -181,8 +182,8 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
 {% if not for_edit %}
           <div class="row tos-agreement">
             <div class="large-12 columns">
-              <div>{% trans %}I hereby confirm that I am submitting this proposal after reading the <a href="" target="_blank">terms of use</a>, and that I understand and agree to its contents.{% endtrans %}</div>
-              <div><span class="i-documents"></span><a href="https://docs.google.com/document/d/1dX6RaYwjZ4VF31_UgrFgQYlkH1ayH39kEG0T3lCPOxo/edit?usp=sharing">{% trans %}Terms Of Use{% endtrans %}</a></div>
+              <div>{% trans %}I hereby confirm that I am submitting this proposal after reading the terms of use, and that I understand and agree to its contents.{% endtrans %}</div>
+              <div><span class="i-documents"></span><a href="{{termsOfUseURL}}" target="_blank">{% trans %}Terms Of Use{% endtrans %}</a></div>
               <div><input type="checkbox" name="terms_of_use" value=true id="terms_of_use_yes" onchange="handleTermsOfUseAgree(this);" /> <span class="yes-no">{% trans %}Yes, I agree to the Terms Of Use{% endtrans %}</span></div>
             </div>
           </div>
