@@ -51,6 +51,9 @@ div.conference-history {
             <div class="profile">
               <img src="{{ user.avatar_url }}">
               <p class="name">{{ user.nickname }} <span class="auth_via">{{ user.auth_via }}</span></p>
+              <form action="/logout" method="POST">
+              <button class="alert button">{% trans %}Logout{% endtrans %}</button>
+              </form>
             </div>
           </div>
           <div class="profile-content large-10 columns">

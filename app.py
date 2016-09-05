@@ -441,7 +441,7 @@ def login_twitter_callback(resp):
     return flask.redirect(flask.request.args.get('.next') or '/')
 
 
-@flaskapp.route('/logout')
+@flaskapp.route('/logout', methods=['POST'])
 def logout(p=None):
     flask.session.clear()
     return flask.redirect('/')
