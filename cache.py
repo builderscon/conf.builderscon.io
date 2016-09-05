@@ -8,6 +8,14 @@ if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/') or os.geten
 else:
     import memcache
 
+def build(backend, cfg):
+    if backend == 'Redis':
+        return Redis(**cfg.section('REDIS_INFO'))
+    elif backend == 'Memcached':
+        return Memcached(**cfg.section('MEMCACHED'))
+   
+    raise Exception('Unknown backend "%s"' % backend)
+
 class Redis(object):
     def __init__(self, host, port, db):
         self.redis = redis.Redis(host=host, port=port, db=db)

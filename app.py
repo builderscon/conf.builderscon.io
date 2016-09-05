@@ -4,6 +4,7 @@
 import flask
 import flask_babel
 import flask_oauth
+import flask_session
 import markupsafe
 import time
 import hashlib
@@ -13,6 +14,7 @@ from logging import StreamHandler
 import json
 import os
 import cache
+import session
 from octav import Octav
 import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
@@ -71,16 +73,11 @@ flaskapp.url_map.converters['regex'] = flasktools.RegexConverter
 babel = flask_babel.Babel(flaskapp)
 app = WSGILogger(flaskapp, [StreamHandler(sys.stdout)], ApacheFormatter())
 
-
 octav = Octav(**cfg.section('OCTAV'))
 
-backend = os.getenv('CACHE_BACKEND', 'Redis')
-if backend == 'Redis':
-    cache = cache.Redis(**cfg.section('REDIS_INFO'))
-elif backend == 'Memcached':
-    cache = cache.Memcached(**cfg.section('MEMCACHED'))
-else:
-    raise Exception('Unknown backend "%s"' % backend)
+cache = cache.build(os.getenv('CACHE_BACKEND', 'Redis'), cfg)
+
+flaskapp.session_interface = session.build(os.getenv('SESSION_BACKEND', 'Redis'), cfg)
 
 oauth = flask_oauth.OAuth()
 twitter = oauth.remote_app('twitter',
@@ -286,7 +283,7 @@ def login_github_callback(resp):
         resp['access_token'],
         ''
     )
-    res = github.request('/user')
+    res = github.request('user')
     if res.status != 200:
         print("got status %d" % res.status)
         print(res.data)
@@ -341,7 +338,7 @@ def login_facebook_callback(resp):
         resp['access_token'],
         ''
     )
-    res = facebook.request('/me')
+    res = facebook.request('me')
     if res.status != 200:
         print("got status %d" % res.status)
         print(res.data)
@@ -409,7 +406,7 @@ def login_twitter_callback(resp):
         flask.session['user'] = user
         return flask.redirect(flask.request.args.get('.next') or '/')
 
-    res = twitter.request('/account/verify_credentials.json')
+    res = twitter.request('account/verify_credentials.json')
     if res.status != 200:
         print("got status %d" % res.status)
         print(res.data)
