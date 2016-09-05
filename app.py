@@ -441,7 +441,7 @@ def login_twitter_callback(resp):
     return flask.redirect(flask.request.args.get('.next') or '/')
 
 
-@flaskapp.route('/logout')
+@flaskapp.route('/logout', methods=['POST'])
 def logout(p=None):
     flask.session.clear()
     return flask.redirect('/')
@@ -490,6 +490,11 @@ def email_confirm_post():
     )
     if not ok:
         return octav.last_error(), 500
+
+    olduser = flask.session.get('user')
+    user = octav.lookup_user_by_auth_user_id(auth_via=olduser['auth_via'], auth_user_id=olduser['auth_user_id'])
+    flask.session['user'] = user
+
     return flask.redirect('/user/email/done')
 
 @flaskapp.route('/user/email/done', methods=['GET'])
