@@ -3,6 +3,7 @@
 
 import flask
 import flask_babel
+import flask_oauth
 import markupsafe
 import time
 import hashlib
@@ -21,7 +22,6 @@ import model
 import flasktools
 import functools
 import sys
-import oauth
 
 if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/') or os.getenv('SERVER_SOFTWARE', '').startswith('Development/'):
     import urllib3.contrib.appengine
@@ -82,7 +82,8 @@ elif backend == 'Memcached':
 else:
     raise Exception('Unknown backend "%s"' % backend)
 
-twitter = oauth.Init('twitter',
+oauth = flask_oauth.OAuth()
+twitter = oauth.remote_app('twitter',
     base_url='https://api.twitter.com/1.1/',
     request_token_url='https://api.twitter.com/oauth/request_token',
     access_token_url='https://api.twitter.com/oauth/access_token',
@@ -91,7 +92,7 @@ twitter = oauth.Init('twitter',
     consumer_secret=cfg.section('TWITTER').get('client_secret').encode('ASCII')
 )
 
-facebook = oauth.Init('facebook',
+facebook = oauth.remote_app('facebook',
     base_url='https://graph.facebook.com/',
     request_token_url=None,
     access_token_url='/oauth/access_token',
@@ -101,7 +102,7 @@ facebook = oauth.Init('facebook',
     request_token_params={'scope': 'email'}
 )
 
-github = oauth.Init('github',
+github = oauth.remote_app('github',
     base_url='https://api.github.com',
     request_token_url=None,
     authorize_url='https://github.com/login/oauth/authorize',
@@ -287,8 +288,9 @@ def login_github_callback(resp):
     )
     res = github.request('/user')
     if res.status != 200:
-        flask.flash('failed to fetch user information after oauth')
-        return flask.redirect('/login')
+        print("got status %d" % res.status)
+        print(res.data)
+        return flask.render_template('login.tpl', error='failed to fetch user information after oauth')
 
     data = res.data
 
@@ -315,8 +317,7 @@ def login_github_callback(resp):
         last_name=last_name
     )
     if not user:
-        flask.flash('failed to register user in the backend server')
-        return flask.redirect('/login')
+        return flask.render_template('login.tpl', error='failed to register user in the backend server')
 
     flask.session['user'] = user
     return flask.redirect(flask.request.args.get('.next') or '/')
@@ -342,8 +343,9 @@ def login_facebook_callback(resp):
     )
     res = facebook.request('/me')
     if res.status != 200:
-        flask.flash('failed to fetch user information after oauth')
-        return flask.redirect('/login')
+        print("got status %d" % res.status)
+        print(res.data)
+        return flask.render_template('login.tpl', error='failed to fetch user information after oauth')
 
     data = res.data
 
@@ -370,8 +372,7 @@ def login_facebook_callback(resp):
         last_name=last_name
     )
     if not user:
-        flask.flash('failed to register user in the backend server')
-        return flask.redirect('/login')
+        return flask.render_template('login.tpl', error='failed to register user in the backend server')
 
     flask.session['user'] = user
     return flask.redirect(flask.request.args.get('.next') or '/')
@@ -382,7 +383,13 @@ def get_twitter_token(token=None):
 
 @flaskapp.route('/login/twitter')
 def login_twitter():
+    if 'twitter_token' in flask.session:
+        del flask.session['twitter_token']
     return start_oauth(twitter, flaskapp.base_url + '/login/twitter/callback')
+
+@flaskapp.errorhandler(flask_oauth.OAuthException)
+def handle_oauth_exception(e):
+    return str(e)
 
 @flaskapp.route('/login/twitter/callback')
 @twitter.authorized_handler
@@ -404,8 +411,9 @@ def login_twitter_callback(resp):
 
     res = twitter.request('/account/verify_credentials.json')
     if res.status != 200:
-        flask.flash('failed to fetch user information after oauth')
-        return flask.redirect('/login')
+        print("got status %d" % res.status)
+        print(res.data)
+        return flask.render_template('login.tpl', error='failed to fetch user information after oauth')
 
     data = res.data
 
@@ -431,8 +439,7 @@ def login_twitter_callback(resp):
         last_name=last_name,
     )
     if not user:
-        flask.flash('failed to register user in the backend server')
-        return flask.redirect('/login')
+        return flask.render_template('login.tpl', error='failed to register user in the backend server')
 
     flask.session['user'] = user
     return flask.redirect(flask.request.args.get('.next') or '/')
