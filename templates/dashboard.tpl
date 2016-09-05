@@ -44,8 +44,8 @@ div.conference-history {
 <main>
   <div class="section article">
     <div class="inner">
-      <div class="section-content no-header">
-
+      <h1 class="section-header">{{ user.nickname }}</h1>
+      <div class="section-content">
         <div class="row">
           <div class="large-2 columns">
             <div class="profile">
