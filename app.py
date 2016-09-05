@@ -289,7 +289,7 @@ def login_github_callback(resp):
     res = github.request('/user')
     if res.status != 200:
         print("got status %d" % res.status)
-        print(data)
+        print(res.data)
         return flask.render_template('login.tpl', error='failed to fetch user information after oauth')
 
     data = res.data
@@ -344,7 +344,7 @@ def login_facebook_callback(resp):
     res = facebook.request('/me')
     if res.status != 200:
         print("got status %d" % res.status)
-        print(data)
+        print(res.data)
         return flask.render_template('login.tpl', error='failed to fetch user information after oauth')
 
     data = res.data
@@ -412,7 +412,7 @@ def login_twitter_callback(resp):
     res = twitter.request('/account/verify_credentials.json')
     if res.status != 200:
         print("got status %d" % res.status)
-        print(data)
+        print(res.data)
         return flask.render_template('login.tpl', error='failed to fetch user information after oauth')
 
     data = res.data
