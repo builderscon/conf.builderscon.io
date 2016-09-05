@@ -278,8 +278,8 @@ def login_github():
 @github.authorized_handler
 def login_github_callback(resp):
     if resp is None:
-        flask.flash('authentication denied')
-        return flask.redirect('/login')
+        err = flask.request.args.get('error_description') or flask.request.args.get('error')
+        return flask.render_template('login.tpl', error=err)
 
     flask.session['github_token'] = (
         resp['access_token'],
@@ -333,8 +333,8 @@ def login_facebook():
 @facebook.authorized_handler
 def login_facebook_callback(resp):
     if resp is None:
-        flask.flash('authentication denied')
-        return flask.redirect('/login')
+        err = flask.request.args.get('error_description') or flask.request.args.get('error')
+        return flask.render_template('login.tpl', error=err)
 
     flask.session['facebook_token'] = (
         resp['access_token'],
@@ -388,8 +388,8 @@ def login_twitter():
 @twitter.authorized_handler
 def login_twitter_callback(resp):
     if resp is None:
-        flask.flash('authentication denied')
-        return flask.redirect('/login')
+        err = flask.request.args.get('error_description') or flask.request.args.get('error')
+        return flask.render_template('login.tpl', error=err)
 
     flask.session['twitter_token'] = (
         resp['oauth_token'],

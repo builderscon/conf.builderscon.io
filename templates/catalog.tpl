@@ -8,3 +8,8 @@
 {{ _("accepted") }}
 {{ _("pending") }}
 {{ _("rejected") }}
+
+# OAuth error. This error message should never ever appear in a user
+# facing context, so it does not need to be translated, but it's here
+# for completeness
+{{ _("The redirect_uri MUST match the registered callback URL for this application.") }}

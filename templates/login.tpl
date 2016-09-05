@@ -23,6 +23,14 @@
 
 {% block main %}
 <main>
+{% if error %}
+  <div class="section article">
+    <div class="inner">
+      <h1 class="section-header">{% trans %}Error{% endtrans %}</h1>
+      <div class="section-content">{{ _(error) }}</div>
+    </div>
+  </div>
+{% endif %}
   <div class="section article">
     <div class="inner">
       <h1 class="section-header">{% trans %}Login{% endtrans %}</h1>

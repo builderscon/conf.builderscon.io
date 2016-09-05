@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-01 14:07+0900\n"
+"POT-Creation-Date: 2016-09-05 09:31+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,7 +43,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/beacon.tpl:44 templates/session/form.tpl:188
+#: templates/beacon.tpl:44 templates/session/form.tpl:186
 msgid "Terms Of Use"
 msgstr ""
 
@@ -93,6 +93,12 @@ msgstr ""
 msgid "rejected"
 msgstr ""
 
+#: templates/catalog.tpl:11
+msgid ""
+"The redirect_uri MUST match the registered callback URL for this "
+"application."
+msgstr ""
+
 #: templates/cfp.tpl:22
 msgid "Call For Papers"
 msgstr ""
@@ -135,41 +141,41 @@ msgstr ""
 msgid "Session Abstract (Japanese)"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:80 templates/session/form.tpl:74
+#: templates/cfp_confirm.tpl:80 templates/session/form.tpl:72
 #: templates/session/view.tpl:60
 msgid "Material Level"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:84 templates/session/form.tpl:90
+#: templates/cfp_confirm.tpl:84 templates/session/form.tpl:88
 #: templates/session/view.tpl:72
 msgid "Spoken Language"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:88 templates/session/form.tpl:102
+#: templates/cfp_confirm.tpl:88 templates/session/form.tpl:100
 #: templates/session/view.tpl:76
 msgid "Slide Language"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:92 templates/session/form.tpl:114
+#: templates/cfp_confirm.tpl:92 templates/session/form.tpl:112
 msgid "Comments"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:96 templates/session/form.tpl:143
+#: templates/cfp_confirm.tpl:96 templates/session/form.tpl:141
 #: templates/session/view.tpl:80
 msgid "Photo Release"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:100 templates/session/form.tpl:157
+#: templates/cfp_confirm.tpl:100 templates/session/form.tpl:155
 #: templates/session/view.tpl:84
 msgid "Recording Release"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:104 templates/session/form.tpl:171
+#: templates/cfp_confirm.tpl:104 templates/session/form.tpl:169
 #: templates/session/view.tpl:88
 msgid "Materials Release"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:112 templates/session/form.tpl:195
+#: templates/cfp_confirm.tpl:112 templates/session/form.tpl:193
 msgid "Submit your proposal"
 msgstr ""
 
@@ -213,7 +219,7 @@ msgstr ""
 msgid "Conference"
 msgstr ""
 
-#: templates/dashboard.tpl:76 templates/session/form.tpl:30
+#: templates/dashboard.tpl:76 templates/session/form.tpl:28
 msgid "Title"
 msgstr ""
 
@@ -293,11 +299,15 @@ msgid ""
 "conversations."
 msgstr ""
 
-#: templates/login.tpl:28
-msgid "Login"
+#: templates/login.tpl:29
+msgid "Error"
 msgstr ""
 
 #: templates/login.tpl:36
+msgid "Login"
+msgstr ""
+
+#: templates/login.tpl:44
 #, python-format
 msgid "Login with %(name)s"
 msgstr ""
@@ -346,134 +356,135 @@ msgstr ""
 msgid "Submission Form"
 msgstr ""
 
-#: templates/session/form.tpl:12
+#: templates/session/form.tpl:13
 msgid "Proposal Details"
 msgstr ""
 
-#: templates/session/form.tpl:17 templates/session/form.tpl:19
+#: templates/session/form.tpl:18
 #, python-format
 msgid "%(lang)s"
 msgstr ""
 
-#: templates/session/form.tpl:28
+#: templates/session/form.tpl:26
 msgid ""
 "You must provide at least one title and abstract in any of the supported "
 "languages"
 msgstr ""
 
-#: templates/session/form.tpl:31 templates/session/form.tpl:45
-#: templates/session/form.tpl:63
+#: templates/session/form.tpl:29 templates/session/form.tpl:43
+#: templates/session/form.tpl:61
 msgid "required field"
 msgstr ""
 
-#: templates/session/form.tpl:37
+#: templates/session/form.tpl:35
 #, python-format
 msgid "Please provide the session title in %(lang)s"
 msgstr ""
 
-#: templates/session/form.tpl:62
-msgid "Session Type"
-msgstr ""
-
-#: templates/session/form.tpl:68
-msgid "SUBMISSION CURRENTLY CLOSED"
-msgstr ""
-
-#: templates/session/form.tpl:44
+#: templates/session/form.tpl:42
 msgid "Abstract"
 msgstr ""
 
-#: templates/session/form.tpl:51
+#: templates/session/form.tpl:49
 #, python-format
 msgid ""
 "Please provide the session abstract in %(lang)s\n"
 "You may use Markdown in this field"
 msgstr ""
 
-#: templates/session/form.tpl:79
+#: templates/session/form.tpl:60
+msgid "Session Type"
+msgstr ""
+
+#: templates/session/form.tpl:66
+msgid "SUBMISSION CURRENTLY CLOSED"
+msgstr ""
+
+#: templates/session/form.tpl:77
 msgid "Beginner"
 msgstr ""
 
-#: templates/session/form.tpl:80
+#: templates/session/form.tpl:78
 msgid "Intermediate"
 msgstr ""
 
-#: templates/session/form.tpl:81
+#: templates/session/form.tpl:79
 msgid "Expert"
 msgstr ""
 
-#: templates/session/form.tpl:92
+#: templates/session/form.tpl:90
 msgid "Please select which language you will be speaking in."
 msgstr ""
 
-#: templates/session/form.tpl:104
+#: templates/session/form.tpl:102
 msgid "Please select which language you will write your slides in."
 msgstr ""
 
-#: templates/session/form.tpl:116
+#: templates/session/form.tpl:114
 msgid ""
 "Specify any communication that you might want to relay to the organizer: "
 "e.g. special financial requirements, required documents, specific dates "
 "during the conference you might not be able to attend, etc"
 msgstr ""
 
-#: templates/session/form.tpl:122
+#: templates/session/form.tpl:120
 msgid "Videos, Photos, and Materials"
 msgstr ""
 
-#: templates/session/form.tpl:123
+#: templates/session/form.tpl:121
+#, python-format
 msgid ""
 "Please refer to our <a href=\"%(termsOfUseURL)s\" target=\"_blank\">terms"
 " of use</a> about how builderscon uses videos, photos, and other "
 "materials."
 msgstr ""
 
-#: templates/session/form.tpl:130
+#: templates/session/form.tpl:128
 msgid "Please provide the URL of where you uploaded your slide"
 msgstr ""
 
-#: templates/session/form.tpl:145
+#: templates/session/form.tpl:143
 msgid ""
 "By selecting \"Allow\" below, you agree to allow builderscon to take your"
 " photo during the duration of the event, and to distribute and place "
 "those photos on our website(s)."
 msgstr ""
 
-#: templates/session/form.tpl:148 templates/session/form.tpl:162
-#: templates/session/form.tpl:176
+#: templates/session/form.tpl:146 templates/session/form.tpl:160
+#: templates/session/form.tpl:174
 msgid "Allow"
 msgstr ""
 
-#: templates/session/form.tpl:149 templates/session/form.tpl:163
-#: templates/session/form.tpl:177
+#: templates/session/form.tpl:147 templates/session/form.tpl:161
+#: templates/session/form.tpl:175
 msgid "Disallow"
 msgstr ""
 
-#: templates/session/form.tpl:159
+#: templates/session/form.tpl:157
 msgid ""
 "By selecting \"Allow\" below, you agree to allow builderscon to record "
 "your presentation on video, and to distribute and place those recordings "
 "on our website(s)."
 msgstr ""
 
-#: templates/session/form.tpl:173
+#: templates/session/form.tpl:171
 msgid ""
 "By selecting \"Allow\" below, you agree to allow builderscon to "
 "distribute and place materials from your presentation (such as slides) on"
 " our website(s), including from our API."
 msgstr ""
 
-#: templates/session/form.tpl:187
+#: templates/session/form.tpl:185
 msgid ""
 "I hereby confirm that I am submitting this proposal after reading the "
 "terms of use, and that I understand and agree to its contents."
 msgstr ""
 
-#: templates/session/form.tpl:189
+#: templates/session/form.tpl:187
 msgid "Yes, I agree to the Terms Of Use"
 msgstr ""
 
-#: templates/session/form.tpl:197
+#: templates/session/form.tpl:195
 msgid "Please check agree to our Terms Of Use before submitting your proposal."
 msgstr ""
 
