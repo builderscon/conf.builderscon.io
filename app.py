@@ -4,7 +4,6 @@
 import flask
 import flask_babel
 import flask_oauth
-import flask_session
 import markupsafe
 import time
 import hashlib
@@ -14,7 +13,7 @@ from logging import StreamHandler
 import json
 import os
 import cache
-import session
+import sessionmgr
 from octav import Octav
 import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
@@ -77,7 +76,7 @@ octav = Octav(**cfg.section('OCTAV'))
 
 cache = cache.build(os.getenv('CACHE_BACKEND', 'Redis'), cfg)
 
-flaskapp.session_interface = session.build(os.getenv('SESSION_BACKEND', 'Redis'), cfg)
+flaskapp.session_interface = sessionmgr.build(os.getenv('SESSION_BACKEND', 'Redis'), cfg)
 
 oauth = flask_oauth.OAuth()
 twitter = oauth.remote_app('twitter',
