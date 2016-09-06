@@ -791,8 +791,8 @@ a.disabled	{ color: #555; }
 	#contents {
 		padding: 20px 0 0 0;
 	}
-	#contents.index {
-		padding: 80px 0 0 0;
+	#top #contents {
+		padding: 150px 0 0 0;
 	}
 	#contents .section {}
 	#contents .article { margin: 0 0 80px 0; }
@@ -866,7 +866,7 @@ a.disabled	{ color: #555; }
 		padding: 80px 0 0 0;
 	}
 	#contents.index {
-		padding: 160px 0 0 0;
+		padding: 80px 0 0 0;
 	}
 	#contents .section {}
 	#contents .article { margin: 0 0 80px 0; }
