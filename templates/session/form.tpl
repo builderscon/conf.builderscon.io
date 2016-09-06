@@ -123,7 +123,7 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
           </div>
 {% if slide_url %}
           <div class="row">
-            <div class="large-{{ left }} columns"><label>Slide URL</label></div>
+            <div class="large-{{ left }} columns"><label>{% trans %}Slide URL{% endtrans %}</label></div>
             <div class="large-{{ right }} columns">
               <input type="text" name="slide_url" placeholder="{% trans %}Please provide the URL of where you uploaded your slide{% endtrans %}"{% if session %} value="{{ session.slide_url }}"{% endif %}>
             </div>
@@ -131,7 +131,7 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
 {% endif %}
 {% if video_url %}
           <div class="row">
-            <div class="large-{{ left }} columns"><label>Video URL</label></div>
+            <div class="large-{{ left }} columns"><label>{% trans %}Video URL{% endtrans %}</label></div>
             <div class="large-{{ right }} columns">
               <input type="text" name="slide_url"{% if session %} value="{{ session.video_url }}"{% endif %}>
             </div>

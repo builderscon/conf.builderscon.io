@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-05 09:31+0900\n"
+"POT-Creation-Date: 2016-09-06 12:05+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,7 +93,7 @@ msgstr ""
 msgid "rejected"
 msgstr ""
 
-#: templates/catalog.tpl:11
+#: templates/catalog.tpl:15
 msgid ""
 "The redirect_uri MUST match the registered callback URL for this "
 "application."
@@ -129,7 +129,7 @@ msgstr ""
 msgid "Session Title (Japanese)"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:68
+#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:58
 msgid "Session Duration"
 msgstr ""
 
@@ -142,17 +142,17 @@ msgid "Session Abstract (Japanese)"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:72
-#: templates/session/view.tpl:60
+#: templates/session/view.tpl:50
 msgid "Material Level"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:88
-#: templates/session/view.tpl:72
+#: templates/session/view.tpl:62
 msgid "Spoken Language"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:100
-#: templates/session/view.tpl:76
+#: templates/session/view.tpl:66
 msgid "Slide Language"
 msgstr ""
 
@@ -161,17 +161,17 @@ msgid "Comments"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:141
-#: templates/session/view.tpl:80
+#: templates/session/view.tpl:70
 msgid "Photo Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:155
-#: templates/session/view.tpl:84
+#: templates/session/view.tpl:74
 msgid "Recording Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:169
-#: templates/session/view.tpl:88
+#: templates/session/view.tpl:78
 msgid "Materials Release"
 msgstr ""
 
@@ -207,23 +207,31 @@ msgstr ""
 msgid "Guest Speakers"
 msgstr ""
 
-#: templates/dashboard.tpl:58
+#: templates/dashboard.tpl:21
+msgid "Logout"
+msgstr ""
+
+#: templates/dashboard.tpl:27
 msgid "Organizer"
 msgstr ""
 
-#: templates/dashboard.tpl:70
+#: templates/dashboard.tpl:37
+msgid "Proposals"
+msgstr ""
+
+#: templates/dashboard.tpl:39
 msgid "No proposals have been submitted"
 msgstr ""
 
-#: templates/dashboard.tpl:75
+#: templates/dashboard.tpl:44
 msgid "Conference"
 msgstr ""
 
-#: templates/dashboard.tpl:76 templates/session/form.tpl:28
+#: templates/dashboard.tpl:45 templates/session/form.tpl:28
 msgid "Title"
 msgstr ""
 
-#: templates/dashboard.tpl:78
+#: templates/dashboard.tpl:47
 msgid "Status"
 msgstr ""
 
@@ -328,11 +336,11 @@ msgstr ""
 msgid "builderscon is a festival for those who love tech!"
 msgstr ""
 
-#: templates/layout/base.tpl:67
+#: templates/layout/base.tpl:69
 msgid "builderscon is a festival for the technology lovers."
 msgstr ""
 
-#: templates/layout/base.tpl:68
+#: templates/layout/base.tpl:70
 msgid "Privacy Policy"
 msgstr ""
 
@@ -439,8 +447,16 @@ msgid ""
 "materials."
 msgstr ""
 
+#: templates/session/form.tpl:126
+msgid "Slide URL"
+msgstr ""
+
 #: templates/session/form.tpl:128
 msgid "Please provide the URL of where you uploaded your slide"
+msgstr ""
+
+#: templates/session/form.tpl:134
+msgid "Video URL"
 msgstr ""
 
 #: templates/session/form.tpl:143
@@ -504,7 +520,7 @@ msgstr ""
 msgid "Accepted Sessions"
 msgstr ""
 
-#: templates/session/view.tpl:64
+#: templates/session/view.tpl:54
 msgid "Starts On"
 msgstr ""
 
