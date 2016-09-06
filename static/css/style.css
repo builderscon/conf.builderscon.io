@@ -206,3 +206,23 @@ a.cfptabs-title-inside {
   font-size: 2em;
 }
 
+#top .get-involved .inner .section-content div.row {
+  margin: 1em 0 0 1em;
+}
+
+#top .get-involved .inner .section-content div.row .get-involved-description {
+  padding-left: 1em;
+}
+
+#top .conferences .inner .section-content div.row {
+  margin: 1em 0 0 1em;
+}
+#top .conferences .conference-name {
+  padding-left: 1em;
+  padding-top: 1em;
+}
+#top .conferences .conference-name a {
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
