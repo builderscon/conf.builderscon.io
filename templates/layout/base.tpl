@@ -26,6 +26,7 @@
           <h1>
             <a href="/"><img alt="builderscon" src="{{ url('static', filename='images/logo.png') }}"/></a>
           </h1>
+          <div class="btn-menu"><a href="#menu"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a></div><!--  / .btn-menu /  -->
         </div>
         <nav id="menu">
           <div id="gnavi">
