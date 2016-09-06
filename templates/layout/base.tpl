@@ -20,6 +20,7 @@
 {% block header %}{% endblock %}
   </head>
   <body id="{% block body_id %}top{% endblock %}">
+    <a id="top" name="top"></a>
     <div id="wrapper">
       <header id="header">
         <div class="inner">
@@ -35,9 +36,9 @@
                 <li><a href="/"><span class="i-home"></span></a></li>
                 <li><a href="/dashboard"><span class="i-user"></span></a></li>
               {% endblock %}
-            </ul>
-          </div>
-        </nav>
+            </ul><!-- ul.menu -->
+          </div><!-- div#gnavi -->
+        </nav><!-- nav#menu -->
       </header>
 {% block heroimage %}
       <div id="heroimage">
@@ -73,15 +74,17 @@
       </footer>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
-    <script src="{{ url('static', filename='js/foundation.min.js') }}"></script>
     <script src="{{ url('static', filename='js/functions.js') }}"></script>
     <script src="{{ url('static', filename='js/jquery.cookie.js') }}"></script>
     <script src="{{ url('static', filename='js/jquery.easing.1.3.js') }}"></script>
     <script src="{{ url('static', filename='js/jquery.rotate.js') }}"></script>
-    <script>
-      var a = $(document);
-      a.foundation();
-    </script>
+    <script src="{{ url('static', filename='js/jquery.mmenu.all.min.js') }}"></script>
+    <script src="{{ url('static', filename='js/foundation.min.js') }}"></script>
+    <script type="text/javascript"><!--
+      $(document).ready(function() {
+          $(document).foundation();
+      })
+    --></script>
     {% block scripts %}{% endblock %}
   </body>
 </html>
