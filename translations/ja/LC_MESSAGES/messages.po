@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-05 09:31+0900\n"
+"POT-Creation-Date: 2016-09-06 12:05+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -109,7 +109,7 @@ msgstr "保留"
 msgid "rejected"
 msgstr "不採用"
 
-#: templates/catalog.tpl:11
+#: templates/catalog.tpl:15
 msgid ""
 "The redirect_uri MUST match the registered callback URL for this "
 "application."
@@ -145,7 +145,7 @@ msgstr "セッションタイトル（英語）"
 msgid "Session Title (Japanese)"
 msgstr "セッションタイトル（日本語）"
 
-#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:68
+#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:58
 msgid "Session Duration"
 msgstr "セッション時間"
 
@@ -158,17 +158,17 @@ msgid "Session Abstract (Japanese)"
 msgstr "セッション概要（日本語）"
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:72
-#: templates/session/view.tpl:60
+#: templates/session/view.tpl:50
 msgid "Material Level"
 msgstr "レベル"
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:88
-#: templates/session/view.tpl:72
+#: templates/session/view.tpl:62
 msgid "Spoken Language"
 msgstr "講演に使用される言語"
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:100
-#: templates/session/view.tpl:76
+#: templates/session/view.tpl:66
 msgid "Slide Language"
 msgstr "スライド言語"
 
@@ -177,17 +177,17 @@ msgid "Comments"
 msgstr "コメント"
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:141
-#: templates/session/view.tpl:80
+#: templates/session/view.tpl:70
 msgid "Photo Release"
 msgstr "撮影許可"
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:155
-#: templates/session/view.tpl:84
+#: templates/session/view.tpl:74
 msgid "Recording Release"
 msgstr "録画許可"
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:169
-#: templates/session/view.tpl:88
+#: templates/session/view.tpl:78
 msgid "Materials Release"
 msgstr "素材利用許可"
 
@@ -223,23 +223,31 @@ msgstr "会場"
 msgid "Guest Speakers"
 msgstr "ゲストスピーカー"
 
-#: templates/dashboard.tpl:58
+#: templates/dashboard.tpl:21
+msgid "Logout"
+msgstr "ログアウト"
+
+#: templates/dashboard.tpl:27
 msgid "Organizer"
 msgstr "主宰"
 
-#: templates/dashboard.tpl:70
+#: templates/dashboard.tpl:37
+msgid "Proposals"
+msgstr "応募されたセッション"
+
+#: templates/dashboard.tpl:39
 msgid "No proposals have been submitted"
 msgstr "応募されたプロポーザルはありません"
 
-#: templates/dashboard.tpl:75
+#: templates/dashboard.tpl:44
 msgid "Conference"
 msgstr "カンファレンス"
 
-#: templates/dashboard.tpl:76 templates/session/form.tpl:28
+#: templates/dashboard.tpl:45 templates/session/form.tpl:28
 msgid "Title"
 msgstr "タイトル"
 
-#: templates/dashboard.tpl:78
+#: templates/dashboard.tpl:47
 msgid "Status"
 msgstr "状態"
 
@@ -345,7 +353,7 @@ msgstr ""
 
 #: templates/login.tpl:29
 msgid "Error"
-msgstr ""
+msgstr "エラー"
 
 #: templates/login.tpl:36
 msgid "Login"
@@ -372,11 +380,11 @@ msgstr "知らなかった、を聞く"
 msgid "builderscon is a festival for those who love tech!"
 msgstr "buildersconは技術を愛する全てのギーク達のお祭りです！"
 
-#: templates/layout/base.tpl:67
+#: templates/layout/base.tpl:69
 msgid "builderscon is a festival for the technology lovers."
 msgstr "buildersconは技術を愛する全てのギーク達のお祭りです"
 
-#: templates/layout/base.tpl:68
+#: templates/layout/base.tpl:70
 msgid "Privacy Policy"
 msgstr "プライバシーポリシー"
 
@@ -487,9 +495,17 @@ msgstr ""
 "提供いただく写真、動画、素材等がどのように利用されるかは<a href=\"%(termsOfUseURL)s\" "
 "target=\"_blank\">利用規約</a>をご確認ください"
 
+#: templates/session/form.tpl:126
+msgid "Slide URL"
+msgstr "スライドURL"
+
 #: templates/session/form.tpl:128
 msgid "Please provide the URL of where you uploaded your slide"
-msgstr ""
+msgstr "セッションスライドが公開されているURLをご記入ください"
+
+#: templates/session/form.tpl:134
+msgid "Video URL"
+msgstr "動画URL"
 
 #: templates/session/form.tpl:143
 msgid ""
@@ -552,7 +568,7 @@ msgstr "以下のプロポーザルはまだ採択されていません。もし
 msgid "Accepted Sessions"
 msgstr "採択されたセッション"
 
-#: templates/session/view.tpl:64
+#: templates/session/view.tpl:54
 msgid "Starts On"
 msgstr "開始日時"
 

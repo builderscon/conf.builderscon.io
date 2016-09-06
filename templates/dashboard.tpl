@@ -1,40 +1,6 @@
 {% extends 'layout/base.tpl' %}
 
-{% block header %}
-<style type="text/css">
-<!--
-div.profile {
-  padding: 5px;
-}
-div.profile img {
-  padding: 2px;
-  border: 1px solid #ccc;
-}
-div.profile p.name {
-  text-align: center;
-}
-span.auth_via {
-  border: 1px solid #0a0;
-  background-color: #cfc;
-  font-weight: bold;
-  font-size: 0.6em;
-  color: #0a0;
-  padding: 0.2em;
-}
-div.profile-content {
-  padding-left: 1em;
-}
-div.conference-history {
-  padding-left: 2em;
-}
-
-.invalid {
-  color: #ccc;
-}
-
--->
-</style>
-{% endblock %}
+{% block body_id %}dashboard{% endblock %}
 
 {% block heroimage %}
 <div id="heroimage-empty"></div>
@@ -52,7 +18,7 @@ div.conference-history {
               <img src="{{ user.avatar_url }}">
               <p class="name">{{ user.nickname }} <span class="auth_via">{{ user.auth_via }}</span></p>
               <form action="/logout" method="POST">
-              <button class="alert button">{% trans %}Logout{% endtrans %}</button>
+              <button class="alert button logout-btn">{% trans %}Logout{% endtrans %}</button>
               </form>
             </div>
           </div>
@@ -68,7 +34,7 @@ div.conference-history {
             </div>
 {% endif %}
 
-            <h3>Proposals</h3>
+            <h3>{% trans %}Proposals{% endtrans %}</h3>
 {% if not sessions %}
             <p>{% trans %}No proposals have been submitted{% endtrans %}</p>
 {% else %}

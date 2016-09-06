@@ -1,24 +1,8 @@
 {% extends 'layout/base.tpl' %}
 
-{% block header %}
-<style type="text/css">
-<!--
-.section-content div.login-row {
-  margin: 1em;
-}
-
-.login-icon img{
-  padding: 0;
-  width: 40px;
-  height: 40px;
-}
-
-.login-link {
-  font-weight: bold;
-  font-size: 2em;
-}
--->
-</style>
+{% block body_id %}login{% endblock %}
+{% block heroimage %}
+<div id="heroimage-empty"></div>
 {% endblock %}
 
 {% block main %}

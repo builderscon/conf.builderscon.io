@@ -1,21 +1,11 @@
 {% extends 'layout/conference.tpl' %}
 
+{% block body_id %}session{% endblock %}
 {% block title %}{{ session.title }} - {{ session.conference.title }}{% endblock %}
 {% block og_image %}{{ session.speaker.avatar_url or url('static', filename='images/noprofile.png') }}{% endblock %}
 
 {% block heroimage %}
 <div id="heroimage-empty"></div>
-{% endblock %}
-
-{% block header %}
-<style type="text/css">
-<!--
-#session-edit-btn {
-  margin-top: 5px;
-}
--->
-</style>
-
 {% endblock %}
 
 {% block main %}
@@ -28,7 +18,7 @@
       </h1>
       <div class="section-content">
         <div class="row">
-          <div class="text-center large-2 columns">
+          <div class="text-center large-2 small-2 columns">
             <img style="width: 120px; height: 120px; border: 1px solid #ccc" src="{% if session.speaker.avatar_url %}{{ session.speaker.avatar_url }}{% else %}{{ url('static', filename='images/noprofile.png') }}{% endif %}" />
             <div class="text-center"><a href="/user/{{ session.speaker.id }}" target="_blank">{{session.speaker.nickname}}</a></div>
             <div class="social-button">
@@ -47,7 +37,7 @@
             <!-- add new buttons here e.g. edit session details button -->
 
           </div>
-          <div class="large-10 columns">
+          <div class="large-10 small-10 columns">
             <p>
               {{session.abstract | markdown}}
             </p>
