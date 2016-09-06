@@ -795,7 +795,7 @@ a.disabled	{ color: #555; }
 		padding: 80px 0 0 0;
 	}
 	#contents .section {}
-	#contents .article { margin: 0 0 140px 0; }
+	#contents .article { margin: 0 0 80px 0; }
 	#contents .inner {
 		width: 900px;
 		margin: 0 auto;
@@ -1069,55 +1069,4 @@ a.disabled	{ color: #555; }
 }
 
 
-
-#dashboard div.profile {
-  padding: 5px;
-}
-#dashboard div.profile img {
-  padding: 2px;
-  border: 1px solid #ccc;
-}
-#dashboard div.profile p.name {
-  text-align: center;
-}
-#dashboard span.auth_via {
-  border: 1px solid #0a0;
-  background-color: #cfc;
-  font-weight: bold;
-  font-size: 0.6em;
-  color: #0a0;
-  padding: 0.2em;
-}
-#dashboard div.profile-content {
-  padding-left: 1em;
-}
-#dashboard div.conference-history {
-  padding-left: 2em;
-}
-
-#dashboard .invalid {
-  color: #ccc;
-}
-
-#dashboard .logout-btn {
-    margin: 0 auto 0 auto;
-    width: 100%;
-    border-radius: 5px;
-    padding: 0.5em 0 0.5em 0; 
-}
-
-#login .section-content div.login-row {
-  margin: 1em;
-}
-
-#login .login-icon img{
-  padding: 0;
-  width: 40px;
-  height: 40px;
-}
-
-#login .login-link {
-  font-weight: bold;
-  font-size: 2em;
-}
 
