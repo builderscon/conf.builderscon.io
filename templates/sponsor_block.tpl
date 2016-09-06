@@ -9,10 +9,10 @@
 {%   endif %} 
 {%   set colsize = (12 / perrow)|int %}
         <div class="row sponsor-tier {{ group.grouper }}">
-          <div class="large-12 columns">
+          <div class="large-12 small-12 columns">
 {% for sponsor in group.list %}
 {% if loop.index % perrow == 1 %}<div class="row">{% endif %}
-            <div class="large-{{ colsize }} columns">
+            <div class="large-{{ colsize }} small-{{ colsize }} columns">
               <div class="sponsor-slot">
                 <a href="{{ sponsor.url }}"><img class="{{ sponsor.group_name }}" src="{{ sponsor.logo_url1 }}"></a>
                 <div class="sponsor-name"><a href="{{ sponsor.url }}">{{ sponsor.name }}</a></div>
