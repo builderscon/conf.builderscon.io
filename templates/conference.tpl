@@ -93,11 +93,11 @@ function initMap() {
       <div class="section-content">
 {% for speaker in conference.featured_speakers %}
         <div class="row speaker">
-<div class="large-2 columns"><img style="width: 120px; height: 120px; border: 1px solid #ccc" src="{% if speaker.avatar_url %}{{ speaker.avatar_url }}{% else %}{{ url('static', filename='images/noprofile.png') }}{% endif %}" /></div>
-<div class="large-10 columns">
-    <h4>{{ speaker.display_name }}</h4>
-    <div>{{ speaker.description|markdown }}</div>
-</div>
+          <div class="large-2 small-2 columns"><img style="margin: 5px; border: 1px solid #ccc" src="{% if speaker.avatar_url %}{{ speaker.avatar_url }}{% else %}{{ url('static', filename='images/noprofile.png') }}{% endif %}" /></div>
+          <div class="large-9 small-9 columns">
+            <h4>{{ speaker.display_name }}</h4>
+            <div>{{ speaker.description|markdown }}</div>
+          </div>
         </div>
 {% endfor %}
       </div>

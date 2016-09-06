@@ -47,7 +47,7 @@ div.conference-history {
       <h1 class="section-header">{{ user.nickname }}</h1>
       <div class="section-content">
         <div class="row">
-          <div class="large-2 columns">
+          <div class="large-2 small-2 columns">
             <div class="profile">
               <img src="{{ user.avatar_url }}">
               <p class="name">{{ user.nickname }} <span class="auth_via">{{ user.auth_via }}</span></p>
@@ -56,7 +56,7 @@ div.conference-history {
               </form>
             </div>
           </div>
-          <div class="profile-content large-10 columns">
+          <div class="profile-content large-10 small-10 columns">
 {% if conferences %}
             <h3>{% trans %}Organizer{% endtrans %}</h3>
             <div class="conference-history">
