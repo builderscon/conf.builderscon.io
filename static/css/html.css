@@ -1106,3 +1106,18 @@ a.disabled	{ color: #555; }
     padding: 0.5em 0 0.5em 0; 
 }
 
+#login .section-content div.login-row {
+  margin: 1em;
+}
+
+#login .login-icon img{
+  padding: 0;
+  width: 40px;
+  height: 40px;
+}
+
+#login .login-link {
+  font-weight: bold;
+  font-size: 2em;
+}
+
