@@ -9,6 +9,7 @@
 {{ _("pending") }}
 {{ _("rejected") }}
 {{ _("Technical Sponsors") }}
+{{ _("Sponsors") }}
 {{ _("ClubT") }}
 
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-07 10:46+0000\n"
+"POT-Creation-Date: 2016-09-07 11:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -98,6 +98,10 @@ msgid "Technical Sponsors"
 msgstr ""
 
 #: templates/catalog.tpl:12
+msgid "Sponsors"
+msgstr ""
+
+#: templates/catalog.tpl:13
 msgid "ClubT"
 msgstr ""
 
@@ -332,13 +336,14 @@ msgstr ""
 msgid "Recent News"
 msgstr ""
 
-#: templates/sponsor_block.tpl:4
+#: templates/sponsor_block.tpl:6
 #, python-format
-msgid "%(custom_header)s"
+msgid "%(header)s"
 msgstr ""
 
-#: templates/sponsor_block.tpl:3
-msgid "Sponsors"
+#: templates/sponsor_block.tpl:21
+#, python-format
+msgid "%(sponsor_name)s"
 msgstr ""
 
 #: templates/layout/base.tpl:4 templates/layout/base.tpl:10
