@@ -157,7 +157,11 @@ def urlencode_filter(s):
     return markupsafe.Markup(s)
 
 def check_login(cb, **args):
-    if 'user' in flask.session:
+    if 'user_id' in flask.session:
+        user = octav.lookup_user(flask.session.get('user_id'))
+        if not user:
+            return "failed to lookup user", 500
+        flask.g.stash['user'] = user
         return cb(**args)
 
     next_url = flask.request.path + "?" + flasktools.urlencode(flask.request.args)
@@ -169,7 +173,7 @@ def require_login(cb, **args):
     return functools.update_wrapper(functools.partial(check_login, cb, **args), cb)
 
 def check_email(cb, **args):
-    user = flask.session.get('user')
+    user = flask.g.stash.get('user')
     if not user:
         return "require_login must be called first", 500
 
@@ -234,7 +238,7 @@ def index():
 @flaskapp.route('/dashboard')
 @require_login
 def dashboard():
-    user = flask.session.get('user')
+    user = flask.g.stash.get('user')
     conferences = octav.list_conferences_by_organizer(organizer_id=user.get('id'))
     sessions = octav.list_sessions(
         speaker_id = user.get('id'),
@@ -256,6 +260,7 @@ def start_oauth(oauth_handler, callback):
     if len(args.keys()) > 0:
         callback = '%s?%s' % (callback, flasktools.urlencode(args))
 
+    print(callback)
     return oauth_handler.authorize(callback=callback)
 
 @flaskapp.route('/login')
@@ -266,6 +271,7 @@ def login():
 
 @github.tokengetter
 def get_github_token(token=None):
+    print("get_github_token")
     return flask.session.get('github_token')
 
 @flaskapp.route('/login/github')
@@ -277,6 +283,9 @@ def login_github():
 def login_github_callback(resp):
     if resp is None:
         err = flask.request.args.get('error_description') or flask.request.args.get('error')
+        return flask.render_template('login.tpl', error=err)
+    if 'error' in resp:
+        err = resp.get('error_description') or resp.get('error')
         return flask.render_template('login.tpl', error=err)
 
     flask.session['github_token'] = (
@@ -294,7 +303,8 @@ def login_github_callback(resp):
     # Load user via github id
     user = octav.lookup_user_by_auth_user_id(auth_via='github', auth_user_id=str(data['id']))
     if user:
-        flask.session['user'] = user
+        flask.session['user_id'] = user.get('id')
+        flask.g.stash['user'] = user
         return flask.redirect(flask.request.args.get('.next') or '/')
 
     names = re.compile('\s+').split(data.get('name'))
@@ -316,7 +326,8 @@ def login_github_callback(resp):
     if not user:
         return flask.render_template('login.tpl', error='failed to register user in the backend server')
 
-    flask.session['user'] = user
+    flask.session['user_id'] = user.get('id')
+    flask.g.stash['user'] = user
     return flask.redirect(flask.request.args.get('.next') or '/')
 
 @facebook.tokengetter
@@ -349,7 +360,8 @@ def login_facebook_callback(resp):
     # Load user via facebook id
     user = octav.lookup_user_by_auth_user_id(auth_via='facebook', auth_user_id=data['id'])
     if user:
-        flask.session['user'] = user
+        flask.session['user_id'] = user.get('id')
+        flask.g.stash['user'] = user
         return flask.redirect(flask.request.args.get('.next') or '/')
 
     names = re.compile('\s+').split(data.get('name'))
@@ -371,7 +383,8 @@ def login_facebook_callback(resp):
     if not user:
         return flask.render_template('login.tpl', error='failed to register user in the backend server')
 
-    flask.session['user'] = user
+    flask.session['user_id'] = user.get('id')
+    flask.g.stash['user'] = user
     return flask.redirect(flask.request.args.get('.next') or '/')
 
 @twitter.tokengetter
@@ -403,7 +416,8 @@ def login_twitter_callback(resp):
     # Load user via twitter id
     user = octav.lookup_user_by_auth_user_id(auth_via='twitter', auth_user_id=resp['user_id'])
     if user:
-        flask.session['user'] = user
+        flask.session['user_id'] = user.get('id')
+        flask.g.stash['user'] = user
         return flask.redirect(flask.request.args.get('.next') or '/')
 
     res = twitter.request('account/verify_credentials.json')
@@ -438,7 +452,8 @@ def login_twitter_callback(resp):
     if not user:
         return flask.render_template('login.tpl', error='failed to register user in the backend server')
 
-    flask.session['user'] = user
+    flask.session['user_id'] = user.get('id')
+    flask.g.stash['user'] = user
     return flask.redirect(flask.request.args.get('.next') or '/')
 
 
@@ -460,8 +475,8 @@ def email_register_post():
         return "email is required", 500
 
     ok = octav.create_temporary_email(
-        user_id = flask.session.get('user').get('id'),
-        target_id = flask.session.get('user').get('id'),
+        user_id = flask.g.stash.get('user').get('id'),
+        target_id = flask.g.stash.get('user').get('id'),
         email = email
     )
     if not ok:
@@ -484,17 +499,17 @@ def email_confirm_post():
     if not confirmation_key:
         return "confirmation_key is required", 500
 
+    user = flask.g.stash.get('user')
     ok = octav.confirm_temporary_email(
-        user_id = flask.session.get('user').get('id'),
-        target_id = flask.session.get('user').get('id'),
+        user_id = user.get('id'),
+        target_id = user.get('id'),
         confirmation_key = confirmation_key
     )
     if not ok:
         return octav.last_error(), 500
 
-    olduser = flask.session.get('user')
-    user = octav.lookup_user_by_auth_user_id(auth_via=olduser['auth_via'], auth_user_id=olduser['auth_user_id'])
-    flask.session['user'] = user
+    user = octav.lookup_user_by_auth_user_id(auth_via=user['auth_via'], auth_user_id=user['auth_user_id'])
+    flask.g.stash['user'] = user
 
     return flask.redirect('/user/email/done')
 
@@ -648,7 +663,7 @@ def conference_cfp_input():
     flask.g.stash["submission_key"] = key
 
     conference = flask.g.stash.get('conference')
-    user = flask.session.get('user')
+    user = flask.g.stash.get('user')
     flask.session[key] = dict(
         expires           = time.time() + 900,
         conference_id     = conference.get('id'),
@@ -843,7 +858,7 @@ def session_update():
 
     print(form)
 
-    user = flask.session.get('user')
+    user = flask.g.stash.get('user')
     try:
         id = flask.g.stash.get('session').get('id')
         ok = octav.update_session(
