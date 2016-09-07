@@ -532,19 +532,8 @@ def with_conference_by_slug(cb):
         return cb(**args)
     return functools.update_wrapper(functools.partial(load_conference_by_slug, cb), cb)
 
-
-def with_conference_sponsors(cb):
-    def set_conference_sponsors(cb, **args):
-        conference = flask.g.stash['conference']
-        if not conference:
-            return "with_conference_by_slug must be called first", 500
-        flask.g.stash['sponsors']   = conference.get('sponsors')
-        return cb(**args)
-    return functools.update_wrapper(functools.partial(set_conference_sponsors, cb), cb)
-
 @flaskapp.route('/<series_slug>/<path:slug>/sponsors')
 @with_conference_by_slug
-@with_conference_sponsors
 def conference_sponsors():
     return flask.render_template('sponsors.tpl')
 
@@ -777,7 +766,6 @@ def conference_news():
 
 @flaskapp.route('/<series_slug>/<path:slug>')
 @with_conference_by_slug
-@with_conference_sponsors
 def conference_instance():
     return flask.render_template('conference.tpl', googlemap_api_key=cfg.googlemap_api_key())
 

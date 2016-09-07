@@ -100,10 +100,9 @@
     </div>
   </div>
 
-  {% set custom_header = 'Technical Sponsors' %}
   {% set technical_sponsors = [
       dict(
-          name = '株式会社ClubT',
+          name = 'ClubT',
           group_name = 'tier-1',
           url = 'https://clubt.jp',
           logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/clubT-600x600.png'
@@ -127,8 +126,9 @@
           logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/mackerel-600x600.png'
       )
   ] %}
-  {% set sponsors = technical_sponsors %}
+  {% with sponsors = technical_sponsors, sponsor_header='Technical Sponsors' %}
   {% include 'sponsor_block.tpl' %}
+  {% endwith %}
 
 </main>
-{% endblock%}
+{% endblock %}
