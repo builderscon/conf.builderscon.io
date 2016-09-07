@@ -3,7 +3,7 @@
 {% if not sponsor_header %}
 {%   set sponsor_header='Sponsors' %}
 {% endif %}
-      <h1 class="section-header">{% trans header=_(sponsor_header) %}{{ header }}{% endtrans %}</h1>
+      <h1 class="section-header">{{ _(sponsor_header) }}</h1>
       <div class="section-content">
 {% for group in sponsors|groupby('group_name') %}
 {%   set perrow = 4 %}
