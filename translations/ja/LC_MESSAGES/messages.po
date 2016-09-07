@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-07 11:30+0000\n"
+"POT-Creation-Date: 2016-09-07 12:31+0000\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -385,11 +385,6 @@ msgstr "最新のニュース"
 msgid "%(header)s"
 msgstr ""
 
-#: templates/sponsor_block.tpl:21
-#, python-format
-msgid "%(sponsor_name)s"
-msgstr ""
-
 #: templates/layout/base.tpl:4 templates/layout/base.tpl:10
 msgid "Discover Something New"
 msgstr "知らなかった、を聞く"
@@ -618,4 +613,7 @@ msgid ""
 " email address. This is required so we know how to contact you regarding "
 "your submission, and to notify you of any important updates."
 msgstr "セッションに応募するにはメールアドレスの登録が必要となります。このメールアドレスは応募された内容に関する連絡や、その他連絡事項にのみ使用されます。"
+
+#~ msgid "%(sponsor_name)s"
+#~ msgstr ""
 
