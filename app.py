@@ -111,61 +111,6 @@ github = oauth.remote_app('github',
 class ConferenceNotFoundError(Exception):
     pass
 
-technical_sponsors = dict(
-    en = [
-        dict(
-            name = 'ClubT',
-            group_name = 'tier-1',
-            url = 'https://clubt.jp',
-            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/clubT-600x600.png'
-        ),
-        dict(
-            name = 'Google Cloud Platform',
-            group_name = 'tier-1',
-            url = 'https://cloud.google.com/',
-            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/gcp-600x600.png'
-        ),
-        dict(
-            name = 'GitHub',
-            group_name = 'tier-1',
-            url = 'https://github.com/',
-            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/github-600x600.png'
-        ),
-        dict(
-            name = 'Mackerel',
-            group_name = 'tier-1',
-            url = 'https://mackerel.io',
-            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/mackerel-600x600.png'
-        )
-    ],
-    ja = [
-        dict(
-            name = u'株式会社ClubT',
-            group_name = 'tier-1',
-            url = 'https://clubt.jp',
-            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/clubT-600x600.png'
-        ),
-        dict(
-            name = 'Google Cloud Platform',
-            group_name = 'tier-1',
-            url = 'https://cloud.google.com/',
-            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/gcp-600x600.png'
-        ),
-        dict(
-            name = 'GitHub',
-            group_name = 'tier-1',
-            url = 'https://github.com/',
-            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/github-600x600.png'
-        ),
-        dict(
-            name = 'Mackerel',
-            group_name = 'tier-1',
-            url = 'https://mackerel.io',
-            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/mackerel-600x600.png'
-        )
-    ]
-)
-
 # stash is where we keep values that get automatically passed
 # to the template when rendering
 @flaskapp.before_request
@@ -281,12 +226,9 @@ def index():
             return octav.last_error(), 500
         cache.set(key, conferences, 600)
 
-    sponsors = technical_sponsors.get(flask.g.lang, technical_sponsors.get('en'))
     return flask.render_template('index.tpl',
         pagetitle='top',
-        conferences=conferences,
-        sponsors=sponsors,
-        custom_header="Technical Sponsors"
+        conferences=conferences
     )
 
 @flaskapp.route('/dashboard')
