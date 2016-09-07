@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-06 12:05+0900\n"
+"POT-Creation-Date: 2016-09-07 07:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,6 +91,10 @@ msgstr ""
 
 #: templates/catalog.tpl:10
 msgid "rejected"
+msgstr ""
+
+#: templates/catalog.tpl:11
+msgid "Technical Sponsors"
 msgstr ""
 
 #: templates/catalog.tpl:15
@@ -322,6 +326,11 @@ msgstr ""
 
 #: templates/news.tpl:11
 msgid "Recent News"
+msgstr ""
+
+#: templates/sponsor_block.tpl:4
+#, python-format
+msgid "%(custom_header)s"
 msgstr ""
 
 #: templates/sponsor_block.tpl:3

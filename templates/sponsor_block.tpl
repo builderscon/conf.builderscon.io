@@ -1,7 +1,7 @@
   <div class="section article">
     <div class="inner">
 {% if custom_header %}
-      <h1 class="section-header">{% trans header=_(custom_header) %}{{ custom_header }}{% endtrans %}</h1>
+      <h1 class="section-header">{% trans header=_(custom_header) %}{{ header }}{% endtrans %}</h1>
 {% else %}
       <h1 class="section-header">{% trans %}Sponsors{% endtrans %}</h1>
 {% endif %}

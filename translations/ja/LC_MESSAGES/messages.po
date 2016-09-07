@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-06 12:05+0900\n"
+"POT-Creation-Date: 2016-09-07 07:42+0000\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -108,6 +108,10 @@ msgstr "保留"
 #: templates/catalog.tpl:10
 msgid "rejected"
 msgstr "不採用"
+
+#: templates/catalog.tpl:11
+msgid "Technical Sponsors"
+msgstr "技術協力"
 
 #: templates/catalog.tpl:15
 msgid ""
@@ -367,6 +371,11 @@ msgstr "%(name)s でログイン"
 #: templates/news.tpl:11
 msgid "Recent News"
 msgstr "最新のニュース"
+
+#: templates/sponsor_block.tpl:4
+#, python-format
+msgid "%(custom_header)s"
+msgstr ""
 
 #: templates/sponsor_block.tpl:3
 msgid "Sponsors"

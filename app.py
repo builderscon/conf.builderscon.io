@@ -286,7 +286,7 @@ def index():
         pagetitle='top',
         conferences=conferences,
         sponsors=sponsors,
-        custom_header="technical sponsors"
+        custom_header="Technical Sponsors"
     )
 
 @flaskapp.route('/dashboard')
