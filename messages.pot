@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-07 12:31+0000\n"
+"POT-Creation-Date: 2016-09-07 13:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Meet Mr. B (Mr. Beacon)!"
 msgstr ""
 
-#: templates/beacon.tpl:8 templates/index.tpl:18
+#: templates/beacon.tpl:8 templates/index.tpl:6
 msgid "BLOG"
 msgstr ""
 
@@ -105,7 +105,7 @@ msgstr ""
 msgid "ClubT"
 msgstr ""
 
-#: templates/catalog.tpl:15
+#: templates/catalog.tpl:19
 msgid ""
 "The redirect_uri MUST match the registered callback URL for this "
 "application."
@@ -247,11 +247,11 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: templates/index.tpl:36
+#: templates/index.tpl:24
 msgid "Welcome To builderscon"
 msgstr ""
 
-#: templates/index.tpl:38
+#: templates/index.tpl:26
 msgid ""
 "\n"
 "        <strong>Join builderscon and discover something new! builderscon "
@@ -267,15 +267,15 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/index.tpl:51
+#: templates/index.tpl:39
 msgid "Upcoming Conferences"
 msgstr ""
 
-#: templates/index.tpl:69
+#: templates/index.tpl:57
 msgid "Get Involved!"
 msgstr ""
 
-#: templates/index.tpl:76
+#: templates/index.tpl:64
 msgid ""
 "<b>Slack: </b> We have <a href=\"https://builderscon.slack.com\">a Slack "
 "team</a>, and <a href=\"https://slack-invite-dot-"
@@ -284,7 +284,7 @@ msgid ""
 " your own builderscon!"
 msgstr ""
 
-#: templates/index.tpl:84
+#: templates/index.tpl:72
 msgid ""
 "<b>Github:</b> Explore our many opensource projects on <a "
 "href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
@@ -294,7 +294,7 @@ msgid ""
 "We'd love for your to send us pull requests!"
 msgstr ""
 
-#: templates/index.tpl:92
+#: templates/index.tpl:80
 msgid ""
 "<b>Facebook:</b> Peruse our <a "
 "href=\"https://www.facebook.com/builderscon\">Facebook page</a> to find "
@@ -304,14 +304,14 @@ msgid ""
 "href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
 msgstr ""
 
-#: templates/index.tpl:100
+#: templates/index.tpl:88
 msgid ""
 "<b>Twitter:</b> Follow us on <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
 "updates!"
 msgstr ""
 
-#: templates/index.tpl:108
+#: templates/index.tpl:96
 msgid ""
 "<b>Share:</b> Read our <a href=\"http://blog.builderscon.io\">blog</a>, "
 "post on your favorite sites, and perhaps if you are feeling like it, you "
@@ -319,15 +319,15 @@ msgid ""
 "conversations."
 msgstr ""
 
-#: templates/login.tpl:29
+#: templates/login.tpl:13
 msgid "Error"
 msgstr ""
 
-#: templates/login.tpl:36
+#: templates/login.tpl:20
 msgid "Login"
 msgstr ""
 
-#: templates/login.tpl:44
+#: templates/login.tpl:28
 #, python-format
 msgid "Login with %(name)s"
 msgstr ""
