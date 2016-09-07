@@ -134,7 +134,7 @@ technical_sponsors = dict(
         dict(
             name = 'Mackerel',
             group_name = 'tier-1',
-            url = 'https://mackerel.io/j',
+            url = 'https://mackerel.io',
             logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/mackerel-600x600.png'
         )
     ],
@@ -160,7 +160,7 @@ technical_sponsors = dict(
         dict(
             name = 'Mackerel',
             group_name = 'tier-1',
-            url = 'https://mackerel.io/j',
+            url = 'https://mackerel.io',
             logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/mackerel-600x600.png'
         )
     ]
