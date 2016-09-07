@@ -99,5 +99,8 @@
       </div>
     </div>
   </div>
+
+  {% include 'sponsor_block.tpl' %}
+
 </main>
 {% endblock%}

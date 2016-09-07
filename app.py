@@ -111,6 +111,61 @@ github = oauth.remote_app('github',
 class ConferenceNotFoundError(Exception):
     pass
 
+technical_sponsors = dict(
+    en = [
+        dict(
+            name = 'ClubT',
+            group_name = 'tier-1',
+            url = 'https://clubt.jp',
+            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/clubT-600x600.png'
+        ),
+        dict(
+            name = 'Google Cloud Platform',
+            group_name = 'tier-1',
+            url = 'https://cloud.google.com/',
+            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/gcp-600x600.png'
+        ),
+        dict(
+            name = 'GitHub',
+            group_name = 'tier-1',
+            url = 'https://github.com/',
+            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/github-600x600.png'
+        ),
+        dict(
+            name = 'Mackerel',
+            group_name = 'tier-1',
+            url = 'https://mackerel.io/j',
+            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/mackerel-600x600.png'
+        )
+    ],
+    ja = [
+        dict(
+            name = u'株式会社ClubT',
+            group_name = 'tier-1',
+            url = 'https://clubt.jp',
+            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/clubT-600x600.png'
+        ),
+        dict(
+            name = 'Google Cloud Platform',
+            group_name = 'tier-1',
+            url = 'https://cloud.google.com/',
+            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/gcp-600x600.png'
+        ),
+        dict(
+            name = 'GitHub',
+            group_name = 'tier-1',
+            url = 'https://github.com/',
+            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/github-600x600.png'
+        ),
+        dict(
+            name = 'Mackerel',
+            group_name = 'tier-1',
+            url = 'https://mackerel.io/j',
+            logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/mackerel-600x600.png'
+        )
+    ]
+)
+
 # stash is where we keep values that get automatically passed
 # to the template when rendering
 @flaskapp.before_request
@@ -225,9 +280,13 @@ def index():
         if conferences is None:
             return octav.last_error(), 500
         cache.set(key, conferences, 600)
+
+    sponsors = technical_sponsors.get(flask.g.lang, technical_sponsors.get('en'))
     return flask.render_template('index.tpl',
         pagetitle='top',
-        conferences=conferences
+        conferences=conferences,
+        sponsors=sponsors,
+        custom_header="technical sponsors"
     )
 
 @flaskapp.route('/dashboard')
@@ -531,11 +590,21 @@ def with_conference_by_slug(cb):
         return cb(**args)
     return functools.update_wrapper(functools.partial(load_conference_by_slug, cb), cb)
 
+
+def with_conference_sponsors(cb):
+    def set_conference_sponsors(cb, **args):
+        conference = flask.g.stash['conference']
+        if not conference:
+            return "with_conference_by_slug must be called first", 500
+        flask.g.stash['sponsors']   = conference.get('sponsors')
+        return cb(**args)
+    return functools.update_wrapper(functools.partial(set_conference_sponsors, cb), cb)
+
 @flaskapp.route('/<series_slug>/<path:slug>/sponsors')
 @with_conference_by_slug
+@with_conference_sponsors
 def conference_sponsors():
     return flask.render_template('sponsors.tpl')
-
 
 @flaskapp.route('/<series_slug>/<path:slug>/sessions')
 @with_conference_by_slug
@@ -766,6 +835,7 @@ def conference_news():
 
 @flaskapp.route('/<series_slug>/<path:slug>')
 @with_conference_by_slug
+@with_conference_sponsors
 def conference_instance():
     return flask.render_template('conference.tpl', googlemap_api_key=cfg.googlemap_api_key())
 

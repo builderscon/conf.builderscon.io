@@ -8,6 +8,8 @@
 {{ _("accepted") }}
 {{ _("pending") }}
 {{ _("rejected") }}
+{{ _("Technical Sponsors") }}
+
 
 # OAuth error. This error message should never ever appear in a user
 # facing context, so it does not need to be translated, but it's here

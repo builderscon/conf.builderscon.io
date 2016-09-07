@@ -1,8 +1,12 @@
   <div class="section article">
     <div class="inner">
+{% if custom_header %}
+      <h1 class="section-header">{% trans header=_(custom_header) %}{{ custom_header }}{% endtrans %}</h1>
+{% else %}
       <h1 class="section-header">{% trans %}Sponsors{% endtrans %}</h1>
+{% endif %}
       <div class="section-content">
-{% for group in conference.sponsors|groupby('group_name') %}
+{% for group in sponsors|groupby('group_name') %}
 {%   set perrow = 4 %}
 {%   if group.grouper == "tier-2" %}
 {%     set perrow = 6 %}
