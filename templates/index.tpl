@@ -102,7 +102,7 @@
 
   {% set technical_sponsors = [
       dict(
-          name = '株式会社ClubT',
+          name = 'ClubT',
           group_name = 'tier-1',
           url = 'https://clubt.jp',
           logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/clubT-600x600.png'

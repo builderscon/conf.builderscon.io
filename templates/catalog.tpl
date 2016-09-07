@@ -9,6 +9,7 @@
 {{ _("pending") }}
 {{ _("rejected") }}
 {{ _("Technical Sponsors") }}
+{{ _("ClubT") }}
 
 
 # OAuth error. This error message should never ever appear in a user

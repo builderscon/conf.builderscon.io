@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-07 07:42+0000\n"
+"POT-Creation-Date: 2016-09-07 10:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,6 +95,10 @@ msgstr ""
 
 #: templates/catalog.tpl:11
 msgid "Technical Sponsors"
+msgstr ""
+
+#: templates/catalog.tpl:12
+msgid "ClubT"
 msgstr ""
 
 #: templates/catalog.tpl:15

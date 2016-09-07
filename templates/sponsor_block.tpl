@@ -18,7 +18,7 @@
             <div class="large-{{ colsize }} small-{{ colsize }} columns">
               <div class="sponsor-slot">
                 <a href="{{ sponsor.url }}"><img class="{{ sponsor.group_name }}" src="{{ sponsor.logo_url1 }}"></a>
-                <div class="sponsor-name"><a href="{{ sponsor.url }}">{{ sponsor.name }}</a></div>
+                <div class="sponsor-name"><a href="{{ sponsor.url }}">{% trans sponsor_name=_(sponsor.name) %}{{ sponsor_name }}{% endtrans %}</a></div>
               </div>
             </div>
 {% if loop.index % perrow == 0 or loop.last %}</div><!-- end row -->{% endif %}
