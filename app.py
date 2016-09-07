@@ -225,6 +225,7 @@ def index():
         if conferences is None:
             return octav.last_error(), 500
         cache.set(key, conferences, 600)
+
     return flask.render_template('index.tpl',
         pagetitle='top',
         conferences=conferences
@@ -535,7 +536,6 @@ def with_conference_by_slug(cb):
 @with_conference_by_slug
 def conference_sponsors():
     return flask.render_template('sponsors.tpl')
-
 
 @flaskapp.route('/<series_slug>/<path:slug>/sessions')
 @with_conference_by_slug

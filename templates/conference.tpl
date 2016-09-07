@@ -104,5 +104,10 @@ function initMap() {
     </div>
   </div>
 {% endif %}
+
+{% with sponsors = conference.sponsors %}
 {% include 'sponsor_block.tpl' %}
+{% endwith %}
+
 {% endblock%}
+

@@ -99,5 +99,36 @@
       </div>
     </div>
   </div>
+
+  {% set technical_sponsors = [
+      dict(
+          name = 'ClubT',
+          group_name = 'tier-1',
+          url = 'https://clubt.jp',
+          logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/clubT-600x600.png'
+      ),
+      dict(
+          name = 'Google Cloud Platform',
+          group_name = 'tier-1',
+          url = 'https://cloud.google.com/',
+          logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/gcp-600x600.png'
+      ),
+      dict(
+          name = 'GitHub',
+          group_name = 'tier-1',
+          url = 'https://github.com/',
+          logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/github-600x600.png'
+      ),
+      dict(
+          name = 'Mackerel',
+          group_name = 'tier-1',
+          url = 'https://mackerel.io',
+          logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/mackerel-600x600.png'
+      )
+  ] %}
+  {% with sponsors = technical_sponsors, sponsor_header='Technical Sponsors' %}
+  {% include 'sponsor_block.tpl' %}
+  {% endwith %}
+
 </main>
-{% endblock%}
+{% endblock %}
