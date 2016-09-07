@@ -101,62 +101,33 @@
   </div>
 
   {% set custom_header = 'Technical Sponsors' %}
-  {% set technical_sponsors = dict(
-      en = [
-          dict(
-              name = 'ClubT',
-              group_name = 'tier-1',
-              url = 'https://clubt.jp',
-              logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/clubT-600x600.png'
-          ),
-          dict(
-              name = 'Google Cloud Platform',
-              group_name = 'tier-1',
-              url = 'https://cloud.google.com/',
-              logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/gcp-600x600.png'
-          ),
-          dict(
-              name = 'GitHub',
-              group_name = 'tier-1',
-              url = 'https://github.com/',
-              logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/github-600x600.png'
-          ),
-          dict(
-              name = 'Mackerel',
-              group_name = 'tier-1',
-              url = 'https://mackerel.io',
-              logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/mackerel-600x600.png'
-          )
-      ],
-      ja = [
-          dict(
-              name = '株式会社ClubT',
-              group_name = 'tier-1',
-              url = 'https://clubt.jp',
-              logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/clubT-600x600.png'
-          ),
-          dict(
-              name = 'Google Cloud Platform',
-              group_name = 'tier-1',
-              url = 'https://cloud.google.com/',
-              logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/gcp-600x600.png'
-          ),
-          dict(
-              name = 'GitHub',
-              group_name = 'tier-1',
-              url = 'https://github.com/',
-              logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/github-600x600.png'
-          ),
-          dict(
-              name = 'Mackerel',
-              group_name = 'tier-1',
-              url = 'https://mackerel.io',
-              logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/mackerel-600x600.png'
-          )
-      ]
-    )
-  %}
-  {% set sponsors = technical_sponsors.get(lang, technical_sponsors.get('en')) %}
+  {% set technical_sponsors = [
+      dict(
+          name = '株式会社ClubT',
+          group_name = 'tier-1',
+          url = 'https://clubt.jp',
+          logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/clubT-600x600.png'
+      ),
+      dict(
+          name = 'Google Cloud Platform',
+          group_name = 'tier-1',
+          url = 'https://cloud.google.com/',
+          logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/gcp-600x600.png'
+      ),
+      dict(
+          name = 'GitHub',
+          group_name = 'tier-1',
+          url = 'https://github.com/',
+          logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/github-600x600.png'
+      ),
+      dict(
+          name = 'Mackerel',
+          group_name = 'tier-1',
+          url = 'https://mackerel.io',
+          logo_url1 = 'https://storage.googleapis.com/media-builderscon-1248/system/mackerel-600x600.png'
+      )
+  ] %}
+  {% set sponsors = technical_sponsors %}
   {% include 'sponsor_block.tpl' %}
 
 </main>
