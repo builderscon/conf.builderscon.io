@@ -15,7 +15,7 @@
             <div class="tabs cfptabs" data-tabs id="cfptabs">
 {% for l in languages %}
               <div class="tabs-title cfptabs-title{% if loop.first %} is-active{% endif %}">
-                <a href="#panel-{{languages[loop.index0].value}}" {% if loop.first %}aria-selected="true"{% endif %} class="cfptabs-title-inside">{% trans lang=_(l.name) %}{{lang}}{% endtrans %}</a>
+                <a href="#panel-{{languages[loop.index0].value}}" {% if loop.first %}aria-selected="true"{% endif %} class="cfptabs-title-inside">{{ _(l.name) }}</a>
               </div>
 {% endfor %}
             </div>
