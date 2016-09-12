@@ -16,7 +16,7 @@
 {% macro session_item(session, speaker, conference) %}
 <div class="large-6 columns session">
   <div class="small-3 large-3 columns">
-    <div class="speaker-avatar"><img class="speaker-avatar" src="{{ speaker.avatar_url }}"/></div>
+    <div class="speaker-avatar"><img class="speaker-avatar" src="{{ speaker.avatar_url or '/static/images/noprofile.png' }}"/></div>
     <div class="session-language">{{ session.spoken_language | upper }}</div>
   </div>
   <div class="small-9 large-9 columns">
