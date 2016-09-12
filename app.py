@@ -178,6 +178,8 @@ def check_email(cb, **args):
         return "require_login must be called first", 500
 
     if not user.get('email'):
+        next_url = flask.request.path + "?" + flasktools.urlencode(flask.request.args)
+        flask.session['next_url_after_email_registration'] = next_url
         return flask.redirect('/user/email/register')
 
     return cb(**args)
@@ -530,6 +532,9 @@ def email_confirm_post():
 @flaskapp.route('/user/email/done', methods=['GET'])
 @require_login
 def email_done():
+    if 'next_url_after_email_registration' in flask.session:
+        flask.g.stash['next_url'] = flask.session['next_url_after_email_registration']
+        del flask.session['next_url_after_email_registration']
     return flask.render_template('user/email_done.tpl')
 
 # This route maps "latest" URLs to the actual latest conference

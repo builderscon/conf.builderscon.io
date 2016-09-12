@@ -23,6 +23,11 @@
         <div class="row">
           <p class="large-12 columns">{% trans %}Thank you! Your email has been registered.{% endtrans %}</p>
         </div>
+{% if next_url %}
+        <div class="row">
+          <p class="large-12 columns"><a href="{{ next_url }}">{% trans %}Proceed to next URL{% endtrans %}</a></p>
+        </div>
+{% endif %}
       </div>
     </div>
   </div>
