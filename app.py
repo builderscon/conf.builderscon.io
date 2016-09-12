@@ -159,11 +159,11 @@ def urlencode_filter(s):
 def check_login(cb, **args):
     if 'user_id' in flask.session:
         user = octav.lookup_user(flask.session.get('user_id'))
-        if not user:
-            return "failed to lookup user", 500
-        flask.g.stash['user'] = user
-        return cb(**args)
+        if user:
+            flask.g.stash['user'] = user
+            return cb(**args)
 
+    del flask.session['user_id']
     next_url = flask.request.path + "?" + flasktools.urlencode(flask.request.args)
     query = flasktools.urlencode({'.next': next_url})
     return flask.redirect("/login?" + query)

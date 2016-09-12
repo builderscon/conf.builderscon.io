@@ -15,7 +15,7 @@
 {% block main %}
 <main>
 {% set action='/' + conference.full_slug + '/session/' + session.id + '/update' %}
-{% with action=action, session=session, for_edit=True, video_url=True if flask_session.user.is_admin else False, slide_url=True %}
+{% with action=action, session=session, for_edit=True, video_url=True if user.is_admin else False, slide_url=True %}
   {% include 'session/form.tpl' %}
 {% endwith %}
 </main>

@@ -26,7 +26,7 @@
         <form id="registration-form" method="POST" action="/user/email/register">
           <div class="row">
             <div class="large-4 columns">
-              <input type="text" name="email"{% if flask_session.user.email %} value="{{ flask_session.user.email }}"{% endif %}>
+              <input type="text" name="email"{% if user.email %} value="{{ user.email }}"{% endif %}>
             </div>
           </div>
           <div>
