@@ -15,7 +15,7 @@
         <div class="row">
           <div class="large-2 small-2 columns">
             <div class="profile">
-              <img src="{{ user.avatar_url }}">
+              <img src="{{ user.avatar_url or '/static/images/noprofile.png' }}">
               <p class="name">{{ user.nickname }} <span class="auth_via">{{ user.auth_via }}</span></p>
               <form action="/logout" method="POST">
               <button class="alert button logout-btn">{% trans %}Logout{% endtrans %}</button>
