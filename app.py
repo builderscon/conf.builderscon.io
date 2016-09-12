@@ -826,6 +826,17 @@ def with_session_from_args(cb, fname='id'):
         return cb(**args)
     return functools.update_wrapper(functools.partial(load_session_from_args, cb), cb)
 
+def with_user(cb, lang=''):
+    def load_user(cb, id, lang, **args):
+        if not lang:
+            lang = flask.g.lang
+
+        user = _get_user(id=id, lang=lang)
+        if not user:
+            return octav.last_error(), 404
+        flask.g.stash["user"] = user
+        return cb(**args)
+    return functools.update_wrapper(functools.partial(load_user, cb, lang=lang), cb)
 
 @flaskapp.route('/<series_slug>/<path:slug>/session/<id>/update', methods=['POST'])
 @with_conference_by_slug
@@ -972,6 +983,25 @@ def session_delete():
 def session_view():
     return flask.render_template('session/view.tpl')
 
+@flaskapp.route('/user/<id>')
+@with_user
+def user_view():
+    sessions = octav.list_sessions(
+        speaker_id=flask.g.stash.get("user").get("id"),
+        status=["accepted"],
+        lang=flask.g.lang
+    )
+    if not sessions:
+        sessions = []
+    flask.g.stash["sessions"] = sessions
+
+    return flask.render_template('user/view.tpl')
+
+def user_cache_key(id, lang):
+    if not id:
+        raise Exception("faild to create user cache key: no id")
+    return "user.%s.lang.%s" % (id, lang)
+
 def session_cache_key(id, lang):
     if not id:
         raise Exception("faild to create session cache key: no id")
@@ -996,6 +1026,16 @@ def conference_sessions_cache_key(conference_id, status, lang):
     if not conference_id:
         raise Exception("faild to create conference cache key: no id")
     return "conference_sessions.%s.status.%s.lang.%s" % (conference_id, status, lang)
+
+def _get_user(id, lang):
+    key = user_cache_key(id, lang)
+    user = cache.get(key)
+    if not user:
+        user = octav.lookup_user(id=id)
+        if not user:
+            return None
+        cache.set(key, user, CACHE_SESSION_EXPIRES)
+    return user
 
 def _get_session(id, lang):
     key = session_cache_key(id, lang)
