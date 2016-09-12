@@ -1,5 +1,7 @@
 {% extends 'layout/base.tpl' %}
 
+{% block body_id %}top{% endblock %}
+
 {% block menuitems %}
 <li><a href="/"><span class="i-home"></span></a></li>
 <li><a href="/dashboard"><span class="i-user"></span></a></li>
