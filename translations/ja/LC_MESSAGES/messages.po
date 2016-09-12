@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-07 23:28+0000\n"
+"POT-Creation-Date: 2016-09-12 11:46+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -30,7 +30,7 @@ msgstr "ビーコン君"
 msgid "Meet Mr. B (Mr. Beacon)!"
 msgstr "ビーコン君！"
 
-#: templates/beacon.tpl:8 templates/index.tpl:6
+#: templates/beacon.tpl:8 templates/index.tpl:8
 msgid "BLOG"
 msgstr "ブログ"
 
@@ -239,11 +239,11 @@ msgstr "ゲストスピーカー"
 msgid "Logout"
 msgstr "ログアウト"
 
-#: templates/dashboard.tpl:27
+#: templates/dashboard.tpl:27 templates/user/view.tpl:24
 msgid "Organizer"
 msgstr "主宰"
 
-#: templates/dashboard.tpl:37
+#: templates/dashboard.tpl:37 templates/user/view.tpl:35
 msgid "Proposals"
 msgstr "応募済みプロポーザル"
 
@@ -251,23 +251,24 @@ msgstr "応募済みプロポーザル"
 msgid "No proposals have been submitted"
 msgstr "応募されたプロポーザルはありません"
 
-#: templates/dashboard.tpl:44
-msgid "Conference"
-msgstr "カンファレンス"
-
-#: templates/dashboard.tpl:45 templates/session/form.tpl:28
+#: templates/dashboard.tpl:44 templates/session/form.tpl:28
+#: templates/user/view.tpl:39
 msgid "Title"
 msgstr "タイトル"
 
-#: templates/dashboard.tpl:47
+#: templates/dashboard.tpl:45 templates/user/view.tpl:40
+msgid "Conference"
+msgstr "カンファレンス"
+
+#: templates/dashboard.tpl:47 templates/user/view.tpl:41
 msgid "Status"
 msgstr "状態"
 
-#: templates/index.tpl:24
+#: templates/index.tpl:26
 msgid "Welcome To builderscon"
 msgstr "builderscon とは"
 
-#: templates/index.tpl:26
+#: templates/index.tpl:28
 msgid ""
 "\n"
 "        <strong>Join builderscon and discover something new! builderscon "
@@ -292,15 +293,15 @@ msgstr ""
 "        <p>buildersconに参加して、あなたの情熱をシェアしてください！皆様のご参加をお待ちしております！</p>"
 "        "
 
-#: templates/index.tpl:39
+#: templates/index.tpl:41
 msgid "Upcoming Conferences"
 msgstr "近日開催予定"
 
-#: templates/index.tpl:57
+#: templates/index.tpl:59
 msgid "Get Involved!"
 msgstr "参加しよう！"
 
-#: templates/index.tpl:64
+#: templates/index.tpl:66
 msgid ""
 "<b>Slack: </b> We have <a href=\"https://builderscon.slack.com\">a Slack "
 "team</a>, and <a href=\"https://slack-invite-dot-"
@@ -313,7 +314,7 @@ msgstr ""
 "href=\"https://slack-invite-dot-"
 "builderscon-1248.appspot.com/\">自動招待フォーム</a>から気軽に参加できます"
 
-#: templates/index.tpl:72
+#: templates/index.tpl:74
 msgid ""
 "<b>Github:</b> Explore our many opensource projects on <a "
 "href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
@@ -328,7 +329,7 @@ msgstr ""
 " <a href=\"https://github.com/builderscon/octav\">APIサーバー</a>, そして<a "
 "href=\"https://github.com/builderscon/builderscon.io\">本サイトのソースコード</a>等もあります。PR等どしどし送って下さい！"
 
-#: templates/index.tpl:80
+#: templates/index.tpl:82
 msgid ""
 "<b>Facebook:</b> Peruse our <a "
 "href=\"https://www.facebook.com/builderscon\">Facebook page</a> to find "
@@ -343,7 +344,7 @@ msgstr ""
 "href=\"https://www.facebook.com/events/803942576374123/\">1</a>][<a "
 "href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
 
-#: templates/index.tpl:88
+#: templates/index.tpl:90
 msgid ""
 "<b>Twitter:</b> Follow us on <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
@@ -352,7 +353,7 @@ msgstr ""
 "<b>Twitter:</b> <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>アカウントをフォローして、最新の情報をチェック！"
 
-#: templates/index.tpl:96
+#: templates/index.tpl:98
 msgid ""
 "<b>Share:</b> Read our <a href=\"http://blog.builderscon.io\">blog</a>, "
 "post on your favorite sites, and perhaps if you are feeling like it, you "
@@ -592,6 +593,10 @@ msgstr "メールアドレスを登録する"
 #: templates/user/email_done.tpl:24
 msgid "Thank you! Your email has been registered."
 msgstr "ありがとうございました。メールアドレスが登録されました"
+
+#: templates/user/email_done.tpl:28
+msgid "Proceed to next URL"
+msgstr "作業を続ける"
 
 #: templates/user/email_register.tpl:21
 msgid "Register Your Email"
