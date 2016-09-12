@@ -245,7 +245,7 @@ msgstr "主宰"
 
 #: templates/dashboard.tpl:37
 msgid "Proposals"
-msgstr "応募されたセッション"
+msgstr "応募済みプロポーザル"
 
 #: templates/dashboard.tpl:39
 msgid "No proposals have been submitted"
