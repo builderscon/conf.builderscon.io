@@ -373,12 +373,26 @@ def login_facebook_callback(resp):
     elif len(names) == 1:
         first_name = names[0]
 
+    params = dict({
+        'height':130,
+        'width': 130,
+        'fields': 'url',
+        'redirect': False
+    })
+    res = facebook.request('v2.7/me/picture', data=params)
+    if res.status != 200:
+        print("got status %d" % res.status)
+        print(res.data)
+        return flask.render_template('login.tpl', error='failed to fetch user photo after oauth')
+    picture = res.data
+
     user = octav.create_user (
         data.get('id'),
         auth_via='facebook',
         nickname=data.get('name'),
         first_name=first_name,
-        last_name=last_name
+        last_name=last_name,
+        avatar_url=picture.get('data', dict()).get('url')
     )
     if not user:
         return flask.render_template('login.tpl', error='failed to register user in the backend server')
