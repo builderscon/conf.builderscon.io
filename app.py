@@ -162,8 +162,8 @@ def check_login(cb, **args):
         if user:
             flask.g.stash['user'] = user
             return cb(**args)
+        del flask.session['user_id']
 
-    del flask.session['user_id']
     next_url = flask.request.path + "?" + flasktools.urlencode(flask.request.args)
     query = flasktools.urlencode({'.next': next_url})
     return flask.redirect("/login?" + query)
