@@ -154,6 +154,30 @@ a.cfptabs-title-inside {
     padding: 10px;
 }
 
+#userview div.profile {
+  padding: 5px;
+  text-align: center;
+}
+#userview div.profile img {
+  padding: 2px;
+  border: 1px solid #ccc;
+}
+#userview div.profile p.name {
+  text-align: center;
+}
+#userview span.auth_via {
+  border: 1px solid #0a0;
+  background-color: #cfc;
+  font-weight: bold;
+  font-size: 0.6em;
+  color: #0a0;
+  padding: 0.2em;
+}
+
+#userview div.profile-content {
+  padding-left: 1em;
+}
+
 #dashboard div.profile {
   padding: 5px;
   text-align: center;

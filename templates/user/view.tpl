@@ -1,5 +1,7 @@
 {% extends 'layout/base.tpl' %}
 
+{% block body_id %}userview{% endblock %}
+
 {% block heroimage %}
 <div id="heroimage-empty"></div>
 {% endblock %}
@@ -8,16 +10,16 @@
 <main>
   <div class="section article">
     <div class="inner">
-      <div class="section-content no-header">
-
+      <h1 class="section-header">{{ user.nickname }}</h1>
+      <div class="section-content">
         <div class="row">
-          <div class="large-2 columns">
+          <div class="large-2 small-2 columns">
             <div class="profile">
-              <img src="{{ user.avatar_url }}">
+              <img src="{{ user.avatar_url or '/static/images/noprofile.png' }}">
               <p class="name">{{ user.nickname }} <span class="auth_via">{{ user.auth_via }}</span></p>
             </div>
           </div>
-          <div class="profile-content large-10 columns">
+          <div class="profile-content large-10 small-10 columns">
 {% if conferences %}
             <h3>{% trans %}Organizer{% endtrans %}</h3>
             <div class="conference-history">
@@ -29,10 +31,8 @@
             </div>
 {% endif %}
 
-            <h3>Proposals</h3>
-{% if not sessions %}
-            <p>{% trans %}No proposals have been submitted{% endtrans %}</p>
-{% else %}
+{% if sessions %}
+            <h3>{% trans %}Proposals{% endtrans %}</h3>
             <table class="session-history">
             <thead>
               <tr>
