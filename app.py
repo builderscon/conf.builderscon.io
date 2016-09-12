@@ -324,7 +324,7 @@ def login_github_callback(resp):
         nickname=data.get('login'),
         first_name=first_name,
         last_name=last_name,
-        avatar_url='https://avatars.githubusercontent.com/u/' + data.get('id')
+        avatar_url='https://avatars.githubusercontent.com/u/' + str(data.get('id'))
     )
     if not user:
         return flask.render_template('login.tpl', error='failed to register user in the backend server')
