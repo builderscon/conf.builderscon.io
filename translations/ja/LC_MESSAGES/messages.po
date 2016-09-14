@@ -554,7 +554,7 @@ msgstr "以下の「許可」を選択することによりbuildersconがあな�
 msgid ""
 "I hereby confirm that I am submitting this proposal after reading the "
 "terms of use, and that I understand and agree to its contents."
-msgstr "利用規約を読み、内容を理解した上で本プロポーザルを応募することを認めます"
+msgstr "プロポーザルの応募には、利用規約を読み、内容を理解した上での同意が必要です"
 
 #: templates/session/form.tpl:187
 msgid "Yes, I agree to the Terms Of Use"
