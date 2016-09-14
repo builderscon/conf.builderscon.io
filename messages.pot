@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-12 11:46+0900\n"
+"POT-Creation-Date: 2016-09-14 10:24+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,30 +82,34 @@ msgid "30 min"
 msgstr ""
 
 #: templates/catalog.tpl:8
-msgid "accepted"
+msgid "15 min"
 msgstr ""
 
 #: templates/catalog.tpl:9
-msgid "pending"
+msgid "accepted"
 msgstr ""
 
 #: templates/catalog.tpl:10
-msgid "rejected"
+msgid "pending"
 msgstr ""
 
 #: templates/catalog.tpl:11
-msgid "Technical Sponsors"
+msgid "rejected"
 msgstr ""
 
 #: templates/catalog.tpl:12
-msgid "Sponsors"
+msgid "Technical Sponsors"
 msgstr ""
 
 #: templates/catalog.tpl:13
+msgid "Sponsors"
+msgstr ""
+
+#: templates/catalog.tpl:14
 msgid "ClubT"
 msgstr ""
 
-#: templates/catalog.tpl:19
+#: templates/catalog.tpl:20
 msgid ""
 "The redirect_uri MUST match the registered callback URL for this "
 "application."

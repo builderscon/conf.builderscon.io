@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-12 11:46+0900\n"
+"POT-Creation-Date: 2016-09-14 10:24+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -98,30 +98,34 @@ msgid "30 min"
 msgstr "30分"
 
 #: templates/catalog.tpl:8
+msgid "15 min"
+msgstr "15分"
+
+#: templates/catalog.tpl:9
 msgid "accepted"
 msgstr "採用"
 
-#: templates/catalog.tpl:9
+#: templates/catalog.tpl:10
 msgid "pending"
 msgstr "保留"
 
-#: templates/catalog.tpl:10
+#: templates/catalog.tpl:11
 msgid "rejected"
 msgstr "不採用"
 
-#: templates/catalog.tpl:11
+#: templates/catalog.tpl:12
 msgid "Technical Sponsors"
 msgstr "技術協力"
 
-#: templates/catalog.tpl:12
+#: templates/catalog.tpl:13
 msgid "Sponsors"
 msgstr "スポンサーの皆様"
 
-#: templates/catalog.tpl:13
+#: templates/catalog.tpl:14
 msgid "ClubT"
 msgstr "株式会社ClubT"
 
-#: templates/catalog.tpl:19
+#: templates/catalog.tpl:20
 msgid ""
 "The redirect_uri MUST match the registered callback URL for this "
 "application."
