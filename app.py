@@ -105,7 +105,7 @@ github = oauth.remote_app('github',
     access_token_url='https://github.com/login/oauth/access_token',
     consumer_key=cfg.section('GITHUB').get('client_id'),
     consumer_secret=cfg.section('GITHUB').get('client_secret').encode('ASCII'),
-    request_token_params={'scope': 'user'}
+    request_token_params={'scope': ''}
 )
 
 class ConferenceNotFoundError(Exception):
