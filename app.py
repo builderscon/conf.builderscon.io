@@ -150,7 +150,6 @@ def urlencode_filter(s):
     return markupsafe.Markup(s)
 
 def load_logged_in_user():
-    print flask.session.get('user_id', 'not found')
     if 'user_id' in flask.session:
         user = octav.lookup_user(flask.session.get('user_id'))
         if user:
