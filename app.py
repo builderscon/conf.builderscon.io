@@ -24,13 +24,6 @@ import flasktools
 import functools
 import sys
 
-if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/') or os.getenv('SERVER_SOFTWARE', '').startswith('Development/'):
-    import urllib3.contrib.appengine
-    http = urllib3.contrib.appengine.AppEngineManager()
-else:
-    import urllib3
-    http = urllib3.PoolManager()
-
 CACHE_CONFERENCE_EXPIRES = 300
 CACHE_CONFERENCE_SESSIONS_EXPIRES = 300
 CACHE_SESSION_EXPIRES = 300
@@ -156,21 +149,37 @@ def urlencode_filter(s):
     s = flasktools.quote_plus(s)
     return markupsafe.Markup(s)
 
-def check_login(cb, **args):
+def load_logged_in_user():
+    print "load_logged_in_user"
+    print flask.session.get('user_id', 'not found')
     if 'user_id' in flask.session:
+        print "found user_id"
         user = octav.lookup_user(flask.session.get('user_id'))
         if user:
+            print "found user"
             flask.g.stash['user'] = user
-            return cb(**args)
+            return True
         del flask.session['user_id']
+    return False
 
+def load_user_only(cb, **args):
+    print "load_user_only"
+    load_logged_in_user()
+    return cb(**args)
+
+def check_login(cb, **args):
+    return functools.update_wrapper(functools.partial(load_user_only, cb, **args), cb)
+
+def load_user_or_login(cb, **args):
+    if load_logged_in_user():
+        return cb(**args)
     next_url = flask.request.path + "?" + flasktools.urlencode(flask.request.args)
     query = flasktools.urlencode({'.next': next_url})
     return flask.redirect("/login?" + query)
 
 # Check if we have the user session field pre-populated.
 def require_login(cb, **args):
-    return functools.update_wrapper(functools.partial(check_login, cb, **args), cb)
+    return functools.update_wrapper(functools.partial(load_user_or_login, cb, **args), cb)
 
 def check_email(cb, **args):
     user = flask.g.stash.get('user')
@@ -845,6 +854,7 @@ def with_user(cb, lang=''):
     return functools.update_wrapper(functools.partial(load_user, cb, lang=lang), cb)
 
 @flaskapp.route('/<series_slug>/<path:slug>/session/<id>/update', methods=['POST'])
+@require_login
 @with_conference_by_slug
 @functools.partial(with_session, lang='all')
 @with_session_types
@@ -924,6 +934,7 @@ def session_update():
     return flask.render_template('session/edit.tpl')
 
 @flaskapp.route('/<series_slug>/<path:slug>/session/<id>/edit')
+@require_login
 @with_conference_by_slug
 @functools.partial(with_session, lang='all')
 @with_session_types
@@ -984,6 +995,7 @@ def session_delete():
         return "", 401
         
 @flaskapp.route('/<series_slug>/<path:slug>/session/<id>')
+@check_login
 @with_conference_by_slug
 @with_session
 def session_view():

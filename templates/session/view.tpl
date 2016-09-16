@@ -13,14 +13,14 @@
 <main>
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">{{session.title}}
-        {% if session.speaker.id == flask_session.get('user').id %}<a id="session-edit-btn" href="/{{ conference.full_slug }}/session/{{ session.id }}/edit"><span class="i-edit"></span></a>{% endif %}
-      </h1>
+      <h1 class="section-header">{{session.title}}</h1>
       <div class="section-content">
         <div class="row">
           <div class="text-center large-2 small-2 columns">
             <img style="width: 120px; height: 120px; border: 1px solid #ccc" src="{% if session.speaker.avatar_url %}{{ session.speaker.avatar_url }}{% else %}{{ url('static', filename='images/noprofile.png') }}{% endif %}" />
-            <div class="text-center"><a href="/user/{{ session.speaker.id }}" target="_blank">{{session.speaker.nickname}}</a></div>
+            <div class="text-center"><a href="/user/{{ session.speaker.id }}" target="_blank">{{session.speaker.nickname}}</a><br />
+        {% if user.is_admin or user.id == session.speaker.id %}<a id="session-edit-btn" href="/{{ conference.full_slug }}/session/{{ session.id }}/edit">{% trans %}Edit{% endtrans %}</a>{% endif %}
+</div>
             <div class="social-button">
               <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
             </div>
