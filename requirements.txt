@@ -1,3 +1,4 @@
+certifi
 feedparser
 flask
 flask_babel
