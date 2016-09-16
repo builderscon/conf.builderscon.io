@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-14 11:21+0900\n"
+"POT-Creation-Date: 2016-09-16 12:37+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -211,15 +211,23 @@ msgstr ""
 msgid "Information"
 msgstr ""
 
-#: templates/conference.tpl:73
+#: templates/conference.tpl:73 templates/layout/conference.tpl:9
+msgid "Sessions"
+msgstr ""
+
+#: templates/conference.tpl:74
+msgid "Session List"
+msgstr ""
+
+#: templates/conference.tpl:76
 msgid "Dates"
 msgstr ""
 
-#: templates/conference.tpl:77
+#: templates/conference.tpl:80
 msgid "Venue"
 msgstr ""
 
-#: templates/conference.tpl:92
+#: templates/conference.tpl:95
 msgid "Guest Speakers"
 msgstr ""
 
@@ -244,12 +252,23 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: templates/dashboard.tpl:45 templates/user/view.tpl:40
+#: templates/dashboard.tpl:45 templates/layout/conference.tpl:8
+#: templates/user/view.tpl:40
 msgid "Conference"
 msgstr ""
 
 #: templates/dashboard.tpl:47 templates/user/view.tpl:41
 msgid "Status"
+msgstr ""
+
+#: templates/index.tpl:6 templates/layout/base.tpl:36
+#: templates/layout/conference.tpl:6
+msgid "builderscon"
+msgstr ""
+
+#: templates/index.tpl:7 templates/layout/base.tpl:37
+#: templates/layout/conference.tpl:7
+msgid "Dashboard"
 msgstr ""
 
 #: templates/index.tpl:26
@@ -355,10 +374,6 @@ msgstr ""
 
 #: templates/layout/base.tpl:70
 msgid "Privacy Policy"
-msgstr ""
-
-#: templates/layout/conference.tpl:9
-msgid "Sessions"
 msgstr ""
 
 #: templates/layout/conference.tpl:10
