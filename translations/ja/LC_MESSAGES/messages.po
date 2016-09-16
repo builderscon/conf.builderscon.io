@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-14 11:21+0900\n"
+"POT-Creation-Date: 2016-09-16 12:37+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -227,15 +227,23 @@ msgstr "カンファレンス概要"
 msgid "Information"
 msgstr "情報"
 
-#: templates/conference.tpl:73
+#: templates/conference.tpl:73 templates/layout/conference.tpl:9
+msgid "Sessions"
+msgstr "セッション"
+
+#: templates/conference.tpl:74
+msgid "Session List"
+msgstr "セッション一覧"
+
+#: templates/conference.tpl:76
 msgid "Dates"
 msgstr "日程"
 
-#: templates/conference.tpl:77
+#: templates/conference.tpl:80
 msgid "Venue"
 msgstr "会場"
 
-#: templates/conference.tpl:92
+#: templates/conference.tpl:95
 msgid "Guest Speakers"
 msgstr "ゲストスピーカー"
 
@@ -260,13 +268,24 @@ msgstr "応募されたプロポーザルはありません"
 msgid "Title"
 msgstr "タイトル"
 
-#: templates/dashboard.tpl:45 templates/user/view.tpl:40
+#: templates/dashboard.tpl:45 templates/layout/conference.tpl:8
+#: templates/user/view.tpl:40
 msgid "Conference"
 msgstr "カンファレンス"
 
 #: templates/dashboard.tpl:47 templates/user/view.tpl:41
 msgid "Status"
 msgstr "状態"
+
+#: templates/index.tpl:6 templates/layout/base.tpl:36
+#: templates/layout/conference.tpl:6
+msgid "builderscon"
+msgstr ""
+
+#: templates/index.tpl:7 templates/layout/base.tpl:37
+#: templates/layout/conference.tpl:7
+msgid "Dashboard"
+msgstr "ダッシュボード"
 
 #: templates/index.tpl:26
 msgid "Welcome To builderscon"
@@ -400,10 +419,6 @@ msgstr "buildersconは技術を愛する全てのギーク達のお祭りです"
 #: templates/layout/base.tpl:70
 msgid "Privacy Policy"
 msgstr "プライバシーポリシー"
-
-#: templates/layout/conference.tpl:9
-msgid "Sessions"
-msgstr "セッション"
 
 #: templates/layout/conference.tpl:10
 msgid "NEWS"

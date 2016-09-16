@@ -70,6 +70,9 @@ function initMap() {
     <div class="inner">
       <h1 class="section-header">{% trans %}Information{% endtrans %}</h1>
       <div class="section-content">
+        <h2>{% trans %}Sessions{% endtrans %}</h2>
+        <div style="margin-left: 2em"><a href="/{{ conference.full_slug }}/sessions">{% trans %}Session List{% endtrans %}</a></div>
+        
         <h2>{% trans %}Dates{% endtrans %}</h2>
 {% for date in conference.dates %}
         <div style="margin-left: 2em">{{ date.date }}</div>

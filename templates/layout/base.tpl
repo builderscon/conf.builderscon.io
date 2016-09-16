@@ -33,8 +33,8 @@
           <div id="gnavi">
             <ul class="menu">
               {% block menuitems %}
-                <li><a href="/"><span class="i-home"></span></a></li>
-                <li><a href="/dashboard"><span class="i-user"></span></a></li>
+                <li><a href="/">{% trans %}builderscon{% endtrans %}</a></li>
+                <li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
               {% endblock %}
             </ul><!-- ul.menu -->
           </div><!-- div#gnavi -->
