@@ -51,7 +51,7 @@ class Memcached:
             if not servers:
                 raise Exception("servers missing in memcache settings")
             else:
-                server_settings = map( server_str, servers )
+                server_settings = [server_str(server) for server in  servers]
             self.client = memcache.Client(server_settings, debug)
 
     def set(self, key, val, expires=0):
