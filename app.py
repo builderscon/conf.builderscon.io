@@ -28,8 +28,8 @@ CACHE_CONFERENCE_EXPIRES = 300
 CACHE_CONFERENCE_SESSIONS_EXPIRES = 300
 CACHE_SESSION_EXPIRES = 300
 LANGUAGES=[
- dict({'name': 'English', 'value': 'en'}),
- dict({'name': 'Japanese', 'value': 'ja'})
+    {'name': 'English', 'value': 'en'},
+    {'name': 'Japanese', 'value': 'ja'}
 ]
 
 class Config(object):
