@@ -28,8 +28,8 @@ CACHE_CONFERENCE_EXPIRES = 300
 CACHE_CONFERENCE_SESSIONS_EXPIRES = 300
 CACHE_SESSION_EXPIRES = 300
 LANGUAGES=[
- dict({'name': 'English', 'value': 'en'}),
- dict({'name': 'Japanese', 'value': 'ja'})
+    {'name': 'English', 'value': 'en'},
+    {'name': 'Japanese', 'value': 'ja'}
 ]
 
 class Config(object):
@@ -42,8 +42,8 @@ class Config(object):
                 raise Exception( "missing section '" + section + "' in config file '" + file + "'" )
         if self.cfg.get('OCTAV').get('BASE_URI'):
             raise Exception(
-                'DEPRECATED: {"OCTAV":{"BASE_URI"}} in config.json is deprecated.\
- Please use {"OCTAV":{"endpoint"}} instead and remove {"OCTAV":{"BASE_URI"}}.'
+                'DEPRECATED: {"OCTAV":{"BASE_URI"}} in config.json is deprecated.'
+                ' Please use {"OCTAV":{"endpoint"}} instead and remove {"OCTAV":{"BASE_URI"}}.'
         )
 
     def section(self, name):
