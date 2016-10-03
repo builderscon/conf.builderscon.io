@@ -46,9 +46,9 @@
         {% trans %}
         <ul>
             <li>Permission is hereby granted to use the Mr. Beacon character, in accordance with <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC 4.0 License</a></li>
-            <li>Mr. Beacon was designed by <a href="https://twitter.com/yassang0928">yassang</a></li>
+            <li>Mr. Beacon was designed by <a href="http://yassang.jp/">yassang</a></li>
             <li>Attribution to the creator ("by yassang") is recommended but not required</li>
-            <li>Mr. Beacon is &copy; endeworks and &copy; <a href="https://twitter.com/yassang0928">yassang</a></li>
+            <li>Mr. Beacon is &copy; endeworks and &copy; <a href="http://yassang.jp/">yassang</a></li>
         </ul>
         {% endtrans %}
       </div>
