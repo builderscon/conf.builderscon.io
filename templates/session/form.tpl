@@ -62,8 +62,8 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
             </div>
             <div class="large-{{ right }} columns">
               <select name="session_type_id">
-                {% for stype in session_types %}
-                <option value="{{ stype.id }}"{% if stype.is_accepting_submission %}{% if stype.is_default %} selected="selected"{% endif %}{% else %} disabled="disabled"{% endif %}>{{ _(stype.name) }}{% if not stype.is_accepting_submission %} [{% trans %}SUBMISSION CURRENTLY CLOSED{% endtrans %}]{% endif %}</option>
+                {% set selected = False %}{% for stype in session_types %}
+                <option value="{{ stype.id }}"{% if stype.is_accepting_submission %}{% if not selected and (session.get('session_type_id') == stype.get('id') or stype.is_default) %} selected="selected"{% set selected = True %}{% endif %}{% else %} disabled="disabled"{% endif %}>{{ _(stype.name) }}{% if not stype.is_accepting_submission %} [{% trans %}SUBMISSION CURRENTLY CLOSED{% endtrans %}]{% endif %}</option>
                 {% endfor %}
               </select>
             </div>
