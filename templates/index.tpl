@@ -46,7 +46,12 @@
             <img src="{{ url('static', filename='images/hex_logo.png') }}">
           </div>
           <div class="large-11 small-11 column conference-name">
-            <a href="{% if conference.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a> ({{ conference.dates[0] | dateobj(lang=lang) }})
+            <a href="{% if conference.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a>
+{%- set dates = conference.get('dates') %}
+{%- if dates|length > 0 %}
+{%- set dt = conference.dates[0]|dateobj(lang=lang,timezone=conference.get('timezone')) %}
+({{ dt.date() }})
+{%- endif %}
           </div>
         </div>
         {% endfor %}
