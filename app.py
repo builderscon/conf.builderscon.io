@@ -201,8 +201,8 @@ def beacon():
     return flask.render_template('beacon.tpl')
 
 @flaskapp.template_filter('dateobj')
-def dateobj_filter(s, lang='en'): # note: this is probably going to be deprecated
-    return model.ConferenceDate(s, lang)
+def dateobj_filter(s, lang='en', timezone='UTC'): # note: this is probably going to be deprecated
+    return model.ConferenceDate(s, lang=lang, timezone=timezone)
 
 markdown_converter = markdown.Markdown(extensions=[GithubFlavoredMarkdownExtension()]).convert
 @flaskapp.template_filter('markdown')
@@ -891,8 +891,6 @@ def session_update():
     if flask.g.stash.get('errors') > 0:
         flask.g.stash["session"] = form
         return flask.render_template('session/edit.tpl')
-
-    print(form)
 
     user = flask.g.stash.get('user')
     try:

@@ -21,7 +21,10 @@ div.speakers div.speaker {
 {% block herotext %}
 <h1>{{ conference.title }}</h1>
 <h2>{{ conference.sub_title }}</h2>
-<h2>{% if conference.dates|length == 1 %}{{ conference.dates[0]|dateobj(lang=lang) }}{% endif %}</h2>
+{% if conference.dates|length == 1 %}
+{% set dt = conference.dates[0]|dateobj(lang=lang,timezone=conference.get('timezone')) %}
+<h2>{{ dt.date() }}</h2>
+{% endif %}
 {% endblock %}
 
 {% block scripts %}
@@ -74,8 +77,9 @@ function initMap() {
         <div style="margin-left: 2em"><a href="/{{ conference.full_slug }}/sessions">{% trans %}Session List{% endtrans %}</a></div>
         
         <h2>{% trans %}Dates{% endtrans %}</h2>
-{% for date in conference.dates %}
-        <div style="margin-left: 2em">{{ date.date }}</div>
+{% for date in conference.get('dates') %}
+{% set dt = date|dateobj(lang=lang, timezone=conference.get('timezone')) %}
+        <div style="margin-left: 2em">{{ dt.date() }} ({{ dt.open_time() }} 〜 {{ dt.close_time() }})</div>
 {% endfor %}
         <h2>{% trans %}Venue{% endtrans %}</h2>
         <div style="margin-left: 2em">
