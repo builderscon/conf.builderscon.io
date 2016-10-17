@@ -134,7 +134,7 @@ def inject_template_vars():
     return stash
 
 @flaskapp.template_filter('is_oauth_error')
-def permission_value_to_name(v):
+def is_oauth_error(v):
     return type(v) is OAuthError
 
 # Used in templates, when all you have is the user's input value
@@ -283,9 +283,10 @@ def start_oauth(oauth_handler, callback):
             callback = '%s?%s' % (callback, flasktools.urlencode(args))
 
         return oauth_handler.authorize(callback=callback)
-    except BaseException as e:
+    except:
         print(traceback.format_exc())
         raise OAuthError
+    
 
 @flaskapp.route('/login')
 def login():
