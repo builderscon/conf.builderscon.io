@@ -13,9 +13,9 @@
 <main>
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">{% trans %}There was an error.{% endtrans %}</h1>
+      <h1 class="section-header">{% trans %}Not Found{% endtrans %}</h1>
       <div class="section-content">
-        {% if error | is_oauth_error %}{% trans %}We received an error from an external site.{% endtrans %}{% else %}{% trans %}There was an error.{% endtrans %}{% endif %} {% trans %}Please try again in a few minutes.{% endtrans %}
+        {% trans %}The request resource was not found.{% endtrans %}
       </div>
     </div>
   </div>

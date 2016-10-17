@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-17 09:46+0900\n"
+"POT-Creation-Date: 2016-10-17 19:03+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,8 @@ msgstr ""
 msgid "Meet Mr. B (Mr. Beacon)!"
 msgstr ""
 
-#: templates/beacon.tpl:8 templates/errors/500.tpl:9 templates/index.tpl:8
+#: templates/beacon.tpl:8 templates/errors/404.tpl:9 templates/errors/500.tpl:9
+#: templates/index.tpl:8
 msgid "BLOG"
 msgstr ""
 
@@ -266,7 +267,7 @@ msgstr ""
 msgid "builderscon"
 msgstr ""
 
-#: templates/errors/500.tpl:8 templates/index.tpl:7
+#: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:7
 #: templates/layout/base.tpl:37 templates/layout/conference.tpl:7
 msgid "Dashboard"
 msgstr ""
@@ -343,7 +344,7 @@ msgid ""
 "conversations."
 msgstr ""
 
-#: templates/errors/500.tpl:2 templates/login.tpl:13
+#: templates/errors/404.tpl:2 templates/errors/500.tpl:2 templates/login.tpl:13
 msgid "Error"
 msgstr ""
 
@@ -360,8 +361,16 @@ msgstr ""
 msgid "Recent News"
 msgstr ""
 
+#: templates/errors/404.tpl:16
+msgid "Not Found"
+msgstr ""
+
+#: templates/errors/404.tpl:18
+msgid "The request resource was not found."
+msgstr ""
+
 #: templates/errors/500.tpl:16
-msgid "There was an error"
+msgid "There was an error."
 msgstr ""
 
 #: templates/errors/500.tpl:18
