@@ -250,4 +250,6 @@ a.cfptabs-title-inside {
   font-size: 1.5em;
   vertical-align: middle;
 }
-
+#error #contents.error {
+    margin-top: 100px;
+}

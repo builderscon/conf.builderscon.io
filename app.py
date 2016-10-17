@@ -22,6 +22,7 @@ import re
 import model
 import flasktools
 import functools
+import traceback
 import sys
 
 CACHE_CONFERENCE_EXPIRES = 300
@@ -104,6 +105,14 @@ github = oauth.remote_app('github',
 class ConferenceNotFoundError(Exception):
     pass
 
+class OAuthError(Exception):
+    pass
+
+@flaskapp.errorhandler(500)
+def internal_sever_error(e):
+    flask.g.stash["error"] = e
+    return flask.render_template('errors/500.tpl'), 500
+
 # stash is where we keep values that get automatically passed
 # to the template when rendering
 @flaskapp.before_request
@@ -123,6 +132,10 @@ def inject_template_vars():
     stash["flask_session"] = flask.session
     stash["url"] = flask.url_for
     return stash
+
+@flaskapp.template_filter('is_oauth_error')
+def is_oauth_error(v):
+    return type(v) is OAuthError
 
 # Used in templates, when all you have is the user's input value
 @flaskapp.template_filter('permname')
@@ -258,16 +271,22 @@ def dashboard():
         sessions=sessions
     )
 
+
+
 def start_oauth(oauth_handler, callback):
-    args = {}
-    if flask.request.args.get('.next'):
-        args['.next'] = flask.request.args.get('.next')
+    try:
+        args = {}
+        if flask.request.args.get('.next'):
+            args['.next'] = flask.request.args.get('.next')
 
-    if len(args.keys()) > 0:
-        callback = '%s?%s' % (callback, flasktools.urlencode(args))
+        if len(args.keys()) > 0:
+            callback = '%s?%s' % (callback, flasktools.urlencode(args))
 
-    print(callback)
-    return oauth_handler.authorize(callback=callback)
+        return oauth_handler.authorize(callback=callback)
+    except:
+        print(traceback.format_exc())
+        raise OAuthError
+    
 
 @flaskapp.route('/login')
 def login():
