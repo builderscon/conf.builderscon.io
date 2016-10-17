@@ -76,7 +76,7 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
 {% set levels = [
   { 'name': _('Beginner'), 'value': 'beginner' },
   { 'name': _('Intermediate'), 'value': 'intermediate' },
-  { 'name': _('Expert'), 'value': 'expert' }
+  { 'name': _('Expert'), 'value': 'advanced' }
 ] %}
 {% for level in levels %}
                 <option value="{{ level.value }}" id="{{ level.value }}"{% if level.value == sel_material_level %} selected="selected"{% endif %}/><label for="{{ level.value }}">{{ _(level.name) }}</option>
