@@ -17,7 +17,7 @@
       <div class="section-content">
         <div class="row">
           <div class="text-center large-2 small-2 columns">
-            <img style="width: 120px; height: 120px; border: 1px solid #ccc" src="{% if session.speaker.avatar_url %}{{ session.speaker.avatar_url }}{% else %}{{ url('static', filename='images/noprofile.png') }}{% endif %}" />
+            <img style="width: 120px; height: auto; border: 1px solid #ccc" src="{% if session.speaker.avatar_url %}{{ session.speaker.avatar_url }}{% else %}{{ url('static', filename='images/noprofile.png') }}{% endif %}" />
             <div class="text-center"><a href="/user/{{ session.speaker.id }}" target="_blank">{{session.speaker.nickname}}</a><br />
         {% if user and (user.is_admin or user.id == session.speaker.id) %}<a id="session-edit-btn" href="/{{ conference.full_slug }}/session/{{ session.id }}/edit">{% trans %}Edit{% endtrans %}</a>{% endif %}
 </div>
