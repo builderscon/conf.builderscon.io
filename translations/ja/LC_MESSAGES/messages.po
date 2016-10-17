@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-16 15:46+0900\n"
+"POT-Creation-Date: 2016-10-17 09:46+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -30,7 +30,7 @@ msgstr "ビーコン君"
 msgid "Meet Mr. B (Mr. Beacon)!"
 msgstr "ビーコン君！"
 
-#: templates/beacon.tpl:8 templates/index.tpl:8
+#: templates/beacon.tpl:8 templates/errors/500.tpl:9 templates/index.tpl:8
 msgid "BLOG"
 msgstr "ブログ"
 
@@ -74,11 +74,10 @@ msgstr ""
 "             <li>「ビーコン君」は<a href=\"https://creativecommons.org/licenses"
 "/by-nc/4.0/\">CC-BY-NC 4.0ライセンス</a>で公開されています。</li>             "
 "<li>ビーコン君イラストは<a "
-"href=\"http://yassang.jp/\">yassang</a>氏に製作していただきました</li>"
-"             <li>利用にあたり著作者表記は任意ですが、表記があると嬉しいです</li>             "
-"<li>ビーコン君は &copy; 株式会社endeworks および &copy; <a "
-"href=\"http://yassang.jp/\">yassang</a>です</li>        </ul>"
-"\n"
+"href=\"http://yassang.jp/\">yassang</a>氏に製作していただきました</li>             "
+"<li>利用にあたり著作者表記は任意ですが、表記があると嬉しいです</li>             <li>ビーコン君は &copy; "
+"株式会社endeworks および &copy; <a "
+"href=\"http://yassang.jp/\">yassang</a>です</li>        </ul>\n"
 "        "
 
 #: templates/catalog.tpl:4
@@ -219,31 +218,31 @@ msgstr "応募ありがとうございました！"
 msgid "Your submission can be viewd here"
 msgstr "応募されたプロポーザルはこちらから確認できます"
 
-#: templates/conference.tpl:61
+#: templates/conference.tpl:64
 msgid "About The Conference"
 msgstr "カンファレンス概要"
 
-#: templates/conference.tpl:71
+#: templates/conference.tpl:74
 msgid "Information"
 msgstr "情報"
 
-#: templates/conference.tpl:73 templates/layout/conference.tpl:9
+#: templates/conference.tpl:76 templates/layout/conference.tpl:9
 msgid "Sessions"
 msgstr "セッション"
 
-#: templates/conference.tpl:74
+#: templates/conference.tpl:77
 msgid "Session List"
 msgstr "セッション一覧"
 
-#: templates/conference.tpl:76
+#: templates/conference.tpl:79
 msgid "Dates"
 msgstr "日程"
 
-#: templates/conference.tpl:80
+#: templates/conference.tpl:84
 msgid "Venue"
 msgstr "会場"
 
-#: templates/conference.tpl:95
+#: templates/conference.tpl:99
 msgid "Guest Speakers"
 msgstr "ゲストスピーカー"
 
@@ -282,8 +281,8 @@ msgstr "状態"
 msgid "builderscon"
 msgstr ""
 
-#: templates/index.tpl:7 templates/layout/base.tpl:37
-#: templates/layout/conference.tpl:7
+#: templates/errors/500.tpl:8 templates/index.tpl:7
+#: templates/layout/base.tpl:37 templates/layout/conference.tpl:7
 msgid "Dashboard"
 msgstr "ダッシュボード"
 
@@ -320,11 +319,11 @@ msgstr ""
 msgid "Upcoming Conferences"
 msgstr "近日開催予定"
 
-#: templates/index.tpl:59
+#: templates/index.tpl:64
 msgid "Get Involved!"
 msgstr "参加しよう！"
 
-#: templates/index.tpl:66
+#: templates/index.tpl:71
 msgid ""
 "<b>Slack: </b> We have <a href=\"https://builderscon.slack.com\">a Slack "
 "team</a>, and <a href=\"https://slack-invite-dot-"
@@ -337,7 +336,7 @@ msgstr ""
 "href=\"https://slack-invite-dot-"
 "builderscon-1248.appspot.com/\">自動招待フォーム</a>から気軽に参加できます"
 
-#: templates/index.tpl:74
+#: templates/index.tpl:79
 msgid ""
 "<b>Github:</b> Explore our many opensource projects on <a "
 "href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
@@ -352,7 +351,7 @@ msgstr ""
 " <a href=\"https://github.com/builderscon/octav\">APIサーバー</a>, そして<a "
 "href=\"https://github.com/builderscon/builderscon.io\">本サイトのソースコード</a>等もあります。PR等どしどし送って下さい！"
 
-#: templates/index.tpl:82
+#: templates/index.tpl:87
 msgid ""
 "<b>Facebook:</b> Peruse our <a "
 "href=\"https://www.facebook.com/builderscon\">Facebook page</a> to find "
@@ -367,7 +366,7 @@ msgstr ""
 "href=\"https://www.facebook.com/events/803942576374123/\">1</a>][<a "
 "href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
 
-#: templates/index.tpl:90
+#: templates/index.tpl:95
 msgid ""
 "<b>Twitter:</b> Follow us on <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
@@ -376,7 +375,7 @@ msgstr ""
 "<b>Twitter:</b> <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>アカウントをフォローして、最新の情報をチェック！"
 
-#: templates/index.tpl:98
+#: templates/index.tpl:103
 msgid ""
 "<b>Share:</b> Read our <a href=\"http://blog.builderscon.io\">blog</a>, "
 "post on your favorite sites, and perhaps if you are feeling like it, you "
@@ -387,7 +386,7 @@ msgstr ""
 "ブログ</a>をチェックしたり、buildersconをSNSサイトなどで紹介してください。また、是非<a "
 "href=\"/beacon\">ビーコン君もチェックしてくださいね</a>！"
 
-#: templates/login.tpl:13
+#: templates/errors/500.tpl:2 templates/login.tpl:13
 msgid "Error"
 msgstr "エラー"
 
@@ -403,6 +402,18 @@ msgstr "%(name)s でログイン"
 #: templates/news.tpl:11
 msgid "Recent News"
 msgstr "最新のニュース"
+
+#: templates/errors/500.tpl:16
+msgid "There was an error"
+msgstr "エラーが発生しました"
+
+#: templates/errors/500.tpl:18
+msgid "We received an error from an external site."
+msgstr "現在外部連携サイトが正常に動作しておりません。"
+
+#: templates/errors/500.tpl:18
+msgid "Please try again in a few minutes."
+msgstr "しばらくしてから再度お試し下さい。"
 
 #: templates/layout/base.tpl:4 templates/layout/base.tpl:10
 msgid "Discover Something New"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-16 15:46+0900\n"
+"POT-Creation-Date: 2016-10-17 09:46+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Meet Mr. B (Mr. Beacon)!"
 msgstr ""
 
-#: templates/beacon.tpl:8 templates/index.tpl:8
+#: templates/beacon.tpl:8 templates/errors/500.tpl:9 templates/index.tpl:8
 msgid "BLOG"
 msgstr ""
 
@@ -203,31 +203,31 @@ msgstr ""
 msgid "Your submission can be viewd here"
 msgstr ""
 
-#: templates/conference.tpl:61
+#: templates/conference.tpl:64
 msgid "About The Conference"
 msgstr ""
 
-#: templates/conference.tpl:71
+#: templates/conference.tpl:74
 msgid "Information"
 msgstr ""
 
-#: templates/conference.tpl:73 templates/layout/conference.tpl:9
+#: templates/conference.tpl:76 templates/layout/conference.tpl:9
 msgid "Sessions"
 msgstr ""
 
-#: templates/conference.tpl:74
+#: templates/conference.tpl:77
 msgid "Session List"
 msgstr ""
 
-#: templates/conference.tpl:76
+#: templates/conference.tpl:79
 msgid "Dates"
 msgstr ""
 
-#: templates/conference.tpl:80
+#: templates/conference.tpl:84
 msgid "Venue"
 msgstr ""
 
-#: templates/conference.tpl:95
+#: templates/conference.tpl:99
 msgid "Guest Speakers"
 msgstr ""
 
@@ -266,8 +266,8 @@ msgstr ""
 msgid "builderscon"
 msgstr ""
 
-#: templates/index.tpl:7 templates/layout/base.tpl:37
-#: templates/layout/conference.tpl:7
+#: templates/errors/500.tpl:8 templates/index.tpl:7
+#: templates/layout/base.tpl:37 templates/layout/conference.tpl:7
 msgid "Dashboard"
 msgstr ""
 
@@ -295,11 +295,11 @@ msgstr ""
 msgid "Upcoming Conferences"
 msgstr ""
 
-#: templates/index.tpl:59
+#: templates/index.tpl:64
 msgid "Get Involved!"
 msgstr ""
 
-#: templates/index.tpl:66
+#: templates/index.tpl:71
 msgid ""
 "<b>Slack: </b> We have <a href=\"https://builderscon.slack.com\">a Slack "
 "team</a>, and <a href=\"https://slack-invite-dot-"
@@ -308,7 +308,7 @@ msgid ""
 " your own builderscon!"
 msgstr ""
 
-#: templates/index.tpl:74
+#: templates/index.tpl:79
 msgid ""
 "<b>Github:</b> Explore our many opensource projects on <a "
 "href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
@@ -318,7 +318,7 @@ msgid ""
 "We'd love for your to send us pull requests!"
 msgstr ""
 
-#: templates/index.tpl:82
+#: templates/index.tpl:87
 msgid ""
 "<b>Facebook:</b> Peruse our <a "
 "href=\"https://www.facebook.com/builderscon\">Facebook page</a> to find "
@@ -328,14 +328,14 @@ msgid ""
 "href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
 msgstr ""
 
-#: templates/index.tpl:90
+#: templates/index.tpl:95
 msgid ""
 "<b>Twitter:</b> Follow us on <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
 "updates!"
 msgstr ""
 
-#: templates/index.tpl:98
+#: templates/index.tpl:103
 msgid ""
 "<b>Share:</b> Read our <a href=\"http://blog.builderscon.io\">blog</a>, "
 "post on your favorite sites, and perhaps if you are feeling like it, you "
@@ -343,7 +343,7 @@ msgid ""
 "conversations."
 msgstr ""
 
-#: templates/login.tpl:13
+#: templates/errors/500.tpl:2 templates/login.tpl:13
 msgid "Error"
 msgstr ""
 
@@ -358,6 +358,18 @@ msgstr ""
 
 #: templates/news.tpl:11
 msgid "Recent News"
+msgstr ""
+
+#: templates/errors/500.tpl:16
+msgid "There was an error"
+msgstr ""
+
+#: templates/errors/500.tpl:18
+msgid "We received an error from an external site."
+msgstr ""
+
+#: templates/errors/500.tpl:18
+msgid "Please try again in a few minutes."
 msgstr ""
 
 #: templates/layout/base.tpl:4 templates/layout/base.tpl:10

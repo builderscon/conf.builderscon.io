@@ -53,7 +53,7 @@
 {% block hexlogo %}{% endblock %}
       </div>
 {% endblock %}
-      <div id="contents" class="index">
+      <div id="contents" class="{% block contents_id %}index{% endblock %}">
         {% block main %}
         {% endblock%}
       </div>
