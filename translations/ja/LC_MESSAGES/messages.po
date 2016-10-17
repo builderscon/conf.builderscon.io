@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-17 09:46+0900\n"
+"POT-Creation-Date: 2016-10-17 19:03+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -30,7 +30,8 @@ msgstr "ビーコン君"
 msgid "Meet Mr. B (Mr. Beacon)!"
 msgstr "ビーコン君！"
 
-#: templates/beacon.tpl:8 templates/errors/500.tpl:9 templates/index.tpl:8
+#: templates/beacon.tpl:8 templates/errors/404.tpl:9 templates/errors/500.tpl:9
+#: templates/index.tpl:8
 msgid "BLOG"
 msgstr "ブログ"
 
@@ -281,7 +282,7 @@ msgstr "状態"
 msgid "builderscon"
 msgstr ""
 
-#: templates/errors/500.tpl:8 templates/index.tpl:7
+#: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:7
 #: templates/layout/base.tpl:37 templates/layout/conference.tpl:7
 msgid "Dashboard"
 msgstr "ダッシュボード"
@@ -386,7 +387,7 @@ msgstr ""
 "ブログ</a>をチェックしたり、buildersconをSNSサイトなどで紹介してください。また、是非<a "
 "href=\"/beacon\">ビーコン君もチェックしてくださいね</a>！"
 
-#: templates/errors/500.tpl:2 templates/login.tpl:13
+#: templates/errors/404.tpl:2 templates/errors/500.tpl:2 templates/login.tpl:13
 msgid "Error"
 msgstr "エラー"
 
@@ -403,9 +404,17 @@ msgstr "%(name)s でログイン"
 msgid "Recent News"
 msgstr "最新のニュース"
 
+#: templates/errors/404.tpl:16
+msgid "Not Found"
+msgstr "Not Found"
+
+#: templates/errors/404.tpl:18
+msgid "The request resource was not found."
+msgstr "指定されたリソースは存在いたしません。"
+
 #: templates/errors/500.tpl:16
-msgid "There was an error"
-msgstr "エラーが発生しました"
+msgid "There was an error."
+msgstr "エラーが発生しました。"
 
 #: templates/errors/500.tpl:18
 msgid "We received an error from an external site."
@@ -646,7 +655,4 @@ msgid ""
 " email address. This is required so we know how to contact you regarding "
 "your submission, and to notify you of any important updates."
 msgstr "セッションに応募するにはメールアドレスの登録が必要となります。このメールアドレスは応募された内容に関する連絡や、その他連絡事項にのみ使用されます。"
-
-#~ msgid "%(sponsor_name)s"
-#~ msgstr ""
 

@@ -75,20 +75,24 @@ function initMap() {
       <div class="section-content">
         <h2>{% trans %}Sessions{% endtrans %}</h2>
         <div style="margin-left: 2em"><a href="/{{ conference.full_slug }}/sessions">{% trans %}Session List{% endtrans %}</a></div>
-        
+
+{% set dates = conference.get('dates') or [] %}{% if dates|length > 0 %}
         <h2>{% trans %}Dates{% endtrans %}</h2>
-{% for date in conference.get('dates') %}
+{% for date in dates %}
 {% set dt = date|dateobj(lang=lang, timezone=conference.get('timezone')) %}
         <div style="margin-left: 2em">{{ dt.date() }} ({{ dt.open_time() }} 〜 {{ dt.close_time() }})</div>
 {% endfor %}
+{% endif %}
+{% set venues = conference.get('venues') or [] %}{% if venues|length > 0 %}
         <h2>{% trans %}Venue{% endtrans %}</h2>
         <div style="margin-left: 2em">
-{% for venue in conference.venues %}
+{% for venue in venues %}
           <h3>{{ venue.name }}</h3>
           <p>{{ venue.address }}</p>
           <div id="map-{{ loop.index }}" style="height: 200px"></div>
 {% endfor %}
         </div>
+{% endif %}
       </div>
     </div>
   </div>
@@ -112,8 +116,10 @@ function initMap() {
   </div>
 {% endif %}
 
-{% with sponsors = conference.sponsors %}
+{% with sponsors = conference.get('sponsors') or [] %}
+{% if sponsors | length > 0 %}
 {% include 'sponsor_block.tpl' %}
+{% endif %}
 {% endwith %}
 
 {% endblock%}

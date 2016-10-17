@@ -108,6 +108,10 @@ class ConferenceNotFoundError(Exception):
 class OAuthError(Exception):
     pass
 
+@flaskapp.errorhandler(404)
+def page_not_found(e):
+    return flask.render_template('errors/404.tpl'), 404
+
 @flaskapp.errorhandler(500)
 def internal_sever_error(e):
     flask.g.stash["error"] = e
@@ -582,7 +586,7 @@ def with_conference_by_slug(cb):
         full_slug = "%s/%s" % (series_slug, slug)
         conference = _get_conference_by_slug(full_slug, flask.g.lang)
         if not conference:
-            return "page not found", 404
+            return flask.abort(404)
         flask.g.stash['series_slug'] = series_slug
         flask.g.stash['slug'] = slug
         flask.g.stash['full_slug'] = full_slug
@@ -648,7 +652,7 @@ def conference_cfp():
     if key:
         session = flask.session.get(key)
         if not session:
-            return "not found", 404
+            return flask.abort(404)
         flask.g.stash["session"] = session
 
     f = '%s/cfp.tpl' % flask.g.stash.get('full_slug')
@@ -747,7 +751,7 @@ def conference_cfp_confirm():
     key = flask.request.args.get('key')
     session = flask.session.get(key)
     if not session:
-        return "not found", 404
+        return flask.abort(404)
 
     session_type_id = session.get('session_type_id')
     for stype in flask.g.stash.get('session_types'):
@@ -768,7 +772,7 @@ def conference_cfp_commit():
     key = flask.request.form.get('key')
     values = flask.session.get(key)
     if not values:
-        return "not found", 404
+        return flask.abort(404)
     try:
         del values['expires']
         session = octav.create_session(**values)
@@ -834,12 +838,12 @@ def with_session(cb, lang=''):
 
         session = _get_session(id=id, lang=lang)
         if not session:
-            return octav.last_error(), 404
+            return flask.abort(404)
         flask.g.stash["session"] = session
 
         if flask.g.stash["conference"]:
             if flask.g.stash["conference"].get('id') != session.get('conference_id'):
-                return "Not found", 404
+                return flask.abort(404)
 
         return cb(**args)
     return functools.update_wrapper(functools.partial(load_session, cb, lang=lang), cb)
@@ -983,7 +987,7 @@ def session_delete():
         token = flask.request.form.get('delete_token')
         data  = flask.session[token]
         if not data:
-            return "", 404
+            return flask.abort(404)
 
         if data.get('id') != session.get('id'):
             return "Invalid token", 500
