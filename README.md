@@ -20,7 +20,7 @@
     $ vagrant ssh
     $ cd ~/vagrant
     $ redis-server &
-    $ python app.py
+    $ gunicorn app:app
     ```
 
 4.  access <http://127.0.0.1:3000/>
