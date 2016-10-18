@@ -34,7 +34,7 @@ def facebook_callback():
 def twitter():
     if 'twitter_token' in flask.session:
         del flask.session['twitter_token']
-    return start_oauth(twitter, flaskapp.base_url + '/login/twitter/callback')
+    return app.twitter_oauth()
 
 @page.route('/login/twitter/callback')
 def twitter_callback():

@@ -85,18 +85,58 @@ def with_session_types(cb):
 
     return functools.update_wrapper(functools.partial(load_session_types, cb), cb)
 
-def with_conference_by_slug(cb):
-    def load_conference_by_slug(cb, series_slug, slug, **args):
+def load_conference_by_slug(cb, series_slug, slug, **args):
+    if slug == 'latest':
+        conference = _get_latest_conference(series_slug, flask.g.lang)
+        if conference:
+            slug = conference.get('slug')
+            full_slug = "%s/%s" % (series_slug, slug)
+    else:
         full_slug = "%s/%s" % (series_slug, slug)
         conference = _get_conference_by_slug(full_slug, flask.g.lang)
-        if not conference:
-            return flask.abort(404)
-        flask.g.stash['series_slug'] = series_slug
-        flask.g.stash['slug'] = slug
-        flask.g.stash['full_slug'] = full_slug
-        flask.g.stash['conference'] = conference
-        return cb(**args)
+
+    if not conference:
+        return flask.abort(404)
+    flask.g.stash['series_slug'] = series_slug
+    flask.g.stash['slug'] = slug
+    flask.g.stash['full_slug'] = full_slug
+    flask.g.stash['conference'] = conference
+    return cb(**args)
+
+def with_latest_conference(cb):
+    return functools.update_wrapper(functools.partial(load_conference_by_slug, cb, slug='latest'), cb)
+
+def with_conference_by_slug(cb):
     return functools.update_wrapper(functools.partial(load_conference_by_slug, cb), cb)
+
+def latest_conference_cache_key(series_slug):
+    if not series_slug:
+        raise Exception("faild to create conference cache key: no series_slug")
+    return "conference.latest.%s" % series_slug
+
+def _get_latest_conference(series_slug, lang):
+    key = latest_conference_cache_key(series_slug)
+    cid = builderscon.cache.get(key)
+    if cid:
+        return _get_conference(id=cid, lang=lang)
+
+    # XXX There should be a specific API call for this
+    conferences = builderscon.api.list_conference(lang=lang)
+    if conferences is None:
+        return None
+
+    for conference in conferences:
+        series = conference.get("series")
+        if not series:
+            continue
+        slug = series.get("slug")
+        if not slug:
+            continue
+        if str(slug) == series_slug:
+            return conference
+
+    return None
+
 
 def conference_by_slug_cache_key(full_slug):
     if not full_slug:

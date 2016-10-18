@@ -1,4 +1,5 @@
 import app
+import app.hooks
 import flask
 import hashlib
 import os

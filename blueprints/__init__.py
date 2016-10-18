@@ -13,3 +13,11 @@ import conference
 import root
 import session
 import user
+
+# silence pyflakes
+assert auth
+assert cfp
+assert conference
+assert root
+assert session
+assert user

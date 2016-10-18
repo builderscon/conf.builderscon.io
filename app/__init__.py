@@ -1,15 +1,22 @@
 import builderscon
-import logging
-import oauth # always load AFTER builderscon
 import os
-import requestlogger
-import sys
 
 if os.getenv('CONFIG_FILE') is None:
     p = os.path.join(os.path.dirname(__file__), '..', 'config.json')
     os.environ['CONFIG_FILE'] = os.path.normpath(p)
 
 builderscon.initialize()
+
+import hooks
+import filters
+import logging
+import oauth # always load AFTER builderscon.initialize
+import requestlogger
+import sys
+
+# silence pyflakes
+assert hooks
+assert filters
 
 api = builderscon.api
 app = requestlogger.WSGILogger(builderscon.app, [
