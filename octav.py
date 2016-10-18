@@ -1,5 +1,5 @@
 """OCTAV Client Library"""
-"""DO NOT EDIT: This file was generated from ../spec/v1/api.json on Fri Sep 16 15:34:03 2016"""
+"""DO NOT EDIT: This file was generated from ../spec/v1/api.json on Tue Oct 18 17:46:13 2016"""
 
 import certifi
 import json
@@ -43,7 +43,7 @@ class Octav(object):
         self.error = js['error']
       elif 'message' in js:
         self.error = js['message']
-    except BaseException as e:
+    except:
       self.error = r.status
 
   def last_error(self):
@@ -697,6 +697,34 @@ class Octav(object):
         self.error = repr(e)
         return None
 
+  def lookup_conference_series (self, id, lang=None):
+    try:
+        payload = {}
+        hdrs = {}
+        if id is None:
+            raise MissingRequiredArgument('property id must be provided')
+        payload['id'] = id
+        if id is not None:
+            payload['id'] = id
+        if lang is not None:
+            payload['lang'] = lang
+        uri = '%s/v1/conference_series/lookup' % self.endpoint
+        qs = urlencode(payload, True)
+        if self.debug:
+            print('GET %s?%s' % (uri, qs))
+        res = self.http.request('GET', '%s?%s' % (uri, qs), headers=hdrs)
+        if self.debug:
+            print(res)
+        if res.status != 200:
+            self.extract_error(res)
+            return None
+        return json.loads(res.data)
+    except BaseException, e:
+        if self.debug:
+            print("error during http access: " + repr(e))
+        self.error = repr(e)
+        return None
+
   def list_conference_series (self, limit=None, since=None):
     try:
         payload = {}
@@ -818,26 +846,31 @@ class Octav(object):
         self.error = repr(e)
         return None
 
-  def add_conference_dates (self, conference_id, dates, user_id):
+  def add_conference_credential (self, conference_id, data, type, user_id):
     try:
         payload = {}
         hdrs = {}
         if conference_id is None:
             raise MissingRequiredArgument('property conference_id must be provided')
         payload['conference_id'] = conference_id
-        if dates is None:
-            raise MissingRequiredArgument('property dates must be provided')
-        payload['dates'] = dates
+        if data is None:
+            raise MissingRequiredArgument('property data must be provided')
+        payload['data'] = data
+        if type is None:
+            raise MissingRequiredArgument('property type must be provided')
+        payload['type'] = type
         if user_id is None:
             raise MissingRequiredArgument('property user_id must be provided')
         payload['user_id'] = user_id
         if conference_id is not None:
             payload['conference_id'] = conference_id
-        if dates is not None:
-            payload['dates'] = dates
+        if data is not None:
+            payload['data'] = data
+        if type is not None:
+            payload['type'] = type
         if user_id is not None:
             payload['user_id'] = user_id
-        uri = '%s/v1/conference/dates/add' % self.endpoint
+        uri = '%s/v1/conference/credentials/add' % self.endpoint
         hdrs = urllib3.util.make_headers(
             basic_auth='%s:%s' % (self.key, self.secret),
         )
@@ -857,26 +890,104 @@ class Octav(object):
         self.error = repr(e)
         return None
 
-  def delete_conference_dates (self, conference_id, dates, user_id):
+  def tweet_as_conference (self, conference_id, tweet, user_id):
     try:
         payload = {}
         hdrs = {}
         if conference_id is None:
             raise MissingRequiredArgument('property conference_id must be provided')
         payload['conference_id'] = conference_id
-        if dates is None:
-            raise MissingRequiredArgument('property dates must be provided')
-        payload['dates'] = dates
+        if tweet is None:
+            raise MissingRequiredArgument('property tweet must be provided')
+        payload['tweet'] = tweet
         if user_id is None:
             raise MissingRequiredArgument('property user_id must be provided')
         payload['user_id'] = user_id
         if conference_id is not None:
             payload['conference_id'] = conference_id
-        if dates is not None:
-            payload['dates'] = dates
+        if tweet is not None:
+            payload['tweet'] = tweet
         if user_id is not None:
             payload['user_id'] = user_id
-        uri = '%s/v1/conference/dates/delete' % self.endpoint
+        uri = '%s/v1/conference/tweet' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
+        if self.debug:
+            print('POST %s' % uri)
+        hdrs['Content-Type']= 'application/json'
+        res = self.http.request('POST', uri, headers=hdrs, body=json.dumps(payload))
+        if self.debug:
+            print(res)
+        if res.status != 200:
+            self.extract_error(res)
+            return None
+        return True
+    except BaseException, e:
+        if self.debug:
+            print("error during http access: " + repr(e))
+        self.error = repr(e)
+        return None
+
+  def add_conference_date (self, conference_id, date, user_id):
+    try:
+        payload = {}
+        hdrs = {}
+        if conference_id is None:
+            raise MissingRequiredArgument('property conference_id must be provided')
+        payload['conference_id'] = conference_id
+        if date is None:
+            raise MissingRequiredArgument('property date must be provided')
+        payload['date'] = date
+        if user_id is None:
+            raise MissingRequiredArgument('property user_id must be provided')
+        payload['user_id'] = user_id
+        if conference_id is not None:
+            payload['conference_id'] = conference_id
+        if date is not None:
+            payload['date'] = date
+        if user_id is not None:
+            payload['user_id'] = user_id
+        uri = '%s/v1/conference/date/add' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
+        if self.debug:
+            print('POST %s' % uri)
+        hdrs['Content-Type']= 'application/json'
+        res = self.http.request('POST', uri, headers=hdrs, body=json.dumps(payload))
+        if self.debug:
+            print(res)
+        if res.status != 200:
+            self.extract_error(res)
+            return None
+        return json.loads(res.data)
+    except BaseException, e:
+        if self.debug:
+            print("error during http access: " + repr(e))
+        self.error = repr(e)
+        return None
+
+  def delete_conference_date (self, conference_id, date, user_id):
+    try:
+        payload = {}
+        hdrs = {}
+        if conference_id is None:
+            raise MissingRequiredArgument('property conference_id must be provided')
+        payload['conference_id'] = conference_id
+        if date is None:
+            raise MissingRequiredArgument('property date must be provided')
+        payload['date'] = date
+        if user_id is None:
+            raise MissingRequiredArgument('property user_id must be provided')
+        payload['user_id'] = user_id
+        if conference_id is not None:
+            payload['conference_id'] = conference_id
+        if date is not None:
+            payload['date'] = date
+        if user_id is not None:
+            payload['user_id'] = user_id
+        uri = '%s/v1/conference/date/delete' % self.endpoint
         if self.debug:
             print('POST %s' % uri)
         hdrs['Content-Type']= 'application/json'
@@ -1373,7 +1484,7 @@ class Octav(object):
         self.error = repr(e)
         return None
 
-  def update_conference (self, id, user_id, cfp_lead_text=None, cfp_post_submit_instructions=None, cfp_pre_submit_instructions=None, description=None, slug=None, status=None, sub_title=None, title=None, **args):
+  def update_conference (self, id, user_id, cfp_lead_text=None, cfp_post_submit_instructions=None, cfp_pre_submit_instructions=None, description=None, slug=None, status=None, sub_title=None, timezone=None, title=None, **args):
     try:
         payload = {}
         hdrs = {}
@@ -1399,6 +1510,8 @@ class Octav(object):
             payload['status'] = status
         if sub_title is not None:
             payload['sub_title'] = sub_title
+        if timezone is not None:
+            payload['timezone'] = timezone
         if title is not None:
             payload['title'] = title
         if user_id is not None:
