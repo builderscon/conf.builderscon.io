@@ -2,9 +2,15 @@ import werkzeug.routing
 import sys
 
 if sys.version[0] == "3":
-    from urllib.parse import urlencode, quote, quote_plus
+    import urllib.parse
+    urlencode = urllib.parse.urlencode
+    quote = urllib.parse.quote
+    quote_plus = urllib.parse.quote_plus
 else:
-    from urllib import urlencode, quote, quote_plus
+    import urllib
+    urlencode = urllib.urlencode
+    quote = urllib.quote
+    quote_plus = urllib.quote_plus
 
 # Required to use regular expressions in the routing
 class RegexConverter(werkzeug.routing.BaseConverter):
