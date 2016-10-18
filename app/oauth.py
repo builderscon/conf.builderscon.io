@@ -2,6 +2,8 @@ import builderscon
 import flask
 import flasktools
 import flask_oauth
+import re
+import traceback
 
 class Error(Exception):
     pass
@@ -59,7 +61,7 @@ def start(oauth_handler, callback):
         return oauth_handler.authorize(callback=callback)
     except:
         print(traceback.format_exc())
-        raise OAuthError
+        raise Error
     
 @github.authorized_handler
 def github_callback(resp):
@@ -187,7 +189,7 @@ def twitter_callback(resp):
     )
 
     # Load user via twitter id
-    user = octav.lookup_user_by_auth_user_id(auth_via='twitter', auth_user_id=resp['user_id'])
+    user = builderscon.api.lookup_user_by_auth_user_id(auth_via='twitter', auth_user_id=resp['user_id'])
     if user:
         flask.session['user_id'] = user.get('id')
         flask.g.stash['user'] = user
@@ -214,7 +216,7 @@ def twitter_callback(resp):
     elif len(names) == 1:
         first_name = names[0]
 
-    user = octav.create_user (
+    user = builderscon.api.create_user (
         data.get('id_str'),
         auth_via='twitter',
         nickname=data.get('screen_name'),
