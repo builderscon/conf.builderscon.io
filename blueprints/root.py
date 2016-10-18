@@ -9,7 +9,6 @@ def index():
 
     conferences = app.cache.get(key)
     if not conferences:
-        print 'app.api = %s' % app.api
         conferences = app.api.list_conference(lang=flask.g.lang)
         if conferences is None:
             return app.api.last_error(), 500
