@@ -1,7 +1,6 @@
 import builderscon
-import filters
-import hooks
 import logging
+import oauth
 import os
 import requestlogger
 import sys
@@ -27,7 +26,7 @@ def github_oauth():
 def facebook_oauth():
     return oauth.start(oauth.facebook, builderscon.app.base_url + '/login/facebook/callback')
 
-def facebook_oauth():
+def twitter_oauth():
     return oauth.start(oauth.twitter, builderscon.app.base_url + '/login/twitter/callback')
 
 github_oauth_callback = oauth.github_callback
