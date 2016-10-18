@@ -27,10 +27,14 @@ class Cache:
             self.client = memcache.Client(server_settings, debug)
 
     def set(self, key, val, expires=0):
-        self.client.set(key, val, expires)
+        self.client.set(key, pickle.dumps(val), expires)
 
     def get(self, key):
-        return self.client.get(key)
+        thing = self.client.get(key)
+        if not thing:
+            return None
+
+        return pickle.loads(thing)
 
     def delete(self, key):
         return self.client.delete(key)
