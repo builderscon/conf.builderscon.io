@@ -1,9 +1,7 @@
 import config
 import flask
 import flask_babel
-import flask_session
 import flasktools
-import functools
 import os
 import octav
 import re
@@ -32,8 +30,6 @@ def initialize():
     if not config_file:
         raise Exception("missing CONFIG_FILE environemnt variable")
     cfg = config.Config(config_file)
-
-    import oauth
 
     api = octav.Octav(**cfg.section('OCTAV'))
 

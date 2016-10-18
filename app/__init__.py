@@ -1,6 +1,6 @@
 import builderscon
 import logging
-import oauth
+import oauth # always load AFTER builderscon
 import os
 import requestlogger
 import sys

@@ -3,6 +3,7 @@ import markdown
 import markupsafe
 import mdx_gfm
 import model
+import oauth
 import flasktools
 
 @builderscon.app.template_filter('dateobj')
