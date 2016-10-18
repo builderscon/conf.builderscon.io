@@ -46,7 +46,6 @@ def initialize():
 
     app.secret_key = cfg.section('Flask').get('secret_key')
     app.base_url = cfg.section('Flask').get('base_url', 'https://builderscon.io')
-    app.url_map.converters['regex'] = flasktools.RegexConverter
     app.session_interface = sessionmgr.build(os.getenv('SESSION_BACKEND', 'Redis'), cfg)
 
 # Get the current locale
