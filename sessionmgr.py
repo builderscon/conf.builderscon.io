@@ -1,5 +1,4 @@
 import redis
-import os
 import flask_session
 
 def build(backend, cfg):
