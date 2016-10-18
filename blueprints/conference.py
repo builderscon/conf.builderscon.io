@@ -2,7 +2,6 @@ import app
 import feedparser
 import flask
 import flasktools
-import functools
 import re
 import time
 

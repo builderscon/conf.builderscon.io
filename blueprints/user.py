@@ -1,5 +1,6 @@
 import app
 import flask
+import functools
 
 page = flask.Blueprint('user', __name__)
 

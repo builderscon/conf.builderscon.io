@@ -1,7 +1,9 @@
 import app
+import app.hooks
 import flask
 import functools
 import re
+import time
 
 LIST_EXPIRES = 300
 page = flask.Blueprint('session', __name__)
@@ -86,7 +88,7 @@ def update():
         if form.get(f):
             has_field = True
 
-        for l in LANGUAGES:
+        for l in app.LANGUAGES:
             v = l.get('value')
             if v == "en":
                 continue
@@ -125,9 +127,9 @@ def update():
             **l10n
         )
         if ok:
-            for l in LANGUAGES:
-                app.cache.delete(session_cache_key(id=id, lang=l.get('value')))
-            app.cache.delete(session_cache_key(id=id, lang='all'))
+            for l in app.LANGUAGES:
+                app.cache.delete(app.hooks.session_cache_key(id=id, lang=l.get('value')))
+            app.cache.delete(app.hooks.session_cache_key(id=id, lang='all'))
             return flask.redirect('/%s/session/%s' % (flask.g.stash.get('full_slug'), id))
         else:
             flask.g.stash["error"] = app.api.last_error()
@@ -185,9 +187,9 @@ def delete():
             flask.g.stash["error"] = app.api.last_error()
             return flask.render_template('session/delete.tpl')
 
-        for l in LANGUAGES:
-            app.cache.delete(session_cache_key(id=id, lang=l.get('value')))
-        app.cache.delete(session_cache_key(id=id, lang='all'))
+        for l in app.LANGUAGES:
+            app.cache.delete(app.hooks.session_cache_key(id=id, lang=l.get('value')))
+        app.cache.delete(app.hooks.session_cache_key(id=id, lang='all'))
         return flask.redirect('/dashboard')
     else:
         return flask.abort(401)
