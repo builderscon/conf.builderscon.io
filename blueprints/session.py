@@ -147,10 +147,9 @@ def update():
 @with_session
 def delete():
     method = flask.request.method
-
     pat = re.compile('^del_session_')
     now = time.time()
-    for k in list(flask.session):
+    for k in flask.session:
         if not pat.match(k):
             continue
         v = flask.session.get(k)
@@ -177,7 +176,7 @@ def delete():
             return flask.abort(500)
 
         del flask.session[token]
-        user = flask.session.get("user")
+        user = flask.g.stash.get("user")
         id = session.get('id')
         ok = app.api.delete_session(
             id      = id,
