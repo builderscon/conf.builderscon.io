@@ -79,6 +79,47 @@ div.session {
     font-family: "MetroNovaPro-Medium","ヒラギノ角ゴ Pro W6",HiraKakuPro-W6,sans-serif;
 }
 
+div.abstract h5 {
+    text-align: left;
+    border-left: 5px solid #000;
+    border-bottom: 1px solid #000;
+    padding-left: 1em;
+}
+
+div.video {
+    text-align: center;
+}
+
+div.video h5 {
+    text-align: left;
+    border-left: 5px solid #000;
+    border-bottom: 1px solid #000;
+    padding-left: 1em;
+}
+
+div.slide {
+    text-align: center
+}
+
+div.slide h5 {
+    text-align: left;
+    border-left: 5px solid #000;
+    border-bottom: 1px solid #000;
+    padding-left: 1em;
+}
+
+div.information {
+    margin-top: 3em;
+}
+
+div.information h5 {
+    text-align: left;
+    border-left: 5px solid #000;
+    border-bottom: 1px solid #000;
+    padding-left: 1em;
+}
+
+
 div.session-title {
     font-size: 14pt;
     font-weight: bold;

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-17 19:03+0900\n"
+"POT-Creation-Date: 2016-10-19 10:37+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -161,7 +161,7 @@ msgstr "セッションタイトル（英語）"
 msgid "Session Title (Japanese)"
 msgstr "セッションタイトル（日本語）"
 
-#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:58
+#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:68
 msgid "Session Duration"
 msgstr "セッション時間"
 
@@ -174,17 +174,17 @@ msgid "Session Abstract (Japanese)"
 msgstr "セッション概要（日本語）"
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:72
-#: templates/session/view.tpl:50
+#: templates/session/view.tpl:60
 msgid "Material Level"
 msgstr "レベル"
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:88
-#: templates/session/view.tpl:62
+#: templates/session/view.tpl:72
 msgid "Spoken Language"
 msgstr "講演に使用される言語"
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:100
-#: templates/session/view.tpl:66
+#: templates/session/view.tpl:76
 msgid "Slide Language"
 msgstr "スライド言語"
 
@@ -193,17 +193,17 @@ msgid "Comments"
 msgstr "コメント"
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:141
-#: templates/session/view.tpl:70
+#: templates/session/view.tpl:80
 msgid "Photo Release"
 msgstr "撮影許可"
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:155
-#: templates/session/view.tpl:74
+#: templates/session/view.tpl:84
 msgid "Recording Release"
 msgstr "録画許可"
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:169
-#: templates/session/view.tpl:78
+#: templates/session/view.tpl:88
 msgid "Materials Release"
 msgstr "素材利用許可"
 
@@ -218,34 +218,6 @@ msgstr "応募ありがとうございました！"
 #: templates/cfp_done.tpl:18
 msgid "Your submission can be viewd here"
 msgstr "応募されたプロポーザルはこちらから確認できます"
-
-#: templates/conference.tpl:64
-msgid "About The Conference"
-msgstr "カンファレンス概要"
-
-#: templates/conference.tpl:74
-msgid "Information"
-msgstr "情報"
-
-#: templates/conference.tpl:76 templates/layout/conference.tpl:9
-msgid "Sessions"
-msgstr "セッション"
-
-#: templates/conference.tpl:77
-msgid "Session List"
-msgstr "セッション一覧"
-
-#: templates/conference.tpl:79
-msgid "Dates"
-msgstr "日程"
-
-#: templates/conference.tpl:84
-msgid "Venue"
-msgstr "会場"
-
-#: templates/conference.tpl:99
-msgid "Guest Speakers"
-msgstr "ゲストスピーカー"
 
 #: templates/dashboard.tpl:21
 msgid "Logout"
@@ -404,6 +376,34 @@ msgstr "%(name)s でログイン"
 msgid "Recent News"
 msgstr "最新のニュース"
 
+#: templates/conference/view.tpl:64
+msgid "About The Conference"
+msgstr "カンファレンス概要"
+
+#: templates/conference/view.tpl:74
+msgid "Information"
+msgstr "情報"
+
+#: templates/conference/view.tpl:76 templates/layout/conference.tpl:9
+msgid "Sessions"
+msgstr "セッション"
+
+#: templates/conference/view.tpl:77
+msgid "Session List"
+msgstr "セッション一覧"
+
+#: templates/conference/view.tpl:80
+msgid "Dates"
+msgstr "日程"
+
+#: templates/conference/view.tpl:87
+msgid "Venue"
+msgstr "会場"
+
+#: templates/conference/view.tpl:103
+msgid "Guest Speakers"
+msgstr "ゲストスピーカー"
+
 #: templates/errors/404.tpl:16
 msgid "Not Found"
 msgstr "Not Found"
@@ -412,7 +412,7 @@ msgstr "Not Found"
 msgid "The request resource was not found."
 msgstr "指定されたリソースは存在いたしません。"
 
-#: templates/errors/500.tpl:16
+#: templates/errors/500.tpl:16 templates/errors/500.tpl:18
 msgid "There was an error."
 msgstr "エラーが発生しました。"
 
@@ -480,7 +480,7 @@ msgstr "必須"
 msgid "Please provide the session title in %(lang)s"
 msgstr "%(lang)s でセッションタイトルを指定してください"
 
-#: templates/session/form.tpl:42
+#: templates/session/form.tpl:42 templates/session/view.tpl:42
 msgid "Abstract"
 msgstr "概要"
 
@@ -619,7 +619,19 @@ msgstr "採択されたセッション"
 msgid "Edit"
 msgstr "編集"
 
-#: templates/session/view.tpl:54
+#: templates/session/view.tpl:47
+msgid "Video"
+msgstr "動画"
+
+#: templates/session/view.tpl:52
+msgid "Slides"
+msgstr "スライド"
+
+#: templates/session/view.tpl:57
+msgid "Session Information"
+msgstr "情報"
+
+#: templates/session/view.tpl:64
 msgid "Starts On"
 msgstr "開始日時"
 

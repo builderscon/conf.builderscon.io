@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-17 19:03+0900\n"
+"POT-Creation-Date: 2016-10-19 10:37+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,7 +146,7 @@ msgstr ""
 msgid "Session Title (Japanese)"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:58
+#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:68
 msgid "Session Duration"
 msgstr ""
 
@@ -159,17 +159,17 @@ msgid "Session Abstract (Japanese)"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:72
-#: templates/session/view.tpl:50
+#: templates/session/view.tpl:60
 msgid "Material Level"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:88
-#: templates/session/view.tpl:62
+#: templates/session/view.tpl:72
 msgid "Spoken Language"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:100
-#: templates/session/view.tpl:66
+#: templates/session/view.tpl:76
 msgid "Slide Language"
 msgstr ""
 
@@ -178,17 +178,17 @@ msgid "Comments"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:141
-#: templates/session/view.tpl:70
+#: templates/session/view.tpl:80
 msgid "Photo Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:155
-#: templates/session/view.tpl:74
+#: templates/session/view.tpl:84
 msgid "Recording Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:169
-#: templates/session/view.tpl:78
+#: templates/session/view.tpl:88
 msgid "Materials Release"
 msgstr ""
 
@@ -202,34 +202,6 @@ msgstr ""
 
 #: templates/cfp_done.tpl:18
 msgid "Your submission can be viewd here"
-msgstr ""
-
-#: templates/conference.tpl:64
-msgid "About The Conference"
-msgstr ""
-
-#: templates/conference.tpl:74
-msgid "Information"
-msgstr ""
-
-#: templates/conference.tpl:76 templates/layout/conference.tpl:9
-msgid "Sessions"
-msgstr ""
-
-#: templates/conference.tpl:77
-msgid "Session List"
-msgstr ""
-
-#: templates/conference.tpl:79
-msgid "Dates"
-msgstr ""
-
-#: templates/conference.tpl:84
-msgid "Venue"
-msgstr ""
-
-#: templates/conference.tpl:99
-msgid "Guest Speakers"
 msgstr ""
 
 #: templates/dashboard.tpl:21
@@ -361,6 +333,34 @@ msgstr ""
 msgid "Recent News"
 msgstr ""
 
+#: templates/conference/view.tpl:64
+msgid "About The Conference"
+msgstr ""
+
+#: templates/conference/view.tpl:74
+msgid "Information"
+msgstr ""
+
+#: templates/conference/view.tpl:76 templates/layout/conference.tpl:9
+msgid "Sessions"
+msgstr ""
+
+#: templates/conference/view.tpl:77
+msgid "Session List"
+msgstr ""
+
+#: templates/conference/view.tpl:80
+msgid "Dates"
+msgstr ""
+
+#: templates/conference/view.tpl:87
+msgid "Venue"
+msgstr ""
+
+#: templates/conference/view.tpl:103
+msgid "Guest Speakers"
+msgstr ""
+
 #: templates/errors/404.tpl:16
 msgid "Not Found"
 msgstr ""
@@ -369,7 +369,7 @@ msgstr ""
 msgid "The request resource was not found."
 msgstr ""
 
-#: templates/errors/500.tpl:16
+#: templates/errors/500.tpl:16 templates/errors/500.tpl:18
 msgid "There was an error."
 msgstr ""
 
@@ -437,7 +437,7 @@ msgstr ""
 msgid "Please provide the session title in %(lang)s"
 msgstr ""
 
-#: templates/session/form.tpl:42
+#: templates/session/form.tpl:42 templates/session/view.tpl:42
 msgid "Abstract"
 msgstr ""
 
@@ -572,7 +572,19 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: templates/session/view.tpl:54
+#: templates/session/view.tpl:47
+msgid "Video"
+msgstr ""
+
+#: templates/session/view.tpl:52
+msgid "Slides"
+msgstr ""
+
+#: templates/session/view.tpl:57
+msgid "Session Information"
+msgstr ""
+
+#: templates/session/view.tpl:64
 msgid "Starts On"
 msgstr ""
 
