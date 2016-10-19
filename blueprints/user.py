@@ -26,7 +26,7 @@ def dashboard():
 
 @page.route('/user/<id>')
 @with_user
-def user_view():
+def view():
     sessions = app.api.list_sessions(
         speaker_id=flask.g.stash.get("user").get("id"),
         status=["accepted"],
