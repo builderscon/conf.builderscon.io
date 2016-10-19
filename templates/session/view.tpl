@@ -36,51 +36,62 @@
 
             <!-- add new buttons here e.g. edit session details button -->
 
-          </div>
+          </div><!-- columns -->
           <div class="large-10 small-10 columns">
-            <p>
-              {{session.abstract | markdown}}
-            </p>
+            <div class="abstract">
+              <h5>{% trans %}Abstract{% endtrans %}</h5>
+              <p>{{session.abstract | markdown}}</p>
+            </div>
+            {% if session.video_url %}
+            <div class="video">
+              <h5>{% trans %}Video{% endtrans %}</h5>
+              {{ session.video_url | video_embed }}
+            </div>{% endif %}
+            {% if session.slide_url %}
+            <div class="slide">
+              <h5>{% trans %}Slides{% endtrans %}</h5>
+              {{ session.slide_url | slide_embed }}
+            </div>{% endif %}
+
+            <div class="information">
+              <h5>{% trans %}Session Information{% endtrans %}</h5>
+              <table>
+                <tr>
+                  <td>{% trans %}Material Level{% endtrans %}</td>
+                  <td>{{ _(session.material_level|audlevelname) }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans %}Starts On{% endtrans %}</td>
+                  <td>{% if session.starts_on %}{{session.starts_on}}{% else %}N/A{% endif %}</td>
+                </tr>
+                <tr>
+                  <td>{% trans %}Session Duration{% endtrans %}</td>
+                  <td>{{ _(session.session_type.name) }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans %}Spoken Language{% endtrans %}</td>
+                  <td>{{ _(session.spoken_language|langname) }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans %}Slide Language{% endtrans %}</td>
+                  <td>{{ _(session.slide_language|langname) }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans %}Photo Release{% endtrans %}</td>
+                  <td>{{ _(session.photo_release|permname) }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans %}Recording Release{% endtrans %}</td>
+                  <td>{{ _(session.recording_release|permname) }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans %}Materials Release{% endtrans %}</td>
+                  <td>{{ _(session.materials_release|permname) }}</td>
+                </tr>
+              </table>
+            </div><!-- .information -->
           </div>
         </div>
-
-        <div class="row">
-          <table>
-            <tr>
-              <td>{% trans %}Material Level{% endtrans %}</td>
-              <td>{{ _(session.material_level|audlevelname) }}</td>
-            </tr>
-            <tr>
-              <td>{% trans %}Starts On{% endtrans %}</td>
-              <td>{% if session.starts_on %}{{session.starts_on}}{% else %}N/A{% endif %}</td>
-            </tr>
-            <tr>
-              <td>{% trans %}Session Duration{% endtrans %}</td>
-              <td>{{ _(session.session_type.name) }}</td>
-            </tr>
-            <tr>
-              <td>{% trans %}Spoken Language{% endtrans %}</td>
-              <td>{{ _(session.spoken_language|langname) }}</td>
-            </tr>
-            <tr>
-              <td>{% trans %}Slide Language{% endtrans %}</td>
-              <td>{{ _(session.slide_language|langname) }}</td>
-            </tr>
-            <tr>
-              <td>{% trans %}Photo Release{% endtrans %}</td>
-              <td>{{ _(session.photo_release|permname) }}</td>
-            </tr>
-            <tr>
-              <td>{% trans %}Recording Release{% endtrans %}</td>
-              <td>{{ _(session.recording_release|permname) }}</td>
-            </tr>
-            <tr>
-              <td>{% trans %}Materials Release{% endtrans %}</td>
-              <td>{{ _(session.materials_release|permname) }}</td>
-            </tr>
-          </table>
-        </div>
-
       </div>
     </div>
   </div>

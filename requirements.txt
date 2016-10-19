@@ -8,6 +8,7 @@ jinja2
 iso8601
 py-gfm
 python-memcached
+python-oembed
 pytz
 redis
 urllib3

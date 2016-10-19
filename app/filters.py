@@ -1,10 +1,49 @@
 import builderscon
+import flasktools
 import markdown
 import markupsafe
 import mdx_gfm
 import model
 import oauth
-import flasktools
+import oembed
+import re
+
+oembed_consumer = oembed.OEmbedConsumer()
+oembed_endpoints = [
+    [ 'https://www.youtube.com/oembed', [ 'https://*.youtube.com/*' ] ],
+    [ 'http://www.slideshare.net/api/oembed/2', [ 'http://www.slideshare.net/*' ] ],
+    [ 'http://speakerdeck.com/oembed.json', [ 'https://speakerdeck.com/*' ], ],
+]
+for ent in oembed_endpoints:
+    e = oembed.OEmbedEndpoint(*ent)
+    oembed_consumer.addEndpoint(e)
+
+@builderscon.app.template_filter('video_embed')
+def video_embed(url, **opt):
+    o = flasktools.urlparse(url)
+    if re.search(r'youtube\.com$', o.netloc, flags=re.UNICODE):
+        if 'maxwidth' not in opt:
+            opt['maxwidth'] = 600
+        if 'maxheight' not in opt:
+            opt['maxheight'] = 480
+        res = oembed_consumer.embed(url, **opt)
+        return res['html']
+    return '<a href="%s">%s</a>' % (url, url)
+
+@builderscon.app.template_filter('slide_embed')
+def slide_embed(url):
+    o = flasktools.urlparse(url)
+    if re.search(r'(slideshare\.net|speakerdeck\.com)$', o.netloc, flags=re.UNICODE):
+        res = oembed_consumer.embed(url)
+        return res['html']
+    elif re.search(r'^docs\.google\.com$', o.netloc, flags=re.UNICODE):
+        url = re.sub(r'/pub\?', '/embed?', url)
+        o = flasktools.urlparse(url)
+        q = flasktools.parse_qsl(o.query)
+        q.append(('width', 400))
+        return '<iframe src="%s" frameborder="0" width="500" height="450"allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>' % flasktools.urlunparse(o)
+
+    return '<a href="%s">%s</a>' % (url, url)
 
 @builderscon.app.template_filter('dateobj')
 def dateobj_filter(s, lang='en', timezone='UTC'): # note: this is probably going to be deprecated
