@@ -62,3 +62,20 @@ def news():
                 entry.date = time.strftime( '%b %d, %Y', entry.published_parsed )
             filtered_entries.append(entry)
     return flask.render_template('news.tpl', entries=filtered_entries)
+
+@page.route('/<series_slug>/<path:slug>/schedule.ics')
+@with_conference_by_slug
+def schedule_ics():
+    conference = flask.g.stash.get('conference')
+    key = "scheule-ics.%s.%s" % (conference.get('id'), flask.g.lang)
+    ics = app.cache.get(key)
+    if ics:
+        return flask.Response(ics, 200, {'Content-Type': 'text/calendar'})
+
+    if not app.api.get_conference_schedule(conference.get('id')):
+        return "failed to fetch schedule", 500
+
+    ics = app.api.last_response().data
+    app.cache.set(key, 200, 300)
+    return flask.Response(ics, 200, {'Content-Type': 'text/calendar'})
+
