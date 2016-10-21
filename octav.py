@@ -1,5 +1,5 @@
 """OCTAV Client Library"""
-"""DO NOT EDIT: This file was generated from ../spec/v1/api.json on Fri Oct 21 17:15:56 2016"""
+"""DO NOT EDIT: This file was generated from ../spec/v1/api.json on Fri Oct 21 17:49:24 2016"""
 
 import certifi
 import json
@@ -43,7 +43,7 @@ class Octav(object):
         self.error = js['error']
       elif 'message' in js:
         self.error = js['message']
-    except BaseException as e:
+    except BaseException:
       self.error = r.status
 
   def last_error(self):
