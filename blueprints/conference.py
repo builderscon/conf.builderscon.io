@@ -76,6 +76,6 @@ def schedule_ics():
         return "failed to fetch schedule", 500
 
     ics = app.api.last_response().data
-    app.cache.set(key, 200, 300)
+    app.cache.set(key, ics, 300)
     return flask.Response(ics, 200, {'Content-Type': 'text/calendar'})
 
