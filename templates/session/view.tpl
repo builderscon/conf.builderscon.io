@@ -13,7 +13,7 @@
 <main>
   <div class="section article">
     <div class="inner">
-      <h1 class="section-header">{{session.title}}</h1>
+      <h1 class="section-header">{{session.title}}<span class="status-{{session.status}}">{{ _(session.status) }}</span></h1>
       <div class="section-content">
         <div class="row">
           <div class="text-center large-2 small-2 columns">
@@ -40,6 +40,9 @@
           <div class="large-10 small-10 columns">
             <div class="abstract">
               <h5>{% trans %}Abstract{% endtrans %}</h5>
+{% if session.status == 'pending' %}
+<p class="pending-notice">{% trans %}This session has NOT been accepted yet. If you would like to see it in the conference, please post it in social networks, as those numbers will be tallied and used as part of the selection criteria{% endtrans %}</p>
+{% endif %}
               <p>{{session.abstract | markdown}}</p>
             </div>
             {% if session.video_url %}

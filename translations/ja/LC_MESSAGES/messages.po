@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-19 10:37+0900\n"
+"POT-Creation-Date: 2016-10-21 12:51+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -161,7 +161,7 @@ msgstr "セッションタイトル（英語）"
 msgid "Session Title (Japanese)"
 msgstr "セッションタイトル（日本語）"
 
-#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:68
+#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:71
 msgid "Session Duration"
 msgstr "セッション時間"
 
@@ -174,17 +174,17 @@ msgid "Session Abstract (Japanese)"
 msgstr "セッション概要（日本語）"
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:72
-#: templates/session/view.tpl:60
+#: templates/session/view.tpl:63
 msgid "Material Level"
 msgstr "レベル"
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:88
-#: templates/session/view.tpl:72
+#: templates/session/view.tpl:75
 msgid "Spoken Language"
 msgstr "講演に使用される言語"
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:100
-#: templates/session/view.tpl:76
+#: templates/session/view.tpl:79
 msgid "Slide Language"
 msgstr "スライド言語"
 
@@ -193,17 +193,17 @@ msgid "Comments"
 msgstr "コメント"
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:141
-#: templates/session/view.tpl:80
+#: templates/session/view.tpl:83
 msgid "Photo Release"
 msgstr "撮影許可"
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:155
-#: templates/session/view.tpl:84
+#: templates/session/view.tpl:87
 msgid "Recording Release"
 msgstr "録画許可"
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:169
-#: templates/session/view.tpl:88
+#: templates/session/view.tpl:91
 msgid "Materials Release"
 msgstr "素材利用許可"
 
@@ -619,19 +619,26 @@ msgstr "採択されたセッション"
 msgid "Edit"
 msgstr "編集"
 
-#: templates/session/view.tpl:47
+#: templates/session/view.tpl:44
+msgid ""
+"This session has NOT been accepted yet. If you would like to see it in "
+"the conference, please post it in social networks, as those numbers will "
+"be tallied and used as part of the selection criteria"
+msgstr "このプロポーザルはまだ採択されていません。もしこのセッションをカンファレンスで見たいと感じた場合は、ぜひソーシャルメディア等でシェアしてください。プロポーザル採択の審査には、SNSでのシェア数も考慮に入れられます。"
+
+#: templates/session/view.tpl:50
 msgid "Video"
 msgstr "動画"
 
-#: templates/session/view.tpl:52
+#: templates/session/view.tpl:55
 msgid "Slides"
 msgstr "スライド"
 
-#: templates/session/view.tpl:57
+#: templates/session/view.tpl:60
 msgid "Session Information"
 msgstr "情報"
 
-#: templates/session/view.tpl:64
+#: templates/session/view.tpl:67
 msgid "Starts On"
 msgstr "開始日時"
 
