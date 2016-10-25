@@ -36,7 +36,7 @@
                 <td><a class="confirm-button success button" data-title="{{ session.title|urlencode }}" data-id="{{ session.id }}">{% trans %}Confirm{% endtrans %}</a></td>
                 <td><a href="/{{ conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a></td>
                 <td><a href="/{{ conference.full_slug }}">{{ conference.title }}</a></td>
-                <td>{% if session.starts_on %}{{ session.starts_on | dateobj | datefmt }}{% endif %}</td>
+                <td>{% if session.starts_on %}{{ session.starts_on | dateobj | datefmt(locale=lang,tzinfo=conference.timezone) }}{% endif %}</td>
                 <td>{% if session.room %}{{ session.room.name }}{% if session.room.venue %} {{ session.room.venue.name }}{% endif %}{% endif %}</td>
               </tr>
 {% endfor %}
