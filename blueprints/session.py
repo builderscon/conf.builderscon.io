@@ -194,3 +194,53 @@ def delete():
         return flask.abort(401)
         
 
+@page.route('/<series_slug>/<path:slug>/session/confirm', methods=['GET'])
+@require_login
+@with_conference_by_slug
+def show_confirm():
+    # List sessions by the same speaker
+    conference = flask.g.stash.get("conference")
+    user = flask.g.stash.get("user")
+    sessions = app.api.list_sessions(
+        conference_id=conference.get('id'),
+        speaker_id=user.get('id'),
+        lang=flask.g.lang,
+        status="accepted",
+        confirmed=False
+    )
+    flask.g.stash["sessions"] = sessions
+    return flask.render_template('session/confirm.tpl')
+
+@page.route('/<series_slug>/<path:slug>/session/<id>/confirm', methods=['POST'])
+@require_login
+@with_conference_by_slug
+@with_session
+def post_confirm():
+    session = flask.g.stash.get("session")
+    user = flask.g.stash.get('user')
+    if user.get("id") != session.get("speaker_id"):
+        flask.g.stash["error"] = "You are not the owner of this session"
+        return flask.render_template('session/confirm.tpl')
+
+    if session.get("status") != "accepted":
+        flask.g.stash["error"] = "The specified session has not been accepted"
+        return flask.render_template('session/confirm.tpl')
+        
+
+    ok = app.api.update_session(
+        id = session.get('id'),
+        confirmed = True,
+        user_id = user.get('id')
+    )
+    if not ok:
+        flask.g.stash["error"] = app.api.last_error()
+        return flask.render_template('session/confirm.tpl')
+
+    return flask.redirect('/%s/session/%s/confirmed' % (flask.g.stash.get('full_slug'), session.get('id')))
+
+@page.route('/<series_slug>/<path:slug>/session/<id>/confirmed', methods=['GET'])
+@with_conference_by_slug
+@with_session
+def confirmed():
+    return flask.render_template('session/confirm_done.tpl')
+

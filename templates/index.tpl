@@ -49,7 +49,7 @@
             <a href="{% if conference.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a>
 {%- set dates = conference.get('dates') %}
 {%- if dates|length > 0 %}
-{%- set dt = conference.dates[0]|dateobj(lang=lang,timezone=conference.get('timezone')) %}
+{%- set dt = conference.dates[0]|confdate(lang=lang,timezone=conference.get('timezone')) %}
 ({{ dt.date() }})
 {%- endif %}
           </div>

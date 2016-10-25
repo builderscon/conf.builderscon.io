@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-21 12:51+0900\n"
+"POT-Creation-Date: 2016-10-25 10:13+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -235,19 +235,37 @@ msgstr "応募済みプロポーザル"
 msgid "No proposals have been submitted"
 msgstr "応募されたプロポーザルはありません"
 
-#: templates/dashboard.tpl:44 templates/session/form.tpl:28
+#: templates/dashboard.tpl:44 templates/session/confirm.tpl:27
+#: templates/session/confirm_done.tpl:23 templates/session/form.tpl:28
 #: templates/user/view.tpl:39
 msgid "Title"
 msgstr "タイトル"
 
 #: templates/dashboard.tpl:45 templates/layout/conference.tpl:8
+#: templates/session/confirm.tpl:28 templates/session/confirm_done.tpl:24
 #: templates/user/view.tpl:40
 msgid "Conference"
 msgstr "カンファレンス"
 
-#: templates/dashboard.tpl:47 templates/user/view.tpl:41
+#: templates/dashboard.tpl:46
+msgid "Confirmed"
+msgstr "登壇確認"
+
+#: templates/dashboard.tpl:47 templates/session/view.tpl:22
+msgid "Edit"
+msgstr "編集"
+
+#: templates/dashboard.tpl:48 templates/user/view.tpl:41
 msgid "Status"
 msgstr "状態"
+
+#: templates/dashboard.tpl:57
+msgid "confirmed"
+msgstr "済"
+
+#: templates/dashboard.tpl:57
+msgid "unconfirmed"
+msgstr "未確認"
 
 #: templates/index.tpl:6 templates/layout/base.tpl:36
 #: templates/layout/conference.tpl:6
@@ -448,6 +466,61 @@ msgstr "ニュース"
 msgid "SPONSORS"
 msgstr "スポンサー"
 
+#: templates/session/confirm.tpl:4 templates/session/confirm.tpl:15
+#: templates/session/confirm_done.tpl:4
+msgid "Confirm your session"
+msgstr "登壇確認"
+
+#: templates/session/confirm.tpl:20
+msgid "There are no sessions that needs confirming"
+msgstr "登壇確認が必要なセッションは現在ありません"
+
+#: templates/session/confirm.tpl:22
+msgid ""
+"Below sessions have been accepted, but you have not yet confirmed that "
+"you can attend. Please confirm that you are in fact attending the "
+"conference, and that you are okay with the presented schedule for the "
+"accepted talk(s) below. If you do not confirm, your session <strong>may "
+"be canceled</strong> by the organizers. If you have schedulding "
+"conflicts, please contact the organizers immediately."
+msgstr "以下のセッションは採択されていますが、最終登壇確認がなされていません。カンファレンスに来場し実際に指定された時間に登壇が可能な場合は該当するセッション横のボタンを押して登壇確認を行ってください。登壇確認がされない場合、主催者によりセッションが<strong>不採用</strong>となる場合があります。予定の変更やスケジュールが合わない場合は速やかに各カンファレンス主催者にその旨をご連絡ください"
+
+#: templates/session/confirm.tpl:29 templates/session/confirm_done.tpl:25
+#: templates/session/view.tpl:67
+msgid "Starts On"
+msgstr "開始日時"
+
+#: templates/session/confirm.tpl:30 templates/session/confirm_done.tpl:26
+msgid "Room"
+msgstr "部屋"
+
+#: templates/session/confirm.tpl:36
+msgid "Confirm"
+msgstr "確認"
+
+#: templates/session/confirm.tpl:54
+msgid "Your session "
+msgstr "以下のボタンを押すと、"
+
+#: templates/session/confirm.tpl:54
+msgid " will be confirmed when you press the button below"
+msgstr "の登壇時間等の確認をし、登壇することに同意したものとされます。"
+
+#: templates/session/confirm.tpl:56
+msgid "Yes, I confirm"
+msgstr "はい、確認しました"
+
+#: templates/session/confirm_done.tpl:15
+msgid "Session confirmed"
+msgstr "確認完了"
+
+#: templates/session/confirm_done.tpl:19
+#, python-format
+msgid ""
+"Thank you for taking the time to confirm your session. Your session has "
+"been confirmed as below. We hope to see you soon at %(title)s."
+msgstr "以下の内容で登壇の確認を承りました。%(title)sの会場でお目にかかれるのを楽しみにしております"
+
 #: templates/session/delete.tpl:12
 msgid "Are you sure you want to delete this session?"
 msgstr "本当にこのセッションを削除しますか？"
@@ -615,10 +688,6 @@ msgstr "以下のプロポーザルはまだ採択されていません。もし
 msgid "Accepted Sessions"
 msgstr "採択されたセッション"
 
-#: templates/session/view.tpl:22
-msgid "Edit"
-msgstr "編集"
-
 #: templates/session/view.tpl:44
 msgid ""
 "This session has NOT been accepted yet. If you would like to see it in "
@@ -637,10 +706,6 @@ msgstr "スライド"
 #: templates/session/view.tpl:60
 msgid "Session Information"
 msgstr "情報"
-
-#: templates/session/view.tpl:67
-msgid "Starts On"
-msgstr "開始日時"
 
 #: templates/user/email_confirm.tpl:21 templates/user/email_done.tpl:21
 msgid "Confirm Email Address"

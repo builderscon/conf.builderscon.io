@@ -6,7 +6,6 @@ import pytz
 months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 class ConferenceDate(object):
     def __init__(self, jsonval, lang='en', timezone='UTC'):
-        print(lang)
         localtz = pytz.timezone(timezone)
         self.open = iso8601.parse_date(jsonval.get('open')).astimezone(localtz)
         self.close = iso8601.parse_date(jsonval.get('close')).astimezone(localtz)

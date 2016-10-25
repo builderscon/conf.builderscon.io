@@ -43,7 +43,8 @@
               <tr>
                 <td>{% trans %}Title{% endtrans %}</td>
                 <td>{% trans %}Conference{% endtrans %}</td>
-                <td>&nbsp;</td>
+                <td>{% trans %}Confirmed{% endtrans %}</td>
+                <td>{% trans %}Edit{% endtrans %}</td>
                 <td>{% trans %}Status{% endtrans %}</td>
                 <td>&nbsp;</td>
               </tr>
@@ -53,6 +54,7 @@
               <tr>
                 <td><span{% if session.conference.status == 'private' %} class="invalid"{% endif %}>{% if session.title %}<a href="/{{ session.conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a>{% else %}N/A{% endif %}</span></td>
                 <td>{% if session.conference %}{{ session.conference.title }}{% endif %}</td>
+                <td>{% if session.status != 'accepted' %}-{% elif session.confirmed %}{% trans %}confirmed{% endtrans %}{% else %}<a class="confirm-session-link" href="/{{ session.conference.full_slug }}/session/confirm">{% trans %}unconfirmed{% endtrans %}</a>{% endif %}</td>
                 <td><a href="/{{ session.conference.full_slug }}/session/{{ session.id }}/edit"><span class="i-mode_edit" /></a></td>
                 <td>{{ _(session.status) }}</td>
                 <td><a href="/{{ session.conference.full_slug }}/session/{{ session.id }}/delete"><span class="i-delete" /></a></td>
