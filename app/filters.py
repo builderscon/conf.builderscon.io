@@ -115,6 +115,6 @@ def dateobj(s, timezone='UTC'):
     return iso8601.parse_date(s).astimezone(localtz)
 
 @builderscon.app.template_filter('datefmt')
-def datefmt(dt, format='short'):
-    return babel.dates.format_datetime(dt, format=format)
+def datefmt(dt, locale, tzinfo, format='short'):
+    return babel.dates.format_datetime(dt, tzinfo=tzinfo, locale=locale, format=format)
 
