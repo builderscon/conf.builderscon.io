@@ -65,7 +65,7 @@
                 </tr>
                 <tr>
                   <td>{% trans %}Starts On{% endtrans %}</td>
-                  <td>{% if session.starts_on %}{{session.starts_on}}{% else %}N/A{% endif %}</td>
+                  <td>{% if session.starts_on %}{{session.starts_on | dateobj | datefmt(locale=lang,tzinfo=conference.timezone)}}{% else %}N/A{% endif %}</td>
                 </tr>
                 <tr>
                   <td>{% trans %}Session Duration{% endtrans %}</td>
