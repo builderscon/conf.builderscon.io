@@ -60,6 +60,10 @@
               <h5>{% trans %}Session Information{% endtrans %}</h5>
               <table>
                 <tr>
+                  <td>{% trans %}Confirmed{% endtrans %}</td>
+                  <td>{% if session.confirmed %}{% trans %}confirmed{% endtrans %}{% else %}{% trans %}unconfirmed{% endtrans %}{% endif %}</td>
+                </tr>
+                <tr>
                   <td>{% trans %}Material Level{% endtrans %}</td>
                   <td>{{ _(session.material_level|audlevelname) }}</td>
                 </tr>
