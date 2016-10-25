@@ -321,4 +321,12 @@ a.cfptabs-title-inside {
   font-size: 10pt;
   padding: 2em;
 }
--->
+
+a.confirm-session-link:link,
+a.confirm-session-link:visited,
+a.confirm-session-link:hover,
+a.confirm-session-link:active {
+  color: #f00;
+  font-weight: bold;
+  text-decoration: underline;
+}

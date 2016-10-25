@@ -22,7 +22,7 @@ div.speakers div.speaker {
 <h1>{{ conference.title }}</h1>
 <h2>{{ conference.sub_title }}</h2>
 {% if conference.dates|length == 1 %}
-{% set dt = conference.dates[0]|dateobj(lang=lang,timezone=conference.get('timezone')) %}
+{% set dt = conference.dates[0]|confdate(lang=lang,timezone=conference.get('timezone')) %}
 <h2>{{ dt.date() }}</h2>
 {% endif %}
 {% endblock %}
@@ -79,7 +79,7 @@ function initMap() {
 {% set dates = conference.get('dates') or [] %}{% if dates|length > 0 %}
         <h2>{% trans %}Dates{% endtrans %}</h2>
 {% for date in dates %}
-{% set dt = date|dateobj(lang=lang, timezone=conference.get('timezone')) %}
+{% set dt = date|confdate(lang=lang, timezone=conference.get('timezone')) %}
         <div style="margin-left: 2em">{{ dt.date() }} ({{ dt.open_time() }} 〜 {{ dt.close_time() }})</div>
 {% endfor %}
 {% endif %}

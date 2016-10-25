@@ -1,11 +1,14 @@
+import babel
 import builderscon
 import flasktools
+import iso8601
 import markdown
 import markupsafe
 import mdx_gfm
 import model
 import oauth
 import oembed
+import pytz
 import re
 
 SESSION_SLIDE_EMBED_EXPIRES = 3600
@@ -61,7 +64,6 @@ def slide_embed(url):
         q = flasktools.parse_qsl(o.query)
         q.append(('width', 400))
         html = '<iframe src="%s" frameborder="0" width="500" height="450"allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>' % flasktools.urlunparse(o)
-        html = res['html']
         builderscon.cache.set(key, html, SESSION_SLIDE_EMBED_EXPIRES)
         return html
 
@@ -69,8 +71,8 @@ def slide_embed(url):
     builderscon.cache.set(key, html, SESSION_SLIDE_EMBED_EXPIRES)
     return html
 
-@builderscon.app.template_filter('dateobj')
-def dateobj_filter(s, lang='en', timezone='UTC'): # note: this is probably going to be deprecated
+@builderscon.app.template_filter('confdate')
+def conference_date_filter(s, lang='en', timezone='UTC'):
     return model.ConferenceDate(s, lang=lang, timezone=timezone)
 
 markdown_converter = markdown.Markdown(extensions=[mdx_gfm.GithubFlavoredMarkdownExtension()]).convert
@@ -107,4 +109,12 @@ def urlencode_filter(s):
     s = flasktools.quote_plus(s)
     return markupsafe.Markup(s)
 
+@builderscon.app.template_filter('dateobj')
+def dateobj(s, timezone='UTC'):
+    localtz = pytz.timezone(timezone)
+    return iso8601.parse_date(s).astimezone(localtz)
+
+@builderscon.app.template_filter('datefmt')
+def datefmt(dt, format='short'):
+    return babel.dates.format_datetime(dt, format=format)
 

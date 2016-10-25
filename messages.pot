@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-21 12:51+0900\n"
+"POT-Creation-Date: 2016-10-25 10:13+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -220,18 +220,36 @@ msgstr ""
 msgid "No proposals have been submitted"
 msgstr ""
 
-#: templates/dashboard.tpl:44 templates/session/form.tpl:28
+#: templates/dashboard.tpl:44 templates/session/confirm.tpl:27
+#: templates/session/confirm_done.tpl:23 templates/session/form.tpl:28
 #: templates/user/view.tpl:39
 msgid "Title"
 msgstr ""
 
 #: templates/dashboard.tpl:45 templates/layout/conference.tpl:8
+#: templates/session/confirm.tpl:28 templates/session/confirm_done.tpl:24
 #: templates/user/view.tpl:40
 msgid "Conference"
 msgstr ""
 
-#: templates/dashboard.tpl:47 templates/user/view.tpl:41
+#: templates/dashboard.tpl:46
+msgid "Confirmed"
+msgstr ""
+
+#: templates/dashboard.tpl:47 templates/session/view.tpl:22
+msgid "Edit"
+msgstr ""
+
+#: templates/dashboard.tpl:48 templates/user/view.tpl:41
 msgid "Status"
+msgstr ""
+
+#: templates/dashboard.tpl:57
+msgid "confirmed"
+msgstr ""
+
+#: templates/dashboard.tpl:57
+msgid "unconfirmed"
 msgstr ""
 
 #: templates/index.tpl:6 templates/layout/base.tpl:36
@@ -405,6 +423,61 @@ msgstr ""
 msgid "SPONSORS"
 msgstr ""
 
+#: templates/session/confirm.tpl:4 templates/session/confirm.tpl:15
+#: templates/session/confirm_done.tpl:4
+msgid "Confirm your session"
+msgstr ""
+
+#: templates/session/confirm.tpl:20
+msgid "There are no sessions that needs confirming"
+msgstr ""
+
+#: templates/session/confirm.tpl:22
+msgid ""
+"Below sessions have been accepted, but you have not yet confirmed that "
+"you can attend. Please confirm that you are in fact attending the "
+"conference, and that you are okay with the presented schedule for the "
+"accepted talk(s) below. If you do not confirm, your session <strong>may "
+"be canceled</strong> by the organizers. If you have schedulding "
+"conflicts, please contact the organizers immediately."
+msgstr ""
+
+#: templates/session/confirm.tpl:29 templates/session/confirm_done.tpl:25
+#: templates/session/view.tpl:67
+msgid "Starts On"
+msgstr ""
+
+#: templates/session/confirm.tpl:30 templates/session/confirm_done.tpl:26
+msgid "Room"
+msgstr ""
+
+#: templates/session/confirm.tpl:36
+msgid "Confirm"
+msgstr ""
+
+#: templates/session/confirm.tpl:54
+msgid "Your session "
+msgstr ""
+
+#: templates/session/confirm.tpl:54
+msgid " will be confirmed when you press the button below"
+msgstr ""
+
+#: templates/session/confirm.tpl:56
+msgid "Yes, I confirm"
+msgstr ""
+
+#: templates/session/confirm_done.tpl:15
+msgid "Session confirmed"
+msgstr ""
+
+#: templates/session/confirm_done.tpl:19
+#, python-format
+msgid ""
+"Thank you for taking the time to confirm your session. Your session has "
+"been confirmed as below. We hope to see you soon at %(title)s."
+msgstr ""
+
 #: templates/session/delete.tpl:12
 msgid "Are you sure you want to delete this session?"
 msgstr ""
@@ -568,10 +641,6 @@ msgstr ""
 msgid "Accepted Sessions"
 msgstr ""
 
-#: templates/session/view.tpl:22
-msgid "Edit"
-msgstr ""
-
 #: templates/session/view.tpl:44
 msgid ""
 "This session has NOT been accepted yet. If you would like to see it in "
@@ -589,10 +658,6 @@ msgstr ""
 
 #: templates/session/view.tpl:60
 msgid "Session Information"
-msgstr ""
-
-#: templates/session/view.tpl:67
-msgid "Starts On"
 msgstr ""
 
 #: templates/user/email_confirm.tpl:21 templates/user/email_done.tpl:21
