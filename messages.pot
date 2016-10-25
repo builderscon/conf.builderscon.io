@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-25 10:13+0900\n"
+"POT-Creation-Date: 2016-10-25 14:15+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,7 +146,7 @@ msgstr ""
 msgid "Session Title (Japanese)"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:71
+#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:75
 msgid "Session Duration"
 msgstr ""
 
@@ -159,17 +159,17 @@ msgid "Session Abstract (Japanese)"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:72
-#: templates/session/view.tpl:63
+#: templates/session/view.tpl:67
 msgid "Material Level"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:88
-#: templates/session/view.tpl:75
+#: templates/session/view.tpl:79
 msgid "Spoken Language"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:100
-#: templates/session/view.tpl:79
+#: templates/session/view.tpl:83
 msgid "Slide Language"
 msgstr ""
 
@@ -178,17 +178,17 @@ msgid "Comments"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:141
-#: templates/session/view.tpl:83
+#: templates/session/view.tpl:87
 msgid "Photo Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:155
-#: templates/session/view.tpl:87
+#: templates/session/view.tpl:91
 msgid "Recording Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:169
-#: templates/session/view.tpl:91
+#: templates/session/view.tpl:95
 msgid "Materials Release"
 msgstr ""
 
@@ -232,7 +232,7 @@ msgstr ""
 msgid "Conference"
 msgstr ""
 
-#: templates/dashboard.tpl:46
+#: templates/dashboard.tpl:46 templates/session/view.tpl:63
 msgid "Confirmed"
 msgstr ""
 
@@ -244,11 +244,11 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: templates/dashboard.tpl:57
+#: templates/dashboard.tpl:57 templates/session/view.tpl:64
 msgid "confirmed"
 msgstr ""
 
-#: templates/dashboard.tpl:57
+#: templates/dashboard.tpl:57 templates/session/view.tpl:64
 msgid "unconfirmed"
 msgstr ""
 
@@ -379,6 +379,10 @@ msgstr ""
 msgid "Guest Speakers"
 msgstr ""
 
+#: templates/conference/view.tpl:128
+msgid "Contact Information"
+msgstr ""
+
 #: templates/errors/404.tpl:16
 msgid "Not Found"
 msgstr ""
@@ -443,7 +447,7 @@ msgid ""
 msgstr ""
 
 #: templates/session/confirm.tpl:29 templates/session/confirm_done.tpl:25
-#: templates/session/view.tpl:67
+#: templates/session/view.tpl:71
 msgid "Starts On"
 msgstr ""
 

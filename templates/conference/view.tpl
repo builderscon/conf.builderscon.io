@@ -122,5 +122,15 @@ function initMap() {
 {% endif %}
 {% endwith %}
 
+{% if conference.contact_information|length > 0 %}
+  <div class="section article" id="contact-information">
+    <div class="inner">
+      <h1 class="section-header">{% trans %}Contact Information{% endtrans %}</h1>
+      <div class="section-content">
+        <p>{{ conference.contact_information | markdown }}</p>
+      </div>
+    </div>
+  </div>
+{% endif %}
 {% endblock%}
 
