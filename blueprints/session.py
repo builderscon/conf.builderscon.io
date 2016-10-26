@@ -126,7 +126,7 @@ def timetable():
                         su = '/%s/session/%s' % (conference.get('full_slug'), session.get('id'))
                         uu = '/user/%s' % (session.get('speaker').get('id'))
                         t += '<td class="session %s" rowspan="%d">' % (widthclass, r)
-                        t += '<a href="%s"><img class="speaker-avatar" src="%s"></a> ' % (uu, session.get('speaker').get('avatar_url'))
+                        t += '<a href="%s"><img class="speaker-avatar" src="%s"></a> ' % (uu, session.get('speaker').get('avatar_url') or '/static/images/noprofile.png')
                         t += '<a class="title" href="%s">%s</a>' % (su, session.get('title'))
                         t += '</td>\n'
                         sessions_by_room[room_id] = room_sessions[1:]
