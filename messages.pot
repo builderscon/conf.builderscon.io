@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-25 14:15+0900\n"
+"POT-Creation-Date: 2016-10-26 11:50+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -643,6 +643,11 @@ msgstr ""
 
 #: templates/session/list.tpl:55
 msgid "Accepted Sessions"
+msgstr ""
+
+#: templates/session/timetable.tpl:13
+#, python-format
+msgid "Sessions for %(date)s"
 msgstr ""
 
 #: templates/session/view.tpl:44
