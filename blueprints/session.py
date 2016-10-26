@@ -22,6 +22,8 @@ with_session_types = app.hooks.with_session_types
 @with_conference_by_slug
 def list():
     conference = flask.g.stash.get('conference')
+    if conference.get('timetable_available'):
+        return flask.redirect('/%s/timetable' % conference.get('full_slug'))
     sessions = _list_sessions(conference.get('id'), ['accepted', 'pending'], flask.g.lang)
 
     accepted = []
@@ -41,6 +43,9 @@ def list():
 @with_conference_by_slug
 def timetable():
     conference = flask.g.stash.get('conference')
+    if not conference.get('timetable_available'):
+        return flask.redirect('/%s/sessions' % conference.get('full_slug'))
+
     tz = pytz.timezone(conference.get('timezone'))
     date = flask.request.args.get('date')
     if date:
