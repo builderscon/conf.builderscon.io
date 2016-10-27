@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-26 11:50+0900\n"
+"POT-Creation-Date: 2016-10-28 07:15+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -81,11 +81,13 @@ msgstr ""
 "href=\"http://yassang.jp/\">yassang</a>です</li>        </ul>\n"
 "        "
 
-#: templates/catalog.tpl:4
+#: templates/catalog.tpl:4 templates/dashboard.tpl:34
+#: templates/user/edit.tpl:20
 msgid "English"
 msgstr "英語"
 
-#: templates/catalog.tpl:5
+#: templates/catalog.tpl:5 templates/dashboard.tpl:34
+#: templates/user/edit.tpl:21
 msgid "Japanese"
 msgstr "日本語"
 
@@ -219,51 +221,61 @@ msgstr "応募ありがとうございました！"
 msgid "Your submission can be viewd here"
 msgstr "応募されたプロポーザルはこちらから確認できます"
 
-#: templates/dashboard.tpl:21
-msgid "Logout"
-msgstr "ログアウト"
-
-#: templates/dashboard.tpl:27 templates/user/view.tpl:24
-msgid "Organizer"
-msgstr "主宰"
-
-#: templates/dashboard.tpl:37 templates/user/view.tpl:35
-msgid "Proposals"
-msgstr "応募済みプロポーザル"
-
-#: templates/dashboard.tpl:39
-msgid "No proposals have been submitted"
-msgstr "応募されたプロポーザルはありません"
-
-#: templates/dashboard.tpl:44 templates/session/confirm.tpl:27
-#: templates/session/confirm_done.tpl:23 templates/session/form.tpl:28
-#: templates/user/view.tpl:39
-msgid "Title"
-msgstr "タイトル"
-
-#: templates/dashboard.tpl:45 templates/layout/conference.tpl:8
-#: templates/session/confirm.tpl:28 templates/session/confirm_done.tpl:24
-#: templates/user/view.tpl:40
-msgid "Conference"
-msgstr "カンファレンス"
-
-#: templates/dashboard.tpl:46 templates/session/view.tpl:63
-msgid "Confirmed"
-msgstr "登壇確認"
-
-#: templates/dashboard.tpl:47 templates/session/view.tpl:22
+#: templates/dashboard.tpl:21 templates/dashboard.tpl:67
+#: templates/session/view.tpl:22
 msgid "Edit"
 msgstr "編集"
 
-#: templates/dashboard.tpl:48 templates/user/view.tpl:41
+#: templates/dashboard.tpl:24
+msgid "Logout"
+msgstr "ログアウト"
+
+#: templates/dashboard.tpl:29
+msgid "User Information"
+msgstr "情報"
+
+#: templates/dashboard.tpl:33 templates/user/edit.tpl:17
+msgid "Language"
+msgstr "言語"
+
+#: templates/dashboard.tpl:40 templates/user/view.tpl:24
+msgid "Organizer"
+msgstr "主宰"
+
+#: templates/dashboard.tpl:44 templates/dashboard.tpl:65
+#: templates/layout/conference.tpl:8 templates/session/confirm.tpl:28
+#: templates/session/confirm_done.tpl:24 templates/user/view.tpl:28
+#: templates/user/view.tpl:47
+msgid "Conference"
+msgstr "カンファレンス"
+
+#: templates/dashboard.tpl:57 templates/user/view.tpl:42
+msgid "Proposals"
+msgstr "応募済みプロポーザル"
+
+#: templates/dashboard.tpl:59
+msgid "No proposals have been submitted"
+msgstr "応募されたプロポーザルはありません"
+
+#: templates/dashboard.tpl:64 templates/session/confirm.tpl:27
+#: templates/session/confirm_done.tpl:23 templates/session/form.tpl:28
+#: templates/user/view.tpl:46
+msgid "Title"
+msgstr "タイトル"
+
+#: templates/dashboard.tpl:66 templates/session/view.tpl:63
+msgid "Confirmed"
+msgstr "登壇確認"
+
+#: templates/dashboard.tpl:68 templates/user/view.tpl:48
 msgid "Status"
 msgstr "状態"
 
-#: templates/dashboard.tpl:57 templates/session/view.tpl:64
+#: templates/dashboard.tpl:77 templates/session/view.tpl:64
 msgid "confirmed"
 msgstr "済"
 
-#: templates/dashboard.tpl:57 templates/session/view.tpl:64
+#: templates/dashboard.tpl:77 templates/session/view.tpl:64
 msgid "unconfirmed"
 msgstr "未確認"
 
@@ -716,6 +728,14 @@ msgstr "スライド"
 msgid "Session Information"
 msgstr "情報"
 
+#: templates/user/edit.tpl:13
+msgid "Edit User Information"
+msgstr "ユーザー情報の編集"
+
+#: templates/user/edit.tpl:27
+msgid "Update"
+msgstr "更新"
+
 #: templates/user/email_confirm.tpl:21 templates/user/email_done.tpl:21
 msgid "Confirm Email Address"
 msgstr "メールアドレスを確認する"
@@ -748,4 +768,3 @@ msgid ""
 " email address. This is required so we know how to contact you regarding "
 "your submission, and to notify you of any important updates."
 msgstr "セッションに応募するにはメールアドレスの登録が必要となります。このメールアドレスは応募された内容に関する連絡や、その他連絡事項にのみ使用されます。"
-

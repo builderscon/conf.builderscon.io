@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-26 11:50+0900\n"
+"POT-Creation-Date: 2016-10-28 07:15+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,11 +66,13 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/catalog.tpl:4
+#: templates/catalog.tpl:4 templates/dashboard.tpl:34
+#: templates/user/edit.tpl:20
 msgid "English"
 msgstr ""
 
-#: templates/catalog.tpl:5
+#: templates/catalog.tpl:5 templates/dashboard.tpl:34
+#: templates/user/edit.tpl:21
 msgid "Japanese"
 msgstr ""
 
@@ -204,51 +206,61 @@ msgstr ""
 msgid "Your submission can be viewd here"
 msgstr ""
 
-#: templates/dashboard.tpl:21
-msgid "Logout"
-msgstr ""
-
-#: templates/dashboard.tpl:27 templates/user/view.tpl:24
-msgid "Organizer"
-msgstr ""
-
-#: templates/dashboard.tpl:37 templates/user/view.tpl:35
-msgid "Proposals"
-msgstr ""
-
-#: templates/dashboard.tpl:39
-msgid "No proposals have been submitted"
-msgstr ""
-
-#: templates/dashboard.tpl:44 templates/session/confirm.tpl:27
-#: templates/session/confirm_done.tpl:23 templates/session/form.tpl:28
-#: templates/user/view.tpl:39
-msgid "Title"
-msgstr ""
-
-#: templates/dashboard.tpl:45 templates/layout/conference.tpl:8
-#: templates/session/confirm.tpl:28 templates/session/confirm_done.tpl:24
-#: templates/user/view.tpl:40
-msgid "Conference"
-msgstr ""
-
-#: templates/dashboard.tpl:46 templates/session/view.tpl:63
-msgid "Confirmed"
-msgstr ""
-
-#: templates/dashboard.tpl:47 templates/session/view.tpl:22
+#: templates/dashboard.tpl:21 templates/dashboard.tpl:67
+#: templates/session/view.tpl:22
 msgid "Edit"
 msgstr ""
 
-#: templates/dashboard.tpl:48 templates/user/view.tpl:41
+#: templates/dashboard.tpl:24
+msgid "Logout"
+msgstr ""
+
+#: templates/dashboard.tpl:29
+msgid "User Information"
+msgstr ""
+
+#: templates/dashboard.tpl:33 templates/user/edit.tpl:17
+msgid "Language"
+msgstr ""
+
+#: templates/dashboard.tpl:40 templates/user/view.tpl:24
+msgid "Organizer"
+msgstr ""
+
+#: templates/dashboard.tpl:44 templates/dashboard.tpl:65
+#: templates/layout/conference.tpl:8 templates/session/confirm.tpl:28
+#: templates/session/confirm_done.tpl:24 templates/user/view.tpl:28
+#: templates/user/view.tpl:47
+msgid "Conference"
+msgstr ""
+
+#: templates/dashboard.tpl:57 templates/user/view.tpl:42
+msgid "Proposals"
+msgstr ""
+
+#: templates/dashboard.tpl:59
+msgid "No proposals have been submitted"
+msgstr ""
+
+#: templates/dashboard.tpl:64 templates/session/confirm.tpl:27
+#: templates/session/confirm_done.tpl:23 templates/session/form.tpl:28
+#: templates/user/view.tpl:46
+msgid "Title"
+msgstr ""
+
+#: templates/dashboard.tpl:66 templates/session/view.tpl:63
+msgid "Confirmed"
+msgstr ""
+
+#: templates/dashboard.tpl:68 templates/user/view.tpl:48
 msgid "Status"
 msgstr ""
 
-#: templates/dashboard.tpl:57 templates/session/view.tpl:64
+#: templates/dashboard.tpl:77 templates/session/view.tpl:64
 msgid "confirmed"
 msgstr ""
 
-#: templates/dashboard.tpl:57 templates/session/view.tpl:64
+#: templates/dashboard.tpl:77 templates/session/view.tpl:64
 msgid "unconfirmed"
 msgstr ""
 
@@ -667,6 +679,14 @@ msgstr ""
 
 #: templates/session/view.tpl:60
 msgid "Session Information"
+msgstr ""
+
+#: templates/user/edit.tpl:13
+msgid "Edit User Information"
+msgstr ""
+
+#: templates/user/edit.tpl:27
+msgid "Update"
 msgstr ""
 
 #: templates/user/email_confirm.tpl:21 templates/user/email_done.tpl:21
