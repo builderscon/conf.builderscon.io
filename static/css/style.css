@@ -119,6 +119,10 @@ div.information h5 {
     padding-left: 1em;
 }
 
+div.information .unconfirmed {
+    font-weight: bold;
+    color: #f00;
+}
 
 div.session-title {
     font-size: 14pt;
