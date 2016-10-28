@@ -172,6 +172,8 @@ def view():
 @functools.partial(with_session, lang='all')
 @with_session_types
 def edit():
+    flask.g.stash['selected_session_type_id'] = flask.g.stash.get('session').get('session_type_id')
+
     return flask.render_template('session/edit.tpl')
 
 @page.route('/<series_slug>/<path:slug>/session/<id>/update', methods=['POST'])

@@ -113,6 +113,10 @@ div.information h5 {
     padding-left: 1em;
 }
 
+div.information .unconfirmed {
+    font-weight: bold;
+    color: #f00;
+}
 
 div.session-title {
     font-size: 14pt;
@@ -244,6 +248,7 @@ a.cfptabs-title-inside {
   color: #ccc;
 }
 
+#dashboard .edit-btn,
 #dashboard .logout-btn {
     margin: 0 auto 0 auto;
     width: 100%;
@@ -380,4 +385,23 @@ a.confirm-session-link:active {
 #schedule .timetable .dates {
     margin-left: 4em;
     margin-bottom: 1em;
+}
+
+.user-form label {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.user-form div.label-sub {
+    font-size: 0.7em;
+    line-height: 100%;
+    color: #888;
+}
+
+.user-form .button-row {
+    margin-top: 2em;
+}
+
+.user-form .button-row button {
+    border-radius: 5px;
 }

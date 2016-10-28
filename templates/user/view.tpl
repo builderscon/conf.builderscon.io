@@ -22,13 +22,20 @@
           <div class="profile-content large-10 small-10 columns">
 {% if conferences %}
             <h3>{% trans %}Organizer{% endtrans %}</h3>
-            <div class="conference-history">
+            <table class="conference-history">
+            <thead>
+              <tr>
+                <td>{% trans %}Conference{% endtrans %}</td>
+              </tr>
+            </thead>
+            <tbody>
 {% for conference in conferences %}
-              <div class="row">
-                <div class="large-3 columns"><a href="/{{ conference.full_slug }}">{{ conference.title }}</a></div>
-              </div>
+              <tr>
+                <td><a href="/{{ conference.full_slug }}">{{ conference.title }}</a></td>
+              </tr>
 {% endfor %}
-            </div>
+            </tbody>
+            </table>
 {% endif %}
 
 {% if sessions %}

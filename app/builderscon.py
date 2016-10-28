@@ -50,11 +50,17 @@ jarx = re.compile('^ja(?:-\w+)$')
 def get_locale():
     l = flask.request.args.get('lang')
     if not l:
+        stash = flask.g.get('stash')
+        if stash:
+            u = stash.get('user')
+            if u:
+                l = u.get('lang', l)
         # This is silly, accept_languages.best_match doesn't
         # match against ja-JP if the arguments are just 'ja'
         # TODO: Lookup Accept-Language, and change its value
         # to make the matching easier
-        l = flask.request.accept_languages.best_match(['ja', 'ja-JP', 'en'])
+        if not l:
+            l = flask.request.accept_languages.best_match(['ja', 'ja-JP', 'en'])
     if l:
         if jarx.match(l):
             l = 'ja'
@@ -86,6 +92,7 @@ def load_logged_in_user():
         user = api.lookup_user(flask.session.get('user_id'))
         if user:
             flask.g.stash['user'] = user
+            flask.g.lang = get_locale()
             return True
         del flask.session['user_id']
     return False

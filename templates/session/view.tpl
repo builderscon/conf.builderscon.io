@@ -59,10 +59,12 @@
             <div class="information">
               <h5>{% trans %}Session Information{% endtrans %}</h5>
               <table>
+{% if session.status == 'accepted' %}
                 <tr>
                   <td>{% trans %}Confirmed{% endtrans %}</td>
-                  <td>{% if session.confirmed %}{% trans %}confirmed{% endtrans %}{% else %}{% trans %}unconfirmed{% endtrans %}{% endif %}</td>
+                  <td>{% if session.confirmed %}{% trans %}confirmed{% endtrans %}{% else %}<span class="unconfirmed">{% trans %}unconfirmed{% endtrans %}</span>{% endif %}</td>
                 </tr>
+{% endif %}
                 <tr>
                   <td>{% trans %}Material Level{% endtrans %}</td>
                   <td>{{ _(session.material_level|audlevelname) }}</td>
