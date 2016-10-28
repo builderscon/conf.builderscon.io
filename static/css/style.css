@@ -51,7 +51,7 @@ div.tier-3 div.sponsor-name {
 
 div.social-button {
     margin: 10px 0px;
-    display: inline-block;
+    display: block;
     vertical-align: top;
 }
 
@@ -62,12 +62,6 @@ div.social-button {
 
 strong {
     font-weight: bold;
-}
-
-@media screen and (min-width: 64em) {
-    div.social-button {
-        display: block;
-    }
 }
 
 div.description-pending {
