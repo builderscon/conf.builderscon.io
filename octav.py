@@ -1,5 +1,5 @@
 """OCTAV Client Library"""
-"""DO NOT EDIT: This file was generated from ../spec/v1/api.json on Tue Oct 25 20:43:22 2016"""
+"""DO NOT EDIT: This file was generated from ../spec/v1/api.json on Fri Oct 28 07:11:39 2016"""
 
 import certifi
 import json
@@ -74,7 +74,7 @@ class Octav(object):
         self.error = repr(e)
         return None
 
-  def create_user (self, auth_user_id, auth_via, nickname, avatar_url=None, email=None, first_name=None, last_name=None, tshirt_size=None, **args):
+  def create_user (self, auth_user_id, auth_via, nickname, avatar_url=None, email=None, first_name=None, lang=None, last_name=None, tshirt_size=None, **args):
     try:
         payload = {}
         hdrs = {}
@@ -97,6 +97,8 @@ class Octav(object):
             payload['email'] = email
         if first_name is not None:
             payload['first_name'] = first_name
+        if lang is not None:
+            payload['lang'] = lang
         if last_name is not None:
             payload['last_name'] = last_name
         if nickname is not None:
@@ -194,7 +196,42 @@ class Octav(object):
         self.error = repr(e)
         return None
 
-  def update_user (self, id, user_id, email=None, first_name=None, last_name=None, nickname=None, tshirt_size=None, **args):
+  def verify_user (self, id, user_id):
+    try:
+        payload = {}
+        hdrs = {}
+        if id is None:
+            raise MissingRequiredArgument('property id must be provided')
+        payload['id'] = id
+        if user_id is None:
+            raise MissingRequiredArgument('property user_id must be provided')
+        payload['user_id'] = user_id
+        if id is not None:
+            payload['id'] = id
+        if user_id is not None:
+            payload['user_id'] = user_id
+        uri = '%s/v1/user/verify' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
+        if self.debug:
+            print('POST %s' % uri)
+        hdrs['Content-Type']= 'application/json'
+        res = self.http.request('POST', uri, headers=hdrs, body=json.dumps(payload))
+        if self.debug:
+            print(res)
+        self.res = res
+        if res.status != 200:
+            self.extract_error(res)
+            return None
+        return True
+    except BaseException as e:
+        if self.debug:
+            print("error during http access: " + repr(e))
+        self.error = repr(e)
+        return None
+
+  def update_user (self, id, user_id, email=None, first_name=None, lang=None, last_name=None, nickname=None, tshirt_size=None, **args):
     try:
         payload = {}
         hdrs = {}
@@ -210,6 +247,8 @@ class Octav(object):
             payload['first_name'] = first_name
         if id is not None:
             payload['id'] = id
+        if lang is not None:
+            payload['lang'] = lang
         if last_name is not None:
             payload['last_name'] = last_name
         if nickname is not None:
@@ -1564,7 +1603,7 @@ class Octav(object):
         self.error = repr(e)
         return None
 
-  def update_conference (self, id, user_id, cfp_lead_text=None, cfp_post_submit_instructions=None, cfp_pre_submit_instructions=None, contact_information=None, description=None, slug=None, status=None, sub_title=None, timezone=None, title=None, **args):
+  def update_conference (self, id, user_id, cfp_lead_text=None, cfp_post_submit_instructions=None, cfp_pre_submit_instructions=None, contact_information=None, description=None, slug=None, status=None, sub_title=None, timetable_available=None, timezone=None, title=None, **args):
     try:
         payload = {}
         hdrs = {}
@@ -1592,6 +1631,8 @@ class Octav(object):
             payload['status'] = status
         if sub_title is not None:
             payload['sub_title'] = sub_title
+        if timetable_available is not None:
+            payload['timetable_available'] = timetable_available
         if timezone is not None:
             payload['timezone'] = timezone
         if title is not None:
@@ -2609,6 +2650,43 @@ class Octav(object):
             self.extract_error(res)
             return None
         return True
+    except BaseException as e:
+        if self.debug:
+            print("error during http access: " + repr(e))
+        self.error = repr(e)
+        return None
+
+  def send_selection_result_notification (self, id, user_id, force=None):
+    try:
+        payload = {}
+        hdrs = {}
+        if id is None:
+            raise MissingRequiredArgument('property id must be provided')
+        payload['id'] = id
+        if user_id is None:
+            raise MissingRequiredArgument('property user_id must be provided')
+        payload['user_id'] = user_id
+        if force is not None:
+            payload['force'] = force
+        if id is not None:
+            payload['id'] = id
+        if user_id is not None:
+            payload['user_id'] = user_id
+        uri = '%s/v1/session/send_selection_result_notification' % self.endpoint
+        hdrs = urllib3.util.make_headers(
+            basic_auth='%s:%s' % (self.key, self.secret),
+        )
+        if self.debug:
+            print('POST %s' % uri)
+        hdrs['Content-Type']= 'application/json'
+        res = self.http.request('POST', uri, headers=hdrs, body=json.dumps(payload))
+        if self.debug:
+            print(res)
+        self.res = res
+        if res.status != 200:
+            self.extract_error(res)
+            return None
+        return json.loads(res.data)
     except BaseException as e:
         if self.debug:
             print("error during http access: " + repr(e))

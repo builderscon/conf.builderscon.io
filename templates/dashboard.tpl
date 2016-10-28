@@ -17,21 +17,41 @@
             <div class="profile">
               <img src="{{ user.avatar_url or '/static/images/noprofile.png' }}">
               <p class="name">{{ user.nickname }} <span class="auth_via">{{ user.auth_via }}</span></p>
+              <form action="/user/edit" method="GET">
+              <button class="alert button edit-btn">{% trans %}Edit{% endtrans %}</button>
+              </form>
               <form action="/logout" method="POST">
               <button class="alert button logout-btn">{% trans %}Logout{% endtrans %}</button>
               </form>
             </div>
           </div>
           <div class="profile-content large-10 small-10 columns">
+            <h3>{% trans %}User Information{% endtrans %}</h3>
+            <table class="user-information">
+            <tbody>
+              <tr>
+                <td>{% trans %}Language{% endtrans %}</td>
+                <td>{% if user.lang == "en" %}{% trans %}English{% endtrans %}{% elif user.lang == "ja" %}{% trans %}Japanese{% endtrans %}{% else %}N/A{% endif %}</td>
+              </tr>
+            </tbody>
+            </table>
+
 {% if conferences %}
             <h3>{% trans %}Organizer{% endtrans %}</h3>
-            <div class="conference-history">
+            <table class="conference-history">
+            <thead>
+              <tr>
+                <td>{% trans %}Conference{% endtrans %}</td>
+              </tr>
+            </thead>
+            <tbody>
 {% for conference in conferences %}
-              <div class="row">
-                <div class="large-3 columns"><a href="/{{ conference.full_slug }}">{{ conference.title }}</a></div>
-              </div>
+              <tr>
+                <td><a href="/{{ conference.full_slug }}">{{ conference.title }}</a></td>
+              </tr>
 {% endfor %}
-            </div>
+            </tbody>
+            </table>
 {% endif %}
 
             <h3>{% trans %}Proposals{% endtrans %}</h3>

@@ -113,7 +113,18 @@ def github_callback(resp):
 
     flask.session['user_id'] = user.get('id')
     flask.g.stash['user'] = user
-    return flask.redirect(flask.request.args.get('.next') or '/')
+
+    return redirect_edit()
+
+def redirect_edit():
+    # Redirect user to edit page, so that they can choose their
+    # language/timezone settings
+    return flask.redirect(
+        '/user/edit?%s' % flasktools.urlencode({
+            'setup': 1,
+            '.next': flask.request.args.get('.next')
+        })
+    )
 
 @facebook.authorized_handler
 def facebook_callback(resp):
@@ -175,7 +186,8 @@ def facebook_callback(resp):
 
     flask.session['user_id'] = user.get('id')
     flask.g.stash['user'] = user
-    return flask.redirect(flask.request.args.get('.next') or '/')
+
+    return redirect_edit()
 
 @twitter.authorized_handler
 def twitter_callback(resp):
@@ -229,6 +241,6 @@ def twitter_callback(resp):
 
     flask.session['user_id'] = user.get('id')
     flask.g.stash['user'] = user
-    return flask.redirect(flask.request.args.get('.next') or '/')
+    return redirect_edit()
 
 
