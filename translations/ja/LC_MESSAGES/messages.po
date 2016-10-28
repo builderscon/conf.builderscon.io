@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-28 07:15+0900\n"
+"POT-Creation-Date: 2016-10-28 09:29+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -82,12 +82,12 @@ msgstr ""
 "        "
 
 #: templates/catalog.tpl:4 templates/dashboard.tpl:34
-#: templates/user/edit.tpl:20
+#: templates/user/edit.tpl:26
 msgid "English"
 msgstr "英語"
 
 #: templates/catalog.tpl:5 templates/dashboard.tpl:34
-#: templates/user/edit.tpl:21
+#: templates/user/edit.tpl:27
 msgid "Japanese"
 msgstr "日本語"
 
@@ -234,7 +234,7 @@ msgstr "ログアウト"
 msgid "User Information"
 msgstr "情報"
 
-#: templates/dashboard.tpl:33 templates/user/edit.tpl:17
+#: templates/dashboard.tpl:33 templates/user/edit.tpl:21
 msgid "Language"
 msgstr "言語"
 
@@ -732,7 +732,11 @@ msgstr "情報"
 msgid "Edit User Information"
 msgstr "ユーザー情報の編集"
 
-#: templates/user/edit.tpl:27
+#: templates/user/edit.tpl:22
+msgid "The language that this web site will be displayed in"
+msgstr "サイト表示の際に使用される言語"
+
+#: templates/user/edit.tpl:34
 msgid "Update"
 msgstr "更新"
 
@@ -768,3 +772,4 @@ msgid ""
 " email address. This is required so we know how to contact you regarding "
 "your submission, and to notify you of any important updates."
 msgstr "セッションに応募するにはメールアドレスの登録が必要となります。このメールアドレスは応募された内容に関する連絡や、その他連絡事項にのみ使用されます。"
+

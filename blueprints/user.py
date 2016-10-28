@@ -111,6 +111,8 @@ def with_session_from_args(cb, fname='id'):
 @page.route('/user/edit', methods=['GET'])
 @require_login
 def edit():
+    flask.g.stash["next_url"] = flask.request.args.get('.next')
+    flask.g.stash["setup"] = flask.request.args.get('setup')
     return flask.render_template('user/edit.tpl')
 
 @page.route('/user/update', methods=['POST'])
@@ -124,6 +126,10 @@ def update():
     )
     if not ok:
         flask.flash('failed to update', 'error')
+
+    next_url = flask.request.values.get('.next')
+    if next_url:
+        return flask.redirect(next_url)
 
     return flask.redirect('/dashboard')
 

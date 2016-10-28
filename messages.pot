@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-28 07:15+0900\n"
+"POT-Creation-Date: 2016-10-28 09:29+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,12 +67,12 @@ msgid ""
 msgstr ""
 
 #: templates/catalog.tpl:4 templates/dashboard.tpl:34
-#: templates/user/edit.tpl:20
+#: templates/user/edit.tpl:26
 msgid "English"
 msgstr ""
 
 #: templates/catalog.tpl:5 templates/dashboard.tpl:34
-#: templates/user/edit.tpl:21
+#: templates/user/edit.tpl:27
 msgid "Japanese"
 msgstr ""
 
@@ -219,7 +219,7 @@ msgstr ""
 msgid "User Information"
 msgstr ""
 
-#: templates/dashboard.tpl:33 templates/user/edit.tpl:17
+#: templates/dashboard.tpl:33 templates/user/edit.tpl:21
 msgid "Language"
 msgstr ""
 
@@ -685,7 +685,11 @@ msgstr ""
 msgid "Edit User Information"
 msgstr ""
 
-#: templates/user/edit.tpl:27
+#: templates/user/edit.tpl:22
+msgid "The language that this web site will be displayed in"
+msgstr ""
+
+#: templates/user/edit.tpl:34
 msgid "Update"
 msgstr ""
 

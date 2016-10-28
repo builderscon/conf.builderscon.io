@@ -388,3 +388,22 @@ a.confirm-session-link:active {
     margin-left: 4em;
     margin-bottom: 1em;
 }
+
+.user-form label {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.user-form div.label-sub {
+    font-size: 0.7em;
+    line-height: 100%;
+    color: #888;
+}
+
+.user-form .button-row {
+    margin-top: 2em;
+}
+
+.user-form .button-row button {
+    border-radius: 5px;
+}
