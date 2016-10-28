@@ -29,6 +29,9 @@ def view():
         flask.g.stash["session"] = session
 
     f = '%s/cfp.tpl' % flask.g.stash.get('full_slug')
+    for stype in flask.g.stash.get('session_types'):
+        if stype.get('is_default'):
+            flask.g.stash['selected_session_type_id'] = stype.get('id')
     return flask.render_template([f, 'cfp.tpl'])
 
 @page.route('/<series_slug>/<path:slug>/cfp/input', methods=['GET','POST'])
