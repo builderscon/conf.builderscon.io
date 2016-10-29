@@ -2,6 +2,9 @@
 
 {% block body_id %}session{% endblock %}
 {% block title %}{{ session.title }} - {{ session.conference.title }}{% endblock %}
+{% block header %}
+<link rel="canonical" href="/{{ conference.full_slug }}/session/{{ session.id }}" />
+{% endblock %}
 {% block og_image %}{{ session.speaker.avatar_url or url('static', filename='images/noprofile.png') }}{% endblock %}
 
 {% block heroimage %}
@@ -22,13 +25,13 @@
         {% if user and (user.is_admin or user.id == session.speaker.id) %}<a id="session-edit-btn" href="/{{ conference.full_slug }}/session/{{ session.id }}/edit">{% trans %}Edit{% endtrans %}</a>{% endif %}
 </div>
             <div class="social-button">
-              <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+              <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="{{ lang }}" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
             </div>
             <div class="social-button">
               <div class="g-plusone" data-size="tall"  data-href="{{url}}"></div>
             </div>
             <div class="social-button">
-              <div class="fb-like" data-href="{{url}}" data-layout="box_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+              <div class="fb-like" data-href="/{{ conference.full_slug }}/session/{{ session.id }}" data-layout="box_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
             </div>
             <div class="social-button">
               <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
