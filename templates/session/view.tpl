@@ -2,6 +2,9 @@
 
 {% block body_id %}session{% endblock %}
 {% block title %}{{ session.title }} - {{ session.conference.title }}{% endblock %}
+{% block header %}
+<link rel="canonical" href="/{{ conference.full_slug }}/session/{{ session.id }}" />
+{% endblock %}
 {% block og_image %}{{ session.speaker.avatar_url or url('static', filename='images/noprofile.png') }}{% endblock %}
 
 {% block heroimage %}
