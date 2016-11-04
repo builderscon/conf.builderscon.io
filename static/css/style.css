@@ -405,3 +405,8 @@ a.confirm-session-link:active {
 .user-form .button-row button {
     border-radius: 5px;
 }
+
+.video-thumbnail {
+    height: auto;
+    width: 100px;
+}

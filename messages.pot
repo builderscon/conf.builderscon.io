@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-28 09:29+0900\n"
+"POT-Creation-Date: 2016-11-04 12:46+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,7 +148,7 @@ msgstr ""
 msgid "Session Title (Japanese)"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:75
+#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:77
 msgid "Session Duration"
 msgstr ""
 
@@ -161,17 +161,17 @@ msgid "Session Abstract (Japanese)"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:72
-#: templates/session/view.tpl:67
+#: templates/session/view.tpl:69
 msgid "Material Level"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:88
-#: templates/session/view.tpl:79
+#: templates/session/view.tpl:81
 msgid "Spoken Language"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:100
-#: templates/session/view.tpl:83
+#: templates/session/view.tpl:85
 msgid "Slide Language"
 msgstr ""
 
@@ -180,17 +180,17 @@ msgid "Comments"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:141
-#: templates/session/view.tpl:87
+#: templates/session/view.tpl:89
 msgid "Photo Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:155
-#: templates/session/view.tpl:91
+#: templates/session/view.tpl:93
 msgid "Recording Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:169
-#: templates/session/view.tpl:95
+#: templates/session/view.tpl:97
 msgid "Materials Release"
 msgstr ""
 
@@ -230,11 +230,10 @@ msgstr ""
 #: templates/dashboard.tpl:44 templates/dashboard.tpl:65
 #: templates/layout/conference.tpl:8 templates/session/confirm.tpl:28
 #: templates/session/confirm_done.tpl:24 templates/user/view.tpl:28
-#: templates/user/view.tpl:47
 msgid "Conference"
 msgstr ""
 
-#: templates/dashboard.tpl:57 templates/user/view.tpl:42
+#: templates/dashboard.tpl:57
 msgid "Proposals"
 msgstr ""
 
@@ -244,23 +243,22 @@ msgstr ""
 
 #: templates/dashboard.tpl:64 templates/session/confirm.tpl:27
 #: templates/session/confirm_done.tpl:23 templates/session/form.tpl:28
-#: templates/user/view.tpl:46
 msgid "Title"
 msgstr ""
 
-#: templates/dashboard.tpl:66 templates/session/view.tpl:63
+#: templates/dashboard.tpl:66 templates/session/view.tpl:64
 msgid "Confirmed"
 msgstr ""
 
-#: templates/dashboard.tpl:68 templates/user/view.tpl:48
+#: templates/dashboard.tpl:68
 msgid "Status"
 msgstr ""
 
-#: templates/dashboard.tpl:77 templates/session/view.tpl:64
+#: templates/dashboard.tpl:77 templates/session/view.tpl:65
 msgid "confirmed"
 msgstr ""
 
-#: templates/dashboard.tpl:77 templates/session/view.tpl:64
+#: templates/dashboard.tpl:77 templates/session/view.tpl:65
 msgid "unconfirmed"
 msgstr ""
 
@@ -459,7 +457,7 @@ msgid ""
 msgstr ""
 
 #: templates/session/confirm.tpl:29 templates/session/confirm_done.tpl:25
-#: templates/session/view.tpl:71
+#: templates/session/view.tpl:73
 msgid "Starts On"
 msgstr ""
 
@@ -724,5 +722,9 @@ msgid ""
 "In order to proceed with your submission, you must first register a valid"
 " email address. This is required so we know how to contact you regarding "
 "your submission, and to notify you of any important updates."
+msgstr ""
+
+#: templates/user/view.tpl:42
+msgid "Past Sessions"
 msgstr ""
 

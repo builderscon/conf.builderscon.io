@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-28 09:29+0900\n"
+"POT-Creation-Date: 2016-11-04 12:46+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -163,7 +163,7 @@ msgstr "セッションタイトル（英語）"
 msgid "Session Title (Japanese)"
 msgstr "セッションタイトル（日本語）"
 
-#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:75
+#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:77
 msgid "Session Duration"
 msgstr "セッション時間"
 
@@ -176,17 +176,17 @@ msgid "Session Abstract (Japanese)"
 msgstr "セッション概要（日本語）"
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:72
-#: templates/session/view.tpl:67
+#: templates/session/view.tpl:69
 msgid "Material Level"
 msgstr "レベル"
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:88
-#: templates/session/view.tpl:79
+#: templates/session/view.tpl:81
 msgid "Spoken Language"
 msgstr "講演に使用される言語"
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:100
-#: templates/session/view.tpl:83
+#: templates/session/view.tpl:85
 msgid "Slide Language"
 msgstr "スライド言語"
 
@@ -195,17 +195,17 @@ msgid "Comments"
 msgstr "コメント"
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:141
-#: templates/session/view.tpl:87
+#: templates/session/view.tpl:89
 msgid "Photo Release"
 msgstr "撮影許可"
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:155
-#: templates/session/view.tpl:91
+#: templates/session/view.tpl:93
 msgid "Recording Release"
 msgstr "録画許可"
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:169
-#: templates/session/view.tpl:95
+#: templates/session/view.tpl:97
 msgid "Materials Release"
 msgstr "素材利用許可"
 
@@ -245,11 +245,10 @@ msgstr "主宰"
 #: templates/dashboard.tpl:44 templates/dashboard.tpl:65
 #: templates/layout/conference.tpl:8 templates/session/confirm.tpl:28
 #: templates/session/confirm_done.tpl:24 templates/user/view.tpl:28
-#: templates/user/view.tpl:47
 msgid "Conference"
 msgstr "カンファレンス"
 
-#: templates/dashboard.tpl:57 templates/user/view.tpl:42
+#: templates/dashboard.tpl:57
 msgid "Proposals"
 msgstr "応募済みプロポーザル"
 
@@ -259,23 +258,22 @@ msgstr "応募されたプロポーザルはありません"
 
 #: templates/dashboard.tpl:64 templates/session/confirm.tpl:27
 #: templates/session/confirm_done.tpl:23 templates/session/form.tpl:28
-#: templates/user/view.tpl:46
 msgid "Title"
 msgstr "タイトル"
 
-#: templates/dashboard.tpl:66 templates/session/view.tpl:63
+#: templates/dashboard.tpl:66 templates/session/view.tpl:64
 msgid "Confirmed"
 msgstr "登壇確認"
 
-#: templates/dashboard.tpl:68 templates/user/view.tpl:48
+#: templates/dashboard.tpl:68
 msgid "Status"
 msgstr "状態"
 
-#: templates/dashboard.tpl:77 templates/session/view.tpl:64
+#: templates/dashboard.tpl:77 templates/session/view.tpl:65
 msgid "confirmed"
 msgstr "済"
 
-#: templates/dashboard.tpl:77 templates/session/view.tpl:64
+#: templates/dashboard.tpl:77 templates/session/view.tpl:65
 msgid "unconfirmed"
 msgstr "未確認"
 
@@ -502,7 +500,7 @@ msgid ""
 msgstr "以下のセッションは採択されていますが、最終登壇確認がなされていません。カンファレンスに来場し実際に指定された時間に登壇が可能な場合は該当するセッション横のボタンを押して登壇確認を行ってください。登壇確認がされない場合、主催者によりセッションが<strong>不採用</strong>となる場合があります。予定の変更やスケジュールが合わない場合は速やかに各カンファレンス主催者にその旨をご連絡ください"
 
 #: templates/session/confirm.tpl:29 templates/session/confirm_done.tpl:25
-#: templates/session/view.tpl:71
+#: templates/session/view.tpl:73
 msgid "Starts On"
 msgstr "開始日時"
 
@@ -772,4 +770,8 @@ msgid ""
 " email address. This is required so we know how to contact you regarding "
 "your submission, and to notify you of any important updates."
 msgstr "セッションに応募するにはメールアドレスの登録が必要となります。このメールアドレスは応募された内容に関する連絡や、その他連絡事項にのみ使用されます。"
+
+#: templates/user/view.tpl:42
+msgid "Past Sessions"
+msgstr "過去の登壇セッション"
 
