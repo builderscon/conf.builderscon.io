@@ -39,21 +39,14 @@
 {% endif %}
 
 {% if sessions %}
-            <h3>{% trans %}Proposals{% endtrans %}</h3>
+            <h3>{% trans %}Past Sessions{% endtrans %}</h3>
             <table class="session-history">
-            <thead>
-              <tr>
-                <td>{% trans %}Title{% endtrans %}</td>
-                <td>{% trans %}Conference{% endtrans %}</td>
-                <td>{% trans %}Status{% endtrans %}</td>
-              </tr>
-            </thead>
             <tbody>
-{% for session in sessions %}
+{% for session in sessions if session.conference.status != 'private' %}
               <tr>
-                <td><span{% if session.conference.status == 'private' %} class="invalid"{% endif %}>{% if session.title %}<a href="/{{ session.conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a>{% else %}N/A{% endif %}</span></td>
-                <td>{% if session.conference %}{{ session.conference.title }}{% endif %}</td>
-                <td>{{ _(session.status) }}</td>
+                <td>{% with thumbnail = session | session_thumbnail_url %}{% if thumbnail %}<img class="video-thumbnail" src="{{ thumbnail }}">{% endif %}{% endwith %}</td>
+                <td>{% if session.title %}<a href="/{{ session.conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a>{% endif %}</td>
+                <td>{% if session.conference %}<a href="/{{ session.conference.full_slug }}">{{ session.conference.title }}</a>{% endif %}</td>
               </tr>
 {% endfor %}
             </tbody>

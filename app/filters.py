@@ -11,8 +11,10 @@ import oembed
 import pytz
 import re
 
+OEMBED_EXPIRES = 3600
 SESSION_SLIDE_EMBED_EXPIRES = 3600
 SESSION_VIDEO_EMBED_EXPIRES = 3600
+SESSION_THUMBNAIL_URL_EXPIRES = 3600
 
 oembed_consumer = oembed.OEmbedConsumer()
 oembed_endpoints = [
@@ -24,13 +26,8 @@ for ent in oembed_endpoints:
     e = oembed.OEmbedEndpoint(*ent)
     oembed_consumer.addEndpoint(e)
 
-@builderscon.app.template_filter('video_embed')
-def video_embed(url, **opt):
-    key = "session.video.embed.html.%s" % url
-    html = builderscon.cache.get(key)
-    if html:
-        return html
-
+def video_oembed(url, **opt):
+    key = 'oembed.%s.%s' % (url, opt)
     o = flasktools.urlparse(url)
     if re.search(r'youtube\.com$', o.netloc, flags=re.UNICODE):
         if 'maxwidth' not in opt:
@@ -38,6 +35,52 @@ def video_embed(url, **opt):
         if 'maxheight' not in opt:
             opt['maxheight'] = 480
         res = oembed_consumer.embed(url, **opt)
+        builderscon.cache.set(key, res, OEMBED_EXPIRES)
+        return res
+    return None
+
+def slide_oembed(url, **opt):
+    key = 'oembed.%s.%s' % (url, opt)
+    o = flasktools.urlparse(url)
+    if re.search(r'(slideshare\.net|speakerdeck\.com)$', o.netloc, flags=re.UNICODE):
+        res = oembed_consumer.embed(url)
+        builderscon.cache.set(key, res, OEMBED_EXPIRES)
+        return res
+
+    return None
+
+@builderscon.app.template_filter('session_thumbnail_url')
+def session_thumbnail_url(session):
+    key = "session.thumbnail_url.%s" % session.get('id')
+    thumb = builderscon.cache.get(key)
+    if thumb:
+        return thumb
+
+    if session.get('video_url'):
+        res = video_oembed(session.get('video_url'))
+        url = res['thumbnail_url']
+        if url:
+            builderscon.cache.set(key, url, SESSION_THUMBNAIL_URL_EXPIRES)
+            return url
+
+    if session.get('slide_url'):
+        res = slide_oembed(session.get('slide_url'))
+        url = res['thumbnail_url']
+        if url:
+            builderscon.cache.set(key, url, SESSION_THUMBNAIL_URL_EXPIRES)
+            return url
+ 
+    return None
+
+@builderscon.app.template_filter('video_embed')
+def video_embed(url, **opt):
+    key = "session.video.embed.html.%s" % url
+    html = builderscon.cache.get(key)
+    if html:
+        return html
+
+    res = video_oembed(url, **opt)
+    if res:
         html = res['html']
         builderscon.cache.set(key, html, SESSION_VIDEO_EMBED_EXPIRES)
         return html
@@ -46,24 +89,25 @@ def video_embed(url, **opt):
     return html
 
 @builderscon.app.template_filter('slide_embed')
-def slide_embed(url):
+def slide_embed(url, **opt):
     key = "session.slide.embed.html.%s" % url
     html = builderscon.cache.get(key)
     if html:
         return html
 
     o = flasktools.urlparse(url)
-    if re.search(r'(slideshare\.net|speakerdeck\.com)$', o.netloc, flags=re.UNICODE):
-        res = oembed_consumer.embed(url)
-        html = res['html']
-        builderscon.cache.set(key, html, SESSION_SLIDE_EMBED_EXPIRES)
-        return html
-    elif re.search(r'^docs\.google\.com$', o.netloc, flags=re.UNICODE):
+    if re.search(r'^docs\.google\.com$', o.netloc, flags=re.UNICODE):
         url = re.sub(r'/pub\?', '/embed?', url)
         o = flasktools.urlparse(url)
         q = flasktools.parse_qsl(o.query)
         q.append(('width', 400))
         html = '<iframe src="%s" frameborder="0" width="500" height="450"allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>' % flasktools.urlunparse(o)
+        builderscon.cache.set(key, html, SESSION_SLIDE_EMBED_EXPIRES)
+        return html
+
+    res = slide_oembed(url, **opt)
+    if res:
+        html = res['html']
         builderscon.cache.set(key, html, SESSION_SLIDE_EMBED_EXPIRES)
         return html
 
