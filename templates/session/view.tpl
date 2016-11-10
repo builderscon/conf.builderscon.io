@@ -65,7 +65,7 @@
 {% if session.status == 'accepted' %}
                 <tr>
                   <td>{% trans %}Confirmed{% endtrans %}</td>
-                  <td>{% if session.confirmed %}{% trans %}confirmed{% endtrans %}{% else %}<span class="unconfirmed">{% trans %}unconfirmed{% endtrans %}</span>{% endif %}</td>
+                  <td>{% if session.confirmed %}{% trans %}confirmed{% endtrans %}{% else %}<span class="unconfirmed">{% trans %}unconfirmed{% endtrans %} {% if session.speaker_id == user.id and session.status == 'accepted' %}<a style="margin: 0" class="confirm-button success button" data-title="{{ session.title|urlencode }}" data-id="{{ session.id }}">{% trans %}Confirm{% endtrans %}</a></span>{% endif %}</span>{% endif %}</td>
                 </tr>
 {% endif %}
                 <tr>
@@ -112,9 +112,11 @@
     </div>
   </div>
 </main>
+{% include 'session/reconfirm-modal.tpl' %}
 {% endblock%}
 
 {% block scripts %}
+{% include 'session/reconfirm-modal-js.tpl' %}
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];

@@ -50,34 +50,9 @@
   </div>
 </main>
 
-<div class="reveal" id="confirm-modal" data-reveal>
-  <p>{% trans %}Your session {% endtrans %}<strong class="session-title"></strong>{% trans %} will be confirmed when you press the button below{% endtrans %}</p>
-  <form id="confirm-form" action="-" method="POST">
-    <input type="submit" class="success button" value="{% trans %}Yes, I confirm{% endtrans %}">
-  </form>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+{% include 'session/reconfirm-modal.tpl' %}
 {% endblock%}
 
 {% block scripts %}
-<script>
-<!--
-$(function() {
-  $(document).ready(function() {
-    $(".confirm-button").click(function(e) {
-      var $t = $(e.target);
-      var id = $t.attr('data-id');
-      var title = $t.attr('data-title');
-      var $f = $("#confirm-form");
-      $f.attr('action', '/{{ conference.full_slug }}/session/' + id + '/confirm');
-      $("strong.session-title", "#confirm-modal").text(decodeURI(title));
-      $("#confirm-modal").foundation("open");
-      return false;
-    });
-  });
-})
--->
-</script>
+{% include 'session/reconfirm-modal-js.tpl' %}
 {% endblock %}

@@ -17,3 +17,6 @@ class Cache(object):
 
     def delete(self, key):
         return self.redis.delete(key)
+
+    def keys(self, key):
+        return self.redis.keys(key)
