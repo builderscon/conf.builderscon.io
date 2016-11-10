@@ -510,7 +510,7 @@ msgstr "部屋"
 
 #: templates/session/confirm.tpl:36
 msgid "Confirm"
-msgstr "確認"
+msgstr "確認する"
 
 #: templates/session/confirm.tpl:54
 msgid "Your session "
