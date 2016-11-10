@@ -77,6 +77,10 @@
                   <td>{% if session.starts_on %}{{session.starts_on | dateobj | datefmt(locale=lang,tzinfo=conference.timezone)}}{% else %}N/A{% endif %}</td>
                 </tr>
                 <tr>
+                  <td>{% trans %}Room{% endtrans %}</td>
+                  <td>{% if session.room %}{{ session.room.name }}{% endif %}</td>
+                </tr>
+                <tr>
                   <td>{% trans %}Session Duration{% endtrans %}</td>
                   <td>{{ _(session.session_type.name) }}</td>
                 </tr>
