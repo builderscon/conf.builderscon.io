@@ -353,5 +353,10 @@ def post_confirm():
 @with_conference_by_slug
 @with_session
 def confirmed():
+    session = flask.g.stash.get('session')
+    if session.get('id'):
+        keys = app.cache.keys('*%s*' % session.get('id'))
+        for key in keys:
+            app.cache.delete(key)
     return flask.render_template('session/confirm_done.tpl')
 
