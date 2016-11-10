@@ -65,7 +65,7 @@
 {% if session.status == 'accepted' %}
                 <tr>
                   <td>{% trans %}Confirmed{% endtrans %}</td>
-                  <td>{% if session.confirmed %}{% trans %}confirmed{% endtrans %}{% else %}<span class="unconfirmed">{% trans %}unconfirmed{% endtrans %} {% if session.speaker_id == user.id and session.status == 'accepted' %}<a style="margin: 0" class="confirm-button success button" data-title="{{ session.title|urlencode }}" data-id="{{ session.id }}">{% trans %}Confirm{% endtrans %}</a></span>{% endif %}</span>{% endif %}</td>
+                  <td>{% if session.confirmed %}{% trans %}confirmed{% endtrans %}{% else %}<span class="unconfirmed">{% trans %}unconfirmed{% endtrans %} {% if user and (session.speaker_id == user.id and session.status == 'accepted') %}<a style="margin: 0" class="confirm-button success button" data-title="{{ session.title|urlencode }}" data-id="{{ session.id }}">{% trans %}Confirm{% endtrans %}</a></span>{% endif %}</span>{% endif %}</td>
                 </tr>
 {% endif %}
                 <tr>
