@@ -97,13 +97,9 @@ def timetable():
 
         room_in_session = dict()
         rooms = dict()
-        tracks = dict()
         for r_id in sessions_by_room:
             r = app.api.lookup_room(r_id)
             rooms[r_id] = r
-
-        for track in conference.get('tracks'):
-            tracks[track.get('room_id')] = track
 
         widthclass = 'room-col-%d' % (int(100 / len(rooms)))
         t = '<table class="ttt">\n' # time-table-table = ttt
