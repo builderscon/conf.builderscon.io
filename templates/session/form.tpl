@@ -71,15 +71,14 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
           <div class="row">
             <div class="large-{{ left }} columns"><label>{% trans %}Material Level{% endtrans %}</label></div>
             <div class="large-{{ right }} columns">
-{% set sel_material_level = session.get('material_level', 'beginner') if session else 'beginner' %}
-              <select name="material_level">
+              <select name="material_level" id="select-material-level">
 {% set levels = [
   { 'name': _('Beginner'), 'value': 'beginner' },
   { 'name': _('Intermediate'), 'value': 'intermediate' },
   { 'name': _('Expert'), 'value': 'advanced' }
 ] %}
 {% for level in levels %}
-                <option value="{{ level.value }}" id="{{ level.value }}"{% if level.value == sel_material_level %} selected="selected"{% endif %}/><label for="{{ level.value }}">{{ _(level.name) }}</option>
+                <option value="{{ level.value }}" id="{{ level.value }}"/><label for="{{ level.value }}">{{ _(level.name) }}</option>
 {% endfor %}
               </select>
             </div>
@@ -91,7 +90,7 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
               <select name="spoken_language" id="select-spoken-language">
 {% set sel_spoken_language = session.get('spoken_language', 'en') if session else 'en' %}
 {% for l in languages %}
-                <option value="{{ l.value }}"{% if l.value == sel_spoken_language %} selected="selected"{% endif %}>{{ _(l.name) }}</option>
+                <option value="{{ l.value }}"{% if l.value == sel_spoken_language %} selected="selected"{% endif %}><label for="{{ l.value }}">{{ _(l.name) }}</label></option>
 {% endfor %}
               </select>
             </div>
@@ -100,10 +99,10 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
             <div class="large-{{ left }} columns"><label>{% trans %}Slide Language{% endtrans %}</label></div>
             <div class="large-{{ right }} columns">
               <p class="notice-small">{% trans %}Please select which language you will write your slides in.{% endtrans %}</p>
+            <p>{{ sel_slide_language }}</p>
               <select name="slide_language" id="select-slide-language">
-{% set sel_slide_language = session.get('slide_language', 'en') if session else 'en' %}
 {% for l in languages %}
-                <option value="{{ l.value }}"{% if l.value == sel_slide_language %} selected="selected"{% endif %}>{{ _(l.name) }}</option>
+                <option value="{{ l.value }}"><label for="{{ l.value }}">{{ _(l.name) }}</label></option>
 {% endfor %}
               </select>
             </div>
@@ -200,3 +199,5 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
       </div>
     </div>
   </div>
+
+

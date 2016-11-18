@@ -90,10 +90,8 @@
     <script src="{{ url('static', filename='js/jquery.mmenu.all.min.js') }}"></script>
     <script src="{{ url('static', filename='js/foundation.min.js') }}"></script>
     <script type="text/javascript"><!--
-      $(document).ready(function() {
-          $(document).foundation();
-      })
-    --></script>
+      $(document).ready(function() { $(document).foundation() });
+--></script>
     {% block scripts %}{% endblock %}
   </body>
 </html>
