@@ -14,8 +14,9 @@ $(function() {
 
   $("#cfptabs").foundation("selectTab", "#panel-{{ lang }}");
 
-  $("#select-spoken-language").val("{{ lang }}");
-  $("#select-slide-language").val("{{ lang }}");
+  $("#select-material-level").val("{% if session %}{{ session.get('material_level', lang) }}{% else %}{{ lang }}{% endif %}");
+  $("#select-spoken-language").val("{% if session %}{{ session.get('spoken_language', lang) }}{% else %}{{ lang }}{% endif %}");
+  $("#select-slide-language").val("{% if session %}{{ session.get('slide_language', lang) }}{% else %}{{ lang }}{% endif %}");
 })
 -->
 </script>
