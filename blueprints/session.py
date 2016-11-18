@@ -104,17 +104,20 @@ def timetable():
         widthclass = 'room-col-%d' % (int(100 / len(rooms)))
         t = '<table class="ttt">\n' # time-table-table = ttt
         t += '<thead>\n<tr>\n<td class="top-left"></td>\n'
-        for room_id in sessions_by_room:
+        for track in conference.get('tracks'):
+            room_id = track.get('room_id')
             room_in_session[room_id] = 0
-            room = rooms[room_id]
-            t += '<td class="room-name %s">%s</td>\n' % (widthclass, room.get('name'))
+            t += '<td class="room-name %s">%s</td>\n' % (widthclass, track.get('name'))
         t += '</tr>\n</thead>\n<tbody>\n'
 
         for h in range(start_h, end_h + 1):
             for m in map(lambda n:n*5, range(0,12)):
                 t += "<tr>\n"
                 t += '<td class="time-cell">%02d:%02d</td>\n' % (h, m)
-                for room_id in room_in_session:
+                for track in conference.get('tracks'):
+                    room_id = track.get('room_id')
+                    if room_id not in room_in_session:
+                        continue
                     room_sessions = sessions_by_room.get(room_id)
                     session = None
                     st = None
