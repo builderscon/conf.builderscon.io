@@ -238,6 +238,8 @@ def update():
             materials_release = form.get('materials_release'),
             slide_language    = form.get('slide_language'),
             spoken_language   = form.get('spoken_language'),
+            slide_url         = form.get('slide_url'),
+            video_url         = form.get('video_url'),
             **l10n
         )
         if ok:
