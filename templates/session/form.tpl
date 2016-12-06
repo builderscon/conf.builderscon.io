@@ -132,7 +132,7 @@ You may use Markdown in this field{% endtrans %}">{% if session %}{{ session.get
           <div class="row">
             <div class="large-{{ left }} columns"><label>{% trans %}Video URL{% endtrans %}</label></div>
             <div class="large-{{ right }} columns">
-              <input type="text" name="slide_url"{% if session %} value="{{ session.video_url }}"{% endif %}>
+              <input type="text" name="video_url"{% if session %} value="{{ session.video_url }}"{% endif %}>
             </div>
           </div>
 {% endif %}
