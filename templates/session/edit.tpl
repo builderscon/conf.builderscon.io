@@ -21,7 +21,7 @@
 </div>
 <div class="row">
   <div class="col s12"><ul>{% for error in missing %}
-    <li>{% _("Missing field %s", error) }}</li>
+    <li>{{ _("Missing field %s", error) }}</li>
   </ul></div>
 </div>
 </div>
