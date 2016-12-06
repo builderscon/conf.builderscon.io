@@ -56,7 +56,8 @@
             {% if session.slide_url %}
             <div class="slide">
               <h5>{% trans %}Slides{% endtrans %}</h5>
-              {{ session.slide_url | slide_embed }}
+              {% for slide_url in session.slide_url.split(',') %}{{ slide_url | slide_embed }}
+{% endfor %}
             </div>{% endif %}
 
             <div class="information">
