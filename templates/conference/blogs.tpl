@@ -18,11 +18,11 @@
         <div class="row">
           <div class="large-12 small-12 columns">
 {% if blog_entries | length > 0 %}
-            <ul>
+            <ol>
 {% for entry in blog_entries %}
               <li><a target="_blank" href="{{ entry.url }}">{{ entry.title }}</a></li>
 {% endfor %}
-            </ul>
+            </ol>
 {% endif %}
           </div>
         </div>
