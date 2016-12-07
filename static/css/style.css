@@ -410,3 +410,7 @@ a.confirm-session-link:active {
     height: auto;
     width: 100px;
 }
+
+ol.visited-link a:visited {
+    color: rgb(234, 84, 50);
+}
