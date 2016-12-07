@@ -100,6 +100,7 @@ def load_conference_by_slug(cb, series_slug, slug, **args):
     flask.g.stash['series_slug'] = series_slug
     flask.g.stash['slug'] = slug
     flask.g.stash['full_slug'] = full_slug
+    flask.g.stash['conference_id'] = conference.get('id')
     flask.g.stash['conference'] = conference
     return cb(**args)
 
