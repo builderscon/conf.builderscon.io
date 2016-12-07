@@ -79,3 +79,24 @@ def schedule_ics():
     app.cache.set(key, ics, 300)
     return flask.Response(ics, 200, {'Content-Type': 'text/calendar'})
 
+
+@page.route('/<series_slug>/<path:slug>/feedback/blogs')
+@with_conference_by_slug
+def feedback_blogs():
+    key = "blog_entries.%s.%s" % (flask.g.stash.get('conference_id'), flask.g.lang)
+    blog_entries = app.cache.get(key)
+    if not blog_entries:
+        blog_entries = app.api.list_blog_entries(
+            conference_id=flask.g.stash.get('conference_id'),
+            lang=flask.g.lang,
+            status=['public']
+        )
+        if not blog_entries:
+            flask.abort(500, "failed to fetch blog entries")
+            return
+        app.cache.set(key, blog_entries, 600)
+
+    flask.g.stash['blog_entries'] = blog_entries or [];
+    print(blog_entries)
+    return flask.render_template('conference/blogs.tpl')
+

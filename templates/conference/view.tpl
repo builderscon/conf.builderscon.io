@@ -57,6 +57,23 @@ function initMap() {
 {% endblock %}
 
 {% block main %}
+
+{% if conference.get('blog_feedback_available') %}
+<div class="section article">
+  <div class="inner">
+    <h1 class="section-header">{% trans %}Feedback{% endtrans %}</h1>
+    <div class="section-content">
+      <div class="row">
+        <div class="large-12 small-12 columns">
+          <h3><span class="i-library_books"> </span><a href="/{{ conference.full_slug }}/feedback/blogs">{% trans %}Blog Posts{% endtrans %}</a></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
 {% set description = conference.get('description') %}
 {% if description %}
   <div class="section article">
