@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-12-07 12:06+0900\n"
+"POT-Creation-Date: 2016-12-08 09:34+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgid "Meet Mr. B (Mr. Beacon)!"
 msgstr ""
 
 #: templates/beacon.tpl:8 templates/errors/404.tpl:9 templates/errors/500.tpl:9
-#: templates/index.tpl:8
+#: templates/index.tpl:33
 msgid "BLOG"
 msgstr ""
 
@@ -112,7 +112,15 @@ msgstr ""
 msgid "ClubT"
 msgstr ""
 
-#: templates/catalog.tpl:20
+#: templates/catalog.tpl:15
+msgid "Upcoming Conferences"
+msgstr ""
+
+#: templates/catalog.tpl:16
+msgid "Past Conferences"
+msgstr ""
+
+#: templates/catalog.tpl:21
 msgid ""
 "The redirect_uri MUST match the registered callback URL for this "
 "application."
@@ -262,21 +270,21 @@ msgstr ""
 msgid "unconfirmed"
 msgstr ""
 
-#: templates/index.tpl:6 templates/layout/base.tpl:36
+#: templates/index.tpl:31 templates/layout/base.tpl:36
 #: templates/layout/conference.tpl:6
 msgid "builderscon"
 msgstr ""
 
-#: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:7
+#: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:32
 #: templates/layout/base.tpl:37 templates/layout/conference.tpl:7
 msgid "Dashboard"
 msgstr ""
 
-#: templates/index.tpl:26
+#: templates/index.tpl:51
 msgid "Welcome To builderscon"
 msgstr ""
 
-#: templates/index.tpl:28
+#: templates/index.tpl:53
 msgid ""
 "\n"
 "        <strong>Join builderscon and discover something new! builderscon "
@@ -292,15 +300,11 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/index.tpl:41
-msgid "Upcoming Conferences"
-msgstr ""
-
-#: templates/index.tpl:64
+#: templates/index.tpl:74
 msgid "Get Involved!"
 msgstr ""
 
-#: templates/index.tpl:71
+#: templates/index.tpl:81
 msgid ""
 "<b>Slack: </b> We have <a href=\"https://builderscon.slack.com\">a Slack "
 "team</a>, and <a href=\"https://slack-invite-dot-"
@@ -309,7 +313,7 @@ msgid ""
 " your own builderscon!"
 msgstr ""
 
-#: templates/index.tpl:79
+#: templates/index.tpl:89
 msgid ""
 "<b>Github:</b> Explore our many opensource projects on <a "
 "href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
@@ -319,7 +323,7 @@ msgid ""
 "We'd love for your to send us pull requests!"
 msgstr ""
 
-#: templates/index.tpl:87
+#: templates/index.tpl:97
 msgid ""
 "<b>Facebook:</b> Peruse our <a "
 "href=\"https://www.facebook.com/builderscon\">Facebook page</a> to find "
@@ -329,14 +333,14 @@ msgid ""
 "href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
 msgstr ""
 
-#: templates/index.tpl:95
+#: templates/index.tpl:105
 msgid ""
 "<b>Twitter:</b> Follow us on <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
 "updates!"
 msgstr ""
 
-#: templates/index.tpl:103
+#: templates/index.tpl:113
 msgid ""
 "<b>Share:</b> Read our <a href=\"http://blog.builderscon.io\">blog</a>, "
 "post on your favorite sites, and perhaps if you are feeling like it, you "
