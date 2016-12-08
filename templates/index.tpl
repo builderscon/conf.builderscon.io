@@ -2,6 +2,31 @@
 
 {% block body_id %}top{% endblock %}
 
+{% macro conference_list(title, conferences) -%}
+  <div class="section article conferences">
+    <div class="inner">
+      <h1 class="section-header">{{ _(title) }}</h1>
+      <div class="section-content">
+        {% for conference in conferences %}
+        <div class="row">
+          <div class="large-1 small-1 column">
+            <img src="{{ url('static', filename='images/hex_logo.png') }}">
+          </div>
+          <div class="large-11 small-11 column conference-name">
+            <a href="{% if conference.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a>
+{%- set dates = conference.get('dates') %}
+{%- if dates|length > 0 %}
+{%- set dt = conference.dates[0]|confdate(lang=lang,timezone=conference.get('timezone')) %}
+({{ dt.date() }})
+{%- endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{%- endmacro %}
+
 {% block menuitems %}
 <li><a href="/">{% trans %}builderscon{% endtrans %}</a></li>
 <li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
@@ -36,28 +61,13 @@
     </div>
   </div>
 
-  <div class="section article conferences">
-    <div class="inner">
-      <h1 class="section-header">{% trans %}Upcoming Conferences{% endtrans %}</h1>
-      <div class="section-content">
-        {% for conference in conferences %}
-        <div class="row">
-          <div class="large-1 small-1 column">
-            <img src="{{ url('static', filename='images/hex_logo.png') }}">
-          </div>
-          <div class="large-11 small-11 column conference-name">
-            <a href="{% if conference.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a>
-{%- set dates = conference.get('dates') %}
-{%- if dates|length > 0 %}
-{%- set dt = conference.dates[0]|confdate(lang=lang,timezone=conference.get('timezone')) %}
-({{ dt.date() }})
-{%- endif %}
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
+{% if upcoming_conferences | length > 0 %}
+{{ conference_list(title='Upcoming Conferences', conferences=upcoming_conferences) }}
+{% endif %}
+
+{% if past_conferences | length > 0 %}
+{{ conference_list(title='Past Conferences', conferences=past_conferences) }}
+{% endif %}
 
   <div class="section article get-involved">
     <div class="inner">

@@ -12,7 +12,8 @@
 {{ _("Technical Sponsors") }}
 {{ _("Sponsors") }}
 {{ _("ClubT") }}
-
+{{ _("Upcoming Conferences") }}
+{{ _("Past Conferences") }}
 
 # OAuth error. This error message should never ever appear in a user
 # facing context, so it does not need to be translated, but it's here

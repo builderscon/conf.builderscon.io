@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-12-07 12:06+0900\n"
+"POT-Creation-Date: 2016-12-08 09:34+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -31,7 +31,7 @@ msgid "Meet Mr. B (Mr. Beacon)!"
 msgstr "ビーコン君！"
 
 #: templates/beacon.tpl:8 templates/errors/404.tpl:9 templates/errors/500.tpl:9
-#: templates/index.tpl:8
+#: templates/index.tpl:33
 msgid "BLOG"
 msgstr "ブログ"
 
@@ -127,7 +127,15 @@ msgstr "スポンサーの皆様"
 msgid "ClubT"
 msgstr "株式会社ClubT"
 
-#: templates/catalog.tpl:20
+#: templates/catalog.tpl:15
+msgid "Upcoming Conferences"
+msgstr "近日開催予定のカンファレンス"
+
+#: templates/catalog.tpl:16
+msgid "Past Conferences"
+msgstr "過去のカンファレンス"
+
+#: templates/catalog.tpl:21
 msgid ""
 "The redirect_uri MUST match the registered callback URL for this "
 "application."
@@ -277,21 +285,21 @@ msgstr "済"
 msgid "unconfirmed"
 msgstr "未確認"
 
-#: templates/index.tpl:6 templates/layout/base.tpl:36
+#: templates/index.tpl:31 templates/layout/base.tpl:36
 #: templates/layout/conference.tpl:6
 msgid "builderscon"
 msgstr ""
 
-#: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:7
+#: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:32
 #: templates/layout/base.tpl:37 templates/layout/conference.tpl:7
 msgid "Dashboard"
 msgstr "ダッシュボード"
 
-#: templates/index.tpl:26
+#: templates/index.tpl:51
 msgid "Welcome To builderscon"
 msgstr "builderscon とは"
 
-#: templates/index.tpl:28
+#: templates/index.tpl:53
 msgid ""
 "\n"
 "        <strong>Join builderscon and discover something new! builderscon "
@@ -316,15 +324,11 @@ msgstr ""
 "        <p>buildersconに参加して、あなたの情熱をシェアしてください！皆様のご参加をお待ちしております！</p>"
 "        "
 
-#: templates/index.tpl:41
-msgid "Upcoming Conferences"
-msgstr "近日開催予定"
-
-#: templates/index.tpl:64
+#: templates/index.tpl:74
 msgid "Get Involved!"
 msgstr "参加しよう！"
 
-#: templates/index.tpl:71
+#: templates/index.tpl:81
 msgid ""
 "<b>Slack: </b> We have <a href=\"https://builderscon.slack.com\">a Slack "
 "team</a>, and <a href=\"https://slack-invite-dot-"
@@ -337,7 +341,7 @@ msgstr ""
 "href=\"https://slack-invite-dot-"
 "builderscon-1248.appspot.com/\">自動招待フォーム</a>から気軽に参加できます"
 
-#: templates/index.tpl:79
+#: templates/index.tpl:89
 msgid ""
 "<b>Github:</b> Explore our many opensource projects on <a "
 "href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
@@ -352,7 +356,7 @@ msgstr ""
 " <a href=\"https://github.com/builderscon/octav\">APIサーバー</a>, そして<a "
 "href=\"https://github.com/builderscon/builderscon.io\">本サイトのソースコード</a>等もあります。PR等どしどし送って下さい！"
 
-#: templates/index.tpl:87
+#: templates/index.tpl:97
 msgid ""
 "<b>Facebook:</b> Peruse our <a "
 "href=\"https://www.facebook.com/builderscon\">Facebook page</a> to find "
@@ -367,7 +371,7 @@ msgstr ""
 "href=\"https://www.facebook.com/events/803942576374123/\">1</a>][<a "
 "href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
 
-#: templates/index.tpl:95
+#: templates/index.tpl:105
 msgid ""
 "<b>Twitter:</b> Follow us on <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
@@ -376,7 +380,7 @@ msgstr ""
 "<b>Twitter:</b> <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>アカウントをフォローして、最新の情報をチェック！"
 
-#: templates/index.tpl:103
+#: templates/index.tpl:113
 msgid ""
 "<b>Share:</b> Read our <a href=\"http://blog.builderscon.io\">blog</a>, "
 "post on your favorite sites, and perhaps if you are feeling like it, you "
