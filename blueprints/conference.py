@@ -31,6 +31,16 @@ def conference(series_slug):
 @page.route('/<series_slug>/<path:slug>')
 @with_conference_by_slug
 def view():
+    key = "staff.%s.%s" % (flask.g.stash.get('conference_id'), flask.g.lang)
+    staff = app.cache.get(key)
+    if not staff:
+        staff = app.api.list_conference_staff(
+            conference_id=flask.g.stash.get('conference_id'),
+            lang=flask.g.lang
+        )
+        if staff:
+            app.cache.set(key, staff, 600)
+    flask.g.stash['staff'] = staff
     return flask.render_template('conference/view.tpl',
         googlemap_api_key=app.cfg.googlemap_api_key())
 
@@ -97,6 +107,24 @@ def feedback_blogs():
         app.cache.set(key, blog_entries, 600)
 
     flask.g.stash['blog_entries'] = blog_entries or [];
-    print(blog_entries)
     return flask.render_template('conference/blogs.tpl')
+
+@page.route('/<series_slug>/<path:slug>/staff')
+@with_conference_by_slug
+def staff():
+    key = "staff.%s.%s" % (flask.g.stash.get('conference_id'), flask.g.lang)
+    staff = app.cache.get(key)
+    if not staff:
+        staff = app.api.list_conference_staff(
+            conference_id=flask.g.stash.get('conference_id'),
+            lang=flask.g.lang
+        )
+        if staff is None:
+            flask.abort(500, "failed to fetch staff")
+            return
+        app.cache.set(key, staff, 600)
+
+    flask.g.stash['staff'] = staff or [];
+    return flask.render_template('conference/staff.tpl')
+
 

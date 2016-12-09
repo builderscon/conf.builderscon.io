@@ -149,5 +149,31 @@ function initMap() {
     </div>
   </div>
 {% endif %}
+
+{% set avatar_edge = 50 %}
+<style type="text/css">
+<!--
+    div.staff img.avatar {
+        border-radius: {{ avatar_edge / 2 }}px;
+        width: {{ avatar_edge }}px;
+        height: {{ avatar_edge }}px;
+    }
+-->
+</style>
+
+
+<div class="section article">
+  <div class="inner">
+    <h1 class="section-header">{% trans %}Staff{% endtrans %} - {{ conference.title }}</h1>
+    <div class="section-content staff">
+{%- for user in conference.administrators %}
+<a href="/{{ conference.full_slug }}/staff"><img class="avatar" src="{{ user.avatar_url }}"></a>
+{% endfor %}
+{%- for user in staff %}
+<a href="/{{ conference.full_slug }}/staff"><img class="avatar" src="{{ user.avatar_url }}"></a>
+{% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock%}
 
