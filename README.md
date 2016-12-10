@@ -1,5 +1,19 @@
 # builderscon.io
 
+This application implements the https://builderscon.io site.
+
+Features include:
+
+* Handles multiple conference series (i.e. Conference "X" 2016, 2017, 2018... and Conference "Y" 2016, 2017, 2018... etc)
+* Internationalized (currently supports Japanese and English)
+* Github/Twitter/Facebook login
+* Capability to track user proposal submissions over time (so you know which proposals were sent to which conference)
+* Capability to display sessions for a given user over time (so you can view all of their video/slides)
+* Custom redirects for conferences that do not want to use our site, but want to register their data through [octav](https://github.com/builderscon/octav)
+* Automatic session timetable generation
+* Automatic conference staff page generation
+* Customizable session submission workflow
+
 ## How to run on Vagrant
 
 1.  setup
