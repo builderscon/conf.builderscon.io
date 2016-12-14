@@ -79,3 +79,12 @@ def schedule_ics():
     app.cache.set(key, ics, 300)
     return flask.Response(ics, 200, {'Content-Type': 'text/calendar'})
 
+@page.route('/<series_slug>/<path:slug>/videos')
+@with_conference_by_slug
+def revideos():
+    conference = flask.g.stash.get('conference')
+    video_url = conference.get('video_url')
+    if video_url:
+        return flask.redirect(video_url)
+
+    return flask.abort(404)
