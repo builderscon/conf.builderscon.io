@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-12-09 11:46+0900\n"
+"POT-Creation-Date: 2016-12-19 02:51+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -419,6 +419,7 @@ msgid "%(count)d blogs collected"
 msgstr "%(count)d個のブログ"
 
 #: templates/conference/staff.tpl:3 templates/conference/staff.tpl:45
+#: templates/conference/view.tpl:182
 msgid "Staff"
 msgstr "運営スタッフ"
 
@@ -455,10 +456,14 @@ msgid "Venue"
 msgstr "会場"
 
 #: templates/conference/view.tpl:120
+msgid "External Resources"
+msgstr "外部リソース"
+
+#: templates/conference/view.tpl:135
 msgid "Guest Speakers"
 msgstr "ゲストスピーカー"
 
-#: templates/conference/view.tpl:145
+#: templates/conference/view.tpl:160
 msgid "Contact Information"
 msgstr "連絡先"
 
