@@ -98,7 +98,7 @@ function initMap() {
         <h2>{% trans %}External Resources{% endtrans %}</h2>
 {% for resource in external_resources %}
         <div class="row">
-          <p style="margin-left: 2em"><a href="{{ resource.url }}">{{ resource.name }}</a>:{{ resource.description }}</p>
+          <p style="margin-left: 2em"><a href="{{ resource.url }}">{{ resource.title }}</a>: {{ resource.description }}</p>
         </div>
 {% endfor %}
 {% endif %}
