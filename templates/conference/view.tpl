@@ -114,6 +114,23 @@ function initMap() {
     </div>
   </div>
 
+{% set external_resources = conference.external_resources %}
+{% if external_resources|length > 0 %}
+  <div class="section article external_resources">
+    <div class="inner">
+      <h1 class="section-header">{% trans %}Resources{% endtrans %}</h1>
+      <div class="section-content">
+{% for resource in external_resources %}
+        <div class="row" style="margin-bottom: 5px;">
+          <div class="small-2  large-1  columns"><a href="{{ resource.url }}">{{ resource.title }}</a>:</div>
+          <div class="small-10 large-11 columns">{{ resource.description }}</div>
+        </div>
+{% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
 {% if conference.featured_speakers|length > 0 %}
   <div class="section article speakers">
     <div class="inner">
