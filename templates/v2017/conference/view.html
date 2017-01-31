@@ -1,5 +1,10 @@
 {% extends 'v2017/layout/base.html' %}
 
+{% block herotext %}
+<h1>{{ conference.title }}</h1>
+<h2>{{ conference.sub_title }}</h2>
+{% endblock %}
+
 {% block scripts %}
 {% if conference.venues|length > 0 %}
 <script type="text/javascript">
