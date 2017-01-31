@@ -46,7 +46,7 @@ function initMap() {
 {% for r in conference.external_resources %}
 <div class="card horizontal hoverable">
 <div class="card-image">
-<img src="{{ r.get('photo_url') or '/static/v2017/images/media_pict_photo.jpg' }}">
+<img src="{{ r.get('image_url') or '/static/v2017/images/media_pict_photo.jpg' }}">
 </div><!--  / .card-image / -->
 <div class="card-stacked">
 <div class="card-action">
