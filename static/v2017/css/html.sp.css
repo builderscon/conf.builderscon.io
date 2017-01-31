@@ -489,12 +489,13 @@ section.section-third .section .title em  { color: #ffffff; }
 #staff .block ul li img { width: 75px; }
 
 #sns .row .col .twitter {
-	max-width: 500px;
+	max-width: 400px;
 	margin: 0 auto 20px auto;
 }
 
 #sns .row .col .fb-iframe {
 	text-align: center;
+        max-width: 400px;
 	margin: 0 auto 20px auto;
 }
 
