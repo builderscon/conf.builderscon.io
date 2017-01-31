@@ -295,7 +295,7 @@ nav .button-collapse i {
 #pagetop {
 	position: fixed;
 	right: 20px;
-	bottom: 45%;
+	bottom: 20px;
 	line-height: 100%;
 	z-index: 99999;
 }
