@@ -98,8 +98,8 @@ def load_conference_by_slug(cb, series_slug, slug, **args):
     if not conference:
         return flask.abort(404)
 
-    if conference.get('redirect_url'):
-        return flask.redirect(conference.get('redirect_url'))
+    #if conference.get('redirect_url'):
+    #    return flask.redirect(conference.get('redirect_url'))
 
     flask.g.stash['series_slug'] = series_slug
     flask.g.stash['slug'] = slug

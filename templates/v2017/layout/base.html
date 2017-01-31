@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{# This is a layout that is designed for v2017 design of builderscon. #}
+{# All components should be included from a path with v2017 in it. For #}
+{# example, static/foo.css should be in static/v2017/foo.css, so forth. #}
+{% set version = 'v2017' -%}
+{% macro navmenu() -%}
+{% block menuitems %}
+<li><a href="/">{% trans %}builderscon{% endtrans %}</a></li>
+<li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
+<li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
+<li><a href="/{{ full_slug }}/sessions">{% trans %}Sessions{% endtrans %}</a></li>
+<li><a href="/{{ full_slug }}/news">{% trans %}NEWS{% endtrans %}</a></li>
+<li><a href="/{{ full_slug }}/sponsors">{% trans %}SPONSORS{% endtrans %}</a></li>
+{% endblock %}
+{% endmacro -%}
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>{% block title %}builderscon - {% trans %}Discover Something New{% endtrans %}{% endblock %}</title>
+<meta name="keywords" content="builderscon,tech,engineer,festival,お祭り" />
+{% for name in ["description","og:description"] %}
+<meta {% if name == 'og:description' %}property{% else %}name{% endif %}="{{ name }}" content="{% block og_description %}{% trans %}Discover Something New{% endtrans %} - {% trans %}builderscon is a festival for those who love tech!{% endtrans %}{% endblock %}" />
+{% endfor %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@builderscon">
+<meta property="fb:app_id" content="1537973726511652" />
+{# <meta property="og:title" content=""> #}
+{# <meta property="og:url" content=""> #}
+<meta property="og:site_name" content="builderscon" />
+<meta property="og:type" content="{% block ogp_type %}{% if pagetitle == 'top' %}website{% else %}article{% endif %}{% endblock %}" />
+<meta property="og:image" content="{% block og_image %}https://builderscon.io{{ url('static', filename='images/hex_logo.png') }}{% endblock %}" />
+<link rel="shortcut icon" href="/static/images/favicon.ico">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400italic,600,600italic,300italic,300" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" />
+<link rel="stylesheet" href="/static/v2017/css/common.css" />
+<link rel="stylesheet" href="/static/v2017/css/materialize.css" />
+<link rel="stylesheet" href="/static/v2017/css/fonts.css" />
+<link rel="stylesheet" media="(max-width: 992px)" href="/static/v2017/css/html.sp.css" />
+<link rel="stylesheet" media="(min-width: 993px)" href="/static/v2017/css/html.pc.css" />
+</head>
+
+<body>
+<a id="top" name="top"></a>
+
+<div id="wrapper">
+
+<ul class="side-nav" id="mobile-nav">
+{{ navmenu() }}
+</ul>
+
+<header id="header">
+<div class="navbar-fixed">
+<nav class="nav-extended">
+<div class="inner">
+<h1><a href="#" class="brand-logo"><img src="/static/images/logo.png" alt="builderscon"/></a></h1>
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+<ul id="nav-mobile" class="right hide-on-med-and-down">
+{{ navmenu() }}
+</ul>
+</div><!--  / .inner /  -->
+</div><!--  / .navbar-fixed /  -->
+</nav>
+</header>
+
+<div id="heroimage">
+<div class="wrapper">
+<div class="inner">
+<div class="column">
+<p><em>3<small>[Thu]</small>, 4<small>[Fri]</small>, 5<small>[Sat]</small> Aug, 2017</em></p>
+<p>at Kyoseikan Keio University Hiyoshi Campus, Kanagawa, Japan</p>
+</div>
+</div><!--  / .inner /  -->
+</div><!--  / .wrapper /  -->
+</div><!--  / #heroimage /  -->
+
+
+<div class="container">
+{% block content %}{% endblock %}
+</div><!--  / .container /  -->
+
+<aside><div id="footer-logo">builderscon</div></aside>
+
+<footer>
+<div id="footer">
+<div class="inner">
+<div class="contents">
+<p>{% trans %}builderscon is a festival for the technology lovers.{% endtrans %}</p>
+<p class="privacy-policy"><a href="https://docs.google.com/document/d/1mAL15VVObqIIqqKIGovnLQ4a4qQEuoACPHksq9sXbzs/edit?usp=sharing">{% trans %}Privacy Policy{% endtrans %}</a></p>
+<address>&copy; 2017 builderscon</address>
+</div><!--  / .contents /  -->
+</div><!--  / .inner /  -->
+</div><!--  / #footer /  -->
+</footer>
+
+<div id="pagetop"><a href="#top"><span class=" i-flight"></span></a></div>
+
+</div><!--  / #wrapper /  -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84262116-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/static/v2017/js/materialize.min.js"></script>
+<script src="/static/v2017/js/functions.js"></script>
+{% block scripts %}{% endblock %}
+</body>
