@@ -4,14 +4,7 @@
 {# example, static/foo.css should be in static/v2017/foo.css, so forth. #}
 {% set version = 'v2017' -%}
 {% macro navmenu() -%}
-{% block menuitems %}
-<li><a href="/">{% trans %}builderscon{% endtrans %}</a></li>
-<li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
-<li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
-<li><a href="/{{ full_slug }}/sessions">{% trans %}Sessions{% endtrans %}</a></li>
-<li><a href="/{{ full_slug }}/news">{% trans %}NEWS{% endtrans %}</a></li>
-<li><a href="/{{ full_slug }}/sponsors">{% trans %}SPONSORS{% endtrans %}</a></li>
-{% endblock %}
+{% block menuitems %}{% endblock %}
 {% endmacro -%}
 <html lang="ja">
 <head>
