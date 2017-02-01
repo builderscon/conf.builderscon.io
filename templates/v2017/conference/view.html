@@ -3,7 +3,6 @@
 {% block title %}{{ conference.title }} - {{ conference.sub_title }}{% endblock %}
 
 {% block menuitems %}
-<li><a href="/">{% trans %}builderscon{% endtrans %}</a></li>
 <li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
 <li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
 {%- with sessions = conference.sessions or [] %}{% if sessions | length > 0 %}
