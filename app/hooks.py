@@ -2,6 +2,7 @@ import builderscon
 import flask
 import flasktools
 import functools
+import re
 
 CACHE_CONFERENCE_EXPIRES = 300
 CACHE_SESSION_EXPIRES = 300
@@ -86,6 +87,7 @@ def with_session_types(cb):
     return functools.update_wrapper(functools.partial(load_session_types, cb), cb)
 
 def load_conference_by_slug(cb, series_slug, slug, **args):
+    slug = re.sub('/$', '', slug)
     if slug == 'latest':
         conference = _get_latest_conference(series_slug, flask.g.lang)
         if conference:
