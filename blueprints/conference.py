@@ -5,6 +5,7 @@ import flasktools
 import re
 import time
 
+LIST_EXPIRES = 300
 page = flask.Blueprint('conference', __name__)
 page.add_app_url_map_converter(flasktools.RegexConverter, 'regex')
 
