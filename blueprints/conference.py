@@ -83,7 +83,7 @@ def news():
         feed_url = 'http://blog.builderscon.io/feed.xml'
         news = feedparser.parse(feed_url)
         if not news.entries:
-            return 'Failed to get news from Atom feed = %, check if the feed is generated there.' % feed_url, 500
+            return 'Failed to get news from Atom feed = %s, check if the feed is generated there.' % feed_url, 500
         news_entries = news.entries
         app.cache.set(key, news.entries, 600)
 
