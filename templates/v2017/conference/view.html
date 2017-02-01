@@ -128,7 +128,7 @@
 <div class="col s8 l9">
 <span class="black-text">
 <h5>{{ speaker.display_name }}</h5>
-{{ speaker.description }}
+{% autoescape false %}{{ speaker.description | markdown }}{% endautoescape %}
 </span>
 </div>
 </div>
