@@ -59,7 +59,20 @@
 <h1 class="title"><em>date&venue</em></h1>
 <div class="body col s12 m9 l10">
 <div class="section transparent">
-{% set venues = conference.get('venues') or [] %}{% if venues|length > 0 %}
+{% with dates = conference.get('dates') %}{% if dates %}
+<table class="bordered highlight">
+<tr>
+<th data-field="venue" width="20%">{% trans %}Dates{% endtrans %}</th>
+<td>
+{% for dt in conference.dates %}
+{%- set dt = dt|confdate(lang=lang,timezone=conference.get('timezone')) -%}
+<p>{{ dt.date() }}</p>
+{% endfor %}
+</td>
+</tr>
+</table>
+{% endif %}{% endwith %}
+{% with venues = conference.get('venues') or [] %}{% if venues|length > 0 %}
 {% for venue in venues %}
 <table class="bordered highlight">
 <tr>
@@ -84,7 +97,7 @@
 </iframe>
 </div>
 {% endfor %}
-{% endif %}
+{% endif %}{% endwith %}
 </div>
 </div><!--  / .body /  -->
 </div><!--  / .inner /  -->
