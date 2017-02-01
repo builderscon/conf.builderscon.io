@@ -5,35 +5,6 @@
 <h2>{{ conference.sub_title }}</h2>
 {% endblock %}
 
-{% block scripts %}
-{% if conference.venues|length > 0 %}
-<script type="text/javascript">
-<!--
-var map;
-function initMap() {
-{% for venue in conference.venues %}
-  (function() {
-    var latlng = {lat: {{ venue.latitude }}, lng: {{ venue.longitude }}};
-    map = new google.maps.Map(document.getElementById('map-{{ loop.index }}'), {
-      center: latlng,
-      draggable: false,
-      scrollwheel: false,
-      zoom: 14
-    });
-    var marker = new google.maps.Marker({
-      position: latlng,
-      map: map,
-      title: "{{ venue.name }}",
-    });
-  })()
-{% endfor %}
-}
--->
-</script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ googlemap_api_key }}&callback=initMap"></script>
-{% endif %}
-{% endblock %}
-
 {% block content %}
 
 {# external resources #}
@@ -46,7 +17,7 @@ function initMap() {
 {% for r in conference.external_resources %}
 <div class="card horizontal hoverable">
 <div class="card-image">
-<img src="{{ r.get('image_url') or '/static/v2017/images/media_pict_photo.jpg' }}">
+<a href="{{ r.get('url') }}"><img src="{{ r.get('image_url') }}" /></a>
 </div><!--  / .card-image / -->
 <div class="card-stacked">
 <div class="card-action">
@@ -95,15 +66,23 @@ function initMap() {
 <th data-field="venue" width="20%">{% trans %}Venue Name{% endtrans %}</th>
 <td>{{ venue.address }}</td>
 </tr>
+{% with u = venue.get('url') %}{% if u -%}
 <tr>
 <th data-field="url">Venue Site</th>
-<td><a href="http://www.kcc.keio.ac.jp/" target="_blank">http://www.kcc.keio.ac.jp/</a></td>
+<td><a href="{{ u }}" target="_blank">{{ u }}</a></td>
 </tr>
+{% endif %}{% endwith -%}
 <tr>
 </tr>
 </table>
-<!-- TODO: add more annotations, update height -->
-<div id="map-{{loop.index }}" class="gmap section transparent iframe"></div>
+<div id="map-{{loop.index }}" class="gmap section transparent iframe">
+<iframe
+  width="830"
+  height="360"
+  frameborder="0" style="border:0"
+  src="https://maps.google.co.jp/maps/embed/v1/place?key={{ googlemap_api_key }}&zoom=16&q={% with place_id = venue.get('place_id') %}{% if place_id %}place_id:{{ place_id }}{% else %}{{ venue.name | urlencode }},{{ venue.address | urlencode }}&center={{ venue.latitude }},{{ venue.longitude }}{% endif %}{% endwith %}" allowfullscreen>
+</iframe>
+</div>
 {% endfor %}
 {% endif %}
 </div>
