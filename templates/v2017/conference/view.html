@@ -109,11 +109,13 @@
 <div class="inner">
 <h1 class="title"><em>sessions</em></h1>
 <div class="body col s12 m9 l10 conference-sessions">
-<div id="" class="section transparent">
+{% if sessions and sessions | length > 0 -%}
+<div class="section transparent">
 <div class="collection">
 <a href="/{{ full_slug }}/sessions" class="collection-item black-text">{% trans %}Session List{% endtrans %}<i class="material-icons right deep-orange-text">&#xE896;</i></a>
 </div>
 </div>
+{%- endif %}
 
 {% set featured_speakers = conference.get('featured_speakers') or [] %}{% if featured_speakers | length > 0 %}
 <div class="section transparent">
