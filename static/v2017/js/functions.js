@@ -48,25 +48,3 @@ $(document).ready(function() {
 	});
 
 });
-
-// RELAYOUT
-var timer = false;
-var windowSize = window.innerWidth ? window.innerWidth: $(window).width();
-$(window).resize(function() {
-	var ReWindowSize = window.innerWidth ? window.innerWidth: $(window).width();
-//	alert(windowSize);
-	if (windowSize >= 900) {
-		
-	}
-	if (windowSize <= 899) {
-		
-	}
-	if (timer !== false) {
-		clearTimeout(timer);
-	}
-	if (windowSize != ReWindowSize) {
-		location.href = location.href;
-	}
-});
-
-

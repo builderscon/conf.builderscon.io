@@ -32,6 +32,7 @@ body {
 #wrapper {
 	position: relative;
 	width: 100%;
+	background: url(/static/images/base_pattern.png) fixed repeat 0 0;
 	height: 100%;
 	margin: 0 auto;
 	padding: 0;
