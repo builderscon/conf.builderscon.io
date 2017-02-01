@@ -68,7 +68,7 @@
 </tr>
 {% with u = venue.get('url') %}{% if u -%}
 <tr>
-<th data-field="url">Venue Site</th>
+<th data-field="url">{% trans %}Venue URL{% endtrans %}</th>
 <td><a href="{{ u }}" target="_blank">{{ u }}</a></td>
 </tr>
 {% endif %}{% endwith -%}
