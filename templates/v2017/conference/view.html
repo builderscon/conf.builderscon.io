@@ -2,6 +2,17 @@
 
 {% block title %}{{ conference.title }} - {{ conferece.sub_title }}{% endblock %}
 
+{% block menuitems %}
+<li><a href="/">{% trans %}builderscon{% endtrans %}</a></li>
+<li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
+<li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
+{%- with sessions = conference.sessions or [] %}{% if sessions | length > 0 %}
+<li><a href="/{{ full_slug }}/sessions">{% trans %}Sessions{% endtrans %}</a></li>
+{% endif %}{% endwith -%}
+<li><a href="/{{ full_slug }}/news">{% trans %}NEWS{% endtrans %}</a></li>
+<li><a href="/{{ full_slug }}/sponsors">{% trans %}SPONSORS{% endtrans %}</a></li>
+{% endblock %}
+
 {% block herotext %}
 <h1>{{ conference.title }}</h1>
 <h2>{{ conference.sub_title }}</h2>
