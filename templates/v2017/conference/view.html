@@ -1,5 +1,7 @@
 {% extends 'v2017/layout/base.html' %}
 
+{% block title %}{{ conference.title }} - {{ conferece.sub_title }}{% endblock %}
+
 {% block herotext %}
 <h1>{{ conference.title }}</h1>
 <h2>{{ conference.sub_title }}</h2>
