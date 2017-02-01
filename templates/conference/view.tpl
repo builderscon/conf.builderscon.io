@@ -91,6 +91,7 @@ function initMap() {
       <h1 class="section-header">{% trans %}Information{% endtrans %}</h1>
       <div class="section-content">
         <h2>{% trans %}Sessions{% endtrans %}</h2>
+
         <div style="margin-left: 2em"><a href="/{{ conference.full_slug }}/sessions">{% trans %}Session List{% endtrans %}</a></div>
 
 {% set dates = conference.get('dates') or [] %}{% if dates|length > 0 %}

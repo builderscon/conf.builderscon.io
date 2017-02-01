@@ -5,6 +5,7 @@ import flasktools
 import re
 import time
 
+LIST_EXPIRES = 300
 page = flask.Blueprint('conference', __name__)
 page.add_app_url_map_converter(flasktools.RegexConverter, 'regex')
 
@@ -28,20 +29,44 @@ def latest(rest):
 def conference(series_slug):
     return flask.redirect('/{0}/latest'.format(series_slug))
 
+# copied from session.py
+def list_cache_key(conference_id, status, lang, range_start=None, range_end=None):
+    if not conference_id:
+        raise Exception("faild to create conference cache key: no id")
+    return "conference_sessions.%s.status.%s.lang.%s.%s.%s" % (conference_id, status, lang, range_start, range_end)
+
+# copied from session.py
+def _list_sessions(conference_id, status, lang, range_start=None, range_end=None):
+    key = list_cache_key(conference_id, status, lang, range_start=range_start, range_end=range_end)
+    conference_sessions = app.cache.get(key)
+    if conference_sessions:
+        return conference_sessions
+
+    conference_sessions = app.api.list_sessions(conference_id, lang=lang, status=status, range_start=range_start, range_end=range_end)
+    if conference_sessions :
+        app.cache.set(key, conference_sessions, LIST_EXPIRES)
+        return conference_sessions
+    return None
+
 @page.route('/<series_slug>/<path:slug>')
 @with_conference_by_slug
 def view():
-    key = "staff.%s.%s" % (flask.g.stash.get('conference_id'), flask.g.lang)
+    lang = flask.g.lang
+    conf_id = flask.g.stash.get('conference_id')
+    key = "staff.%s.%s" % (conf_id, lang)
+    flask.g.stash['sessions'] = _list_sessions(conf_id, ['accepted', 'pending'], lang)
+
     staff = app.cache.get(key)
     if not staff:
         staff = app.api.list_conference_staff(
-            conference_id=flask.g.stash.get('conference_id'),
-            lang=flask.g.lang
+            conference_id=conf_id,
+            lang=lang
         )
         if staff:
             app.cache.set(key, staff, 600)
     flask.g.stash['staff'] = staff
-    return flask.render_template('conference/view.tpl',
+    tmpl = 'v2017/conference/view.html'
+    return flask.render_template(tmpl,
         googlemap_api_key=app.cfg.googlemap_api_key())
 
 @page.route('/<series_slug>/<path:slug>/sponsors')

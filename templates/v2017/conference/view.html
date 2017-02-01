@@ -1,0 +1,224 @@
+{% extends 'v2017/layout/base.html' %}
+
+{% block herotext %}
+<h1>{{ conference.title }}</h1>
+<h2>{{ conference.sub_title }}</h2>
+{% endblock %}
+
+{% block content %}
+
+{# external resources #}
+{% if conference.external_resources | length > 0 %}
+<section>
+<div class="section">
+<div class="inner">
+<h1 class="title"><em>media</em></h1>
+<div class="body col s12 m9 l10">
+{% for r in conference.external_resources %}
+<div class="card horizontal hoverable">
+<div class="card-image">
+<a href="{{ r.get('url') }}"><img src="{{ r.get('image_url') }}" /></a>
+</div><!--  / .card-image / -->
+<div class="card-stacked">
+<div class="card-action">
+<a href="{{ r.get('url') }}">{{ r.get('title') }}</a>
+</div><!--  / .card-action / -->
+<div class="card-content">
+<p>{{ r.get('description') }}</p>
+</div><!--  / .card-content / -->
+</div><!--  / .card-stacked / -->
+</div><!--  / .card .horizontal .hoverable / -->
+{% endfor %}
+</div><!--  / .body /  -->
+</div><!--  / .inner /  -->
+</div><!--  / .section /  -->
+</section>
+{% endif %}
+
+{# about the conference #}
+{% set description = conference.get('description') %}
+{% if description %}
+<section>
+<div class="section">
+<div class="inner">
+<h1 class="title scrollspy"><em>about</em></h1>
+<div class="body col s12 m9 l10 conference-about">
+<div class="section transparent">
+<div>{% autoescape false %}{{ description|markdown }}{% endautoescape %}</div>
+</div><!--  / .section / -->
+</div><!--  / .body /  -->
+</div><!--  / .inner /  -->
+</div><!--  / .section /  -->
+</section>
+{% endif %}{# if description #}
+
+{# dates and venue #}
+<section class="">
+<div class="section">
+<div class="inner">
+<h1 class="title"><em>date&venue</em></h1>
+<div class="body col s12 m9 l10">
+<div class="section transparent">
+{% with dates = conference.get('dates') %}{% if dates %}
+<table class="bordered highlight">
+<tr>
+<th data-field="venue" width="20%">{% trans %}Dates{% endtrans %}</th>
+<td>
+{% for dt in conference.dates %}
+{%- set dt = dt|confdate(lang=lang,timezone=conference.get('timezone')) -%}
+<p>{{ dt.date() }}</p>
+{% endfor %}
+</td>
+</tr>
+</table>
+{% endif %}{% endwith %}
+{% with venues = conference.get('venues') or [] %}{% if venues|length > 0 %}
+{% for venue in venues %}
+<table class="bordered highlight">
+<tr>
+<th data-field="venue" width="20%">{% trans %}Venue Name{% endtrans %}</th>
+<td>{{ venue.address }}</td>
+</tr>
+{% with u = venue.get('url') %}{% if u -%}
+<tr>
+<th data-field="url">{% trans %}Venue URL{% endtrans %}</th>
+<td><a href="{{ u }}" target="_blank">{{ u }}</a></td>
+</tr>
+{% endif %}{% endwith -%}
+<tr>
+</tr>
+</table>
+<div id="map-{{loop.index }}" class="gmap section transparent iframe">
+<iframe
+  width="830"
+  height="360"
+  frameborder="0" style="border:0"
+  src="https://maps.google.co.jp/maps/embed/v1/place?key={{ googlemap_api_key }}&zoom=16&q={% with place_id = venue.get('place_id') %}{% if place_id %}place_id:{{ place_id }}{% else %}{{ venue.name | urlencode }},{{ venue.address | urlencode }}&center={{ venue.latitude }},{{ venue.longitude }}{% endif %}{% endwith %}" allowfullscreen>
+</iframe>
+</div>
+{% endfor %}
+{% endif %}{% endwith %}
+</div>
+</div><!--  / .body /  -->
+</div><!--  / .inner /  -->
+</div><!--  / .section /  -->
+</section>
+
+<section>
+<div class="section">
+<div class="inner">
+<h1 class="title"><em>sessions</em></h1>
+<div class="body col s12 m9 l10 conference-sessions">
+{% if sessions and sessions | length > 0 -%}
+<div class="section transparent">
+<div class="collection">
+<a href="/{{ full_slug }}/sessions" class="collection-item black-text">{% trans %}Session List{% endtrans %}<i class="material-icons right deep-orange-text">&#xE896;</i></a>
+</div>
+</div>
+{%- endif %}
+
+{% set featured_speakers = conference.get('featured_speakers') or [] %}{% if featured_speakers | length > 0 %}
+<div class="section transparent">
+<h4>{% trans %}Guest Speakers{% endtrans %}</h4>
+{% for speaker in conference.featured_speakers %}
+<div class="row valign-wrapper">
+<div class="col s4 l3">
+<img src="{{ speaker.avatar_url }}" alt="{{ speaker.display_name }}" class="circle responsive-img guest-speaker-img">
+</div>
+<div class="col s8 l9">
+<span class="black-text">
+<h5>{{ speaker.display_name }}</h5>
+{% autoescape false %}{{ speaker.description | markdown }}{% endautoescape %}
+</span>
+</div>
+</div>
+{% endfor %}
+{% endif %}
+</div><!--  / .body /  -->
+</div><!--  / .inner /  -->
+</div><!--  / .section /  -->
+</section>
+
+{% with sponsors = conference.get('sponsors') or [] %}
+{% if sponsors | length > 0 %}
+<section class="">
+<div class="section">
+<div class="inner">
+<h1 class="title"><em>sponsors</em></h1>
+<div class="body col s12 m9 l10">
+<div id="sponsors" class="section transparent">
+<h4>{% trans %}Sponsors{% endtrans %}</h4>
+{% for group in sponsors|groupby('group_name') -%}
+{%   set perrow = 5 -%}
+{%   set liclass = 'large' -%}
+{%   if group.grouper == "tier-2" -%}
+{%     set perrow = 8 -%}
+{%     set liclass = 'medium' -%}
+{%   endif -%} 
+{% for sponsor in group.list -%}
+{% if loop.first %}<div class="block">
+  <ul>{% endif %}
+    <li class="{{ liclass }}"><a href="{{ sponsor.url }}" target="_blank"><img src="{{ sponsor.logo_url1 }}"></a></li>
+{%- if loop.last %}
+  </ul>
+</div><!-- end block -->
+{% endif -%}
+{% endfor -%}{# for sponsor in group.list #}
+{%- endfor -%}{# for sponsors|groupby #}
+</div>
+</div><!--  / .body /  -->
+</div><!--  / .inner /  -->
+</div><!--  / .section /  -->
+</section>
+{% endif %}{# if sponsors > 0 #}
+{% endwith %}
+
+<section class="">
+<div class="section">
+<div class="inner">
+<h1 class="title"><em>team</em></h1>
+<div class="body col s12 m9 l10">
+<div id="staff" class="section transparent">
+<h4>{% trans %}Staff{% endtrans %}</h4>
+<div class="block">
+<ul>
+{%- for user in conference.administrators %}
+  <li><a href="/{{ conference.full_slug }}/staff" target="_blank"><img src="{{ user.avatar_url }}" class="circle" /></a></li>
+{% endfor %}
+{%- for user in staff %}
+  <li><a href="/{{ conference.full_slug }}/staff" target="_blank"><img src="{{ user.avatar_url }}" class="circle" /></a></li>
+{% endfor %}
+</ul>
+</div>
+<div id="inquiry" class="section transparent">
+<h4>{% trans %}Contact Information{% endtrans %}</h4>
+<p>{% autoescape false %}{{ conference.contact_information | markdown }}{% endautoescape %}</p>
+</div>
+<div id="sns" class="section transparent">
+<div class="row">
+<div class="col s12 l6">
+<div class="twitter">
+<a class="twitter-timeline" data-width="930" data-height="500" data-dnt="true" data-theme="light" href="https://twitter.com/{{ conference.twitter_account or 'builderscon' }}">Tweets by builderscon</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+</div>
+<div class="col s12 l6">
+<div class="fb-iframe">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.7&appId=546362158903970";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-page" data-href="{{ conference.facebook_page or 'https://www.facebook.com/builderscon' }}" data-tabs="timeline" data-width="500" data-height="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
+</div>
+</div>
+</div>
+</div>
+</div><!--  / .body /  -->
+</div><!--  / .inner /  -->
+</div><!--  / .section /  -->
+</section>
+{% endblock %}

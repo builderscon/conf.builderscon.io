@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-01-05 07:34+0900\n"
+"POT-Creation-Date: 2017-02-01 09:47+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,7 +104,7 @@ msgstr ""
 msgid "Technical Sponsors"
 msgstr ""
 
-#: templates/catalog.tpl:13
+#: templates/catalog.tpl:13 templates/v2017/conference/view.html:135
 msgid "Sponsors"
 msgstr ""
 
@@ -238,6 +238,7 @@ msgstr ""
 #: templates/dashboard.tpl:44 templates/dashboard.tpl:65
 #: templates/layout/conference.tpl:8 templates/session/confirm.tpl:28
 #: templates/session/confirm_done.tpl:24 templates/user/view.tpl:28
+#: templates/v2017/layout/base.html:10
 msgid "Conference"
 msgstr ""
 
@@ -271,12 +272,13 @@ msgid "unconfirmed"
 msgstr ""
 
 #: templates/index.tpl:31 templates/layout/base.tpl:36
-#: templates/layout/conference.tpl:6
+#: templates/layout/conference.tpl:6 templates/v2017/layout/base.html:8
 msgid "builderscon"
 msgstr ""
 
 #: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:32
 #: templates/layout/base.tpl:37 templates/layout/conference.tpl:7
+#: templates/v2017/layout/base.html:9
 msgid "Dashboard"
 msgstr ""
 
@@ -376,7 +378,7 @@ msgid "%(count)d blogs collected"
 msgstr ""
 
 #: templates/conference/staff.tpl:3 templates/conference/staff.tpl:45
-#: templates/conference/view.tpl:184
+#: templates/conference/view.tpl:184 templates/v2017/conference/view.html:167
 msgid "Staff"
 msgstr ""
 
@@ -397,10 +399,11 @@ msgid "Information"
 msgstr ""
 
 #: templates/conference/view.tpl:93 templates/layout/conference.tpl:9
+#: templates/v2017/layout/base.html:11
 msgid "Sessions"
 msgstr ""
 
-#: templates/conference/view.tpl:94
+#: templates/conference/view.tpl:94 templates/v2017/conference/view.html:101
 msgid "Session List"
 msgstr ""
 
@@ -416,11 +419,11 @@ msgstr ""
 msgid "Resources"
 msgstr ""
 
-#: templates/conference/view.tpl:137
+#: templates/conference/view.tpl:137 templates/v2017/conference/view.html:107
 msgid "Guest Speakers"
 msgstr ""
 
-#: templates/conference/view.tpl:162
+#: templates/conference/view.tpl:162 templates/v2017/conference/view.html:179
 msgid "Contact Information"
 msgstr ""
 
@@ -445,26 +448,27 @@ msgid "Please try again in a few minutes."
 msgstr ""
 
 #: templates/layout/base.tpl:4 templates/layout/base.tpl:10
+#: templates/v2017/layout/base.html:20 templates/v2017/layout/base.html:23
 msgid "Discover Something New"
 msgstr ""
 
-#: templates/layout/base.tpl:10
+#: templates/layout/base.tpl:10 templates/v2017/layout/base.html:23
 msgid "builderscon is a festival for those who love tech!"
 msgstr ""
 
-#: templates/layout/base.tpl:69
+#: templates/layout/base.tpl:69 templates/v2017/layout/base.html:91
 msgid "builderscon is a festival for the technology lovers."
 msgstr ""
 
-#: templates/layout/base.tpl:70
+#: templates/layout/base.tpl:70 templates/v2017/layout/base.html:92
 msgid "Privacy Policy"
 msgstr ""
 
-#: templates/layout/conference.tpl:10
+#: templates/layout/conference.tpl:10 templates/v2017/layout/base.html:12
 msgid "NEWS"
 msgstr ""
 
-#: templates/layout/conference.tpl:11
+#: templates/layout/conference.tpl:11 templates/v2017/layout/base.html:13
 msgid "SPONSORS"
 msgstr ""
 
@@ -763,5 +767,13 @@ msgstr ""
 
 #: templates/user/view.tpl:42
 msgid "Past Sessions"
+msgstr ""
+
+#: templates/v2017/conference/view.html:66
+msgid "Venue Name"
+msgstr ""
+
+#: templates/v2017/conference/view.html:71
+msgid "Venue URL"
 msgstr ""
 
