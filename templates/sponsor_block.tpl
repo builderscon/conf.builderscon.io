@@ -17,7 +17,7 @@
 {% if loop.index % perrow == 1 %}<div class="row">{% endif %}
             <div class="large-{{ colsize }} small-{{ colsize }} columns">
               <div class="sponsor-slot">
-                <a href="{{ sponsor.url }}"><img class="{{ sponsor.group_name }}" src="{{ sponsor.logo_url1 }}"></a>
+                <a href="{{ sponsor.url }}"><img class="{{ sponsor.group_name }}" src="{{ sponsor.get('logo_url1') or sponsor.get('logo_url') }}"></a>
                 <div class="sponsor-name"><a href="{{ sponsor.url }}">{{ _(sponsor.name) }}</a></div>
               </div>
             </div>
