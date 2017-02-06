@@ -17,7 +17,7 @@
 {% if loop.index % perrow == 1 %}<div class="row">{% endif %}
             <div class="large-{{ colsize }} small-{{ colsize }} columns">
               <div class="sponsor-slot">
-                <a href="{{ sponsor.url }}"><img class="{{ sponsor.group_name }}" src="https://sharaq-dot-builderscon-1248.appspot.com/?preset=sponsor-small&url={{ sponsor.get('logo_url1') or sponsor.get('logo_url') | urlencode }}"></a>
+                <a href="{{ sponsor.url }}"><img class="{{ sponsor.group_name }}" src="/sharaq/sponsor-small/{{ sponsor.get('logo_url1') or sponsor.get('logo_url') | urlencode }}"></a>
                 <div class="sponsor-name"><a href="{{ sponsor.url }}">{{ _(sponsor.name) }}</a></div>
               </div>
             </div>

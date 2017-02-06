@@ -12,6 +12,7 @@ import cfp
 import conference
 import root
 import session
+import sharaq
 import user
 
 # silence pyflakes
@@ -20,4 +21,5 @@ assert cfp
 assert conference
 assert root
 assert session
+assert sharaq
 assert user
