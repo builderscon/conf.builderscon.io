@@ -24,6 +24,7 @@ def initialize():
     app.register_blueprint(blueprints.conference.page)
     app.register_blueprint(blueprints.root.page)
     app.register_blueprint(blueprints.session.page)
+    app.register_blueprint(blueprints.sharaq.page)
     app.register_blueprint(blueprints.user.page)
 
     config_file = os.getenv("CONFIG_FILE")
