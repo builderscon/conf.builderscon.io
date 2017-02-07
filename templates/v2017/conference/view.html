@@ -184,7 +184,7 @@
 {% for sponsor in group.list -%}
 {% if loop.first %}<div class="block">
   <ul>{% endif %}
-    <li class="{{ liclass }}"><a href="{{ sponsor.url }}" target="_blank"><img src="/sharaq/sponsor-small/{{ sponsor.get('logo_url1') or sponsor.get('logo_url') | urlencode }}"></a></li>
+    <li class="{{ liclass }}"><a href="{{ sponsor.url }}" target="_blank"><img alt="{{ sponsor.name }}" src="/sharaq/sponsor-small/{{ sponsor.get('logo_url1') or sponsor.get('logo_url') | urlencode }}"></a></li>
 {%- if loop.last %}
   </ul>
 </div><!-- end block -->
