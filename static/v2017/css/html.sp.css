@@ -480,7 +480,7 @@ section.section-third .section .title em  { color: #ffffff; }
 	background-color: #eee;
 }
 #sponsors .block ul li a img,
-#staff .block ul li a img { background-color: #f8c3b7; }
+#staff .block ul li a img { background-color: #fff; }
 #sponsors .block ul li a:hover img,
 #staff .block ul li a:hover img { background-color: #ea5432; }
 
