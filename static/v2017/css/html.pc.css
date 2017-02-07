@@ -501,6 +501,9 @@ section.section-third .section .title em  { color: #ffffff; }
 	_zoom: 1;
 	overflow: hidden;
 }
+#sponsors {
+    min-height: 300px;
+}
 
 #sponsors .block ul,
 #staff .block ul {
