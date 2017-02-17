@@ -178,8 +178,11 @@
 {%   set perrow = 5 -%}
 {%   set liclass = 'large' -%}
 {%   if group.grouper == "tier-2" -%}
-{%     set perrow = 8 -%}
+{%     set perrow = 7 -%}
 {%     set liclass = 'medium' -%}
+{%   elif group.grouper == "tier-3" -%}
+{%     set perrow = 8 -%}
+{%     set liclass = 'small' -%}
 {%   endif -%} 
 {% for sponsor in group.list -%}
 {% if loop.first %}<div class="block">
