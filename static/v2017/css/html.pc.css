@@ -500,6 +500,7 @@ section.section-third .section .title em  { color: #ffffff; }
 	width: 930px;
 	_zoom: 1;
 	overflow: hidden;
+        position: relative;
 }
 #sponsors {
     min-height: 300px;
