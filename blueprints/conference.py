@@ -69,11 +69,6 @@ def view():
     return flask.render_template(tmpl,
         googlemap_api_key=app.cfg.googlemap_api_key())
 
-@page.route('/<series_slug>/<path:slug>/sponsors')
-@with_conference_by_slug
-def sponsors():
-    return flask.render_template('sponsors.tpl')
-
 @page.route('/<series_slug>/<path:slug>/news')
 @with_conference_by_slug
 def news():
