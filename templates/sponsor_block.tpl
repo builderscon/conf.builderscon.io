@@ -9,6 +9,8 @@
 {%   set perrow = 4 %}
 {%   if group.grouper == "tier-2" %}
 {%     set perrow = 6 %}
+{%   elif group.grouper == "tier-3" %}
+{%     set perrow = 7 %}
 {%   endif %} 
 {%   set colsize = (12 / perrow)|int %}
         <div class="row sponsor-tier {{ group.grouper }}">
