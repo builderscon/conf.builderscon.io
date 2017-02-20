@@ -9,9 +9,6 @@
 <li><a href="/{{ full_slug }}/sessions">{% trans %}Sessions{% endtrans %}</a></li>
 {% endif %}{% endwith -%}
 {# <li><a href="/{{ full_slug }}/news">{% trans %}NEWS{% endtrans %}</a></li> #}
-{%- with sponsors = conference.get('sponsors') or [] %}{% if sponsors | length > 0 %}
-<li><a href="/{{ full_slug }}/sponsors">{% trans %}SPONSORS{% endtrans %}</a></li>
-{% endif %}{% endwith -%}
 {% endblock %}
 
 {% block herotext %}
