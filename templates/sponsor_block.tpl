@@ -6,11 +6,11 @@
       <h1 class="section-header">{{ _(sponsor_header) }}</h1>
       <div class="section-content">
 {% for group in sponsors|groupby('group_name') %}
-{%   set perrow = 4 %}
+{%   set perrow = 3 %}
 {%   if group.grouper == "tier-2" %}
-{%     set perrow = 6 %}
+{%     set perrow = 4 %}
 {%   elif group.grouper == "tier-3" %}
-{%     set perrow = 7 %}
+{%     set perrow = 6 %}
 {%   endif %} 
 {%   set colsize = (12 / perrow)|int %}
         <div class="row sponsor-tier {{ group.grouper }}">
