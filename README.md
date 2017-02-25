@@ -14,6 +14,22 @@ Features include:
 * Automatic conference staff page generation
 * Customizable session submission workflow
 
+## How to run locally
+
+1. Setup
+
+* Install gunicorn
+* Install pybabel
+* Install pip stuff `pip -r ... requirements.txt`
+
+2. Start redis
+
+3. Setup config
+
+4. Run gunicorn
+
+gunicorn --reload app:app
+
 ## How to run on Vagrant
 
 1.  setup
