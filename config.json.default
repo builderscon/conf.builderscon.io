@@ -8,15 +8,6 @@
         "port": 6379,
         "db": 0
     },
-    "MEMCACHED": {
-        "servers" : [
-            {
-                "host": "localhost",
-                "port": "11211"
-            }
-        ],
-        "debug": 0
-    },
     "OCTAV": {
         "endpoint": "",
         "key": "",
@@ -33,5 +24,8 @@
     "TWITTER": {
         "client_id":     "",
         "client_secret": ""
+    },
+    "GOOGLE_MAP": {
+        "api_key": ""
     }
 }
