@@ -17,7 +17,7 @@
             <div class="profile">
               <img src="{{ user.avatar_url or '/static/images/noprofile.png' }}">
               <p class="name">{{ user.nickname }} <span class="auth_via">{{ user.auth_via }}</span></p>
-              <a class="alert button profile-btn">{% trans %}Public Profile{% endtrans %}</a>
+              <a href="/user/{{ user.id }}" class="alert button profile-btn">{% trans %}Public Profile{% endtrans %}</a>
               <form action="/user/edit" method="GET">
               <button class="alert button edit-btn">{% trans %}Edit{% endtrans %}</button>
               </form>
