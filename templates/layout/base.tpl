@@ -1,10 +1,16 @@
+{%- macro title_content() -%}
+{% block title %}builderscon - {% trans %}Discover Something New{% endtrans %}{% endblock %}
+{%- endmacro -%}
+{%- macro social_image() -%}
+{% block og_image %}https://builderscon.io{{ url('static', filename='images/hex_logo.png') }}{% endblock %}
+{%- endmacro -%}
 <!doctype html>
 <html lang="ja" prefix="og:http://ogp.me/ns#">
   <head>
-    <title>{% block title %}builderscon - {% trans %}Discover Something New{% endtrans %}{% endblock %}</title>
+    <title>{{ title_content() }}</title>
     <meta property="fb:app_id" content="1537973726511652" />
     <meta property="og:type" content="{% block ogp_type %}{% if pagetitle == 'top' %}website{% else %}article{% endif %}{% endblock %}" />
-    <meta property="og:image" content="{% block og_image %}https://builderscon.io{{ url('static', filename='images/hex_logo.png') }}{% endblock %}" />
+    <meta property="og:image" content="{{ social_image() }}" />
     <meta property="og:site_name" content="builderscon" />
 {% for name in ["description","og:description"] %}
     <meta {% if name == 'og:description' %}property{% else %}name{% endif %}="{{ name }}" content="{% block og_description %}{% trans %}Discover Something New{% endtrans %} - {% trans %}builderscon is a festival for those who love tech!{% endtrans %}{% endblock %}" />
@@ -13,8 +19,10 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="@builderscon" name="twitter:site" />
     <meta name="keywords" content="builderscon,tech,engineer,festival,お祭り" />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@builderscon" />
+    <meta name="twitter:title" content="{{ title_content() }}" />
+    <meta name="twitter:image" content="{{ social_image() }}" />
     <link href="{{ url('static', filename='images/favicon.ico') }}" rel="shortcut icon"/>
     <link href="{{ url('static', filename='css/style.css') }}" rel="stylesheet"/>
 {% block header %}{% endblock %}
