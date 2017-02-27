@@ -29,9 +29,7 @@ for ent in oembed_endpoints:
 @builderscon.app.template_filter('video_id')
 def video_id(url):
     mobj = re.search(r'youtube\.com/watch\?v=(.+)', url, flags=re.UNICODE)
-    print mobj
     if mobj:
-        print(mobj)
         return mobj.group(1)
     return ''
 
