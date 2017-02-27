@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-02-01 09:47+0900\n"
+"POT-Creation-Date: 2017-02-27 14:09+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgid "Meet Mr. B (Mr. Beacon)!"
 msgstr ""
 
 #: templates/beacon.tpl:8 templates/errors/404.tpl:9 templates/errors/500.tpl:9
-#: templates/index.tpl:33
+#: templates/index.tpl:34
 msgid "BLOG"
 msgstr ""
 
@@ -66,12 +66,12 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/catalog.tpl:4 templates/dashboard.tpl:34
+#: templates/catalog.tpl:4 templates/dashboard.tpl:35
 #: templates/user/edit.tpl:26
 msgid "English"
 msgstr ""
 
-#: templates/catalog.tpl:5 templates/dashboard.tpl:34
+#: templates/catalog.tpl:5 templates/dashboard.tpl:35
 #: templates/user/edit.tpl:27
 msgid "Japanese"
 msgstr ""
@@ -104,7 +104,7 @@ msgstr ""
 msgid "Technical Sponsors"
 msgstr ""
 
-#: templates/catalog.tpl:13 templates/v2017/conference/view.html:135
+#: templates/catalog.tpl:13 templates/v2017/conference/view.html:173
 msgid "Sponsors"
 msgstr ""
 
@@ -156,7 +156,7 @@ msgstr ""
 msgid "Session Title (Japanese)"
 msgstr ""
 
-#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:85
+#: templates/cfp_confirm.tpl:68 templates/session/view.tpl:91
 msgid "Session Duration"
 msgstr ""
 
@@ -169,17 +169,17 @@ msgid "Session Abstract (Japanese)"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:72
-#: templates/session/view.tpl:73
+#: templates/session/view.tpl:79
 msgid "Material Level"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:87
-#: templates/session/view.tpl:89
+#: templates/session/view.tpl:95
 msgid "Spoken Language"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:99
-#: templates/session/view.tpl:93
+#: templates/session/view.tpl:99
 msgid "Slide Language"
 msgstr ""
 
@@ -188,17 +188,17 @@ msgid "Comments"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:140
-#: templates/session/view.tpl:97
+#: templates/session/view.tpl:103
 msgid "Photo Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:154
-#: templates/session/view.tpl:101
+#: templates/session/view.tpl:107
 msgid "Recording Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:168
-#: templates/session/view.tpl:105
+#: templates/session/view.tpl:111
 msgid "Materials Release"
 msgstr ""
 
@@ -214,79 +214,83 @@ msgstr ""
 msgid "Your submission can be viewd here"
 msgstr ""
 
-#: templates/dashboard.tpl:21 templates/dashboard.tpl:67
-#: templates/session/view.tpl:25
+#: templates/dashboard.tpl:20
+msgid "Public Profile"
+msgstr ""
+
+#: templates/dashboard.tpl:22 templates/dashboard.tpl:68
+#: templates/session/view.tpl:31
 msgid "Edit"
 msgstr ""
 
-#: templates/dashboard.tpl:24
+#: templates/dashboard.tpl:25
 msgid "Logout"
 msgstr ""
 
-#: templates/dashboard.tpl:29
+#: templates/dashboard.tpl:30
 msgid "User Information"
 msgstr ""
 
-#: templates/dashboard.tpl:33 templates/user/edit.tpl:21
+#: templates/dashboard.tpl:34 templates/user/edit.tpl:21
 msgid "Language"
 msgstr ""
 
-#: templates/dashboard.tpl:40 templates/user/view.tpl:24
+#: templates/dashboard.tpl:41 templates/user/view.tpl:24
 msgid "Organizer"
 msgstr ""
 
-#: templates/dashboard.tpl:44 templates/dashboard.tpl:65
+#: templates/dashboard.tpl:45 templates/dashboard.tpl:66
 #: templates/layout/conference.tpl:8 templates/session/confirm.tpl:28
 #: templates/session/confirm_done.tpl:24 templates/user/view.tpl:28
-#: templates/v2017/layout/base.html:10
+#: templates/v2017/conference/view.html:7
 msgid "Conference"
 msgstr ""
 
-#: templates/dashboard.tpl:57
+#: templates/dashboard.tpl:58
 msgid "Proposals"
 msgstr ""
 
-#: templates/dashboard.tpl:59
+#: templates/dashboard.tpl:60
 msgid "No proposals have been submitted"
 msgstr ""
 
-#: templates/dashboard.tpl:64 templates/session/confirm.tpl:27
+#: templates/dashboard.tpl:65 templates/session/confirm.tpl:27
 #: templates/session/confirm_done.tpl:23 templates/session/form.tpl:28
 msgid "Title"
 msgstr ""
 
-#: templates/dashboard.tpl:66 templates/session/view.tpl:68
+#: templates/dashboard.tpl:67 templates/session/view.tpl:74
 msgid "Confirmed"
 msgstr ""
 
-#: templates/dashboard.tpl:68
+#: templates/dashboard.tpl:69
 msgid "Status"
 msgstr ""
 
-#: templates/dashboard.tpl:77 templates/session/view.tpl:69
+#: templates/dashboard.tpl:78 templates/session/view.tpl:75
 msgid "confirmed"
 msgstr ""
 
-#: templates/dashboard.tpl:77 templates/session/view.tpl:69
+#: templates/dashboard.tpl:78 templates/session/view.tpl:75
 msgid "unconfirmed"
 msgstr ""
 
-#: templates/index.tpl:31 templates/layout/base.tpl:36
-#: templates/layout/conference.tpl:6 templates/v2017/layout/base.html:8
+#: templates/index.tpl:32 templates/layout/base.tpl:36
+#: templates/layout/conference.tpl:6
 msgid "builderscon"
 msgstr ""
 
-#: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:32
+#: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:33
 #: templates/layout/base.tpl:37 templates/layout/conference.tpl:7
-#: templates/v2017/layout/base.html:9
+#: templates/v2017/conference/view.html:6
 msgid "Dashboard"
 msgstr ""
 
-#: templates/index.tpl:51
+#: templates/index.tpl:52
 msgid "Welcome To builderscon"
 msgstr ""
 
-#: templates/index.tpl:53
+#: templates/index.tpl:54
 msgid ""
 "\n"
 "        <strong>Join builderscon and discover something new! builderscon "
@@ -302,11 +306,11 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/index.tpl:74
+#: templates/index.tpl:75
 msgid "Get Involved!"
 msgstr ""
 
-#: templates/index.tpl:81
+#: templates/index.tpl:82
 msgid ""
 "<b>Slack: </b> We have <a href=\"https://builderscon.slack.com\">a Slack "
 "team</a>, and <a href=\"https://slack-invite-dot-"
@@ -315,7 +319,7 @@ msgid ""
 " your own builderscon!"
 msgstr ""
 
-#: templates/index.tpl:89
+#: templates/index.tpl:90
 msgid ""
 "<b>Github:</b> Explore our many opensource projects on <a "
 "href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
@@ -325,7 +329,7 @@ msgid ""
 "We'd love for your to send us pull requests!"
 msgstr ""
 
-#: templates/index.tpl:97
+#: templates/index.tpl:98
 msgid ""
 "<b>Facebook:</b> Peruse our <a "
 "href=\"https://www.facebook.com/builderscon\">Facebook page</a> to find "
@@ -335,14 +339,14 @@ msgid ""
 "href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
 msgstr ""
 
-#: templates/index.tpl:105
+#: templates/index.tpl:106
 msgid ""
 "<b>Twitter:</b> Follow us on <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
 "updates!"
 msgstr ""
 
-#: templates/index.tpl:113
+#: templates/index.tpl:114
 msgid ""
 "<b>Share:</b> Read our <a href=\"http://blog.builderscon.io\">blog</a>, "
 "post on your favorite sites, and perhaps if you are feeling like it, you "
@@ -378,7 +382,7 @@ msgid "%(count)d blogs collected"
 msgstr ""
 
 #: templates/conference/staff.tpl:3 templates/conference/staff.tpl:45
-#: templates/conference/view.tpl:184 templates/v2017/conference/view.html:167
+#: templates/conference/view.tpl:185 templates/v2017/conference/view.html:208
 msgid "Staff"
 msgstr ""
 
@@ -399,31 +403,31 @@ msgid "Information"
 msgstr ""
 
 #: templates/conference/view.tpl:93 templates/layout/conference.tpl:9
-#: templates/v2017/layout/base.html:11
+#: templates/v2017/conference/view.html:9
 msgid "Sessions"
 msgstr ""
 
-#: templates/conference/view.tpl:94 templates/v2017/conference/view.html:101
+#: templates/conference/view.tpl:95 templates/v2017/conference/view.html:138
 msgid "Session List"
 msgstr ""
 
-#: templates/conference/view.tpl:97
+#: templates/conference/view.tpl:98 templates/v2017/conference/view.html:88
 msgid "Dates"
 msgstr ""
 
-#: templates/conference/view.tpl:104
+#: templates/conference/view.tpl:105
 msgid "Venue"
 msgstr ""
 
-#: templates/conference/view.tpl:121
+#: templates/conference/view.tpl:122
 msgid "Resources"
 msgstr ""
 
-#: templates/conference/view.tpl:137 templates/v2017/conference/view.html:107
+#: templates/conference/view.tpl:138 templates/v2017/conference/view.html:145
 msgid "Guest Speakers"
 msgstr ""
 
-#: templates/conference/view.tpl:162 templates/v2017/conference/view.html:179
+#: templates/conference/view.tpl:163 templates/v2017/conference/view.html:220
 msgid "Contact Information"
 msgstr ""
 
@@ -448,27 +452,27 @@ msgid "Please try again in a few minutes."
 msgstr ""
 
 #: templates/layout/base.tpl:4 templates/layout/base.tpl:10
-#: templates/v2017/layout/base.html:20 templates/v2017/layout/base.html:23
+#: templates/v2017/layout/base.html:13 templates/v2017/layout/base.html:16
 msgid "Discover Something New"
 msgstr ""
 
-#: templates/layout/base.tpl:10 templates/v2017/layout/base.html:23
+#: templates/layout/base.tpl:10 templates/v2017/layout/base.html:16
 msgid "builderscon is a festival for those who love tech!"
 msgstr ""
 
-#: templates/layout/base.tpl:69 templates/v2017/layout/base.html:91
+#: templates/layout/base.tpl:69 templates/v2017/layout/base.html:84
 msgid "builderscon is a festival for the technology lovers."
 msgstr ""
 
-#: templates/layout/base.tpl:70 templates/v2017/layout/base.html:92
+#: templates/layout/base.tpl:70 templates/v2017/layout/base.html:85
 msgid "Privacy Policy"
 msgstr ""
 
-#: templates/layout/conference.tpl:10 templates/v2017/layout/base.html:12
+#: templates/layout/conference.tpl:10
 msgid "NEWS"
 msgstr ""
 
-#: templates/layout/conference.tpl:11 templates/v2017/layout/base.html:13
+#: templates/layout/conference.tpl:11
 msgid "SPONSORS"
 msgstr ""
 
@@ -492,16 +496,16 @@ msgid ""
 msgstr ""
 
 #: templates/session/confirm.tpl:29 templates/session/confirm_done.tpl:25
-#: templates/session/view.tpl:77
+#: templates/session/view.tpl:83
 msgid "Starts On"
 msgstr ""
 
 #: templates/session/confirm.tpl:30 templates/session/confirm_done.tpl:26
-#: templates/session/view.tpl:81
+#: templates/session/view.tpl:87
 msgid "Room"
 msgstr ""
 
-#: templates/session/confirm.tpl:36 templates/session/view.tpl:69
+#: templates/session/confirm.tpl:36 templates/session/view.tpl:75
 msgid "Confirm"
 msgstr ""
 
@@ -553,7 +557,7 @@ msgstr ""
 msgid "Please provide the session title in %(lang)s"
 msgstr ""
 
-#: templates/session/form.tpl:42 templates/session/view.tpl:45
+#: templates/session/form.tpl:42 templates/session/view.tpl:51
 msgid "Abstract"
 msgstr ""
 
@@ -701,22 +705,22 @@ msgstr ""
 msgid "Sessions for %(date)s"
 msgstr ""
 
-#: templates/session/view.tpl:47
+#: templates/session/view.tpl:53
 msgid ""
 "This session has NOT been accepted yet. If you would like to see it in "
 "the conference, please post it in social networks, as those numbers will "
 "be tallied and used as part of the selection criteria"
 msgstr ""
 
-#: templates/session/view.tpl:53
+#: templates/session/view.tpl:59
 msgid "Video"
 msgstr ""
 
-#: templates/session/view.tpl:58
+#: templates/session/view.tpl:64
 msgid "Slides"
 msgstr ""
 
-#: templates/session/view.tpl:64
+#: templates/session/view.tpl:70
 msgid "Session Information"
 msgstr ""
 
@@ -769,11 +773,11 @@ msgstr ""
 msgid "Past Sessions"
 msgstr ""
 
-#: templates/v2017/conference/view.html:66
+#: templates/v2017/conference/view.html:102
 msgid "Venue Name"
 msgstr ""
 
-#: templates/v2017/conference/view.html:71
+#: templates/v2017/conference/view.html:107
 msgid "Venue URL"
 msgstr ""
 
