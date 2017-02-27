@@ -5,7 +5,13 @@
 {% block header %}
 <link rel="canonical" href="/{{ conference.full_slug }}/session/{{ session.id }}" />
 {% endblock %}
-{% block og_image %}{{ session.speaker.avatar_url or url('static', filename='images/noprofile.png') }}{% endblock %}
+{% block og_image %}
+{%- if session.video_url -%}
+https://i.ytimg.com/vi/{{ session.video_url | video_id }}/maxresdefault.jpg
+{%- else -%}
+{{ session.speaker.avatar_url or url('static', filename='images/noprofile.png') }}
+{%- endif -%}
+{% endblock %}
 
 {% block heroimage %}
 <div id="heroimage-empty"></div>

@@ -26,6 +26,15 @@ for ent in oembed_endpoints:
     e = oembed.OEmbedEndpoint(*ent)
     oembed_consumer.addEndpoint(e)
 
+@builderscon.app.template_filter('video_id')
+def video_id(url):
+    mobj = re.search(r'youtube\.com/watch\?v=(.+)', url, flags=re.UNICODE)
+    print mobj
+    if mobj:
+        print(mobj)
+        return mobj.group(1)
+    return ''
+
 def video_oembed(url, **opt):
     key = 'oembed.%s.%s' % (url, opt)
     o = flasktools.urlparse(url)
