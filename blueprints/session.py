@@ -221,7 +221,6 @@ def update():
         flask.g.stash["session"] = form
         return flask.render_template('session/edit.tpl')
 
-    user = flask.g.stash.get('user')
     try:
         id = flask.g.stash.get('session').get('id')
         ok = flask.g.api.update_session(
