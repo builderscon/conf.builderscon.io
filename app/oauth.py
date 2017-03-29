@@ -87,7 +87,9 @@ def github_callback(resp):
     # Load user via github id
     user = builderscon.api.lookup_user_by_auth_user_id(auth_via='github', auth_user_id=str(data['id']))
     if user:
-        flask.session['user_id'] = user.get('id')
+        user_id = user.get('id')
+        flask.session['user_id'] = user_id
+        flask.session['access_token'] = resp['access_token']
         flask.g.stash['user'] = user
         return flask.redirect(flask.request.args.get('.next') or '/')
 
@@ -111,7 +113,9 @@ def github_callback(resp):
     if not user:
         return flask.render_template('login.tpl', error='failed to register user in the backend server')
 
-    flask.session['user_id'] = user.get('id')
+    user_id = user.get('id')
+    flask.session['user_id'] = user_id
+    flask.session['access_token'] = resp['access_token']
     flask.g.stash['user'] = user
 
     return redirect_edit()

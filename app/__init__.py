@@ -39,4 +39,3 @@ def twitter_oauth():
 github_oauth_callback = oauth.github_callback
 facebook_oauth_callback = oauth.facebook_callback
 twitter_oauth_callback = oauth.twitter_callback
-

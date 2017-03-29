@@ -98,7 +98,7 @@ def timetable():
         room_in_session = dict()
         rooms = dict()
         for r_id in sessions_by_room:
-            r = app.api.lookup_room(r_id)
+            r = flask.g.api.lookup_room(r_id)
             rooms[r_id] = r
 
         widthclass = 'room-col-%d' % (int(100 / len(rooms)))
@@ -151,7 +151,7 @@ def _list_sessions(conference_id, status, lang, range_start=None, range_end=None
     if conference_sessions:
         return conference_sessions
 
-    conference_sessions = app.api.list_sessions(conference_id, lang=lang, status=status, range_start=range_start, range_end=range_end)
+    conference_sessions = flask.g.api.list_sessions(conference_id, lang=lang, status=status, range_start=range_start, range_end=range_end)
     if conference_sessions :
         app.cache.set(key, conference_sessions, LIST_EXPIRES)
         return conference_sessions
@@ -224,11 +224,10 @@ def update():
     user = flask.g.stash.get('user')
     try:
         id = flask.g.stash.get('session').get('id')
-        ok = app.api.update_session(
+        ok = flask.g.api.update_session(
             id                = id,
             abstract          = form.get('abstract'),
             session_type_id   = form.get('session_type_id'),
-            user_id           = user.get('id'),
             title             = form.get('title'),
             category          = form.get('category'),
             material_level    = form.get('material_level'),
@@ -248,7 +247,7 @@ def update():
             app.cache.delete(app.hooks.session_cache_key(id=id, lang='all'))
             return flask.redirect('/%s/session/%s' % (flask.g.stash.get('full_slug'), id))
         else:
-            flask.g.stash["error"] = app.api.last_error()
+            flask.g.stash["error"] = flask.g.api.last_error()
     except BaseException as e:
         flask.g.stash["error"] = e
         print(e)
@@ -294,12 +293,12 @@ def delete():
         del flask.session[token]
         user = flask.g.stash.get("user")
         id = session.get('id')
-        ok = app.api.delete_session(
+        ok = flask.g.api.delete_session(
             id      = id,
             user_id = user.get('id')
         )
         if not ok:
-            flask.g.stash["error"] = app.api.last_error()
+            flask.g.stash["error"] = flask.g.api.last_error()
             return flask.render_template('session/delete.tpl')
 
         for l in app.LANGUAGES:
@@ -317,7 +316,7 @@ def show_confirm():
     # List sessions by the same speaker
     conference = flask.g.stash.get("conference")
     user = flask.g.stash.get("user")
-    sessions = app.api.list_sessions(
+    sessions = flask.g.api.list_sessions(
         conference_id=conference.get('id'),
         speaker_id=user.get('id'),
         lang=flask.g.lang,
@@ -343,13 +342,13 @@ def post_confirm():
         return flask.render_template('session/confirm.tpl')
         
 
-    ok = app.api.update_session(
+    ok = flask.g.api.update_session(
         id = session.get('id'),
         confirmed = True,
         user_id = user.get('id')
     )
     if not ok:
-        flask.g.stash["error"] = app.api.last_error()
+        flask.g.stash["error"] = flask.g.api.last_error()
         return flask.render_template('session/confirm.tpl')
 
     return flask.redirect('/%s/session/%s/confirmed' % (flask.g.stash.get('full_slug'), session.get('id')))

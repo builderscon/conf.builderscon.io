@@ -2,6 +2,7 @@ import config
 import flask
 import flask_babel
 import flasktools
+import functools
 import os
 import octav
 import re
@@ -73,6 +74,7 @@ def get_locale():
 @app.before_request
 def init_stash():
     lang = get_locale()
+    flask.g.api = api
     flask.g.lang = lang # this gets a special slot
     flask.g.stash = dict(
         lang=lang
@@ -89,6 +91,39 @@ def inject_template_vars():
     return stash
 
 def load_logged_in_user():
+    has_octav_session = True
+    for k in ['octav_session_id', 'octav_session_expires']:
+        if k not in flask.session:
+            print("Could not find key %s" % k)
+            has_octav_session = False
+            break
+
+    if not has_octav_session:
+        for k in ['access_token', 'user_id']:
+            if k not in flask.session:
+                return False
+
+        s = api.new_session(flask.session['access_token'], flask.session['user_id'])
+        if s is None:
+            return False
+        flask.session['octav_session_id'] = s.sid
+        flask.session['octav_session_expires'] = s.expires
+    else:
+        sid = flask.session['octav_session_id']
+        print("session exists %s" % sid)
+        expires = flask.session['octav_session_expires']
+        f = functools.partial(api.create_client_session, flask.session['access_token'], flask.session['user_id'])
+        s = octav.Session(api, f, sid, expires)
+        v = s.renew()
+        print("result of renew %s" % v)
+        if v is None:
+            return False
+        if v:
+            # Update the stored octav session ID
+            flask.session['octav_session_id'] = s.sid
+            flask.session['octav_session_expires'] = s.expires
+    flask.g.api = s
+
     if 'user_id' in flask.session:
         user = api.lookup_user(flask.session.get('user_id'))
         if user:

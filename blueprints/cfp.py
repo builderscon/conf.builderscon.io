@@ -151,7 +151,7 @@ def conference_cfp_commit():
         return flask.abort(404)
     try:
         del values['expires']
-        session = app.api.create_session(**values)
+        session = flask.g.api.create_session(**values)
         if session:
             del flask.session[key]
     except:
@@ -170,9 +170,9 @@ def conference_cfp_commit():
 @with_session_types
 def confernece_cfp_done():
     id = flask.request.values.get('id')
-    session = app.api.lookup_session(lang='all', id=id)
+    session = flask.g.api.lookup_session(lang='all', id=id)
     if not session:
-        return app.api.last_error(), 404
+        return flask.g.api.last_error(), 404
 
     flask.g.stash["session"] = session
     return flask.render_template('cfp_done.tpl')
