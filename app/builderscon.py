@@ -103,7 +103,7 @@ def load_logged_in_user():
             if k not in flask.session:
                 return False
 
-        s = api.new_session(flask.session['access_token'], flask.session['user_id'])
+        s = api.new_session(flask.session['access_token'], flask.session['auth_via'])
         if s is None:
             return False
         flask.session['octav_session_id'] = s.sid
@@ -112,7 +112,7 @@ def load_logged_in_user():
         sid = flask.session['octav_session_id']
         print("session exists %s" % sid)
         expires = flask.session['octav_session_expires']
-        f = functools.partial(api.create_client_session, flask.session['access_token'], flask.session['user_id'])
+        f = functools.partial(api.create_client_session, flask.session['access_token'], flask.session['auth_via'])
         s = octav.Session(api, f, sid, expires)
         v = s.renew()
         print("result of renew %s" % v)
