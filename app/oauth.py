@@ -87,7 +87,10 @@ def github_callback(resp):
     # Load user via github id
     user = builderscon.api.lookup_user_by_auth_user_id(auth_via='github', auth_user_id=str(data['id']))
     if user:
-        flask.session['user_id'] = user.get('id')
+        user_id = user.get('id')
+        flask.session['user_id'] = user_id
+        flask.session['access_token'] = resp['access_token']
+        flask.session['auth_via'] = 'github'
         flask.g.stash['user'] = user
         return flask.redirect(flask.request.args.get('.next') or '/')
 
@@ -111,7 +114,10 @@ def github_callback(resp):
     if not user:
         return flask.render_template('login.tpl', error='failed to register user in the backend server')
 
-    flask.session['user_id'] = user.get('id')
+    user_id = user.get('id')
+    flask.session['user_id'] = user_id
+    flask.session['access_token'] = resp['access_token']
+    flask.session['auth_via'] = 'github'
     flask.g.stash['user'] = user
 
     return redirect_edit()
@@ -148,6 +154,8 @@ def facebook_callback(resp):
     user = builderscon.api.lookup_user_by_auth_user_id(auth_via='facebook', auth_user_id=data['id'])
     if user:
         flask.session['user_id'] = user.get('id')
+        flask.session['access_token'] = resp['access_token']
+        flask.session['auth_via'] = 'facebook'
         flask.g.stash['user'] = user
         return flask.redirect(flask.request.args.get('.next') or '/')
 
@@ -185,6 +193,8 @@ def facebook_callback(resp):
         return flask.render_template('login.tpl', error='failed to register user in the backend server')
 
     flask.session['user_id'] = user.get('id')
+    flask.session['access_token'] = resp['access_token']
+    flask.session['auth_via'] = 'facebook'
     flask.g.stash['user'] = user
 
     return redirect_edit()
@@ -200,10 +210,14 @@ def twitter_callback(resp):
         resp['oauth_token_secret']
     )
 
+    consumer_key=builderscon.cfg.section('TWITTER').get('client_id')
+    consumer_secret=builderscon.cfg.section('TWITTER').get('client_secret').encode('ASCII')
     # Load user via twitter id
     user = builderscon.api.lookup_user_by_auth_user_id(auth_via='twitter', auth_user_id=resp['user_id'])
     if user:
         flask.session['user_id'] = user.get('id')
+        flask.session['access_token'] = ":".join([resp['oauth_token'], resp['oauth_token_secret'], consumer_key, consumer_secret])
+        flask.session['auth_via'] = 'twitter'
         flask.g.stash['user'] = user
         return flask.redirect(flask.request.args.get('.next') or '/')
 
@@ -240,6 +254,8 @@ def twitter_callback(resp):
         return flask.render_template('login.tpl', error='failed to register user in the backend server')
 
     flask.session['user_id'] = user.get('id')
+    flask.session['access_token'] = ":".join([resp['oauth_token'], resp['oauth_token_secret'], consumer_key, consumer_secret])
+    flask.session['auth_via'] = 'twitter'
     flask.g.stash['user'] = user
     return redirect_edit()
 

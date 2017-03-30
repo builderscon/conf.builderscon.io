@@ -21,7 +21,7 @@ def index():
     key = 'conferences.after.%s.lang.%s' % (today.strftime('%Y-%m-%d'), flask.g.lang)
     conferences = app.cache.get(key)
     if not conferences:
-        conferences = app.api.list_conference(
+        conferences = flask.g.api.list_conference(
             range_start=today.strftime('%Y-%m-%d'),
             lang=flask.g.lang
         )
@@ -34,7 +34,7 @@ def index():
     key = 'conferences.before.%s.lang.%s' % (today.strftime('%Y-%m-%d'), flask.g.lang)
     conferences = app.cache.get(key)
     if not conferences:
-        conferences = app.api.list_conference(
+        conferences = flask.g.api.list_conference(
             range_start=today.replace(year=today.year - 1).strftime('%Y-%m-%d'),
             range_end=today.strftime('%Y-%m-%d'),
             lang=flask.g.lang

@@ -42,7 +42,7 @@ def _list_sessions(conference_id, status, lang, range_start=None, range_end=None
     if conference_sessions:
         return conference_sessions
 
-    conference_sessions = app.api.list_sessions(conference_id, lang=lang, status=status, range_start=range_start, range_end=range_end)
+    conference_sessions = flask.g.api.list_sessions(conference_id, lang=lang, status=status, range_start=range_start, range_end=range_end)
     if conference_sessions :
         app.cache.set(key, conference_sessions, LIST_EXPIRES)
         return conference_sessions
@@ -51,6 +51,7 @@ def _list_sessions(conference_id, status, lang, range_start=None, range_end=None
 @page.route('/<series_slug>/<path:slug>')
 @with_conference_by_slug
 def view():
+    print(flask.g.api)
     lang = flask.g.lang
     conf_id = flask.g.stash.get('conference_id')
     key = "staff.%s.%s" % (conf_id, lang)
@@ -58,7 +59,7 @@ def view():
 
     staff = app.cache.get(key)
     if not staff:
-        staff = app.api.list_conference_staff(
+        staff = flask.g.api.list_conference_staff(
             conference_id=conf_id,
             lang=lang
         )
@@ -102,10 +103,10 @@ def schedule_ics():
     if ics:
         return flask.Response(ics, 200, {'Content-Type': 'text/calendar'})
 
-    if not app.api.get_conference_schedule(conference.get('id')):
+    if not flask.g.api.get_conference_schedule(conference.get('id')):
         return "failed to fetch schedule", 500
 
-    ics = app.api.last_response().data
+    ics = flask.g.api.last_response().data
     app.cache.set(key, ics, 300)
     return flask.Response(ics, 200, {'Content-Type': 'text/calendar'})
 
@@ -116,7 +117,7 @@ def feedback_blogs():
     key = "blog_entries.%s.%s" % (flask.g.stash.get('conference_id'), flask.g.lang)
     blog_entries = app.cache.get(key)
     if not blog_entries:
-        blog_entries = app.api.list_blog_entries(
+        blog_entries = flask.g.api.list_blog_entries(
             conference_id=flask.g.stash.get('conference_id'),
             lang=flask.g.lang,
             status=['public']
@@ -135,7 +136,7 @@ def staff():
     key = "staff.%s.%s" % (flask.g.stash.get('conference_id'), flask.g.lang)
     staff = app.cache.get(key)
     if not staff:
-        staff = app.api.list_conference_staff(
+        staff = flask.g.api.list_conference_staff(
             conference_id=flask.g.stash.get('conference_id'),
             lang=flask.g.lang
         )

@@ -11,8 +11,8 @@ with_user = app.hooks.with_user
 @require_login
 def dashboard():
     user = flask.g.stash.get('user')
-    conferences = app.api.list_conferences_by_organizer(organizer_id=user.get('id'))
-    sessions = app.api.list_sessions(
+    conferences = flask.g.api.list_conferences_by_organizer(organizer_id=user.get('id'))
+    sessions = flask.g.api.list_sessions(
         speaker_id = user.get('id'),
         status     = ['pending', 'accepted', 'rejected'],
         lang       = flask.g.lang
@@ -27,7 +27,7 @@ def dashboard():
 @page.route('/user/<id>')
 @with_user
 def view():
-    sessions = app.api.list_sessions(
+    sessions = flask.g.api.list_sessions(
         speaker_id=flask.g.stash.get("user").get("id"),
         status=["accepted"],
         lang=flask.g.lang
@@ -50,13 +50,13 @@ def email_register_post():
     if not email:
         return "email is required", 500
 
-    ok = app.api.create_temporary_email(
+    ok = flask.g.api.create_temporary_email(
         user_id = flask.g.stash.get('user').get('id'),
         target_id = flask.g.stash.get('user').get('id'),
         email = email
     )
     if not ok:
-        return app.api.last_error(), 500
+        return flask.g.api.last_error(), 500
     flask.g.stash['show_directions'] = True
     return flask.redirect('/user/email/confirm')
 
@@ -76,15 +76,15 @@ def email_confirm_post():
         return "confirmation_key is required", 500
 
     user = flask.g.stash.get('user')
-    ok = app.api.confirm_temporary_email(
+    ok = flask.g.api.confirm_temporary_email(
         user_id = user.get('id'),
         target_id = user.get('id'),
         confirmation_key = confirmation_key
     )
     if not ok:
-        return app.api.last_error(), 500
+        return flask.g.api.last_error(), 500
 
-    user = app.api.lookup_user_by_auth_user_id(auth_via=user['auth_via'], auth_user_id=user['auth_user_id'])
+    user = flask.g.api.lookup_user_by_auth_user_id(auth_via=user['auth_via'], auth_user_id=user['auth_user_id'])
     flask.g.stash['user'] = user
 
     return flask.redirect('/user/email/done')
@@ -100,10 +100,10 @@ def email_done():
 def with_session_from_args(cb, fname='id'):
     def load_session_from_args(cb, **args):
         id = flask.request.values.get(fname)
-        session = app.api.lookup_session(id=id, lang=flask.g.lang)
+        session = flask.g.api.lookup_session(id=id, lang=flask.g.lang)
         flask.g.stash["session"] = session
         if not session:
-            return app.api.last_error(), 404
+            return flask.g.api.last_error(), 404
 
         return cb(**args)
     return functools.update_wrapper(functools.partial(load_session_from_args, cb), cb)
@@ -119,10 +119,9 @@ def edit():
 @require_login
 def update():
     user = flask.g.stash.get('user')
-    ok = app.api.update_user(
+    ok = flask.g.api.update_user(
         id = user.get('id'),
-        lang = flask.request.values.get('lang'),
-        user_id = user.get('id'),
+        lang = flask.request.values.get('lang')
     )
     if not ok:
         flask.flash('failed to update', 'error')
