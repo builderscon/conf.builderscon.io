@@ -11,6 +11,7 @@ python-memcached
 python-oembed
 pytz
 redis
+redis-py-cluster
 urllib3
 wsgi-request-logger
 werkzeug

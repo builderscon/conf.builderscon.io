@@ -1,7 +1,7 @@
 """abstracts caching layer"""
 
 import pickle
-import redis
+import rediscluster
 import os
 if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/') or os.getenv('SERVER_SOFTWARE', '').startswith('Development/'):
     from google.appengine.api import memcache
@@ -18,7 +18,7 @@ def build(backend, cfg):
 
 class Redis(object):
     def __init__(self, host, port, db):
-        self.redis = redis.Redis(host=host, port=port, db=db)
+        self.redis = rediscluster.client.RedisCluster(host=host, port=port, db=db)
 
     def set(self, key, val, expires=0):
         self.redis.setex(key, pickle.dumps(val), expires)
