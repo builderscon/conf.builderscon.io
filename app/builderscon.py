@@ -35,9 +35,13 @@ def initialize():
 
     api = octav.Octav(**cfg.section('OCTAV'))
 
-    if os.getenv('CACHE_BACKEND', 'Redis') == 'Redis':
+    cache_backend = os.getenv('CACHE_BACKEND', 'Redis') 
+    if cache_backend == 'Redis':
         import cache_redis
-        cache = cache_redis.Cache(**cfg.section('REDIS_INFO'))
+        cache = cache_redis.Cache(cluster=False, **cfg.section('REDIS_INFO'))
+    elif cache_backend == 'RedisCluster':
+        import cache_redis
+        cache = cache_redis.Cache(cluster=True, **cfg.section('REDIS_CLUSTER'))
     else:
         import cache_memd
         cache = cache_memd.Cache(**cfg.section('MEMCACHED'))
