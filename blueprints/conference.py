@@ -51,7 +51,6 @@ def _list_sessions(conference_id, status, lang, range_start=None, range_end=None
 @page.route('/<series_slug>/<path:slug>')
 @with_conference_by_slug
 def view():
-    print(flask.g.api)
     lang = flask.g.lang
     conf_id = flask.g.stash.get('conference_id')
     key = "staff.%s.%s" % (conf_id, lang)
