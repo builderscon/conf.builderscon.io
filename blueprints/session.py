@@ -37,7 +37,7 @@ def list():
 
     flask.g.stash['accepted_sessions'] = accepted
     flask.g.stash['pending_sessions']  = pending
-    return flask.render_template('session/list.tpl')
+    return flask.render_template('v2017/session/list.html')
 
 @page.route('/<series_slug>/<path:slug>/timetable')
 @with_conference_by_slug
