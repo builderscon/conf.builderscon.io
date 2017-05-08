@@ -279,7 +279,7 @@ def delete():
             expires = time.time() + 900,
             id      = session.get('id')
         )
-        return flask.render_template('session/delete.tpl')
+        return flask.render_template('v2017/session/delete.html')
     elif method == 'POST':
         token = flask.request.form.get('delete_token')
         data  = flask.session[token]
@@ -292,13 +292,10 @@ def delete():
         del flask.session[token]
         user = flask.g.stash.get("user")
         id = session.get('id')
-        ok = flask.g.api.delete_session(
-            id      = id,
-            user_id = user.get('id')
-        )
+        ok = flask.g.api.delete_session(id)
         if not ok:
             flask.g.stash["error"] = flask.g.api.last_error()
-            return flask.render_template('session/delete.tpl')
+            return flask.render_template('v2017/session/delete.html')
 
         for l in app.LANGUAGES:
             app.cache.delete(app.hooks.session_cache_key(id=id, lang=l.get('value')))
