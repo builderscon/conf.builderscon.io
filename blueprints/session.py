@@ -290,7 +290,6 @@ def delete():
             return flask.abort(500)
 
         del flask.session[token]
-        user = flask.g.stash.get("user")
         id = session.get('id')
         ok = flask.g.api.delete_session(id)
         if not ok:
