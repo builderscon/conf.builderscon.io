@@ -296,23 +296,26 @@ a.cfptabs-title-inside {
 }
 
 .status-accepted {
-  font-size: 12pt;
+  vertical-align: middle;
+  font-size: 8pt;
   color: #eee;
-  padding: 5px;
+  padding: 2px;
   background-color: #0c0;
   border: 2px solid #393;
 }
 .status-pending {
-  font-size: 12pt;
+  vertical-align: middle;
+  font-size: 8pt;
   color: #555;
-  padding: 5px;
+  padding: 2px;
   background-color: #ee0;
   border: 2px solid #cc3;
 }
 .status-rejected {
-  font-size: 12pt;
+  vertical-align: middle;
+  font-size: 8pt;
   color: #eee;
-  padding: 5px;
+  padding: 2px;
   background-color: #e00;
   border: 2px solid #c33;
 }

@@ -129,6 +129,10 @@ nav .button-collapse i {
 	   -moz-background-size: auto 150%;
 		    background-size: auto 150%;
 }
+#heroimage-empty {
+	position: relative;
+	height: auto;
+}
 
 #heroimage .wrapper {
 	position: relative;
