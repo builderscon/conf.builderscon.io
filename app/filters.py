@@ -133,6 +133,8 @@ def markdown_filter(s):
 
 @builderscon.app.template_filter('audlevelname')
 def audience_level_value_to_name(v):
+    if not v:
+        return ''
     return v.title()
 
 # Used in templates, when all you have is the user's input value

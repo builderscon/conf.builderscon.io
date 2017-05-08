@@ -153,7 +153,6 @@ a.disabled	{ color: #555; }
 	position: relative;
 	width: 100%;
 }
-
 #heroimage {
 	position: relative;
 	height: 410px;
@@ -162,6 +161,11 @@ a.disabled	{ color: #555; }
 	   -moz-background-size: 100% auto;
 		    background-size: 100% auto;
 }
+#heroimage-empty {
+	position: relative;
+	height: 110px;
+}
+
 
 #heroimage .wrapper {
 	position: relative;

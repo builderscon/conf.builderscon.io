@@ -7,6 +7,7 @@ import random
 import re
 import time
 
+SESSION_VAR_KEY = "input"
 page = flask.Blueprint('cfp', __name__)
 
 check_login = app.hooks.check_login
@@ -26,13 +27,12 @@ def view():
         session = flask.session.get(key)
         if not session:
             return flask.abort(404)
-        flask.g.stash["session"] = session
+        flask.g.stash[SESSION_VAR_KEY] = session
 
-    f = '%s/cfp.tpl' % flask.g.stash.get('full_slug')
     for stype in flask.g.stash.get('session_types'):
         if stype.get('is_default'):
             flask.g.stash['selected_session_type_id'] = stype.get('id')
-    return flask.render_template([f, 'cfp.tpl'])
+    return flask.render_template(['v2017/cfp/index.html', 'cfp.tpl'])
 
 @page.route('/<series_slug>/<path:slug>/cfp/input', methods=['GET','POST'])
 @require_login
@@ -75,8 +75,8 @@ def input():
             flask.g.stash['missing'][f] = True
     
     if flask.g.stash.get('errors') > 0:
-        flask.g.stash["session"] = form
-        return flask.render_template('cfp.tpl')
+        flask.g.stash[SESSION_VAR_KEY] = form
+        return flask.render_template('v2017/cfp/index.html')
 
     h = hashlib.sha256()
     h.update('%f' % time.time())
@@ -93,7 +93,6 @@ def input():
         abstract          = form.get('abstract'),
         session_type_id   = form.get('session_type_id'),
         speaker_id        = user.get('id'),
-        user_id           = user.get('id'),
         title             = form.get('title'),
         category          = form.get('category'),
         material_level    = form.get('material_level'),
@@ -134,11 +133,12 @@ def conference_cfp_confirm():
         if stype.get('id') == session_type_id:
             flask.g.stash['session_type'] = stype
             break
-    flask.g.stash['session'] = session
+    flask.g.stash[SESSION_VAR_KEY] = session
     flask.g.stash['submission_key'] = key
-    return flask.render_template('cfp_confirm.tpl')
+    return flask.render_template('v2017/cfp/confirm.html')
 
 @page.route('/<series_slug>/<path:slug>/cfp/commit', methods=['GET','POST'])
+@require_login
 @with_conference_by_slug
 @with_session_types
 def conference_cfp_commit():
@@ -147,21 +147,16 @@ def conference_cfp_commit():
 
     key = flask.request.form.get('key')
     values = flask.session.get(key)
+    session = None
     if not values:
         return flask.abort(404)
-    try:
-        del values['expires']
-        session = flask.g.api.create_session(**values)
-        if session:
-            del flask.session[key]
-    except:
-        # TODO: capture, and do the right thing
-        pass
-
+    del values['expires']
+    session = flask.g.api.create_session(**values)
     if session:
+        del flask.session[key]
         return flask.redirect('/%s/cfp_done?id=%s' % (flask.g.stash.get('full_slug'), session.get('id')))
 
-    return flask.render_template('cfp.tpl')
+    return flask.render_template('v2017/cfp/index.html')
 
 @page.route('/<series_slug>/<path:slug>/cfp_done')
 @require_login
@@ -174,7 +169,7 @@ def confernece_cfp_done():
     if not session:
         return flask.g.api.last_error(), 404
 
-    flask.g.stash["session"] = session
-    return flask.render_template('cfp_done.tpl')
+    flask.g.stash[SESSION_VAR_KEY] = session
+    return flask.render_template('v2017/cfp/done.html')
 
 

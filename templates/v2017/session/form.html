@@ -1,0 +1,229 @@
+{% set termsOfUseURL = 'https://docs.google.com/document/d/1dX6RaYwjZ4VF31_UgrFgQYlkH1ayH39kEG0T3lCPOxo/edit?usp=sharing' %}
+{% set left = 3 %}
+{% set right = 12 - left %}
+<section>
+<div class="section">
+  <div class="inner">
+    <div class="body col s12 m9 l10">
+<form class="cfp-form" action="{{ action }}" method="post">
+{% if for_edit %}
+  <input type="hidden" name="id" value="{{ input.id }}">
+{% endif %}
+  <div class="section transparent">
+    <div class="inner box">
+      <div class="row box-header">
+        <div class="col s12 m9 l10">
+          <h1>{% if for_edit %}{% trans %}Edit your session{% endtrans %}{% else %}{% trans %}Submission Form{% endtrans %}{% endif %}</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m9 l10"><h3>{% trans %}Proposal Details{% endtrans %}</h3></div>
+      </div>
+      <div class="row">
+        <div class="col l12">
+          <ul class="tabs">
+{% for l in languages %}
+            <li class="tab col l6">
+              <a href="#panel-{{languages[loop.index0].value}}">{{ _(l.name) }}</a>
+            </li>
+{% endfor %}
+          </ul>
+        </div>
+      </div>
+
+{% for l in languages %}
+      <div class="row" id="panel-{{languages[loop.index0 ].value}}">
+        <div class="col s12 m8 l10">
+          <div class="row">
+            <div class="col l12">
+              <p class="notice-small">{% trans %}You must provide at least one title and abstract in any of the supported languages{% endtrans %}</p>
+            </div>
+          </div><!-- .row -->
+          <div class="row">
+            <div class="col l{{ left }}">
+              <label>{% trans %}Title{% endtrans %}</label>
+              {% if errors and missing.get('title') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}
+            </div>
+            <div class="col l{{ right }}">
+              <div class="row" style="margin-left: 0em">
+                <div class="l11 col">
+{% set itemName = 'title#' + l.value if l.value != 'en' else 'title' %}
+                  <input type="text" class="title-input" name="{{ itemName }}"{% if input %} value="{{ input.get(itemName, '') }}"{% endif %} placeholder="{% trans lang=_(l.name) %}Please provide the session title in {{ lang }}{% endtrans %}"/>
+                </div>
+              </div>
+            </div>
+          </div><!-- .row -->
+          <div class="row">
+            <div class="l{{ left }} col">
+              <label>{% trans %}Abstract{% endtrans %}</label>
+              {% if errors and missing.get('abstract') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}
+            </div>
+            <div class="l{{ right }} col">
+              <div class="row" style="margin-left: 0em">
+                <div class="l11 col">
+{% set itemName = 'abstract#' + l.value if l.value != 'en' else 'abstract' %}
+                  <textarea class="abstract-textarea" name="{{ itemName }}" rows="8" placeholder="{% trans lang=_(l.name) %}Please provide the session abstract in {{ lang }}
+You may use Markdown in this field{% endtrans %}">{% if input %}{{ input.get(itemName, '') }}{% endif %}</textarea>
+                </div>
+              </div>
+            </div>
+          </div><!-- .row -->
+        </div>
+      </div><!-- .panel-{{languages[loop.index0].value}} -->
+{% endfor %}
+
+      <div class="row">
+        <div class="l{{ left }} col">
+          <label>{% trans %}Session Type{% endtrans %}</label>
+          {% if errors and missing.get('session_type_id') %}<span class="error">{% trans %}required field{% endtrans %}</span>{% endif %}
+        </div>
+        <div class="l{{ right }} col">
+          <select name="session_type_id">
+            {% for stype in session_types %}
+            <option value="{{ stype.id }}"{% if selected_session_type_id == stype.id %} selected="selected"{% endif %}{% if not user.is_admin and not stype.is_accepting_submission %}disabled="disabled"{% endif %}>{{ _(stype.name) }}{% if not stype.is_accepting_submission %} [{% trans %}SUBMISSION CURRENTLY CLOSED{% endtrans %}]{% endif %}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="l{{ left }} col"><label>{% trans %}Material Level{% endtrans %}</label></div>
+        <div class="l{{ right }} col">
+          <select name="material_level" id="select-material-level">
+{% set levels = [
+  { 'name': _('Beginner'), 'value': 'beginner' },
+  { 'name': _('Intermediate'), 'value': 'intermediate' },
+  { 'name': _('Expert'), 'value': 'advanced' }
+] %}
+{% for level in levels %}
+            <option value="{{ level.value }}" id="{{ level.value }}"{% if level.value == 'beginner' %} selected="selected"{% endif %}/><label for="{{ level.value }}">{{ _(level.name) }}</option>
+{% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="l{{ left }} col"><label>{% trans %}Spoken Language{% endtrans %}</label></div>
+        <div class="l{{ right }} col">
+          <p class="notice-small">{% trans %}Please select which language you will be speaking in.{% endtrans %}</p>
+          <select name="spoken_language" id="select-spoken-language">
+{% set sel_spoken_language = input.get('spoken_language', 'en') if input else 'en' %}
+{% for l in languages %}
+            <option value="{{ l.value }}"{% if l.value == sel_spoken_language %} selected="selected"{% endif %}><label for="{{ l.value }}">{{ _(l.name) }}</label></option>
+{% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="l{{ left }} col"><label>{% trans %}Slide Language{% endtrans %}</label></div>
+        <div class="l{{ right }} col">
+          <p class="notice-small">{% trans %}Please select which language you will write your slides in.{% endtrans %}</p>
+          <p>{{ sel_slide_language }}</p>
+          <select name="slide_language" id="select-slide-language">
+{% for l in languages %}
+            <option value="{{ l.value }}"><label for="{{ l.value }}">{{ _(l.name) }}</label></option>
+{% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="l{{ left }} col"><label>{% trans %}Comments{% endtrans %}</label></div>
+        <div class="l{{ right }} col">
+          <textarea name="memo" rows=4 placeholder="{% trans %}Specify any communication that you might want to relay to the organizer: e.g. special financial requirements, required documents, specific dates during the conference you might not be able to attend, etc{% endtrans %}">{% if input %}{{ input.get('memo', '') }}{% endif %}</textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="l12 col">
+          <h3>{% trans %}Videos, Photos, and Materials{% endtrans %}</h3>
+          <p class="notice-small">{% trans %}Please refer to our <a href="{{termsOfUseURL}}" target="_blank">terms of use</a> about how builderscon uses videos, photos, and other materials.{% endtrans %}</p>
+        </div>
+      </div>
+{% if slide_url %}
+      <div class="row">
+        <div class="l{{ left }} col"><label>{% trans %}Slide URL{% endtrans %}</label></div>
+        <div class="l{{ right }} col">
+          <input type="text" name="slide_url" placeholder="{% trans %}Please provide the URL of where you uploaded your slide{% endtrans %}"{% if input %} value="{{ input.slide_url }}"{% endif %}>
+        </div>
+      </div>
+{% endif %}
+{% if video_url %}
+      <div class="row">
+        <div class="l{{ left }} col"><label>{% trans %}Video URL{% endtrans %}</label></div>
+        <div class="l{{ right }} col">
+          <input type="text" name="video_url"{% if input %} value="{{ input.video_url }}"{% endif %}>
+        </div>
+      </div>
+{% endif %}
+
+      <div class="row">
+        <div class="l{{ left }} col"><label>{% trans %}Photo Release{% endtrans %}</label></div>
+        <div class="l{{ right }} col">
+          <p>{% trans %}By selecting "Allow" below, you agree to allow builderscon to take your photo during the duration of the event, and to distribute and place those photos on our website(s).{% endtrans %}</p>
+{% set sel_photo_release = input.get('photo_release', 'allow') if input else 'allow' %}
+{% set photo_release_choices = [
+    {'name': _('Allow'), 'value': 'allow' },
+    {'name': _('Disallow'), 'value': 'disallow' }
+] %}
+{% for choice in photo_release_choices %}
+          <input id="photo_release_choice{{ loop.index }}" type="radio" name="photo_release" value="{{ choice.value }}"{% if sel_photo_release == choice.value %} checked="checked"{% endif %}/>
+          <label for="photo_release_choice{{ loop.index }}">{{ _(choice.name) }}</label>
+{% endfor %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="l{{ left }} col"><label>{% trans %}Recording Release{% endtrans %}</label></div>
+        <div class="l{{ right }} col">
+          <p>{% trans %}By selecting "Allow" below, you agree to allow builderscon to record your presentation on video, and to distribute and place those recordings on our website(s).{% endtrans %}</p>
+{% set sel_recording_release = input.get('recording_release', 'allow') if input else 'allow' %}
+{% set recording_release_choices = [
+    {'name': _('Allow'), 'value': 'allow' },
+    {'name': _('Disallow'), 'value': 'disallow' }
+] %}
+{% for choice in recording_release_choices %}
+          <input id="recording_release_choice{{ loop.index }}" type="radio" name="recording_release" value="{{ choice.value }}"{% if sel_recording_release == choice.value %} checked="checked"{% endif %}/>
+          <label for="recording_release_choice{{ loop.index }}">{{ _(choice.name) }}</label>
+{% endfor %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="l{{ left }} col"><label>{% trans %}Materials Release{% endtrans %}</label></div>
+        <div class="l{{ right }} col">
+          <p>{% trans %}By selecting "Allow" below, you agree to allow builderscon to distribute and place materials from your presentation (such as slides) on our website(s), including from our API.{% endtrans %}</p>
+{% set sel_material_release = input.get('materials_release', 'allow') if input else 'allow' %}
+{% set material_release_choices = [
+    {'name': _('Allow'), 'value': 'allow' },
+    {'name': _('Disallow'), 'value': 'disallow' }
+] %}
+{% for choice in material_release_choices %}
+          <input id="material_release_choice{{ loop.index }}" type="radio" name="materials_release" value="{{ choice.value }}"{% if sel_material_release == choice.value %} checked="checked"{% endif %}/>
+          <label for="material_release_choice{{ loop.index }}">{{ _(choice.name) }}</label>
+{% endfor %}
+        </div>
+      </div>
+{% if not for_edit %}
+      <div class="row tos-agreement">
+        <div class="l12 col">
+          <div>{% trans %}I hereby confirm that I am submitting this proposal after reading the terms of use, and that I understand and agree to its contents.{% endtrans %}</div>
+          <div><span class="i-documents"></span><a href="{{termsOfUseURL}}" target="_blank">{% trans %}Terms Of Use{% endtrans %}</a></div>
+          <div>
+            <input id="terms_of_use" type="checkbox" name="terms_of_use" value="true" />
+            <label for="terms_of_use">{% trans %}Yes, I agree to the Terms Of Use{% endtrans %}</label>
+          </div>
+        </div>
+      </div>
+{% endif %}
+      <div class="row">
+        <div class="l12 col center-align">
+          <button id="submit-button" type="submit" class="btn{% if not for_edit %} disabled{% endif %}"{% if not for_edit %} disabled="disabled"{% endif %}>{% if for_edit %}{% trans %}Edit your proposal{% endtrans %}{% else %}{% trans %}Submit your proposal{% endtrans %}{% endif %}</button>
+{% if not for_edit %}
+          <p class="notice-small center-align">{% trans %}Please check agree to our Terms Of Use before submitting your proposal.{% endtrans %}</p>
+{% endif %}
+        </div>
+      </div>
+    </div><!-- .body -->
+    </div><!-- .inner -->
+  </div><!-- .section -->
+</form>
+    </div><!-- .body -->
+  </div><!-- .inner -->
+</div><!-- .section -->
+</section>
+

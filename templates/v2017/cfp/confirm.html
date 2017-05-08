@@ -1,0 +1,145 @@
+{% extends 'v2017/layout/base.html' %}
+
+{% block title %}{{ conference.title }} - Confirm Proposal{% endblock %}
+
+{% block menuitems %}
+<li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
+<li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
+{%- with sessions = conference.sessions or [] %}{% if sessions | length > 0 %}
+<li><a href="/{{ full_slug }}/sessions">{% trans %}Sessions{% endtrans %}</a></li>
+{% endif %}{% endwith -%}
+{% endblock %}
+
+{% block scripts %}
+{% include 'v2017/session/form_scripts.html' %}
+{% endblock %}
+
+{% block header %}
+<style type="text/css">
+<!--
+.notice-small {
+  font-size: 80% !important;
+  color: #888 !important;
+}
+
+.centered {
+    text-align: center !important;
+    margin: 0 auto 0 auto !important;
+    float: none !important;
+}
+
+.edit-button {
+    margin: 1em auto 1em auto !important;
+    float: none !important;
+}
+
+.submission-verify .row {
+    margin-bottom: 1em;
+}
+
+.submission-verify .value {
+    border-bottom: 1px solid #ccc;
+}
+
+#confirm-content {
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 1em;
+  background-color: #fff;
+}
+-->
+</style>
+{% include 'v2017/session/form_styles.html' %}
+{% endblock %}
+
+{% block content %}
+{% set leftcol = 4 %}
+{% set rightcol = 12 - leftcol %}
+<section>
+  <div class="section">
+    <div class="inner">
+      <h1 class="title">{% trans %}Submission Details{% endtrans %}</h1>
+      <div class="body col s12 m9 l10">
+        <h2>{% trans %}Submission Details{% endtrans %}</h2>
+
+        <div id="confirm-content">
+        <div class="row">
+          <div class="l12 col">
+            <p class="centered notice-small">{% trans %}Please review your submission details below. If you have corrections to make, click the button below to edit your submission{% endtrans %}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="l12 col edit-button center-align">
+            <form action="/{{ conference.full_slug }}/cfp" method="GET">
+              <input type="hidden" name="key" value="{{ submission_key }}">
+            <button type="submit" class="btn">{% trans %}Edit your proposal{% endtrans %}</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="submission-verify">
+        <div class="row">
+          <div class="l{{ leftcol }} col">{% trans %}Session Title (English){% endtrans %}</div>
+          <div class="l{{ rightcol }} col value">{{ input.get('title', '-') }}</div>
+        </div>
+        <div class="row">
+          <div class="l{{ leftcol }} col">{% trans %}Session Title (Japanese){% endtrans %}</div>
+          <div class="l{{ rightcol }} col value">{{ input.get('title#ja', '-') }}</div>
+        </div>
+        <div class="row">
+          <div class="l{{ leftcol }} col">{% trans %}Session Duration{% endtrans %}</div>
+          <div class="l{{ rightcol }} col value">{{ session_type.name }}</div>
+        </div>
+        <div class="row">
+          <div class="l{{ leftcol }} col">{% trans %}Session Abstract (English){% endtrans %}</div>
+          <div class="l{{ rightcol }} col value">{% autoescape off %}{{ input.get('abstract', '-') | markdown }}{% endautoescape %}</div>
+        </div>
+        <div class="row">
+          <div class="l{{ leftcol }} col">{% trans %}Session Abstract (Japanese){% endtrans %}</div>
+          <div class="l{{ rightcol }} col value">{% autoescape off %}{{ input.get('abstract#ja', '-') | markdown }}{% endautoescape %}</div>
+        </div>
+        <div class="row">
+          <div class="l{{ leftcol }} col">{% trans %}Material Level{% endtrans %}</div>
+          <div class="l{{ rightcol }} col value">{{ _(input.material_level|audlevelname) }}</div>
+        </div>
+        <div class="row">
+          <div class="l{{ leftcol }} col">{% trans %}Spoken Language{% endtrans %}</div>
+          <div class="l{{ rightcol }} col value">{{ _(input.spoken_language|langname) }}</div>
+        </div>
+        <div class="row">
+          <div class="l{{ leftcol }} col">{% trans %}Slide Language{% endtrans %}</div>
+          <div class="l{{ rightcol }} col value">{{ _(input.slide_language|langname) }}</div>
+        </div>
+        <div class="row">
+          <div class="l{{ leftcol }} col">{% trans %}Comments{% endtrans %}</div>
+          <div class="l{{ rightcol }} col value">{{ input.get('memo', '-') }}</div>
+        </div>
+        <div class="row">
+          <div class="l{{ leftcol }} col">{% trans %}Photo Release{% endtrans %}</div>
+          <div class="l{{ rightcol }} col value">{{ _(input.photo_release|permname) }}</div>
+        </div>
+        <div class="row">
+          <div class="l{{ leftcol }} col">{% trans %}Recording Release{% endtrans %}</div>
+          <div class="l{{ rightcol }} col value">{{ _(input.recording_release|permname) }}</div>
+        </div>
+        <div class="row">
+          <div class="l{{ leftcol }} col">{% trans %}Materials Release{% endtrans %}</div>
+          <div class="l{{ rightcol }} col value">{{ _(input.materials_release|permname) }}</div>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="l12 col center-align">
+            <form action="/{{ conference.full_slug }}/cfp/commit" method="POST">
+              <input type="hidden" name="key" value="{{ submission_key }}">
+            <button id="submit-button" type="submit" class="btn">{% trans %}Submit your proposal{% endtrans %}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      </div><!-- confirm-content -->
+    <div>
+  </div>
+</section>
+{% endblock %}

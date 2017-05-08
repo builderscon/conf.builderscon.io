@@ -167,7 +167,7 @@ def list_cache_key(conference_id, status, lang, range_start=None, range_end=None
 @with_conference_by_slug
 @with_session
 def view():
-    return flask.render_template('session/view.tpl')
+    return flask.render_template('v2017/session/view.html')
 
 @page.route('/<series_slug>/<path:slug>/session/<id>/edit')
 @require_login
@@ -177,7 +177,7 @@ def view():
 def edit():
     flask.g.stash['selected_session_type_id'] = flask.g.stash.get('session').get('session_type_id')
 
-    return flask.render_template('session/edit.tpl')
+    return flask.render_template('v2017/session/edit.html')
 
 @page.route('/<series_slug>/<path:slug>/session/<id>/update', methods=['POST'])
 @require_login

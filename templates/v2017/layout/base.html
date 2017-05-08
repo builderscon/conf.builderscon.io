@@ -34,6 +34,8 @@
 <link rel="stylesheet" href="/static/v2017/css/fonts.css" />
 <link rel="stylesheet" media="(max-width: 992px)" href="/static/v2017/css/html.sp.css" />
 <link rel="stylesheet" media="(min-width: 993px)" href="/static/v2017/css/html.pc.css" />
+<link rel="stylesheet" href="/static/v2017/css/styles.css" />
+{% block header %}{% endblock %}
 </head>
 
 <body>
@@ -59,6 +61,7 @@
 </nav>
 </header>
 
+{% block heroimage %}
 <div id="heroimage">
 <div class="wrapper">
 <div class="inner">
@@ -69,6 +72,7 @@
 </div><!--  / .inner /  -->
 </div><!--  / .wrapper /  -->
 </div><!--  / #heroimage /  -->
+{% endblock %}
 
 
 <div class="container">

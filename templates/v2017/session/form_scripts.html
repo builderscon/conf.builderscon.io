@@ -1,0 +1,27 @@
+<script type="text/javascript">
+<!--
+  $(document).ready(function() {
+    $('select').material_select();
+    $("#terms_of_use").click(function() {
+      var $btn = $("#submit-button");
+      if ($("#terms_of_use").prop('checked')) {
+        $btn.removeClass("disabled");
+        $btn.prop("disabled", false);
+      } else {
+        $btn.addClass("disabled");
+        $btn.prop("disabled", true);
+      }
+    });
+
+    $('ul.tabs').tabs('select_tab', 'panel-{{ lang }}');
+{% if input %}
+    $("#select-material-level").val("{{ input.get('material_level', 'beginner') }}").material_select();
+    $("#select-spoken-language").val("{{ input.get('spoken_language', lang) }}").material_select();
+    $("#select-slide-language").val("{{ input.get('slide_language', lang) }}").material_select();
+{% else %}
+    $("#select-spoken-language").val("{{ lang }}").material_select();
+    $("#select-slide-language").val("{{ lang }}").material_select();
+{% endif %}
+  })
+-->
+</script>
