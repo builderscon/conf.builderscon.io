@@ -14,12 +14,16 @@
           </div>
           <div class="large-11 small-11 column conference-name">
             <a href="{% if conference.series %}{{ conference.series.slug }}/{% endif %}{{ conference.slug }}">{{ conference.title }}</a>
+            <p style="font-size: 0.5em">
 {%- with dates = conference.get('dates') %}
 {%- if dates|length > 0 %}
-{%- set dt = conference.dates[0]|confdate(lang=lang,timezone=conference.get('timezone')) %}
-[{{ dt.date() }}]
+[{%- for x in dates -%}
+{%- set dt = x|confdate(lang=lang,timezone=conference.get('timezone')) %}
+{{ dt.date() }}{% if not loop.last %},{% endif %}
+{%- endfor -%}]
 {%- endif %}
 {%- endwith %}
+            </p>
           </div>
         </div>
         {% endfor %}
