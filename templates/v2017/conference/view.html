@@ -231,7 +231,7 @@
 <div class="block">
 <ul>
 {%- for user in conference.administrators %}
-  <li><a href="/{{ conference.full_slug }}/staff" target="_blank"><img src="{{ user.avatar_url }}" class="circle" /></a></li>
+  <li><a href="/{{ conference.full_slug }}/staff" target="_blank"><img src="/sharaq/small/{{ "https://api.builderscon.io/v2/user/avatar?id" | urlencode }}={{ user.id }}" class="circle" /></a></li>
 {% endfor %}
 {%- for user in staff %}
   <li><a href="/{{ conference.full_slug }}/staff" target="_blank"><img src="{{ user.avatar_url }}" class="circle" /></a></li>
