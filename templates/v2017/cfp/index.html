@@ -53,7 +53,6 @@ section .inner .body ul.dropdown-content li {
     <section>
       <div class="section">
         <div class="inner">
-          <h1 class="title">{% trans %}Abstract{% endtrans %} </h1>
           <div class="body col s12 m9 l10">
             <h1>{% trans %}Submit Your Proposals!{% endtrans %}</h1>
             {% autoescape false %}{{ conference.cfp_lead_text | markdown }}{% endautoescape %}
@@ -68,7 +67,6 @@ section .inner .body ul.dropdown-content li {
     <section>
       <div class="section">
         <div class="inner">
-          <h1 class="title">{% trans %}Instructions{% endtrans %}</h1>
           <div class="body col s12 m9 l10">
             <h1>{% trans %}Submission Instructions{% endtrans %}</h1>
             {% autoescape false %}{{ conference.cfp_pre_submit_instructions | markdown }}{% endautoescape %}
