@@ -8,6 +8,7 @@ import model
 import pytz
 import re
 import time
+import uuid
 
 LIST_EXPIRES = 300
 page = flask.Blueprint('session', __name__)
@@ -273,7 +274,7 @@ def delete():
 
     session = flask.g.stash["session"]
     if method == 'GET':
-        token = "del_session_"
+        token = "del_session_" + str(uuid.uuid4())
         flask.g.stash["delete_token"] = token
         flask.session[token] = dict(
             expires = time.time() + 900,
