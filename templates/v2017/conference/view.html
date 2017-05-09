@@ -2,6 +2,16 @@
 
 {% block title %}{{ conference.title }} - {{ conference.sub_title }}{% endblock %}
 
+{% block header %}
+<style type="text/css">
+<!--
+#conference-about p {
+  margin-bottom: 1em;
+}
+-->
+</style>
+{% endblock %}
+
 {% block menuitems %}
 <li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
 <li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
@@ -79,7 +89,7 @@
 <h1 class="title scrollspy"><em>about</em></h1>
 <div class="body col s12 m9 l10 conference-about">
 <div class="section transparent">
-<div>{% autoescape false %}{{ description|markdown }}{% endautoescape %}</div>
+<div id="conference-about">{% autoescape false %}{{ description|markdown }}{% endautoescape %}</div>
 </div><!--  / .section / -->
 </div><!--  / .body /  -->
 </div><!--  / .inner /  -->
