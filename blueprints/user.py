@@ -51,7 +51,6 @@ def email_register_post():
         return "email is required", 500
 
     ok = flask.g.api.create_temporary_email(
-        user_id = flask.g.stash.get('user').get('id'),
         target_id = flask.g.stash.get('user').get('id'),
         email = email
     )
@@ -77,7 +76,6 @@ def email_confirm_post():
 
     user = flask.g.stash.get('user')
     ok = flask.g.api.confirm_temporary_email(
-        user_id = user.get('id'),
         target_id = user.get('id'),
         confirmation_key = confirmation_key
     )
