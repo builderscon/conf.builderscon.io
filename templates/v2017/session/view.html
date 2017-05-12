@@ -12,7 +12,7 @@
 {% block body_id %}session{% endblock %}
 {% block title %}{{ session.title }} - {{ session.conference.title }}{% endblock %}
 {% block header %}
-<link rel="canonical" href="/{% if conference.series_id == "a7cbd9c9-472c-11e6-941a-42010af00043" %}{{ conference.slug }}{% else %}{{ conference.full_slug }}{% endif %}/session/{{ session.id }}" />
+<link rel="canonical" href="/{% if conference.series_id == "a7cbd9c9-472c-11e6-941a-42010af00043" and conference.id != "fdd2e7aa-b234-4aac-bfb1-e58cb334e8a7" %}{{ conference.slug }}{% else %}{{ conference.full_slug }}{% endif %}/session/{{ session.id }}" />
 <style type="text/css">
 <!--
 .status-accepted {
