@@ -122,12 +122,12 @@ https://i.ytimg.com/vi/{{ session.video_url | video_id }}/maxresdefault.jpg
             {% if session.video_url %}
             <div class="video">
               <h5>{% trans %}Video{% endtrans %}</h5>
-              {{ session.video_url | video_embed }}
+              {% autoescape off %}{{ session.video_url | video_embed }}{% endautoescape %}
             </div>{% endif %}
             {% if session.slide_url %}
             <div class="slide">
               <h5>{% trans %}Slides{% endtrans %}</h5>
-              {% for slide_url in session.slide_url.split(',') %}{{ slide_url | slide_embed }}
+              {% for slide_url in session.slide_url.split(',') %}{% autoescape off %}{{ slide_url | slide_embed }}{% endautoescape %}
 {% endfor %}
             </div>{% endif %}
 
