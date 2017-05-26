@@ -25,6 +25,17 @@ img.speaker-avatar {
   border: 1px solid #ccc;
 }
 
+.interpretation {
+  width: 24.5px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+}
+
+.interpretation i {
+  vertical-align: text-bottom;
+}
+
 .session-title {
   font-size: 1.2em;
   font-weight: bold;
@@ -52,7 +63,7 @@ img.speaker-avatar {
 {% macro session_item(session, speaker, conference) %}
   <div class="s2 l2 col center-align">
     <div class="speaker-avatar"><img class="speaker-avatar" src="{{ speaker.avatar_url or '/static/images/noprofile.png' }}"/></div>
-    <div class="session-language">{{ session.spoken_language | upper }}{% if session.has_interpretation %} <i class="tiny material-icons">hearing</i>{% endif %}</div>
+    <div class="session-language">{{ session.spoken_language | upper }}{% if session.has_interpretation %} <div class="interpretation"><i class="tiny material-icons">hearing</i></div>{% endif %}</div>
   </div>
   <div class="s4 l4 col">
     <div>
