@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-08 19:10+0900\n"
+"POT-Creation-Date: 2017-05-26 10:51+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgid "Meet Mr. B (Mr. Beacon)!"
 msgstr ""
 
 #: templates/beacon.tpl:8 templates/errors/404.tpl:9 templates/errors/500.tpl:9
-#: templates/index.tpl:34
+#: templates/index.tpl:38
 msgid "BLOG"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgid ""
 msgstr ""
 
 #: templates/beacon.tpl:44 templates/session/form.tpl:185
-#: templates/v2017/session/form.html:203
+#: templates/v2017/session/form.html:215
 msgid "Terms Of Use"
 msgstr ""
 
@@ -105,7 +105,7 @@ msgstr ""
 msgid "Technical Sponsors"
 msgstr ""
 
-#: templates/catalog.tpl:13 templates/v2017/conference/view.html:177
+#: templates/catalog.tpl:13 templates/v2017/conference/view.html:195
 msgid "Sponsors"
 msgstr ""
 
@@ -131,7 +131,7 @@ msgstr ""
 msgid "Call For Papers"
 msgstr ""
 
-#: templates/cfp.tpl:34 templates/v2017/cfp/index.html:73
+#: templates/cfp.tpl:34 templates/v2017/cfp/index.html:71
 msgid "Submission Instructions"
 msgstr ""
 
@@ -147,6 +147,7 @@ msgid ""
 msgstr ""
 
 #: templates/cfp_confirm.tpl:53 templates/v2017/cfp/confirm.html:76
+#: templates/v2017/session/form.html:225
 msgid "Edit your proposal"
 msgstr ""
 
@@ -159,7 +160,7 @@ msgid "Session Title (Japanese)"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:68 templates/session/view.tpl:91
-#: templates/v2017/cfp/confirm.html:91 templates/v2017/session/view.html:160
+#: templates/v2017/cfp/confirm.html:91 templates/v2017/session/view.html:156
 msgid "Session Duration"
 msgstr ""
 
@@ -173,47 +174,47 @@ msgstr ""
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:72
 #: templates/session/view.tpl:79 templates/v2017/cfp/confirm.html:103
-#: templates/v2017/session/form.html:87 templates/v2017/session/view.html:148
+#: templates/v2017/session/form.html:89 templates/v2017/session/view.html:144
 msgid "Material Level"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:87
 #: templates/session/view.tpl:95 templates/v2017/cfp/confirm.html:107
-#: templates/v2017/session/form.html:102 templates/v2017/session/view.html:164
+#: templates/v2017/session/form.html:104 templates/v2017/session/view.html:160
 msgid "Spoken Language"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:99
 #: templates/session/view.tpl:99 templates/v2017/cfp/confirm.html:111
-#: templates/v2017/session/form.html:114 templates/v2017/session/view.html:168
+#: templates/v2017/session/form.html:116 templates/v2017/session/view.html:168
 msgid "Slide Language"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:92 templates/session/form.tpl:111
-#: templates/v2017/cfp/confirm.html:115 templates/v2017/session/form.html:126
+#: templates/v2017/cfp/confirm.html:115 templates/v2017/session/form.html:128
 msgid "Comments"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:140
 #: templates/session/view.tpl:103 templates/v2017/cfp/confirm.html:119
-#: templates/v2017/session/form.html:155 templates/v2017/session/view.html:172
+#: templates/v2017/session/form.html:167 templates/v2017/session/view.html:172
 msgid "Photo Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:154
 #: templates/session/view.tpl:107 templates/v2017/cfp/confirm.html:123
-#: templates/v2017/session/form.html:170 templates/v2017/session/view.html:176
+#: templates/v2017/session/form.html:182 templates/v2017/session/view.html:176
 msgid "Recording Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:168
 #: templates/session/view.tpl:111 templates/v2017/cfp/confirm.html:127
-#: templates/v2017/session/form.html:185 templates/v2017/session/view.html:180
+#: templates/v2017/session/form.html:197 templates/v2017/session/view.html:180
 msgid "Materials Release"
 msgstr ""
 
 #: templates/cfp_confirm.tpl:112 templates/session/form.tpl:192
-#: templates/v2017/cfp/confirm.html:136 templates/v2017/session/form.html:213
+#: templates/v2017/cfp/confirm.html:136 templates/v2017/session/form.html:225
 msgid "Submit your proposal"
 msgstr ""
 
@@ -230,7 +231,7 @@ msgid "Public Profile"
 msgstr ""
 
 #: templates/dashboard.tpl:22 templates/dashboard.tpl:68
-#: templates/session/view.tpl:31 templates/v2017/session/view.html:100
+#: templates/session/view.tpl:31 templates/v2017/session/view.html:96
 msgid "Edit"
 msgstr ""
 
@@ -254,7 +255,8 @@ msgstr ""
 #: templates/layout/conference.tpl:8 templates/session/confirm.tpl:28
 #: templates/session/confirm_done.tpl:24 templates/user/view.tpl:28
 #: templates/v2017/cfp/confirm.html:7 templates/v2017/cfp/index.html:7
-#: templates/v2017/conference/view.html:7
+#: templates/v2017/conference/view.html:17 templates/v2017/session/edit.html:5
+#: templates/v2017/session/list.html:5 templates/v2017/session/view.html:5
 msgid "Conference"
 msgstr ""
 
@@ -273,7 +275,7 @@ msgid "Title"
 msgstr ""
 
 #: templates/dashboard.tpl:67 templates/session/view.tpl:74
-#: templates/v2017/session/view.html:143
+#: templates/v2017/session/view.html:139
 msgid "Confirmed"
 msgstr ""
 
@@ -282,32 +284,33 @@ msgid "Status"
 msgstr ""
 
 #: templates/dashboard.tpl:78 templates/session/view.tpl:75
-#: templates/v2017/session/view.html:144
+#: templates/v2017/session/view.html:140
 msgid "confirmed"
 msgstr ""
 
 #: templates/dashboard.tpl:78 templates/session/view.tpl:75
-#: templates/v2017/session/view.html:144
+#: templates/v2017/session/view.html:140
 msgid "unconfirmed"
 msgstr ""
 
-#: templates/index.tpl:32 templates/layout/base.tpl:44
+#: templates/index.tpl:36 templates/layout/base.tpl:44
 #: templates/layout/conference.tpl:6
 msgid "builderscon"
 msgstr ""
 
-#: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:33
+#: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:37
 #: templates/layout/base.tpl:45 templates/layout/conference.tpl:7
 #: templates/v2017/cfp/confirm.html:6 templates/v2017/cfp/index.html:6
-#: templates/v2017/conference/view.html:6
+#: templates/v2017/conference/view.html:16 templates/v2017/session/edit.html:4
+#: templates/v2017/session/list.html:4 templates/v2017/session/view.html:4
 msgid "Dashboard"
 msgstr ""
 
-#: templates/index.tpl:52
+#: templates/index.tpl:56
 msgid "Welcome To builderscon"
 msgstr ""
 
-#: templates/index.tpl:54
+#: templates/index.tpl:58
 msgid ""
 "\n"
 "        <strong>Join builderscon and discover something new! builderscon "
@@ -323,11 +326,11 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/index.tpl:75
+#: templates/index.tpl:79
 msgid "Get Involved!"
 msgstr ""
 
-#: templates/index.tpl:82
+#: templates/index.tpl:86
 msgid ""
 "<b>Slack: </b> We have <a href=\"https://builderscon.slack.com\">a Slack "
 "team</a>, and <a href=\"https://slack-invite-dot-"
@@ -336,7 +339,7 @@ msgid ""
 " your own builderscon!"
 msgstr ""
 
-#: templates/index.tpl:90
+#: templates/index.tpl:94
 msgid ""
 "<b>Github:</b> Explore our many opensource projects on <a "
 "href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
@@ -346,7 +349,7 @@ msgid ""
 "We'd love for your to send us pull requests!"
 msgstr ""
 
-#: templates/index.tpl:98
+#: templates/index.tpl:102
 msgid ""
 "<b>Facebook:</b> Peruse our <a "
 "href=\"https://www.facebook.com/builderscon\">Facebook page</a> to find "
@@ -356,14 +359,14 @@ msgid ""
 "href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
 msgstr ""
 
-#: templates/index.tpl:106
+#: templates/index.tpl:110
 msgid ""
 "<b>Twitter:</b> Follow us on <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
 "updates!"
 msgstr ""
 
-#: templates/index.tpl:114
+#: templates/index.tpl:118
 msgid ""
 "<b>Share:</b> Read our <a href=\"http://blog.builderscon.io\">blog</a>, "
 "post on your favorite sites, and perhaps if you are feeling like it, you "
@@ -372,7 +375,7 @@ msgid ""
 msgstr ""
 
 #: templates/errors/404.tpl:2 templates/errors/500.tpl:2 templates/login.tpl:13
-#: templates/session/edit.tpl:20 templates/v2017/session/edit.html:19
+#: templates/session/edit.tpl:20 templates/v2017/session/edit.html:32
 msgid "Error"
 msgstr ""
 
@@ -399,7 +402,7 @@ msgid "%(count)d blogs collected"
 msgstr ""
 
 #: templates/conference/staff.tpl:3 templates/conference/staff.tpl:45
-#: templates/conference/view.tpl:185 templates/v2017/conference/view.html:212
+#: templates/conference/view.tpl:185 templates/v2017/conference/view.html:230
 msgid "Staff"
 msgstr ""
 
@@ -421,15 +424,16 @@ msgstr ""
 
 #: templates/conference/view.tpl:93 templates/layout/conference.tpl:9
 #: templates/v2017/cfp/confirm.html:9 templates/v2017/cfp/index.html:9
-#: templates/v2017/conference/view.html:9
+#: templates/v2017/conference/view.html:19 templates/v2017/session/edit.html:7
+#: templates/v2017/session/list.html:7 templates/v2017/session/view.html:7
 msgid "Sessions"
 msgstr ""
 
-#: templates/conference/view.tpl:95 templates/v2017/conference/view.html:142
+#: templates/conference/view.tpl:95 templates/v2017/conference/view.html:160
 msgid "Session List"
 msgstr ""
 
-#: templates/conference/view.tpl:98 templates/v2017/conference/view.html:92
+#: templates/conference/view.tpl:98 templates/v2017/conference/view.html:110
 msgid "Dates"
 msgstr ""
 
@@ -441,11 +445,11 @@ msgstr ""
 msgid "Resources"
 msgstr ""
 
-#: templates/conference/view.tpl:138 templates/v2017/conference/view.html:149
+#: templates/conference/view.tpl:138 templates/v2017/conference/view.html:167
 msgid "Guest Speakers"
 msgstr ""
 
-#: templates/conference/view.tpl:163 templates/v2017/conference/view.html:224
+#: templates/conference/view.tpl:163 templates/v2017/conference/view.html:242
 msgid "Contact Information"
 msgstr ""
 
@@ -478,11 +482,11 @@ msgstr ""
 msgid "builderscon is a festival for those who love tech!"
 msgstr ""
 
-#: templates/layout/base.tpl:77 templates/v2017/layout/base.html:87
+#: templates/layout/base.tpl:77 templates/v2017/layout/base.html:88
 msgid "builderscon is a festival for the technology lovers."
 msgstr ""
 
-#: templates/layout/base.tpl:78 templates/v2017/layout/base.html:88
+#: templates/layout/base.tpl:78 templates/v2017/layout/base.html:89
 msgid "Privacy Policy"
 msgstr ""
 
@@ -514,17 +518,17 @@ msgid ""
 msgstr ""
 
 #: templates/session/confirm.tpl:29 templates/session/confirm_done.tpl:25
-#: templates/session/view.tpl:83 templates/v2017/session/view.html:152
+#: templates/session/view.tpl:83 templates/v2017/session/view.html:148
 msgid "Starts On"
 msgstr ""
 
 #: templates/session/confirm.tpl:30 templates/session/confirm_done.tpl:26
-#: templates/session/view.tpl:87 templates/v2017/session/view.html:156
+#: templates/session/view.tpl:87 templates/v2017/session/view.html:152
 msgid "Room"
 msgstr ""
 
 #: templates/session/confirm.tpl:36 templates/session/view.tpl:75
-#: templates/v2017/session/view.html:144
+#: templates/v2017/session/view.html:140
 msgid "Confirm"
 msgstr ""
 
@@ -539,21 +543,20 @@ msgid ""
 "been confirmed as below. We hope to see you soon at %(title)s."
 msgstr ""
 
-#: templates/session/delete.tpl:12
+#: templates/session/delete.tpl:12 templates/v2017/session/delete.html:16
 msgid "Are you sure you want to delete this session?"
 msgstr ""
 
-#: templates/session/delete.tpl:19
+#: templates/session/delete.tpl:19 templates/v2017/session/delete.html:29
 msgid "Delete your session/proposal"
 msgstr ""
 
-#: templates/session/edit.tpl:24 templates/v2017/session/edit.html:23
+#: templates/session/edit.tpl:24
 #, python-format
 msgid "Missing field %s"
 msgstr ""
 
-#: templates/session/form.tpl:5 templates/v2017/session/form.html:11
-#: templates/v2017/session/form.html:13
+#: templates/session/form.tpl:5 templates/v2017/session/form.html:16
 msgid "Submission Form"
 msgstr ""
 
@@ -569,7 +572,7 @@ msgstr ""
 
 #: templates/session/form.tpl:29 templates/session/form.tpl:43
 #: templates/session/form.tpl:61 templates/v2017/session/form.html:45
-#: templates/v2017/session/form.html:59 templates/v2017/session/form.html:76
+#: templates/v2017/session/form.html:59 templates/v2017/session/form.html:78
 msgid "required field"
 msgstr ""
 
@@ -579,8 +582,7 @@ msgid "Please provide the session title in %(lang)s"
 msgstr ""
 
 #: templates/session/form.tpl:42 templates/session/view.tpl:51
-#: templates/v2017/cfp/index.html:56 templates/v2017/session/form.html:58
-#: templates/v2017/session/view.html:123
+#: templates/v2017/session/form.html:58 templates/v2017/session/view.html:119
 msgid "Abstract"
 msgstr ""
 
@@ -591,46 +593,46 @@ msgid ""
 "You may use Markdown in this field"
 msgstr ""
 
-#: templates/session/form.tpl:60 templates/v2017/session/form.html:75
+#: templates/session/form.tpl:60 templates/v2017/session/form.html:77
 msgid "Session Type"
 msgstr ""
 
-#: templates/session/form.tpl:66 templates/v2017/session/form.html:81
+#: templates/session/form.tpl:66 templates/v2017/session/form.html:83
 msgid "SUBMISSION CURRENTLY CLOSED"
 msgstr ""
 
-#: templates/session/form.tpl:76 templates/v2017/session/form.html:91
+#: templates/session/form.tpl:76 templates/v2017/session/form.html:93
 msgid "Beginner"
 msgstr ""
 
-#: templates/session/form.tpl:77 templates/v2017/session/form.html:92
+#: templates/session/form.tpl:77 templates/v2017/session/form.html:94
 msgid "Intermediate"
 msgstr ""
 
-#: templates/session/form.tpl:78 templates/v2017/session/form.html:93
+#: templates/session/form.tpl:78 templates/v2017/session/form.html:95
 msgid "Expert"
 msgstr ""
 
-#: templates/session/form.tpl:89 templates/v2017/session/form.html:104
+#: templates/session/form.tpl:89 templates/v2017/session/form.html:106
 msgid "Please select which language you will be speaking in."
 msgstr ""
 
-#: templates/session/form.tpl:101 templates/v2017/session/form.html:116
+#: templates/session/form.tpl:101 templates/v2017/session/form.html:118
 msgid "Please select which language you will write your slides in."
 msgstr ""
 
-#: templates/session/form.tpl:113 templates/v2017/session/form.html:128
+#: templates/session/form.tpl:113 templates/v2017/session/form.html:130
 msgid ""
 "Specify any communication that you might want to relay to the organizer: "
 "e.g. special financial requirements, required documents, specific dates "
 "during the conference you might not be able to attend, etc"
 msgstr ""
 
-#: templates/session/form.tpl:119 templates/v2017/session/form.html:134
+#: templates/session/form.tpl:119 templates/v2017/session/form.html:135
 msgid "Videos, Photos, and Materials"
 msgstr ""
 
-#: templates/session/form.tpl:120 templates/v2017/session/form.html:135
+#: templates/session/form.tpl:120 templates/v2017/session/form.html:136
 #, python-format
 msgid ""
 "Please refer to our <a href=\"%(termsOfUseURL)s\" target=\"_blank\">terms"
@@ -638,19 +640,19 @@ msgid ""
 "materials."
 msgstr ""
 
-#: templates/session/form.tpl:125 templates/v2017/session/form.html:140
+#: templates/session/form.tpl:125 templates/v2017/session/form.html:141
 msgid "Slide URL"
 msgstr ""
 
-#: templates/session/form.tpl:127 templates/v2017/session/form.html:142
+#: templates/session/form.tpl:127 templates/v2017/session/form.html:143
 msgid "Please provide the URL of where you uploaded your slide"
 msgstr ""
 
-#: templates/session/form.tpl:133 templates/v2017/session/form.html:148
+#: templates/session/form.tpl:133 templates/v2017/session/form.html:149
 msgid "Video URL"
 msgstr ""
 
-#: templates/session/form.tpl:142 templates/v2017/session/form.html:157
+#: templates/session/form.tpl:142 templates/v2017/session/form.html:169
 msgid ""
 "By selecting \"Allow\" below, you agree to allow builderscon to take your"
 " photo during the duration of the event, and to distribute and place "
@@ -658,50 +660,51 @@ msgid ""
 msgstr ""
 
 #: templates/session/form.tpl:145 templates/session/form.tpl:159
-#: templates/session/form.tpl:173 templates/v2017/session/form.html:160
-#: templates/v2017/session/form.html:175 templates/v2017/session/form.html:190
+#: templates/session/form.tpl:173 templates/v2017/session/form.html:172
+#: templates/v2017/session/form.html:187 templates/v2017/session/form.html:202
 msgid "Allow"
 msgstr ""
 
 #: templates/session/form.tpl:146 templates/session/form.tpl:160
-#: templates/session/form.tpl:174 templates/v2017/session/form.html:161
-#: templates/v2017/session/form.html:176 templates/v2017/session/form.html:191
+#: templates/session/form.tpl:174 templates/v2017/session/form.html:173
+#: templates/v2017/session/form.html:188 templates/v2017/session/form.html:203
 msgid "Disallow"
 msgstr ""
 
-#: templates/session/form.tpl:156 templates/v2017/session/form.html:172
+#: templates/session/form.tpl:156 templates/v2017/session/form.html:184
 msgid ""
 "By selecting \"Allow\" below, you agree to allow builderscon to record "
 "your presentation on video, and to distribute and place those recordings "
 "on our website(s)."
 msgstr ""
 
-#: templates/session/form.tpl:170 templates/v2017/session/form.html:187
+#: templates/session/form.tpl:170 templates/v2017/session/form.html:199
 msgid ""
 "By selecting \"Allow\" below, you agree to allow builderscon to "
 "distribute and place materials from your presentation (such as slides) on"
 " our website(s), including from our API."
 msgstr ""
 
-#: templates/session/form.tpl:184 templates/v2017/session/form.html:202
+#: templates/session/form.tpl:184 templates/v2017/session/form.html:214
 msgid ""
 "I hereby confirm that I am submitting this proposal after reading the "
 "terms of use, and that I understand and agree to its contents."
 msgstr ""
 
-#: templates/session/form.tpl:186 templates/v2017/session/form.html:206
+#: templates/session/form.tpl:186 templates/v2017/session/form.html:218
 msgid "Yes, I agree to the Terms Of Use"
 msgstr ""
 
-#: templates/session/form.tpl:194 templates/v2017/session/form.html:215
+#: templates/session/form.tpl:194 templates/v2017/session/form.html:227
 msgid "Please check agree to our Terms Of Use before submitting your proposal."
 msgstr ""
 
 #: templates/session/list.tpl:8 templates/session/list.tpl:56
+#: templates/v2017/session/list.html:35 templates/v2017/session/list.html:89
 msgid "Pending Proposals"
 msgstr ""
 
-#: templates/session/list.tpl:10
+#: templates/session/list.tpl:10 templates/v2017/session/list.html:37
 msgid ""
 "These proposals have not yet been accepted for this conference. If you "
 "would like to see them in the conference, please help by sharing them on "
@@ -709,7 +712,7 @@ msgid ""
 "when selection takes place"
 msgstr ""
 
-#: templates/session/list.tpl:55
+#: templates/session/list.tpl:55 templates/v2017/session/list.html:88
 msgid "Accepted Sessions"
 msgstr ""
 
@@ -733,22 +736,22 @@ msgstr ""
 msgid "Sessions for %(date)s"
 msgstr ""
 
-#: templates/session/view.tpl:53 templates/v2017/session/view.html:121
+#: templates/session/view.tpl:53 templates/v2017/session/view.html:117
 msgid ""
 "This session has NOT been accepted yet. If you would like to see it in "
 "the conference, please post it in social networks, as those numbers will "
 "be tallied and used as part of the selection criteria"
 msgstr ""
 
-#: templates/session/view.tpl:59 templates/v2017/session/view.html:128
+#: templates/session/view.tpl:59 templates/v2017/session/view.html:124
 msgid "Video"
 msgstr ""
 
-#: templates/session/view.tpl:64 templates/v2017/session/view.html:133
+#: templates/session/view.tpl:64 templates/v2017/session/view.html:129
 msgid "Slides"
 msgstr ""
 
-#: templates/session/view.tpl:70 templates/v2017/session/view.html:139
+#: templates/session/view.tpl:70 templates/v2017/session/view.html:135
 msgid "Session Information"
 msgstr ""
 
@@ -801,23 +804,39 @@ msgstr ""
 msgid "Past Sessions"
 msgstr ""
 
-#: templates/v2017/cfp/index.html:58
+#: templates/v2017/cfp/index.html:57
 msgid "Submit Your Proposals!"
 msgstr ""
 
-#: templates/v2017/cfp/index.html:71
-msgid "Instructions"
-msgstr ""
-
-#: templates/v2017/conference/view.html:106
+#: templates/v2017/conference/view.html:124
 msgid "Venue Name"
 msgstr ""
 
-#: templates/v2017/conference/view.html:111
+#: templates/v2017/conference/view.html:129
 msgid "Venue URL"
 msgstr ""
 
-#: templates/v2017/session/form.html:11 templates/v2017/session/form.html:13
+#: templates/v2017/session/form.html:16
 msgid "Edit your session"
+msgstr ""
+
+#: templates/v2017/session/form.html:158 templates/v2017/session/view.html:164
+msgid "Interpretation"
+msgstr ""
+
+#: templates/v2017/session/form.html:160
+msgid "Only administrators can set this."
+msgstr ""
+
+#: templates/v2017/session/form.html:162
+msgid "YES, we have interpration"
+msgstr ""
+
+#: templates/v2017/session/view.html:165
+msgid "Available"
+msgstr ""
+
+#: templates/v2017/session/view.html:165
+msgid "Unavailable"
 msgstr ""
 

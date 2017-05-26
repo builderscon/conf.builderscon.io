@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-08 19:10+0900\n"
+"POT-Creation-Date: 2017-05-26 10:51+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -31,7 +31,7 @@ msgid "Meet Mr. B (Mr. Beacon)!"
 msgstr "ビーコン君！"
 
 #: templates/beacon.tpl:8 templates/errors/404.tpl:9 templates/errors/500.tpl:9
-#: templates/index.tpl:34
+#: templates/index.tpl:38
 msgid "BLOG"
 msgstr "ブログ"
 
@@ -50,7 +50,7 @@ msgstr ""
 "        "
 
 #: templates/beacon.tpl:44 templates/session/form.tpl:185
-#: templates/v2017/session/form.html:203
+#: templates/v2017/session/form.html:215
 msgid "Terms Of Use"
 msgstr "利用規約"
 
@@ -120,7 +120,7 @@ msgstr "不採用"
 msgid "Technical Sponsors"
 msgstr "技術協力"
 
-#: templates/catalog.tpl:13 templates/v2017/conference/view.html:177
+#: templates/catalog.tpl:13 templates/v2017/conference/view.html:195
 msgid "Sponsors"
 msgstr "スポンサーの皆様"
 
@@ -146,7 +146,7 @@ msgstr ""
 msgid "Call For Papers"
 msgstr "トーク募集中"
 
-#: templates/cfp.tpl:34 templates/v2017/cfp/index.html:73
+#: templates/cfp.tpl:34 templates/v2017/cfp/index.html:71
 msgid "Submission Instructions"
 msgstr "応募方法"
 
@@ -162,6 +162,7 @@ msgid ""
 msgstr "以下の応募内容をご確認ください。修正が必要な場合以下のボタンをクリックし、編集を行って下さい"
 
 #: templates/cfp_confirm.tpl:53 templates/v2017/cfp/confirm.html:76
+#: templates/v2017/session/form.html:225
 msgid "Edit your proposal"
 msgstr "応募内容を修正する"
 
@@ -174,7 +175,7 @@ msgid "Session Title (Japanese)"
 msgstr "セッションタイトル（日本語）"
 
 #: templates/cfp_confirm.tpl:68 templates/session/view.tpl:91
-#: templates/v2017/cfp/confirm.html:91 templates/v2017/session/view.html:160
+#: templates/v2017/cfp/confirm.html:91 templates/v2017/session/view.html:156
 msgid "Session Duration"
 msgstr "セッション時間"
 
@@ -188,47 +189,47 @@ msgstr "セッション概要（日本語）"
 
 #: templates/cfp_confirm.tpl:80 templates/session/form.tpl:72
 #: templates/session/view.tpl:79 templates/v2017/cfp/confirm.html:103
-#: templates/v2017/session/form.html:87 templates/v2017/session/view.html:148
+#: templates/v2017/session/form.html:89 templates/v2017/session/view.html:144
 msgid "Material Level"
 msgstr "レベル"
 
 #: templates/cfp_confirm.tpl:84 templates/session/form.tpl:87
 #: templates/session/view.tpl:95 templates/v2017/cfp/confirm.html:107
-#: templates/v2017/session/form.html:102 templates/v2017/session/view.html:164
+#: templates/v2017/session/form.html:104 templates/v2017/session/view.html:160
 msgid "Spoken Language"
 msgstr "講演に使用される言語"
 
 #: templates/cfp_confirm.tpl:88 templates/session/form.tpl:99
 #: templates/session/view.tpl:99 templates/v2017/cfp/confirm.html:111
-#: templates/v2017/session/form.html:114 templates/v2017/session/view.html:168
+#: templates/v2017/session/form.html:116 templates/v2017/session/view.html:168
 msgid "Slide Language"
 msgstr "スライド言語"
 
 #: templates/cfp_confirm.tpl:92 templates/session/form.tpl:111
-#: templates/v2017/cfp/confirm.html:115 templates/v2017/session/form.html:126
+#: templates/v2017/cfp/confirm.html:115 templates/v2017/session/form.html:128
 msgid "Comments"
 msgstr "コメント"
 
 #: templates/cfp_confirm.tpl:96 templates/session/form.tpl:140
 #: templates/session/view.tpl:103 templates/v2017/cfp/confirm.html:119
-#: templates/v2017/session/form.html:155 templates/v2017/session/view.html:172
+#: templates/v2017/session/form.html:167 templates/v2017/session/view.html:172
 msgid "Photo Release"
 msgstr "撮影許可"
 
 #: templates/cfp_confirm.tpl:100 templates/session/form.tpl:154
 #: templates/session/view.tpl:107 templates/v2017/cfp/confirm.html:123
-#: templates/v2017/session/form.html:170 templates/v2017/session/view.html:176
+#: templates/v2017/session/form.html:182 templates/v2017/session/view.html:176
 msgid "Recording Release"
 msgstr "録画許可"
 
 #: templates/cfp_confirm.tpl:104 templates/session/form.tpl:168
 #: templates/session/view.tpl:111 templates/v2017/cfp/confirm.html:127
-#: templates/v2017/session/form.html:185 templates/v2017/session/view.html:180
+#: templates/v2017/session/form.html:197 templates/v2017/session/view.html:180
 msgid "Materials Release"
 msgstr "素材利用許可"
 
 #: templates/cfp_confirm.tpl:112 templates/session/form.tpl:192
-#: templates/v2017/cfp/confirm.html:136 templates/v2017/session/form.html:213
+#: templates/v2017/cfp/confirm.html:136 templates/v2017/session/form.html:225
 msgid "Submit your proposal"
 msgstr "応募する"
 
@@ -245,7 +246,7 @@ msgid "Public Profile"
 msgstr "公開プロフィール"
 
 #: templates/dashboard.tpl:22 templates/dashboard.tpl:68
-#: templates/session/view.tpl:31 templates/v2017/session/view.html:100
+#: templates/session/view.tpl:31 templates/v2017/session/view.html:96
 msgid "Edit"
 msgstr "編集"
 
@@ -269,7 +270,8 @@ msgstr "主宰"
 #: templates/layout/conference.tpl:8 templates/session/confirm.tpl:28
 #: templates/session/confirm_done.tpl:24 templates/user/view.tpl:28
 #: templates/v2017/cfp/confirm.html:7 templates/v2017/cfp/index.html:7
-#: templates/v2017/conference/view.html:7
+#: templates/v2017/conference/view.html:17 templates/v2017/session/edit.html:5
+#: templates/v2017/session/list.html:5 templates/v2017/session/view.html:5
 msgid "Conference"
 msgstr "カンファレンス"
 
@@ -288,7 +290,7 @@ msgid "Title"
 msgstr "タイトル"
 
 #: templates/dashboard.tpl:67 templates/session/view.tpl:74
-#: templates/v2017/session/view.html:143
+#: templates/v2017/session/view.html:139
 msgid "Confirmed"
 msgstr "登壇確認"
 
@@ -297,32 +299,33 @@ msgid "Status"
 msgstr "状態"
 
 #: templates/dashboard.tpl:78 templates/session/view.tpl:75
-#: templates/v2017/session/view.html:144
+#: templates/v2017/session/view.html:140
 msgid "confirmed"
 msgstr "済"
 
 #: templates/dashboard.tpl:78 templates/session/view.tpl:75
-#: templates/v2017/session/view.html:144
+#: templates/v2017/session/view.html:140
 msgid "unconfirmed"
 msgstr "未確認"
 
-#: templates/index.tpl:32 templates/layout/base.tpl:44
+#: templates/index.tpl:36 templates/layout/base.tpl:44
 #: templates/layout/conference.tpl:6
 msgid "builderscon"
 msgstr ""
 
-#: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:33
+#: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:37
 #: templates/layout/base.tpl:45 templates/layout/conference.tpl:7
 #: templates/v2017/cfp/confirm.html:6 templates/v2017/cfp/index.html:6
-#: templates/v2017/conference/view.html:6
+#: templates/v2017/conference/view.html:16 templates/v2017/session/edit.html:4
+#: templates/v2017/session/list.html:4 templates/v2017/session/view.html:4
 msgid "Dashboard"
 msgstr "ダッシュボード"
 
-#: templates/index.tpl:52
+#: templates/index.tpl:56
 msgid "Welcome To builderscon"
 msgstr "builderscon とは"
 
-#: templates/index.tpl:54
+#: templates/index.tpl:58
 msgid ""
 "\n"
 "        <strong>Join builderscon and discover something new! builderscon "
@@ -347,11 +350,11 @@ msgstr ""
 "        <p>buildersconに参加して、あなたの情熱をシェアしてください！皆様のご参加をお待ちしております！</p>"
 "        "
 
-#: templates/index.tpl:75
+#: templates/index.tpl:79
 msgid "Get Involved!"
 msgstr "参加しよう！"
 
-#: templates/index.tpl:82
+#: templates/index.tpl:86
 msgid ""
 "<b>Slack: </b> We have <a href=\"https://builderscon.slack.com\">a Slack "
 "team</a>, and <a href=\"https://slack-invite-dot-"
@@ -364,7 +367,7 @@ msgstr ""
 "href=\"https://slack-invite-dot-"
 "builderscon-1248.appspot.com/\">自動招待フォーム</a>から気軽に参加できます"
 
-#: templates/index.tpl:90
+#: templates/index.tpl:94
 msgid ""
 "<b>Github:</b> Explore our many opensource projects on <a "
 "href=\"https://github.com/builderscon\">Github</a>, including our \"<a "
@@ -379,7 +382,7 @@ msgstr ""
 " <a href=\"https://github.com/builderscon/octav\">APIサーバー</a>, そして<a "
 "href=\"https://github.com/builderscon/builderscon.io\">本サイトのソースコード</a>等もあります。PR等どしどし送って下さい！"
 
-#: templates/index.tpl:98
+#: templates/index.tpl:102
 msgid ""
 "<b>Facebook:</b> Peruse our <a "
 "href=\"https://www.facebook.com/builderscon\">Facebook page</a> to find "
@@ -394,7 +397,7 @@ msgstr ""
 "href=\"https://www.facebook.com/events/803942576374123/\">1</a>][<a "
 "href=\"https://www.facebook.com/events/1091601347586795/\">2</a>]</a>"
 
-#: templates/index.tpl:106
+#: templates/index.tpl:110
 msgid ""
 "<b>Twitter:</b> Follow us on <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>, and get the latest "
@@ -403,7 +406,7 @@ msgstr ""
 "<b>Twitter:</b> <a "
 "href=\"https://twitter.com/builderscon\">Twitter</a>アカウントをフォローして、最新の情報をチェック！"
 
-#: templates/index.tpl:114
+#: templates/index.tpl:118
 msgid ""
 "<b>Share:</b> Read our <a href=\"http://blog.builderscon.io\">blog</a>, "
 "post on your favorite sites, and perhaps if you are feeling like it, you "
@@ -415,7 +418,7 @@ msgstr ""
 "href=\"/beacon\">ビーコン君もチェックしてくださいね</a>！"
 
 #: templates/errors/404.tpl:2 templates/errors/500.tpl:2 templates/login.tpl:13
-#: templates/session/edit.tpl:20 templates/v2017/session/edit.html:19
+#: templates/session/edit.tpl:20 templates/v2017/session/edit.html:32
 msgid "Error"
 msgstr "エラー"
 
@@ -442,7 +445,7 @@ msgid "%(count)d blogs collected"
 msgstr "%(count)d個のブログ"
 
 #: templates/conference/staff.tpl:3 templates/conference/staff.tpl:45
-#: templates/conference/view.tpl:185 templates/v2017/conference/view.html:212
+#: templates/conference/view.tpl:185 templates/v2017/conference/view.html:230
 msgid "Staff"
 msgstr "運営スタッフ"
 
@@ -464,15 +467,16 @@ msgstr "情報"
 
 #: templates/conference/view.tpl:93 templates/layout/conference.tpl:9
 #: templates/v2017/cfp/confirm.html:9 templates/v2017/cfp/index.html:9
-#: templates/v2017/conference/view.html:9
+#: templates/v2017/conference/view.html:19 templates/v2017/session/edit.html:7
+#: templates/v2017/session/list.html:7 templates/v2017/session/view.html:7
 msgid "Sessions"
 msgstr "セッション"
 
-#: templates/conference/view.tpl:95 templates/v2017/conference/view.html:142
+#: templates/conference/view.tpl:95 templates/v2017/conference/view.html:160
 msgid "Session List"
 msgstr "セッション一覧"
 
-#: templates/conference/view.tpl:98 templates/v2017/conference/view.html:92
+#: templates/conference/view.tpl:98 templates/v2017/conference/view.html:110
 msgid "Dates"
 msgstr "日程"
 
@@ -484,11 +488,11 @@ msgstr "会場"
 msgid "Resources"
 msgstr "リソース"
 
-#: templates/conference/view.tpl:138 templates/v2017/conference/view.html:149
+#: templates/conference/view.tpl:138 templates/v2017/conference/view.html:167
 msgid "Guest Speakers"
 msgstr "ゲストスピーカー"
 
-#: templates/conference/view.tpl:163 templates/v2017/conference/view.html:224
+#: templates/conference/view.tpl:163 templates/v2017/conference/view.html:242
 msgid "Contact Information"
 msgstr "連絡先"
 
@@ -521,11 +525,11 @@ msgstr "知らなかった、を聞く"
 msgid "builderscon is a festival for those who love tech!"
 msgstr "buildersconは技術を愛する全てのギーク達のお祭りです！"
 
-#: templates/layout/base.tpl:77 templates/v2017/layout/base.html:87
+#: templates/layout/base.tpl:77 templates/v2017/layout/base.html:88
 msgid "builderscon is a festival for the technology lovers."
 msgstr "buildersconは技術を愛する全てのギーク達のお祭りです"
 
-#: templates/layout/base.tpl:78 templates/v2017/layout/base.html:88
+#: templates/layout/base.tpl:78 templates/v2017/layout/base.html:89
 msgid "Privacy Policy"
 msgstr "プライバシーポリシー"
 
@@ -557,17 +561,17 @@ msgid ""
 msgstr "以下のセッションは採択されていますが、最終登壇確認がなされていません。カンファレンスに来場し実際に指定された時間に登壇が可能な場合は該当するセッション横のボタンを押して登壇確認を行ってください。登壇確認がされない場合、主催者によりセッションが<strong>不採用</strong>となる場合があります。予定の変更やスケジュールが合わない場合は速やかに各カンファレンス主催者にその旨をご連絡ください"
 
 #: templates/session/confirm.tpl:29 templates/session/confirm_done.tpl:25
-#: templates/session/view.tpl:83 templates/v2017/session/view.html:152
+#: templates/session/view.tpl:83 templates/v2017/session/view.html:148
 msgid "Starts On"
 msgstr "開始日時"
 
 #: templates/session/confirm.tpl:30 templates/session/confirm_done.tpl:26
-#: templates/session/view.tpl:87 templates/v2017/session/view.html:156
+#: templates/session/view.tpl:87 templates/v2017/session/view.html:152
 msgid "Room"
 msgstr "部屋"
 
 #: templates/session/confirm.tpl:36 templates/session/view.tpl:75
-#: templates/v2017/session/view.html:144
+#: templates/v2017/session/view.html:140
 msgid "Confirm"
 msgstr "確認する"
 
@@ -582,21 +586,20 @@ msgid ""
 "been confirmed as below. We hope to see you soon at %(title)s."
 msgstr "以下の内容で登壇の確認を承りました。%(title)sの会場でお目にかかれるのを楽しみにしております"
 
-#: templates/session/delete.tpl:12
+#: templates/session/delete.tpl:12 templates/v2017/session/delete.html:16
 msgid "Are you sure you want to delete this session?"
 msgstr "本当にこのセッションを削除しますか？"
 
-#: templates/session/delete.tpl:19
+#: templates/session/delete.tpl:19 templates/v2017/session/delete.html:29
 msgid "Delete your session/proposal"
 msgstr "削除する"
 
-#: templates/session/edit.tpl:24 templates/v2017/session/edit.html:23
+#: templates/session/edit.tpl:24
 #, python-format
 msgid "Missing field %s"
 msgstr ""
 
-#: templates/session/form.tpl:5 templates/v2017/session/form.html:11
-#: templates/v2017/session/form.html:13
+#: templates/session/form.tpl:5 templates/v2017/session/form.html:16
 msgid "Submission Form"
 msgstr "応募フォーム"
 
@@ -612,7 +615,7 @@ msgstr "選択可能な言語の中からひとつ以上のタイトルと概要
 
 #: templates/session/form.tpl:29 templates/session/form.tpl:43
 #: templates/session/form.tpl:61 templates/v2017/session/form.html:45
-#: templates/v2017/session/form.html:59 templates/v2017/session/form.html:76
+#: templates/v2017/session/form.html:59 templates/v2017/session/form.html:78
 msgid "required field"
 msgstr "必須"
 
@@ -622,8 +625,7 @@ msgid "Please provide the session title in %(lang)s"
 msgstr "%(lang)s でセッションタイトルを指定してください"
 
 #: templates/session/form.tpl:42 templates/session/view.tpl:51
-#: templates/v2017/cfp/index.html:56 templates/v2017/session/form.html:58
-#: templates/v2017/session/view.html:123
+#: templates/v2017/session/form.html:58 templates/v2017/session/view.html:119
 msgid "Abstract"
 msgstr "概要"
 
@@ -636,46 +638,46 @@ msgstr ""
 "%(lang)s でセッション概要を記入してください\n"
 "このフィールドにはMarkdown記法を使う事ができます"
 
-#: templates/session/form.tpl:60 templates/v2017/session/form.html:75
+#: templates/session/form.tpl:60 templates/v2017/session/form.html:77
 msgid "Session Type"
 msgstr "セッション種別"
 
-#: templates/session/form.tpl:66 templates/v2017/session/form.html:81
+#: templates/session/form.tpl:66 templates/v2017/session/form.html:83
 msgid "SUBMISSION CURRENTLY CLOSED"
 msgstr "受付期間外"
 
-#: templates/session/form.tpl:76 templates/v2017/session/form.html:91
+#: templates/session/form.tpl:76 templates/v2017/session/form.html:93
 msgid "Beginner"
 msgstr "初級者"
 
-#: templates/session/form.tpl:77 templates/v2017/session/form.html:92
+#: templates/session/form.tpl:77 templates/v2017/session/form.html:94
 msgid "Intermediate"
 msgstr "中級者"
 
-#: templates/session/form.tpl:78 templates/v2017/session/form.html:93
+#: templates/session/form.tpl:78 templates/v2017/session/form.html:95
 msgid "Expert"
 msgstr "上級者"
 
-#: templates/session/form.tpl:89 templates/v2017/session/form.html:104
+#: templates/session/form.tpl:89 templates/v2017/session/form.html:106
 msgid "Please select which language you will be speaking in."
 msgstr "講演の際に使用される言語を指定してください"
 
-#: templates/session/form.tpl:101 templates/v2017/session/form.html:116
+#: templates/session/form.tpl:101 templates/v2017/session/form.html:118
 msgid "Please select which language you will write your slides in."
 msgstr "講演スライドで使用される言語を指定してください"
 
-#: templates/session/form.tpl:113 templates/v2017/session/form.html:128
+#: templates/session/form.tpl:113 templates/v2017/session/form.html:130
 msgid ""
 "Specify any communication that you might want to relay to the organizer: "
 "e.g. special financial requirements, required documents, specific dates "
 "during the conference you might not be able to attend, etc"
 msgstr "イベント運営スタッフに伝えたい連絡事項等、をご記入ください。例： ドキュメント等の準備、登壇できる・できない日程等"
 
-#: templates/session/form.tpl:119 templates/v2017/session/form.html:134
+#: templates/session/form.tpl:119 templates/v2017/session/form.html:135
 msgid "Videos, Photos, and Materials"
 msgstr "動画、写真、素材等"
 
-#: templates/session/form.tpl:120 templates/v2017/session/form.html:135
+#: templates/session/form.tpl:120 templates/v2017/session/form.html:136
 #, python-format
 msgid ""
 "Please refer to our <a href=\"%(termsOfUseURL)s\" target=\"_blank\">terms"
@@ -685,19 +687,19 @@ msgstr ""
 "提供いただく写真、動画、素材等がどのように利用されるかは<a href=\"%(termsOfUseURL)s\" "
 "target=\"_blank\">利用規約</a>をご確認ください"
 
-#: templates/session/form.tpl:125 templates/v2017/session/form.html:140
+#: templates/session/form.tpl:125 templates/v2017/session/form.html:141
 msgid "Slide URL"
 msgstr "スライドURL"
 
-#: templates/session/form.tpl:127 templates/v2017/session/form.html:142
+#: templates/session/form.tpl:127 templates/v2017/session/form.html:143
 msgid "Please provide the URL of where you uploaded your slide"
 msgstr "セッションスライドが公開されているURLをご記入ください"
 
-#: templates/session/form.tpl:133 templates/v2017/session/form.html:148
+#: templates/session/form.tpl:133 templates/v2017/session/form.html:149
 msgid "Video URL"
 msgstr "動画URL"
 
-#: templates/session/form.tpl:142 templates/v2017/session/form.html:157
+#: templates/session/form.tpl:142 templates/v2017/session/form.html:169
 msgid ""
 "By selecting \"Allow\" below, you agree to allow builderscon to take your"
 " photo during the duration of the event, and to distribute and place "
@@ -705,50 +707,51 @@ msgid ""
 msgstr "以下の「許可」を選択することによりbuildersconがイベント会期中にあなたの写真を撮影すること、およびそれらの写真をbuilderscon関連のサイト上に配置したり、同サイトから配信することを許諾したものと見なされます"
 
 #: templates/session/form.tpl:145 templates/session/form.tpl:159
-#: templates/session/form.tpl:173 templates/v2017/session/form.html:160
-#: templates/v2017/session/form.html:175 templates/v2017/session/form.html:190
+#: templates/session/form.tpl:173 templates/v2017/session/form.html:172
+#: templates/v2017/session/form.html:187 templates/v2017/session/form.html:202
 msgid "Allow"
 msgstr "許可"
 
 #: templates/session/form.tpl:146 templates/session/form.tpl:160
-#: templates/session/form.tpl:174 templates/v2017/session/form.html:161
-#: templates/v2017/session/form.html:176 templates/v2017/session/form.html:191
+#: templates/session/form.tpl:174 templates/v2017/session/form.html:173
+#: templates/v2017/session/form.html:188 templates/v2017/session/form.html:203
 msgid "Disallow"
 msgstr "不許可"
 
-#: templates/session/form.tpl:156 templates/v2017/session/form.html:172
+#: templates/session/form.tpl:156 templates/v2017/session/form.html:184
 msgid ""
 "By selecting \"Allow\" below, you agree to allow builderscon to record "
 "your presentation on video, and to distribute and place those recordings "
 "on our website(s)."
 msgstr "以下の「許可」を選択することによりbuildersconがイベント会期中にあなたの講演を動画撮影すること、およびそれらの動画をbuilderscon関連のサイト上に配置したり、同サイトから配信することを許諾したものと見なされます"
 
-#: templates/session/form.tpl:170 templates/v2017/session/form.html:187
+#: templates/session/form.tpl:170 templates/v2017/session/form.html:199
 msgid ""
 "By selecting \"Allow\" below, you agree to allow builderscon to "
 "distribute and place materials from your presentation (such as slides) on"
 " our website(s), including from our API."
 msgstr "以下の「許可」を選択することによりbuildersconがあなたの講演の素材（スライド等）をbuilderscon関連のサイト上に配置したり、同サイトから配信することを許諾したものと見なされます"
 
-#: templates/session/form.tpl:184 templates/v2017/session/form.html:202
+#: templates/session/form.tpl:184 templates/v2017/session/form.html:214
 msgid ""
 "I hereby confirm that I am submitting this proposal after reading the "
 "terms of use, and that I understand and agree to its contents."
 msgstr "プロポーザルの応募には、利用規約を読み、内容を理解した上での同意が必要です"
 
-#: templates/session/form.tpl:186 templates/v2017/session/form.html:206
+#: templates/session/form.tpl:186 templates/v2017/session/form.html:218
 msgid "Yes, I agree to the Terms Of Use"
 msgstr "利用規約に同意します"
 
-#: templates/session/form.tpl:194 templates/v2017/session/form.html:215
+#: templates/session/form.tpl:194 templates/v2017/session/form.html:227
 msgid "Please check agree to our Terms Of Use before submitting your proposal."
 msgstr "応募前に利用規約に同意してください"
 
 #: templates/session/list.tpl:8 templates/session/list.tpl:56
+#: templates/v2017/session/list.html:35 templates/v2017/session/list.html:89
 msgid "Pending Proposals"
 msgstr "審査中のプロポーザル"
 
-#: templates/session/list.tpl:10
+#: templates/session/list.tpl:10 templates/v2017/session/list.html:37
 msgid ""
 "These proposals have not yet been accepted for this conference. If you "
 "would like to see them in the conference, please help by sharing them on "
@@ -756,7 +759,7 @@ msgid ""
 "when selection takes place"
 msgstr "以下のプロポーザルはまだ採択されていません。もし見たいセッションがありましたら、ぜひシェアしてください。プロポーザル採択の審査には、SNSでのシェア数も考慮に入れられます。"
 
-#: templates/session/list.tpl:55
+#: templates/session/list.tpl:55 templates/v2017/session/list.html:88
 msgid "Accepted Sessions"
 msgstr "採択されたセッション"
 
@@ -780,22 +783,22 @@ msgstr "はい、確認しました"
 msgid "Sessions for %(date)s"
 msgstr "%(date)sのセッション"
 
-#: templates/session/view.tpl:53 templates/v2017/session/view.html:121
+#: templates/session/view.tpl:53 templates/v2017/session/view.html:117
 msgid ""
 "This session has NOT been accepted yet. If you would like to see it in "
 "the conference, please post it in social networks, as those numbers will "
 "be tallied and used as part of the selection criteria"
 msgstr "このプロポーザルはまだ採択されていません。もしこのセッションをカンファレンスで見たいと感じた場合は、ぜひソーシャルメディア等でシェアしてください。プロポーザル採択の審査には、SNSでのシェア数も考慮に入れられます。"
 
-#: templates/session/view.tpl:59 templates/v2017/session/view.html:128
+#: templates/session/view.tpl:59 templates/v2017/session/view.html:124
 msgid "Video"
 msgstr "動画"
 
-#: templates/session/view.tpl:64 templates/v2017/session/view.html:133
+#: templates/session/view.tpl:64 templates/v2017/session/view.html:129
 msgid "Slides"
 msgstr "スライド"
 
-#: templates/session/view.tpl:70 templates/v2017/session/view.html:139
+#: templates/session/view.tpl:70 templates/v2017/session/view.html:135
 msgid "Session Information"
 msgstr "情報"
 
@@ -848,23 +851,42 @@ msgstr "セッションに応募するにはメールアドレスの登録が必
 msgid "Past Sessions"
 msgstr "過去の登壇セッション"
 
-#: templates/v2017/cfp/index.html:58
+#: templates/v2017/cfp/index.html:57
 msgid "Submit Your Proposals!"
 msgstr ""
 
-#: templates/v2017/cfp/index.html:71
-msgid "Instructions"
-msgstr ""
-
-#: templates/v2017/conference/view.html:106
+#: templates/v2017/conference/view.html:124
 msgid "Venue Name"
 msgstr "会場名"
 
-#: templates/v2017/conference/view.html:111
+#: templates/v2017/conference/view.html:129
 msgid "Venue URL"
 msgstr "会場URL"
 
-#: templates/v2017/session/form.html:11 templates/v2017/session/form.html:13
+#: templates/v2017/session/form.html:16
 msgid "Edit your session"
 msgstr "情報を編集"
+
+#: templates/v2017/session/form.html:158 templates/v2017/session/view.html:164
+msgid "Interpretation"
+msgstr "同時通訳"
+
+#: templates/v2017/session/form.html:160
+msgid "Only administrators can set this."
+msgstr ""
+
+#: templates/v2017/session/form.html:162
+msgid "YES, we have interpration"
+msgstr ""
+
+#: templates/v2017/session/view.html:165
+msgid "Available"
+msgstr "有"
+
+#: templates/v2017/session/view.html:165
+msgid "Unavailable"
+msgstr "無"
+
+#~ msgid "Instructions"
+#~ msgstr ""
 

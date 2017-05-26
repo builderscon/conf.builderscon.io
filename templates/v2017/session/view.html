@@ -161,6 +161,10 @@ https://i.ytimg.com/vi/{{ session.video_url | video_id }}/maxresdefault.jpg
                   <td>{{ _(session.spoken_language|langname) }}</td>
                 </tr>
                 <tr>
+                  <td>{% trans %}Interpretation{% endtrans %}</td>
+                  <td>{% if session.has_interpretation %}{% trans %}Available{% endtrans %}{% else %}{% trans %}Unavailable{% endtrans %}{% endif %}</td>
+                </tr>
+                <tr>
                   <td>{% trans %}Slide Language{% endtrans %}</td>
                   <td>{{ _(session.slide_language|langname) }}</td>
                 </tr>
