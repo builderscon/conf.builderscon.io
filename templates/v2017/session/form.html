@@ -153,6 +153,16 @@ You may use Markdown in this field{% endtrans %}">{% if input %}{{ input.get(ite
       </div>
 {% endif %}
 
+{% if user.is_admin %}
+      <div class="row">
+        <div class="l{{ left }} col"><label>{% trans %}Interpretation{% endtrans %}</label></div>
+        <div class="l{{ right }} col">
+          <p>{% trans %}Only administrators can set this.{% endtrans %}</p>
+          <input id="has_interpretation_check" type="checkbox" name="has_interpretation" value="1"{% if session.has_interpretation == 1%} checked="checked"{% endif %}/>
+          <label for="has_interpretation_check">{% trans %}YES, we have interpration{% endtrans %}</label>
+        </div>
+      </div>
+{% endif %}
       <div class="row">
         <div class="l{{ left }} col"><label>{% trans %}Photo Release{% endtrans %}</label></div>
         <div class="l{{ right }} col">

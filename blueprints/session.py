@@ -220,9 +220,12 @@ def update():
     
     if flask.g.stash.get('errors') > 0:
         flask.g.stash["session"] = form
-        return flask.render_template('session/edit.tpl')
+        return flask.render_template('v2017/session/edit.html')
 
     try:
+        has_interpretation = False
+        if form.get('has_interpretation'):
+            has_interpretation =  True
         id = flask.g.stash.get('session').get('id')
         ok = flask.g.api.update_session(
             id                = id,
@@ -239,6 +242,7 @@ def update():
             spoken_language   = form.get('spoken_language'),
             slide_url         = form.get('slide_url'),
             video_url         = form.get('video_url'),
+            has_interpretation = has_interpretation,
             **l10n
         )
         if ok:
@@ -247,14 +251,14 @@ def update():
             app.cache.delete(app.hooks.session_cache_key(id=id, lang='all'))
             return flask.redirect('/%s/session/%s' % (flask.g.stash.get('full_slug'), id))
         else:
-            flask.g.stash["error"] = flask.g.api.last_error()
+            flask.g.stash["errors"] = [flask.g.api.last_error()]
     except BaseException as e:
-        flask.g.stash["error"] = e
+        flask.g.stash["errors"] = [e]
         print(e)
         pass
 
     # XXX redirect to a proper location
-    return flask.render_template('session/edit.tpl')
+    return flask.render_template('v2017/session/edit.html')
 
 @page.route('/<series_slug>/<path:slug>/session/<id>/delete', methods=['GET', 'POST'])
 @require_login

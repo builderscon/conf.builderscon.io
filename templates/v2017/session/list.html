@@ -1,5 +1,7 @@
 {% extends 'v2017/layout/base.html' %}
 
+{% block title %}{{ conference.title }} Session List - builderscon{% endblock %}
+
 {% block menuitems %}
 <li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
 <li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
@@ -27,6 +29,13 @@ img.speaker-avatar {
   font-size: 1.2em;
   font-weight: bold;
 }
+
+.legend {
+  background-color: #fff;
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 10px
+}
 -->
 </style>
 {% endblock %}
@@ -43,7 +52,7 @@ img.speaker-avatar {
 {% macro session_item(session, speaker, conference) %}
   <div class="s2 l2 col center-align">
     <div class="speaker-avatar"><img class="speaker-avatar" src="{{ speaker.avatar_url or '/static/images/noprofile.png' }}"/></div>
-    <div class="session-language">{{ session.spoken_language | upper }}</div>
+    <div class="session-language">{{ session.spoken_language | upper }}{% if session.has_interpretation %} <i class="tiny material-icons">hearing</i>{% endif %}</div>
   </div>
   <div class="s4 l4 col">
     <div>
@@ -75,6 +84,12 @@ img.speaker-avatar {
       </div>
 {% endif %}
 {% endfor %}
+      <div class="row">
+        <div class="col s1 m1 l1">
+          <i class="material-icons">hearing</i>
+        </div>
+        <div class="col s11 m8 l9">Simultaneous Interpretation Available</div>
+      </div>
     </div>
   </div>
 {% endmacro %}
