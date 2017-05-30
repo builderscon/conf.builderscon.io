@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-26 10:51+0900\n"
+"POT-Creation-Date: 2017-05-30 08:56+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -256,7 +256,7 @@ msgstr ""
 #: templates/session/confirm_done.tpl:24 templates/user/view.tpl:28
 #: templates/v2017/cfp/confirm.html:7 templates/v2017/cfp/index.html:7
 #: templates/v2017/conference/view.html:17 templates/v2017/session/edit.html:5
-#: templates/v2017/session/list.html:5 templates/v2017/session/view.html:5
+#: templates/v2017/session/list.html:7 templates/v2017/session/view.html:5
 msgid "Conference"
 msgstr ""
 
@@ -302,7 +302,7 @@ msgstr ""
 #: templates/layout/base.tpl:45 templates/layout/conference.tpl:7
 #: templates/v2017/cfp/confirm.html:6 templates/v2017/cfp/index.html:6
 #: templates/v2017/conference/view.html:16 templates/v2017/session/edit.html:4
-#: templates/v2017/session/list.html:4 templates/v2017/session/view.html:4
+#: templates/v2017/session/list.html:6 templates/v2017/session/view.html:4
 msgid "Dashboard"
 msgstr ""
 
@@ -425,7 +425,7 @@ msgstr ""
 #: templates/conference/view.tpl:93 templates/layout/conference.tpl:9
 #: templates/v2017/cfp/confirm.html:9 templates/v2017/cfp/index.html:9
 #: templates/v2017/conference/view.html:19 templates/v2017/session/edit.html:7
-#: templates/v2017/session/list.html:7 templates/v2017/session/view.html:7
+#: templates/v2017/session/list.html:9 templates/v2017/session/view.html:7
 msgid "Sessions"
 msgstr ""
 
@@ -700,11 +700,11 @@ msgid "Please check agree to our Terms Of Use before submitting your proposal."
 msgstr ""
 
 #: templates/session/list.tpl:8 templates/session/list.tpl:56
-#: templates/v2017/session/list.html:35 templates/v2017/session/list.html:89
+#: templates/v2017/session/list.html:55 templates/v2017/session/list.html:115
 msgid "Pending Proposals"
 msgstr ""
 
-#: templates/session/list.tpl:10 templates/v2017/session/list.html:37
+#: templates/session/list.tpl:10 templates/v2017/session/list.html:57
 msgid ""
 "These proposals have not yet been accepted for this conference. If you "
 "would like to see them in the conference, please help by sharing them on "
@@ -712,7 +712,7 @@ msgid ""
 "when selection takes place"
 msgstr ""
 
-#: templates/session/list.tpl:55 templates/v2017/session/list.html:88
+#: templates/session/list.tpl:55 templates/v2017/session/list.html:114
 msgid "Accepted Sessions"
 msgstr ""
 
@@ -830,6 +830,10 @@ msgstr ""
 
 #: templates/v2017/session/form.html:162
 msgid "YES, we have interpration"
+msgstr ""
+
+#: templates/v2017/session/list.html:102
+msgid "Simultaneous Interpretation Available"
 msgstr ""
 
 #: templates/v2017/session/view.html:165
