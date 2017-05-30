@@ -15,7 +15,7 @@
 {% block menuitems %}
 <li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
 <li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
-{%- with sessions = conference.sessions or [] %}{% if sessions | length > 0 %}
+{% if sessions | length > 0 %}
 <li><a href="/{{ full_slug }}/sessions">{% trans %}Sessions{% endtrans %}</a></li>
 {% endif %}{% endwith -%}
 {# <li><a href="/{{ full_slug }}/news">{% trans %}NEWS{% endtrans %}</a></li> #}
