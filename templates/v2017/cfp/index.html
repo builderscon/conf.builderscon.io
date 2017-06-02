@@ -31,6 +31,10 @@ section .inner .body ul.dropdown-content li {
   padding-left: 0;
   list-style-type: none !important;
 }
+
+.submit-btn a {
+  color: #fff;
+}
 -->
 </style>
 {% include 'v2017/session/form_styles.html' %}
@@ -76,10 +80,18 @@ section .inner .body ul.dropdown-content li {
     </section>
   {% endif %}
 {% endblock %}
+    <section>
+      <div class="section">
+        <div class="inner">
+          <div class="body col s12 m9 l10">
+            <div class="center-align submit-btn">
+              <a href="/{{ conference.full_slug }}/cfp/input" class="waves-effect waves-light btn-large deep-orange darken-3"><i class="material-icons left">edit</i> {% trans %}Fill Out The Form{% endtrans %}</a>
+            </div>
+          </div><!-- .body -->
+        </div><!-- inner -->
+      </div><!-- section -->
+    </section>
 {% endif %}
-{% with action='/%s/cfp/input' % full_slug %}
-{% include "v2017/session/form.html" %}
-{% endwith %}
 {% endblock%}
 
 

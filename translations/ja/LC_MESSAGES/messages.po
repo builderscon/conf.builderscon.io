@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-30 08:56+0900\n"
+"POT-Creation-Date: 2017-06-02 18:25+0900\n"
 "PO-Revision-Date: 2016-07-25 19:57+0900\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ja\n"
@@ -146,7 +146,7 @@ msgstr ""
 msgid "Call For Papers"
 msgstr "トーク募集中"
 
-#: templates/cfp.tpl:34 templates/v2017/cfp/index.html:71
+#: templates/cfp.tpl:34 templates/v2017/cfp/index.html:75
 msgid "Submission Instructions"
 msgstr "応募方法"
 
@@ -270,8 +270,9 @@ msgstr "主宰"
 #: templates/layout/conference.tpl:8 templates/session/confirm.tpl:28
 #: templates/session/confirm_done.tpl:24 templates/user/view.tpl:28
 #: templates/v2017/cfp/confirm.html:7 templates/v2017/cfp/index.html:7
-#: templates/v2017/conference/view.html:17 templates/v2017/session/edit.html:5
-#: templates/v2017/session/list.html:7 templates/v2017/session/view.html:5
+#: templates/v2017/cfp/input.html:7 templates/v2017/conference/view.html:17
+#: templates/v2017/session/edit.html:5 templates/v2017/session/list.html:7
+#: templates/v2017/session/view.html:5
 msgid "Conference"
 msgstr "カンファレンス"
 
@@ -316,8 +317,9 @@ msgstr ""
 #: templates/errors/404.tpl:8 templates/errors/500.tpl:8 templates/index.tpl:37
 #: templates/layout/base.tpl:45 templates/layout/conference.tpl:7
 #: templates/v2017/cfp/confirm.html:6 templates/v2017/cfp/index.html:6
-#: templates/v2017/conference/view.html:16 templates/v2017/session/edit.html:4
-#: templates/v2017/session/list.html:6 templates/v2017/session/view.html:4
+#: templates/v2017/cfp/input.html:6 templates/v2017/conference/view.html:16
+#: templates/v2017/session/edit.html:4 templates/v2017/session/list.html:6
+#: templates/v2017/session/view.html:4
 msgid "Dashboard"
 msgstr "ダッシュボード"
 
@@ -426,7 +428,7 @@ msgstr "エラー"
 msgid "Login"
 msgstr "ログイン"
 
-#: templates/login.tpl:28
+#: templates/login.tpl:29
 #, python-format
 msgid "Login with %(name)s"
 msgstr "%(name)s でログイン"
@@ -467,8 +469,9 @@ msgstr "情報"
 
 #: templates/conference/view.tpl:93 templates/layout/conference.tpl:9
 #: templates/v2017/cfp/confirm.html:9 templates/v2017/cfp/index.html:9
-#: templates/v2017/conference/view.html:19 templates/v2017/session/edit.html:7
-#: templates/v2017/session/list.html:9 templates/v2017/session/view.html:7
+#: templates/v2017/cfp/input.html:9 templates/v2017/conference/view.html:19
+#: templates/v2017/session/edit.html:7 templates/v2017/session/list.html:8
+#: templates/v2017/session/view.html:7
 msgid "Sessions"
 msgstr "セッション"
 
@@ -747,11 +750,11 @@ msgid "Please check agree to our Terms Of Use before submitting your proposal."
 msgstr "応募前に利用規約に同意してください"
 
 #: templates/session/list.tpl:8 templates/session/list.tpl:56
-#: templates/v2017/session/list.html:55 templates/v2017/session/list.html:115
+#: templates/v2017/session/list.html:52 templates/v2017/session/list.html:112
 msgid "Pending Proposals"
 msgstr "審査中のプロポーザル"
 
-#: templates/session/list.tpl:10 templates/v2017/session/list.html:57
+#: templates/session/list.tpl:10 templates/v2017/session/list.html:54
 msgid ""
 "These proposals have not yet been accepted for this conference. If you "
 "would like to see them in the conference, please help by sharing them on "
@@ -759,7 +762,7 @@ msgid ""
 "when selection takes place"
 msgstr "以下のプロポーザルはまだ採択されていません。もし見たいセッションがありましたら、ぜひシェアしてください。プロポーザル採択の審査には、SNSでのシェア数も考慮に入れられます。"
 
-#: templates/session/list.tpl:55 templates/v2017/session/list.html:114
+#: templates/session/list.tpl:55 templates/v2017/session/list.html:111
 msgid "Accepted Sessions"
 msgstr "採択されたセッション"
 
@@ -851,9 +854,13 @@ msgstr "セッションに応募するにはメールアドレスの登録が必
 msgid "Past Sessions"
 msgstr "過去の登壇セッション"
 
-#: templates/v2017/cfp/index.html:57
+#: templates/v2017/cfp/index.html:61
 msgid "Submit Your Proposals!"
-msgstr ""
+msgstr "あなたも登壇しよう！"
+
+#: templates/v2017/cfp/index.html:88
+msgid "Fill Out The Form"
+msgstr "フォームに記入する"
 
 #: templates/v2017/conference/view.html:124
 msgid "Venue Name"
@@ -879,7 +886,7 @@ msgstr ""
 msgid "YES, we have interpration"
 msgstr ""
 
-#: templates/v2017/session/list.html:102
+#: templates/v2017/session/list.html:99
 msgid "Simultaneous Interpretation Available"
 msgstr "同時通訳有り"
 

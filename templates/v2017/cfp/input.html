@@ -1,0 +1,55 @@
+{% extends 'v2017/layout/base.html' %}
+
+{% block title %}{{ conference.title }} - Call For Proposals{% endblock %}
+
+{% block menuitems %}
+<li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
+<li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
+{%- with sessions = conference.sessions or [] %}{% if sessions | length > 0 %}
+<li><a href="/{{ full_slug }}/sessions">{% trans %}Sessions{% endtrans %}</a></li>
+{% endif %}{% endwith -%}
+{% endblock %}
+
+{% block header %}
+<style type="text/css">
+<!--
+section .inner .body p {
+  margin-bottom: 1em;
+}
+section .inner .body ul {
+  margin-bottom: 1em;
+}
+
+section .inner .body ul li {
+  margin-left: 2em;
+  padding-left: 0.5em;
+  list-style-type: disc;
+}
+
+section .inner .body ul.dropdown-content li {
+  margin-left: 0;
+  padding-left: 0;
+  list-style-type: none !important;
+}
+-->
+</style>
+{% include 'v2017/session/form_styles.html' %}
+{% endblock %}
+
+{% block scripts %}
+{% include 'v2017/session/form_scripts.html' %}
+{% endblock %}
+
+
+{% block herotext %}
+<h1>Call For Proposals</h1>
+<h2>{{ conference.title }}</h2>
+{% endblock %}
+
+
+{% block content %}
+{% with action='/%s/cfp/input' % full_slug %}
+{% include "v2017/session/form.html" %}
+{% endwith %}
+{% endblock%}
+

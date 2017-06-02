@@ -17,11 +17,16 @@ with_conference_by_slug = app.hooks.with_conference_by_slug
 with_session_types = app.hooks.with_session_types
 
 @page.route('/<series_slug>/<path:slug>/cfp')
+@with_conference_by_slug
+def view():
+    return flask.render_template(['v2017/cfp/index.html', 'cfp.tpl'])
+
+@page.route('/<series_slug>/<path:slug>/cfp/input', methods=['GET'])
 @require_login
 @require_email
 @with_conference_by_slug
 @with_session_types
-def view():
+def input_get():
     key = flask.request.args.get('key')
     if key:
         session = flask.session.get(key)
@@ -32,17 +37,14 @@ def view():
     for stype in flask.g.stash.get('session_types'):
         if stype.get('is_default'):
             flask.g.stash['selected_session_type_id'] = stype.get('id')
-    return flask.render_template(['v2017/cfp/index.html', 'cfp.tpl'])
+    return flask.render_template('v2017/cfp/input.html')
 
-@page.route('/<series_slug>/<path:slug>/cfp/input', methods=['GET','POST'])
+@page.route('/<series_slug>/<path:slug>/cfp/input', methods=['POST'])
 @require_login
 @require_email
 @with_conference_by_slug
 @with_session_types
-def input():
-    if flask.request.method != 'POST':
-        return flask.redirect('/%s/cfp' % flask.g.stash.get('full_slug'))
-
+def input_post():
     form = flask.request.form
     # Silly to do this by hand, but I'm going to do this
     # right now so that we get better error reporting to uers
@@ -76,7 +78,7 @@ def input():
     
     if flask.g.stash.get('errors') > 0:
         flask.g.stash[SESSION_VAR_KEY] = form
-        return flask.render_template('v2017/cfp/index.html')
+        return flask.render_template('v2017/cfp/input.html')
 
     h = hashlib.sha256()
     h.update('%f' % time.time())
