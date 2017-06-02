@@ -19,7 +19,8 @@
     <div class="inner">
       <h1 class="section-header">{% trans %}Login{% endtrans %}</h1>
       <div class="section-content">
-{% for href, name, image in [ ('/login/github', 'GitHub', '/static/images/github-120px.png'), ('/login/facebook', 'Facebook','/static/images/facebook-120px.jpg'), ( '/login/twitter', 'Twitter','/static/images/twitter-120px.png') ] %}
+{% for href, name, image in [ ('/login/github', 'GitHub', '/static/images/github-120px.png'), ('/login/facebook', 'Facebook','/static/images/facebook-120px.jpg') ]%}
+{#, ( '/login/twitter', 'Twitter','/static/images/twitter-120px.png') ] #} 
         <div class="login-row row">
           <div class="login-icon large-1 columns">
             <img src="{{ image }}">
