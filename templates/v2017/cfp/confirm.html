@@ -71,7 +71,7 @@
 
         <div class="row">
           <div class="l12 col edit-button center-align">
-            <form action="/{{ conference.full_slug }}/cfp" method="GET">
+            <form action="/{{ conference.full_slug }}/cfp/input" method="GET">
               <input type="hidden" name="key" value="{{ submission_key }}">
             <button type="submit" class="btn">{% trans %}Edit your proposal{% endtrans %}</button>
             </form>
