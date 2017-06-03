@@ -185,26 +185,10 @@ def with_user(cb, lang=''):
         if not lang:
             lang = flask.g.lang
 
-        user = _get_user(id=id, lang=lang)
+        user = builderscon.api.lookup_user(id=id)
         if not user:
             return builderscon.api.last_error(), 404
         flask.g.stash["user"] = user
         return cb(**args)
     return functools.update_wrapper(functools.partial(load_user, cb, lang=lang), cb)
-
-def _get_user(id, lang):
-    key = user_cache_key(id, lang)
-    user = builderscon.cache.get(key)
-    if not user:
-        user = builderscon.api.lookup_user(id=id)
-        if not user:
-            return None
-        builderscon.cache.set(key, user, CACHE_SESSION_EXPIRES)
-    return user
-
-def user_cache_key(id, lang):
-    if not id:
-        raise Exception("faild to create user cache key: no id")
-    return "user.%s.lang.%s" % (id, lang)
-
 
