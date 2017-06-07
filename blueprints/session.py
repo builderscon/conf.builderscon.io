@@ -218,7 +218,8 @@ def update():
             flask.g.stash['errors'] = True
             flask.g.stash['missing'][f] = True
     
-    if flask.g.stash.get('errors') > 0:
+    if len(flask.g.stash.get('errors')) > 0:
+        print(flask.g.stash.get('errors'))
         flask.g.stash["session"] = form
         return flask.render_template('v2017/session/edit.html')
 
