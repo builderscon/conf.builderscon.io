@@ -256,6 +256,7 @@ def update():
             return flask.redirect('/%s/session/%s' % (flask.g.stash.get('full_slug'), id))
         else:
             flask.g.stash["errors"] = [flask.g.api.last_error()]
+            print(flask.g.stash['errors'])
     except BaseException as e:
         flask.g.stash["errors"] = [e]
         print(e)
