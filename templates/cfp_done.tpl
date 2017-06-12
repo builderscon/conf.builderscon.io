@@ -15,7 +15,7 @@
   <div class="section article">
     <div class="inner">
       <div class="section-content no-header">
-        <p>{% trans %}Thank your for your submission!{% endtrans %} <a href="/{{ session.conference.full_slug }}/session/{{ session.id }}">{% trans %}Your submission can be viewd here{% endtrans %}</a></p>
+        <p>{% trans %}Thank your for your submission!{% endtrans %} <a href="/{{ conference.full_slug }}/session/{{ session.id }}">{% trans %}Your submission can be viewd here{% endtrans %}</a></p>
       </div>
     </div>
   </div>

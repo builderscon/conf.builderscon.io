@@ -42,12 +42,15 @@
             <h3>{% trans %}Past Sessions{% endtrans %}</h3>
             <table class="session-history">
             <tbody>
-{% for session in sessions if session.conference.status != 'private' %}
+{% for session in sessions %}
+{% set conference = conferences_by_id.get(session.get('conference_id')) %}
+{% if conference.status != 'private' %}
               <tr>
                 <td>{% with thumbnail = session | session_thumbnail_url %}{% if thumbnail %}<img class="video-thumbnail" src="{{ thumbnail }}">{% endif %}{% endwith %}</td>
-                <td>{% if session.title %}<a href="/{{ session.conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a>{% endif %}</td>
-                <td>{% if session.conference %}<a href="/{{ session.conference.full_slug }}">{{ session.conference.title }}</a>{% endif %}</td>
+                <td>{% if session.title %}<a href="/{{ conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a>{% endif %}</td>
+                <td><a href="/{{ conference.full_slug }}">{{ conference.title }}</a></td>
               </tr>
+{% endif %}
 {% endfor %}
             </tbody>
             </table>
