@@ -117,7 +117,11 @@ https://i.ytimg.com/vi/{{ session.video_url | video_id }}/maxresdefault.jpg
 <p class="pending-notice">{% trans %}This session has NOT been accepted yet. If you would like to see it in the conference, please post it in social networks, as those numbers will be tallied and used as part of the selection criteria{% endtrans %}</p>
 {% endif %}
               <h5>{% trans %}Abstract{% endtrans %}</h5>
+{% if session.duration != 300 or (user and (user.is_admin or user.id == session.speaker.id)) %}
               <p>{% autoescape off %}{{session.abstract | markdown}}{% endautoescape %}</p>
+{% else %}
+              <p>{% trans %}Lightning Talk details will be released after the presentation{% endtrans %}</p>
+{% endif %}
             </div>
             {% if session.video_url %}
             <div class="video">
