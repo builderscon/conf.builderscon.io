@@ -1,7 +1,7 @@
 {% extends 'layout/conference.tpl' %}
 
 {% block body_id %}session{% endblock %}
-{% block title %}{{ session.title }} - {{ session.conference.title }}{% endblock %}
+{% block title %}{{ session.title }} - {{ conference.title }}{% endblock %}
 {% block header %}
 <link rel="canonical" href="/{{ conference.full_slug }}/session/{{ session.id }}" />
 {% endblock %}

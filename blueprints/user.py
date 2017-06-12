@@ -17,26 +17,47 @@ def dashboard():
         status     = ['pending', 'accepted', 'rejected'],
         lang       = flask.g.lang
     )
+    conferences_by_id = {}
+    for conference in conferences:
+        conferences_by_id[conference.get('id')] = conference
+
+    for session in sessions:
+        conference_id = session.get('conference_id')
+        if conference_id not in conferences:
+            conferences_by_id[conference_id] = flask.g.api.lookup_conference(id=conference_id, lang=flask.g.lang)
 
     return flask.render_template('dashboard.tpl',
         user=user,
         conferences=conferences,
+        conferences_by_id=conferences_by_id,
         sessions=sessions
     )
 
 @page.route('/user/<id>')
 @with_user
 def view():
+    user = flask.g.stash.get('user')
+    conferences = flask.g.api.list_conferences_by_organizer(organizer_id=user.get('id'))
     sessions = flask.g.api.list_sessions(
-        speaker_id=flask.g.stash.get("user").get("id"),
+        speaker_id=user.get("id"),
         status=["accepted"],
         lang=flask.g.lang
     )
     if not sessions:
         sessions = []
-    flask.g.stash["sessions"] = sessions
+    conferences_by_id = {}
+    for conference in conferences:
+        conferences_by_id[conference.get('id')] = conference
+    for session in sessions:
+        conference_id = session.get('conference_id')
+        if conference_id not in conferences:
+            conferences_by_id[conference_id] = flask.g.api.lookup_conference(id=conference_id, lang=flask.g.lang)
+    return flask.render_template('user/view.tpl',
+        sessions=sessions,
+        conferences_by_id=conferences_by_id,
+        conferences=conferences
+    )
 
-    return flask.render_template('user/view.tpl')
 
 @page.route('/user/email/register', methods=['GET'])
 @require_login

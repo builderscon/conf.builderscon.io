@@ -72,13 +72,14 @@
             </thead>
             <tbody>
 {% for session in sessions %}
+{% set conference = conferences_by_id.get(session.get('conference_id')) %}
               <tr>
-                <td><span{% if session.conference.status == 'private' %} class="invalid"{% endif %}>{% if session.title %}<a href="/{{ session.conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a>{% else %}N/A{% endif %}</span></td>
-                <td>{% if session.conference %}{{ session.conference.title }}{% endif %}</td>
-                <td>{% if session.status != 'accepted' %}-{% elif session.confirmed %}{% trans %}confirmed{% endtrans %}{% else %}<a class="confirm-session-link" href="/{{ session.conference.full_slug }}/session/confirm">{% trans %}unconfirmed{% endtrans %}</a>{% endif %}</td>
-                <td><a href="/{{ session.conference.full_slug }}/session/{{ session.id }}/edit"><span class="i-mode_edit" /></a></td>
+                <td><span{% if conference.status == 'private' %} class="invalid"{% endif %}>{% if session.title %}<a href="/{{ conference.full_slug }}/session/{{ session.id }}">{{ session.title }}</a>{% else %}N/A{% endif %}</span></td>
+                <td>{{ conference.title }}</td>
+                <td>{% if session.status != 'accepted' %}-{% elif session.confirmed %}{% trans %}confirmed{% endtrans %}{% else %}<a class="confirm-session-link" href="/{{ conference.full_slug }}/session/confirm">{% trans %}unconfirmed{% endtrans %}</a>{% endif %}</td>
+                <td><a href="/{{ conference.full_slug }}/session/{{ session.id }}/edit"><span class="i-mode_edit" /></a></td>
                 <td>{{ _(session.status) }}</td>
-                <td><a href="/{{ session.conference.full_slug }}/session/{{ session.id }}/delete"><span class="i-delete" /></a></td>
+                <td><a href="/{{ conference.full_slug }}/session/{{ session.id }}/delete"><span class="i-delete" /></a></td>
               </tr>
 {% endfor %}
             </tbody>
