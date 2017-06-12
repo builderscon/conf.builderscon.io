@@ -6,6 +6,9 @@
 <li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
 <li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
 <li><a href="/{{ full_slug }}/sessions">{% trans %}Sessions{% endtrans %}</a></li>
+{% if conference.get('timetable_available') %}
+<li><a href="/{{ full_slug }}/timetable">{% trans %}Timetable{% endtrans %}</a></li>
+{% endif %}
 {% endblock %}
 
 {% block heroimage %}
