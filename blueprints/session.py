@@ -34,6 +34,8 @@ def list():
             else:
                 pending.append(session)
 
+    if sessions and len(sessions) > 0:
+        flask.g.stash['has_sessions'] = True
     flask.g.stash['accepted_sessions'] = accepted
     flask.g.stash['pending_sessions']  = pending
     return flask.render_template('v2017/session/list.html')
@@ -57,6 +59,7 @@ def timetable():
         range_end = (dt + datetime.timedelta(days=1)).isoformat('T')
 
     flask.g.stash['date'] = date
+    flask.g.stash['has_sessions'] = True
 
     # In this handler we cache two things:
     # 1) The raw JSON search result, and
@@ -65,7 +68,7 @@ def timetable():
     html = app.cache.get(html_key)
     if html:
         flask.g.stash['table'] = html
-        return flask.render_template('session/timetable.tpl')
+        return flask.render_template('v2017/session/timetable.html')
 
     sessions = _list_sessions(conference.get('id'), ['accepted'], flask.g.lang, range_start, range_end)
     sessions_by_room = dict()

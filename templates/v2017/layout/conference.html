@@ -1,0 +1,17 @@
+{% extends 'v2017/layout/base.html' %}
+
+{% block title %}{{ conference.title }} - {{ conference.sub_title }}{% endblock %}
+
+{% block menuitems %}
+{{ sessions }}
+<li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
+<li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
+{%- with sessions = conference.sessions or [] %}{% if has_sessions or sessions | length > 0 %}
+<li><a href="/{{ full_slug }}/sessions">{% trans %}Sessions{% endtrans %}</a></li>
+{% endif %}{% endwith %}
+{% if conference.get('timetable_available') %}
+<li><a href="/{{ full_slug }}/timetable">{% trans %}Timetable{% endtrans %}</a></li>
+{% endif %}
+{% endblock %}
+
+

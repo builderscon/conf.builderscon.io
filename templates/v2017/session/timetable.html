@@ -1,0 +1,33 @@
+{% extends 'v2017/layout/conference.html' %}
+
+{% block heroimage %}
+<div id="heroimage-empty"></div>
+{% endblock %}
+
+{% block body_id %}schedule{% endblock %}
+
+{% block content %}
+<section id="schedule">
+  <div class="section">
+    <div class="inner box">
+      <div class="row box-header">
+        <div class="col l12 s12 m12">
+          <h1 class="section-header">{{ _("Sessions for %(date)s", date=date) }}</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m12 l12">
+          <div class="section-content timetable">
+            <div class="dates">| {% for cdt in conference.get('dates') %}
+{% set cds = (cdt.open | dateobj).strftime('%Y-%m-%d') %}
+              <a href="/{{ conference.get('full_slug') }}/timetable?date={{ cds }}">{{ cds }}</a>{% if not loop.last %} | {% endif %}
+{% endfor %} |</div>
+{% autoescape off %}{{ table }}{% endautoescape %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

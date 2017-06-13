@@ -24,3 +24,62 @@
   background: rgba(234, 84, 50, 1);
 }
 
+#schedule .timetable .ttt thead {
+    background: inherit;
+    border: none;
+}
+
+#schedule .timetable .ttt td {
+    border: none;
+}
+
+#schedule .timetable .ttt td {
+    border: 1px solid #ccc;
+}
+
+#schedule .timetable .ttt td.top-left {
+    border: none;
+}
+
+#schedule .timetable .ttt td.empty {
+    background-color: #eee;
+    border: none;
+}
+
+#schedule .timetable .ttt td.room-name {
+    text-align: center;
+    font-weight: bold;
+}
+
+#schedule .timetable .ttt td.time-cell {
+    width: 5em;
+    text-align: center;
+}
+
+#schedule .timetable .ttt td.room-col-50 {
+    width: 50%;
+}
+
+#schedule .timetable .ttt td.session {
+    background-color: #fff;
+    text-align: left;
+    vertical-align: top;
+}
+
+#schedule .timetable .ttt td.session .title {
+    position: static !important;
+    font-weight: bold;
+}
+
+#schedule .timetable .ttt td.session .speaker-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+}
+
+#schedule .timetable .dates {
+    margin-left: 4em;
+    margin-bottom: 1em;
+}
+
+
