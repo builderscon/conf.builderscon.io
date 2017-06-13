@@ -18,7 +18,9 @@
 {% endblock %}
 
 {% block scripts %}
+{% with input=session %}
 {% include 'v2017/session/form_scripts.html' %}
+{% endwith %}
 {% endblock %}
 
 {% block content %}
