@@ -1,16 +1,9 @@
-{% extends 'v2017/layout/base.html' %}
-
-{% block menuitems %}
-<li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
-<li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
-{%- with sessions = conference.sessions or [] %}{% if sessions | length > 0 %}
-<li><a href="/{{ full_slug }}/sessions">{% trans %}Sessions{% endtrans %}</a></li>
-{% endif %}{% endwith -%}
-{# <li><a href="/{{ full_slug }}/news">{% trans %}NEWS{% endtrans %}</a></li> #}
-{% endblock %}
+{% extends 'v2017/layout/conference.html' %}
 
 {% block body_id %}session{% endblock %}
+
 {% block title %}{{ session.title }} - {{ conference.title }}{% endblock %}
+
 {% block header %}
 <link rel="canonical" href="/{% if conference.series_id == "a7cbd9c9-472c-11e6-941a-42010af00043" and conference.id != "fdd2e7aa-b234-4aac-bfb1-e58cb334e8a7" %}{{ conference.slug }}{% else %}{{ conference.full_slug }}{% endif %}/session/{{ session.id }}" />
 <style type="text/css">

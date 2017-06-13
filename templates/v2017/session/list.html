@@ -1,15 +1,6 @@
-{% extends 'v2017/layout/base.html' %}
+{% extends 'v2017/layout/conference.html' %}
 
-{% block title %}{{ conference.title }} Session List - builderscon{% endblock %}
-
-{% block menuitems %}
-<li><a href="/dashboard">{% trans %}Dashboard{% endtrans %}</a></li>
-<li><a href="/{{ full_slug }}">{% trans %}Conference{% endtrans %}</a></li>
-<li><a href="/{{ full_slug }}/sessions">{% trans %}Sessions{% endtrans %}</a></li>
-{% if conference.get('timetable_available') %}
-<li><a href="/{{ full_slug }}/timetable">{% trans %}Timetable{% endtrans %}</a></li>
-{% endif %}
-{% endblock %}
+{% block title %}{% trans %}Session List{% endtrans %} - {{ conference.title }}{% endblock %}
 
 {% block heroimage %}
 <div id="heroimage-empty"></div>
