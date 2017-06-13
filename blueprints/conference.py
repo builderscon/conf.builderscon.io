@@ -54,7 +54,10 @@ def view():
     lang = flask.g.lang
     conf_id = flask.g.stash.get('conference_id')
     key = "staff.%s.%s" % (conf_id, lang)
-    flask.g.stash['sessions'] = _list_sessions(conf_id, ['accepted', 'pending'], lang)
+    sessions = _list_sessions(conf_id, ['accepted', 'pending'], lang)
+    flask.g.stash['sessions'] = sessions
+    if sessions and len(sessions) > 0:
+        flask.g.stash['has_sessions'] = True
 
     staff = app.cache.get(key)
     if not staff:
