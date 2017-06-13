@@ -134,7 +134,7 @@ https://i.ytimg.com/vi/{{ session.video_url | video_id }}/maxresdefault.jpg
 {% if session.status == 'accepted' %}
                 <tr>
                   <td>{% trans %}Confirmed{% endtrans %}</td>
-                  <td>{% if session.confirmed %}{% trans %}confirmed{% endtrans %}{% else %}<span class="unconfirmed">{% trans %}unconfirmed{% endtrans %} {% if user and (session.speaker_id == user.id and session.status == 'accepted') %}<a style="margin: 0" class="confirm-button success button" data-title="{{ session.title|urlencode }}" data-id="{{ session.id }}">{% trans %}Confirm{% endtrans %}</a></span>{% endif %}</span>{% endif %}</td>
+                  <td>{% if session.confirmed %}{% trans %}confirmed{% endtrans %}{% else %}<span class="unconfirmed">{% trans %}unconfirmed{% endtrans %} {% if user and (session.speaker_id == user.id and session.status == 'accepted') %}<a style="margin: 0" class="confirm-button success button" data-title="{{ session.title|urlencode }}" data-id="{{ session.id }}" href="/{{ conference.full_slug }}/session/confirm">{% trans %}Confirm{% endtrans %}</a></span>{% endif %}</span>{% endif %}</td>
                 </tr>
 {% endif %}
                 <tr>
@@ -198,30 +198,6 @@ https://i.ytimg.com/vi/{{ session.video_url | video_id }}/maxresdefault.jpg
 {% endblock%}
 
 {% block scripts %}
-{% if 0 %}
-<script>
-<!--
-$(function() {
-  $(document).ready(function() {
-    $("#confirm-modal").hide();
-    $(".modal").modal();
-    $(".confirm-button").click(function(e) {
-      $("#confirm-modal").modal("open")
-      var $t = $(e.target);
-      var id = $t.attr('data-id');
-      var title = $t.attr('data-title');
-      var $f = $("#confirm-form");
-      $f.attr('action', '/{{ conference.full_slug }}/session/' + id + '/confirm');
-      $("strong.session-title", "#confirm-modal").text(decodeURI(title));
-      $("#confirm-modal").foundation("open");
-      return false;
-    });
-  });
-})
--->
-</script>
-{% endif %}
-
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
