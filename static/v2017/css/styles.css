@@ -8,6 +8,7 @@
   border-right: 1px solid #ccc;
   margin: 0;
   padding: 1em;
+  overflow: auto;
 }
 
 .box > .row:last-child {
