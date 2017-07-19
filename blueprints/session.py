@@ -142,7 +142,7 @@ def timetable():
         flask.g.stash['table'] = t
         app.cache.set(html_key, t, 3600)
 
-    return flask.render_template('session/timetable.tpl')
+    return flask.render_template('v2017/session/timetable.html')
 
 def _list_sessions(conference_id, status, lang, range_start=None, range_end=None):
     key = list_cache_key(conference_id, status, lang, range_start=range_start, range_end=range_end)
