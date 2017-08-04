@@ -136,7 +136,7 @@ You may use Markdown in this field{% endtrans %}">{% if input %}{{ input.get(ite
           <p class="notice-small">{% trans %}Please refer to our <a href="{{termsOfUseURL}}" target="_blank">terms of use</a> about how builderscon uses videos, photos, and other materials.{% endtrans %}</p>
         </div>
       </div>
-{% if slide_url %}
+{% if user.id == session.speaker_id or user.is_admin %}
       <div class="row">
         <div class="l{{ left }} col"><label>{% trans %}Slide URL{% endtrans %}</label></div>
         <div class="l{{ right }} col">
@@ -144,7 +144,7 @@ You may use Markdown in this field{% endtrans %}">{% if input %}{{ input.get(ite
         </div>
       </div>
 {% endif %}
-{% if video_url %}
+{% if user.is_admin %}
       <div class="row">
         <div class="l{{ left }} col"><label>{% trans %}Video URL{% endtrans %}</label></div>
         <div class="l{{ right }} col">
