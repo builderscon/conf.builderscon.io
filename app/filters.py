@@ -50,9 +50,13 @@ def slide_oembed(url, **opt):
     key = 'oembed.%s.%s' % (url, opt)
     o = flasktools.urlparse(url)
     if re.search(r'(slideshare\.net|speakerdeck\.com)$', o.netloc, flags=re.UNICODE):
-        res = oembed_consumer.embed(url)
-        builderscon.cache.set(key, res, OEMBED_EXPIRES)
-        return res
+        try:
+            res = oembed_consumer.embed(url)
+            builderscon.cache.set(key, res, OEMBED_EXPIRES)
+            return res
+        except:
+            print(traceback.format_exc())
+            return None
 
     return None
 
