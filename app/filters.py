@@ -10,6 +10,7 @@ import oauth
 import oembed
 import pytz
 import re
+import traceback
 
 OEMBED_EXPIRES = 3600
 SESSION_SLIDE_EMBED_EXPIRES = 3600
