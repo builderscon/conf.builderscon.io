@@ -83,4 +83,6 @@
     margin-bottom: 1em;
 }
 
-
+ol.visited-link a:visited {
+    color: rgb(234, 84, 50);
+}
