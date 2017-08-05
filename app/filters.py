@@ -72,7 +72,7 @@ def session_thumbnail_url(session):
 
     if session.get('slide_url'):
         res = slide_oembed(session.get('slide_url'))
-        if !res:
+        if not res:
             return None
         url = res.get('thumbnail_url')
         if url:
