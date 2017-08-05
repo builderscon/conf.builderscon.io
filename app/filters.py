@@ -72,7 +72,9 @@ def session_thumbnail_url(session):
 
     if session.get('slide_url'):
         res = slide_oembed(session.get('slide_url'))
-        url = res['thumbnail_url']
+        if !res:
+            return None
+        url = res.get('thumbnail_url')
         if url:
             builderscon.cache.set(key, url, SESSION_THUMBNAIL_URL_EXPIRES)
             return url
