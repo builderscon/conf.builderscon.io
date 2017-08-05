@@ -1,0 +1,50 @@
+{% extends 'v2017/layout/conference.html' %}
+
+{% block header %}
+<style type="text/css">
+<!--
+ol {
+padding-left: 2em;
+list-style-type: decimal;
+}
+
+div.body {
+  border-radius: 10px 10px 10px 10px;
+  margin-left: 2em;
+  background-color: #fff;
+}
+-->
+</style>
+{% endblock %}
+
+
+{% block title %}{% trans %}Feedback - Blogs{% endtrans%}: {{ conference.title }} - builderscon{% endblock %}
+
+{% block heroimage %}
+<div id="heroimage-empty"></div>
+{% endblock %}
+
+{% block content %}
+<section class="">
+  <div class="section">
+    <div class="inner">
+      <h1 class="title"><em>Blogs</em></h1>
+      <div class="body col s12 m9 l10">
+        <div class="row">
+          <div class="large-12 small-12 columns">{{ _("%(count)d blogs collected", count=blog_entries | length) }}</div>
+        </div>
+        <div class="row">
+          <div class="large-12 small-12 columns">
+{% if blog_entries | length > 0 %}
+            <ol class="visited-link">
+{% for entry in blog_entries %}
+              <li><a target="_blank" href="{{ entry.url }}">{{ entry.title }}</a></li>
+{% endfor %}
+            </ol>
+{% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

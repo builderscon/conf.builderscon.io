@@ -130,7 +130,7 @@ def feedback_blogs():
         app.cache.set(key, blog_entries, 600)
 
     flask.g.stash['blog_entries'] = blog_entries or [];
-    return flask.render_template('conference/blogs.tpl')
+    return flask.render_template('v2017/conference/blog.html')
 
 @page.route('/<series_slug>/<path:slug>/staff')
 @with_conference_by_slug
