@@ -389,9 +389,8 @@ a.disabled	{ color: #555; }
 
 .container section > .section .title {
 	position: absolute;
-	top: 405px;
+	top: 70px;
 	left: -30px;
-	width: 100%;
 	margin: 0;
 	padding: 0;
 	-webkit-transform: translateX(-50%);
