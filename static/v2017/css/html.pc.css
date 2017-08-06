@@ -396,6 +396,7 @@ a.disabled	{ color: #555; }
 	padding: 0;
 	-webkit-transform: translateX(-50%);
 	        transform: translateX(-50%);
+	pointer-events: none;
 }
 
 .container section > .section .title em {
