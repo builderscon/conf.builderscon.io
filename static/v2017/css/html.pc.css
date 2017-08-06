@@ -389,12 +389,14 @@ a.disabled	{ color: #555; }
 
 .container section > .section .title {
 	position: absolute;
-	top: 70px;
+	top: 405px;
 	left: -30px;
+	width: 100%;
 	margin: 0;
 	padding: 0;
 	-webkit-transform: translateX(-50%);
 	        transform: translateX(-50%);
+	pointer-events: none;
 }
 
 .container section > .section .title em {
