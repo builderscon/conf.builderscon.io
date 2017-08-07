@@ -19,7 +19,7 @@ SESSION_THUMBNAIL_URL_EXPIRES = 3600
 
 oembed_consumer = oembed.OEmbedConsumer()
 oembed_endpoints = [
-    [ 'https://www.youtube.com/oembed', [ 'https://*.youtube.com/*' ] ],
+    [ 'https://www.youtube.com/oembed', [ 'https://*.youtube.com/*', 'https://youtu.be/*' ] ],
     [ 'http://www.slideshare.net/api/oembed/2', [ 'https?://www.slideshare.net/*' ] ],
     [ 'http://speakerdeck.com/oembed.json', [ 'https://speakerdeck.com/*' ], ],
 ]
