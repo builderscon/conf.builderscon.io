@@ -32,6 +32,9 @@ def video_id(url):
     mobj = re.search(r'youtube\.com/watch\?v=(.+)', url, flags=re.UNICODE)
     if mobj:
         return mobj.group(1)
+    mobj = re.search(r'youtu\.be/(.+)', url, flags=re.UNICODE)
+    if mobj:
+        return mobj.group(1)
     return ''
 
 def video_oembed(url, **opt):
