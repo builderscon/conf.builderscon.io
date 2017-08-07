@@ -441,31 +441,27 @@ a.disabled {
 
 .container section > .section .title {
   position: absolute;
-  top: 405px;
+  top: 0px;
   left: -30px;
-  width: 100%;
+  width: auto;
   margin: 0;
   padding: 0;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  -webkit-transform: translate(-50%, -50%) rotate(-90deg);
 }
 
 .container section > .section .title em {
   display: block;
   position: relative;
+  right: 50%;
   color: #ea5432;
   font-size: 100px;
   font-family: "DIN-Medium", "Titillium Web", "Helvetica Neue", "Helvetica", "Roboto", "Arial", "Lucida Grande", "Tahoma", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "Noto Sans Japanese", "メイリオ", "Meiryo", "ＭＳ Ｐゴシック", sans-serif !important;
   font-weight: 400;
   font-style: normal;
-  text-align: right;
   line-height: 100%;
   letter-spacing: -5px;
   width: auto;
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  transform: rotate(-90deg);
   margin: 0;
   padding: 0;
 }
