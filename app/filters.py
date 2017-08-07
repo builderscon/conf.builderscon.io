@@ -40,7 +40,7 @@ def video_id(url):
 def video_oembed(url, **opt):
     key = 'oembed.%s.%s' % (url, opt)
     o = flasktools.urlparse(url)
-    if re.search(r'youtube\.com$', o.netloc, flags=re.UNICODE):
+    if re.search(r'(youtube\.com|youtu\.be)$', o.netloc, flags=re.UNICODE):
         if 'maxwidth' not in opt:
             opt['maxwidth'] = 600
         if 'maxheight' not in opt:
