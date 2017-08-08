@@ -130,6 +130,10 @@ def timetable():
                         t += '<td class="session %s" rowspan="%d">' % (widthclass, r)
                         t += '<a href="%s"><img class="speaker-avatar" src="%s"></a> ' % (uu, session.get('speaker').get('avatar_url') or '/static/images/noprofile.png')
                         t += '<a class="title" href="%s">%s</a>' % (su, session.get('title'))
+                        if session.get('video_url'):
+                            t += ' <i class="material-icons tiny">videocam</i>'
+                        if session.get('slide_url'):
+                            t += ' <i class="material-icons tiny">slideshow</i>'
                         t += '</td>\n'
                         sessions_by_room[room_id] = room_sessions[1:]
                         room_in_session[room_id] = r - 1
