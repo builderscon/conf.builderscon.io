@@ -45,9 +45,14 @@ def video_oembed(url, **opt):
             opt['maxwidth'] = 600
         if 'maxheight' not in opt:
             opt['maxheight'] = 480
-        res = oembed_consumer.embed(url, **opt)
-        builderscon.cache.set(key, res, OEMBED_EXPIRES)
-        return res
+        try:
+            res = oembed_consumer.embed(url, **opt)
+            if res:
+                builderscon.cache.set(key, res, OEMBED_EXPIRES)
+                return res
+        except:
+            print(traceback.format_exc())
+            return None
     return None
 
 def slide_oembed(url, **opt):
@@ -56,8 +61,9 @@ def slide_oembed(url, **opt):
     if re.search(r'(slideshare\.net|speakerdeck\.com)$', o.netloc, flags=re.UNICODE):
         try:
             res = oembed_consumer.embed(url)
-            builderscon.cache.set(key, res, OEMBED_EXPIRES)
-            return res
+            if res:
+                builderscon.cache.set(key, res, OEMBED_EXPIRES)
+                return res
         except:
             print(traceback.format_exc())
             return None
