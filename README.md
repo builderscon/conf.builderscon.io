@@ -41,7 +41,7 @@ gunicorn --reload app:app
 
 2.  configure, edit config.json
 
-    Currently OCTAB section is empty.
+    Currently OCTAV section is empty.
     Please set proper values to run correctly.
 
 3.  start server in simple server.
